@@ -1,0 +1,96 @@
+.Title
+{ 
+  font-size :12px;
+  color : black;
+  background: #7B9AC9;
+  BORDER-RIGHT: buttonshadow 1px solid; 
+  BORDER-TOP: 2px outset #999999; 
+  BORDER-LEFT: buttonhighlight 1px solid; 
+  BORDER-BOTTOM: buttonshadow 1px solid;
+  PADDING-RIGHT: 5px; 
+  PADDING-LEFT: 5px;  
+  cursor :default;
+  text-align:center;
+}
+
+.table_backcolor
+{
+	background-color: #cccccc;
+	}
+
+
+.Normal
+{
+  FONT-SIZE:12px;
+  COLOR: #ffffff;
+  BACKGROUND-COLOR: #7B9AC9;
+  BORDER-RIGHT: buttonshadow 1px solid; 
+  BORDER-Top: buttonshadow 1px solid;
+  BORDER-LEFT: buttonhighlight 1px solid; 
+  BORDER-BOTTOM:  1px solid #999999;
+  PADDING-LEFT: 5px; 
+  PADDING-RIGHT: 5px;
+  cursor :default
+}
+
+
+TR.Same
+{
+	
+    BACKGROUND-COLOR: #DDECFF;
+    height :25px;
+    COLOR: black;
+    FONT-SIZE:12px;
+     
+}
+.fakeContainer { /* The parent container */
+    BACKGROUND-COLOR: #f5f9ff;
+    padding: 0px;
+    border: 1px solid #4f7fc9;
+   overflow:auto; /* Required to set */
+   font-size:9pt;
+     
+}
+.detailtext /*明細輸入字符框*/
+{   margin:0px;
+   	padding:3px 2px 2px 2px;
+	border: 0px;
+	height:20px;
+	font-size: 8pt;
+	width:100%;
+	BACKGROUND-COLOR: #DDECFF;
+}
+
+.detailnum /*明細輸入數字框*/
+{
+	border: 0px;
+	height: 20px;
+	font-size:8pt;
+	text-align: right;
+	BACKGROUND-COLOR: #DDECFF;
+	width:100%;
+	padding:3px 2px 2px 2px;
+}
+.detailtextReadOnly /*明細輸入字符框*/
+
+{   margin:0px;
+	border: 0px;
+	padding:3px 2px 2px 2px;
+    background-color:#DDECFF;	
+	height: 20px;
+	font-size: 8pt;
+	width:100%;
+}
+
+.detailnumReadOnly /*明細輸入數字框*/
+{   background-color:#DDECFF;
+	border: 0px;
+	height: 20px;
+	font-size: 8pt;
+	text-align: right;
+	padding:3px 2px 2px 2px;
+	width:100%;
+}
+.myClass{background:#FCEFD5 !important; color:#000 !important;
+}
+

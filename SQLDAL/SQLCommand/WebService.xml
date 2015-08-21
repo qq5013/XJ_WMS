@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SqlCommand>
+  <Command ID="InsertTMPDeliverSchedule">
+    <CommandString>
+      delete from TMP_DeliverSchedule where SourceNo=@SourceNo;
+      insert into TMP_DeliverSchedule(SourceNo,Transport,CustomerID,ParCustomerID,LinkPerson,LinkPhone,LinkAddress,Memo,CreateDate,PlanDate)
+      values(@SourceNo,@Transport,@CustomerID,@ParCustomerID,@LinkPerson,@LinkPhone,@LinkAddress,@Memo, @BillDate,@PlanDate)
+    </CommandString>
+  </Command>
+
+  <Command ID="DeleteTMPDeliverScheduleSub">
+    <CommandString>
+      Delete from TMP_DeliverScheduleSub Where {0}
+    </CommandString>
+  </Command>
+
+  <Command ID="InsertTMPDeliverScheduleSub">
+    <CommandString>
+      INSERT INTO TMP_DeliverSCHEDULESUB(SourceNo,RowID,ProductNo,PlanQty,Price,Amount)
+      values(@SourceNo,(select count(1)+1 from TMP_DeliverSCHEDULESUB where SourceNo=@SourceNo),@ProductNo,@PlanQty,@Price,@Amount)
+    </CommandString>
+  </Command> 
+  <Command ID="InsertDeliverSchedule">
+    
+  <CommandString>
+    insert into WMS_DeliverSchedule(Flag,ScheduleNo,BillDate,SourceNo,CustomerID,ParCustomerID,CustPerson,CustPhone,LinkPerson,LinkPhone,LinkAddress,Memo,Creator,CreateDate,Updater,UpdateDate,Transport,PlanDate,AreaSation)
+    select  1,@ScheduleNo,GETDATE(),SourceNo,CustomerID,ParCustomerID,'','',LinkPerson,LinkPhone,LinkAddress,,tmp.Memo,'Admin',CreateDate,'admin',GETDATE(),Transport,PlanDate,cust.AreaSation
+    from TMP_DeliverSchedule TMP LEFT JOIN CMD_CUSTOMER Cust on tmp.CustomerID=cust.CUSTOMER_CODE
+    where SourceNo=@SourceNo
+  </CommandString>
+  </Command>
+  <Command ID="InsertDeliverScheduleSub">
+  <CommandString>
+    INSERT INTO WMS_DeliverSCHEDULESUB(Flag,ScheduleNo,RowID,SubID,ProductID,ColorID,PlanQty,PlanDate,RealQty,Price,Amount)
+    select 1,@ScheduleNo,ROW_NUMBER() over (order by SourceNo),1,Product_Code,ColorID,PlanQty,(select plandate from TMP_DeliverSchedule where SourceNo=@SourceNo) ,0,Price,Amount
+    from (select SourceNo,ProductNo,SUM(PlanQty) as planqty, round(SUM(Amount)/SUM(PlanQty),2) as price,SUM(amount) as amount from TMP_DeliverScheduleSub
+    group by SourceNo,ProductNo
+    ) sub
+    inner join cmd_ProductBOM BOM on sub.ProductNo=BOM.ProductNO
+    where SourceNo=@SourceNo
+
+  </CommandString>
+  </Command>
+
+  <Command ID="InsertProductBom">
+    <CommandString>
+      INSERT INTO CMD_ProductBOM(ProductNo,Name,Model,Unit)
+      values(@ProductNo,@Name,@Model,@Unit)
+    </CommandString>
+  </Command>
+  
+  <Command ID="InsertCust">
+    <CommandString>
+      INSERT INTO CMD_CUSTOMER(CUSTOMER_CODE,CUSTOMER_NAME,PLAYCUSTOMER_CODE)
+      values(@CustNo,@CustName,@CustNo)
+    </CommandString>
+  </Command>
+  
+  <Command ID="InsertFact">
+    <CommandString>
+      INSERT INTO CMD_Factory(FactoryID,FactoryName)
+      values(@FactNo,@FactName)
+    </CommandString>
+  </Command>
+
+
+  <Command ID="DeleteDeliverScheduleBySource">
+    <CommandString>
+      delete from WMS_DeliverSchedule where SourceNo=@SourceNo and Flag=1
+    </CommandString>
+  </Command>
+
+  <Command ID="DeleteDeliverScheduleSubBySource">
+    <CommandString>
+      select * from WMS_DeliverScheduleSub where  exists(select 1 from WMS_DeliverSchedule main where Flag=WMS_DeliverScheduleSub.Flag and ScheduleNo=WMS_DeliverScheduleSub.ScheduleNo and SourceNo=@SourceNo and Flag=1 )  and Flag=1
+    </CommandString>
+  </Command>
+
+  <Command ID="InsertWareHouse">
+    <CommandString>
+      insert into CMD_WAREHOUSE(WAREHOUSE_CODE,WAREHOUSE_NAME,IsManage,OtherCode)
+      select (select REPLICATE('0',2-len(CAST(isnull(MAX(CMD_WAREHOUSE_ID),0)+1 as varchar))) + cast(isnull(MAX(CMD_WAREHOUSE_ID),0)+1 as varchar)  from CMD_WAREHOUSE),@WareHouseName,0,@WareHouseID
+    </CommandString>
+  </Command>
+
+  <Command ID="SelectWmsToPursher">
+    <CommandString>
+      select bom.ProductNo as ProductCode,sub.Memo as ReplyContent from WMS_DeliverScheduleSub sub
+      inner join WMS_DeliverSchedule main on sub.Flag=main.Flag and sub.ScheduleNo=main.ScheduleNo
+      inner join CMD_ProductBOM Bom on sub.ProductID=bom.Product_Code and sub.ColorID=bom.ColorID
+      where main.SourceNo=@SourceNo
+    </CommandString>
+  </Command>
+
+  <Command ID="SelectStockByStraightID">
+    <CommandString>
+      select * from WMS_Stock where StraightBillID=@StraightBillID
+    </CommandString>
+  </Command>
+
+  <!--入库单主档写入K3-->
+  <Command ID="SelectInStockToK3Main">
+    <CommandString>
+      select 1 as FTranType,BillID as FBillNo,stock.BillDate as Fdate,GETDATE() as FCheckDate,1 as FROB,
+      case when (user1.Memo='' or user1.Memo IS null) then user2.Memo else user1.Memo end  as FuserNo,  stock.FactoryID as FSupplyID,case when (user1.Memo='' or user1.Memo IS null) then user2.Memo else user1.Memo end as FEmpNo, '' as FNote
+      from View_WMS_InStock stock
+      left join WMS_SCHEDULE  schedule on stock.ScheduleNo=schedule.ScheduleNo
+      left join SYS_USERLIST User1 on schedule.Creator=user1.EmployeeCode
+      left join SYS_USERLIST User2 on stock.Creator=user2.EmployeeCode
+      where schedule.Flag=1 and stock.Flag=1 and {0}
+    </CommandString>
+  </Command>
+  <!--入库明细写入K3-->
+  <Command ID="SelectInStockToK3Sub">
+    <CommandString>
+      select  main.billid as FBillNo, 1.01 as FSCStockID,1.01 as FDCStockID,bom.ProductNo as FFullNumber,bom.Unit as FUnitName,sub.InStockQty as Fqty,
+      ssub.Price as Fprice,sub.InStockQty*ssub.Price as Famount,Ssub.ScheduleNo as FSCBillNo
+      from WMS_StockSub sub inner join WMS_Stock main on sub.Flag=main.Flag and sub.BillID=main.BillID
+      inner join WMS_SCHEDULESUB Ssub on main.ScheduleNo=Ssub.ScheduleNo and Ssub.Flag=1 and ssub.ProductID=sub.ProductID and Ssub.ColorID=sub.ColorID
+      inner join CMD_ProductBOM Bom on sub.ProductID=bom.Product_Code and sub.ColorID=bom.ColorID
+      where main.Flag=1 and {0}
+    </CommandString>
+  </Command>
+
+
+  <!--出库单主档写入K3-->
+  <Command ID="SelectOutStockToK3Main">
+    <CommandString>
+      select 21 as FTranType,BillID as FBillNo,stock.BillDate as Fdate,GETDATE() as FCheckDate,1 as FROB,
+      user1.Memo as FuserNo,  stock.ParCustomerID as FSupplyID,user1.Memo as FEmpNo,      stock.CustName as FNote
+      from View_WMS_OutStock stock
+      inner join WMS_DeliverSchedule  schedule on stock.ScheduleNo=schedule.ScheduleNo
+      inner join SYS_USERLIST User1 on schedule.Creator=user1.EmployeeCode
+      where schedule.Flag=1 and stock.Flag=2 and {0}
+    </CommandString>
+  </Command>
+  <!--出库明细写入K3-->
+  <Command ID="SelectOutStockToK3Sub">
+    <CommandString>
+      select  main.billid as FBillNo, 1.01 as FSCStockID,1.01 as FDCStockID,bom.ProductNo as FFullNumber,bom.Unit as FUnitName,sub.InStockQty as Fqty,
+      ssub.Price as Fprice,sub.InStockQty*ssub.Price as Famount,Ssub.ScheduleNo as FSCBillNo
+      from WMS_StockSub sub inner join WMS_Stock main on sub.Flag=main.Flag and sub.BillID=main.BillID
+      inner join WMS_DeliverScheduleSub Ssub on main.ScheduleNo=Ssub.ScheduleNo and Ssub.Flag=1 and ssub.ProductID=sub.ProductID and Ssub.ColorID=sub.ColorID
+      inner join CMD_ProductBOM Bom on sub.ProductID=bom.Product_Code and sub.ColorID=bom.ColorID
+      where main.Flag=2 and {0}
+    </CommandString>
+  </Command>
+
+
+  <!--调拨单主档写入K3-->
+  <Command ID="SelectTransferToK3Main">
+    <CommandString>
+      select 41 as FTranType,BillID as FBillNo,stock.BillDate as Fdate,GETDATE() as FCheckDate,1 as FROB,
+      user1.Memo as FuserNo,  '' as FSupplyID,user1.Memo as FEmpNo,'' as FNote
+      from WMS_Migration stock
+      inner join SYS_USERLIST User1 on stock.Creator=user1.EmployeeCode
+      where   stock.Flag=2 and stock.BillID=@BillID
+    </CommandString>
+  </Command>
+  <!--调拨明细写入K3-->
+  <Command ID="SelectTransferToK3Sub">
+    <CommandString>
+      select  main.billid as FBillNo, 1.01 as FSCStockID,wh.OtherCode as FDCStockID,bom.ProductNo as FFullNumber,bom.Unit as FUnitName,sub.Qty as Fqty,
+      0 as Fprice,0 as Famount,'' as FSCBillNo
+      from WMS_MigrationSub sub inner join WMS_Migration main on sub.Flag=main.Flag and sub.BillID=main.BillID
+      inner join CMD_WAREHOUSE WH on main.StockFunction=wh.CMD_WAREHOUSE_ID
+      inner join CMD_ProductBOM Bom on sub.ProductID=bom.Product_Code and sub.ColorID=bom.ColorID
+      where main.Flag=2  and main.BillID=@BillID
+    </CommandString>
+  </Command>
+  
+  <!--其它写入K3-->
+  <Command ID="SelectOtherToK3Main">
+    <CommandString>
+      select  case when (Flag=2 or Flag=3 or Flag=5) then 21  when Flag=4 then 1 when Flag=6 then 41 end as FTranType,BillID as FBillNo,stock.BillDate as Fdate,GETDATE() as FCheckDate,
+      case when (Flag=2 or Flag=4)then -1 else 1 end as FROB,
+      user1.Memo as FuserNo,  case when (Flag=2 or Flag=3 OR Flag=5) then   stock.TranCustomerID when Flag=6 then '' when Flag=4 then stock.CustomerID end  as FSupplyID, user1.Memo as FEmpNo, case when (Flag=2 OR Flag=3 OR Flag=5) then cust.CUSTOMER_NAME else '' end as FNote
+      from WMS_Transfer Stock
+      left join SYS_USERLIST User1 on stock.Creator=user1.EmployeeCode
+      left join CMD_CUSTOMER cust on stock.CustomerID=cust.CUSTOMER_CODE
+      where {0}
+    </CommandString>
+  </Command>
+
+  <Command ID="SelectOtherToK3Sub">
+    <CommandString>
+      select  main.billid as FBillNo, case when main.Flag=6 then  main.OutStockID else 1.01 end as FSCStockID, case when main.flag in (2,3,4,6)  then 1.01 else main.OutStockID end as FDCStockID,bom.ProductNo as FFullNumber,
+      bom.Unit as FUnitName,Stock.Qty as Fqty,
+      Stock.Price as Fprice,Stock.Qty*Stock.Price as Famount,'' as FSCBillNo
+      from WMS_TransferSub Stock inner join WMS_Transfer main on Stock.Flag=main.Flag and Stock.BillID=main.BillID
+      inner join CMD_ProductBOM Bom on Stock.ProductID=bom.Product_Code and Stock.ColorID=bom.ColorID
+      where {0}
+    </CommandString>
+  </Command>
+
+ <!--返修-->
+  <Command ID="SelectBackToK3Main">
+    <CommandString>
+      select 1 as FTranType,BillID as FBillNo,stock.BillDate as Fdate,GETDATE() as FCheckDate,-1 as FROB,
+      user1.Memo as FuserNo,  '' as FSupplyID,user1.Memo as FEmpNo,'' as FNote
+      from WMS_Migration stock
+      inner join SYS_USERLIST User1 on stock.Creator=user1.EmployeeCode
+      where   stock.Flag=1 and stock.BillID=@BillID
+    </CommandString>
+  </Command>
+  <!--返修明细写入K3-->
+  <Command ID="SelectBackToK3Sub">
+    <CommandString>
+      select  main.billid as FBillNo, 1.01 as FSCStockID,1.01 as FDCStockID,bom.ProductNo as FFullNumber,bom.Unit as FUnitName,sub.ScanQty as Fqty,
+      0 as Fprice,0 as Famount,'' as FSCBillNo
+      from WMS_MigrationSub sub inner join WMS_Migration main on sub.Flag=main.Flag and sub.BillID=main.BillID
+      inner join CMD_WAREHOUSE WH on main.StockFunction=wh.CMD_WAREHOUSE_ID
+      inner join CMD_ProductBOM Bom on sub.ProductID=bom.Product_Code and sub.ColorID=bom.ColorID
+      where main.Flag=1  and main.BillID=@BillID
+    </CommandString>
+  </Command>
+  
+
+
+  <Command ID="SpStockBillTOK3">
+    <CommandString>
+      sp_stockbill_WMSTOK3
+    </CommandString>
+  </Command>
+  
+  <Command ID="SpStockBillTOK3Filter">
+    <CommandString>
+      sp_stockbill_WMSTOK3Filer
+    </CommandString>
+  </Command>
+
+  
+
+</SqlCommand>

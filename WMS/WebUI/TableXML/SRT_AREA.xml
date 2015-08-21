@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TABLE name="SRT_AREA" ChineseName="区域信息" PrimaryKey="AREA_CODE" OrderBy="AREA_CODE" ViewName="SRT_AREA">
+
+	<FIELD DisplayWhenSelect="T" DisplayWhenQuery="T" DisplayWhenEdit="T" HIDDEN="F" ColumnIndex="00">
+		<FieldName>AREA_CODE</FieldName>
+		<FieldTitle>区域代码</FieldTitle>
+		<Width>100</Width>
+		<HeadTextHeight></HeadTextHeight>
+		<ItemHeight></ItemHeight>
+		<DataType>string</DataType>
+		<DefaultValue></DefaultValue>
+		<ControlID>txt_AREA_CODE</ControlID>
+		<ControlType>TextBox</ControlType>
+		<NotNull>N</NotNull>
+		<Validate onfocus="" onblur=""></Validate>
+	</FIELD>
+
+	<FIELD DisplayWhenSelect="T" DisplayWhenQuery="T" DisplayWhenEdit="T" HIDDEN="F" ColumnIndex="01">
+		<FieldName>AREA_NAME</FieldName>
+		<FieldTitle>区域名称</FieldTitle>
+		<Width>100</Width>
+		<HeadTextHeight></HeadTextHeight>
+		<ItemHeight></ItemHeight>
+		<DataType>string</DataType>
+		<DefaultValue></DefaultValue>
+		<ControlID>txt_AREA_NAME</ControlID>
+		<ControlType>TextBox</ControlType>
+		<NotNull>N</NotNull>
+		<Validate onfocus="" onblur=""></Validate>
+	</FIELD>
+	<FIELD DisplayWhenSelect="F" DisplayWhenQuery="T" DisplayWhenEdit="T" HIDDEN="F" ColumnIndex="10">
+		<FieldName>ORDER_NO</FieldName>
+		<FieldTitle>配送顺序</FieldTitle>
+		<Width>100</Width>
+		<HeadTextHeight></HeadTextHeight>
+		<ItemHeight></ItemHeight>
+		<DataType>double</DataType>
+		<DefaultValue></DefaultValue>
+		<ControlID>txt_ORDER_NO</ControlID>
+		<ControlType>TextBox</ControlType>
+		<NotNull>N</NotNull>
+		<Validate onfocus="" onblur=""></Validate>
+	</FIELD>
+
+</TABLE>

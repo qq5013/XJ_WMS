@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SqlCommand>
+  <!--是否-->
+  <Command ID="0">
+    <CommandString>
+      SELECT *
+      FROM
+      (
+      SELECT DispValue AS ID,DispText AS Text,DispValue+' '+DispText AS IDText,DISPSORT Sort,DispValue AS Condition1
+      FROM BCB_T_MasterInfo
+      WHERE ITEMCODE ='YesOrNo'
+      ) T
+      WHERE 1=1 {0}
+      ORDER BY Sort,IDText
+    </CommandString>
+  </Command>
+
+  <!--工厂-->
+  <Command ID="1">
+    <CommandString>
+      SELECT *
+      FROM
+      (
+      SELECT ID,FactoryName AS Text,FactoryNumber+' '+FactoryName AS IDText,FactoryNumber AS Condition1,ID AS Condition2
+      FROM BCB_T_Factory
+      ) T
+      WHERE 1=1 {0}
+      ORDER BY IDText
+    </CommandString>
+  </Command>
+
+  <!--车间-->
+  <Command ID="2">
+    <CommandString>
+      SELECT *
+      FROM
+      (
+      SELECT ID,WorkShopName AS Text,WorkShopNumber+' '+WorkShopName AS IDText ,FactoryID AS Condition1,IsEnable AS Condition2,WorkShopNumber AS Condition3
+      FROM BCB_T_WorkShop
+      ) T
+      WHERE 1=1 {0}
+      ORDER BY IDText
+    </CommandString>
+  </Command>
+
+  <!--员工-->
+  <Command ID="3">
+    <CommandString>
+      SELECT *
+      FROM
+      (
+      SELECT ID,EmpName AS Text,EmpNumber+' '+EmpName AS IDText,IsEnable AS Condition1,FactoryID AS Condition2,WorkShopID AS Condition3,ProcessID AS Condition4
+      FROM BCB_T_Emp
+      ) T
+      WHERE 1=1 {0}
+      ORDER BY IDText
+    </CommandString>
+  </Command>
+
+  <!--班组-->
+  <Command ID="4">
+    <CommandString>
+      SELECT *
+      FROM
+      (
+      SELECT ID,TeamName AS Text,TeamNumber+' '+TeamName AS IDText,FactoryID AS Condition1,WorkShopID AS Condition2
+      FROM BCB_T_WorkTeam
+      ) T
+      WHERE 1=1 {0}
+      ORDER BY IDText
+    </CommandString>
+  </Command>
+
+  <!--班别-->
+  <Command ID="5">
+    <CommandString>
+      SELECT *
+      FROM
+      (
+      SELECT ID,ClassName AS Text,ClassNumber+' '+ClassName AS IDText,FactoryID AS Condition1
+      FROM BCB_T_WorkClass
+      ) T
+      WHERE 1=1 {0}
+      ORDER BY IDText
+    </CommandString>
+  </Command>
+  <!--机台类别-->
+  <Command ID="17">
+    <CommandString>
+      SELECT *
+      FROM
+      (
+      SELECT ID,MachineTypeName AS Text,MachineTypeNumber+' '+MachineTypeName AS IDText,FactoryID AS Condition1,WorkShopID AS Condition2
+      FROM BCB_T_MachineType
+      ) T
+      WHERE 1=1 {0}
+      ORDER BY IDText
+    </CommandString>
+  </Command>
+  <!--机台-->
+  <Command ID="6">
+    <CommandString>
+      SELECT *
+      FROM
+      (
+      SELECT ID,MachineName AS Text,MachineNumber+' '+MachineName AS IDText,FactoryID AS Condition1,WorkShopID AS Condition2
+      FROM BCB_T_Machine
+      ) T
+      WHERE 1=1 {0}
+      ORDER BY IDText
+    </CommandString>
+  </Command>
+
+  <!--产品类别-->
+  <Command ID="7">
+    <CommandString>
+      SELECT *
+      FROM
+      (
+      SELECT ID,CategoryName AS Text,CategoryNumber+' '+CategoryName AS IDText,CategoryPreID AS Condition1
+      FROM BCB_T_ProductCategory
+      ) T
+      WHERE 1=1 {0}
+      ORDER BY IDText
+    </CommandString>
+  </Command>
+
+  <!--产品型号-->
+  <Command ID="8">
+    <CommandString>
+      SELECT *
+      FROM
+      (
+      SELECT ID,FName AS Text,FNumber+' '+FName AS IDText,FactoryID AS Condition1,CategoryID AS Condition2
+      FROM BCB_T_Product
+      ) T
+      WHERE 1=1 {0}
+      ORDER BY IDText
+    </CommandString>
+  </Command>
+
+  <!--报废类别-->
+  <Command ID="9">
+    <CommandString>
+      SELECT *
+      FROM
+      (
+      SELECT ID,ScrapName AS Text,ScrapNumber+' '+ScrapName AS IDText,IsEnable AS Condition1,WorkShopID AS Condition2
+      FROM BCB_T_Scrap
+      ) T
+      WHERE 1=1 {0}
+      ORDER BY IDText
+    </CommandString>
+  </Command>
+
+  <!--生产工序-->
+  <Command ID="10">
+    <CommandString>
+      SELECT *
+      FROM
+      (
+      SELECT ID,ProcessName AS Text,ProcessNumber+' '+ProcessName AS IDText,SortNo,IsEnable AS Condition1,WorkShopID AS Condition2
+      FROM BCB_T_ProductProcess
+      ) T
+      WHERE 1=1 {0}
+      ORDER BY SortNo,IDText
+    </CommandString>
+  </Command>
+
+  <!--用户配置-->
+  <Command ID="11">
+    <CommandString>
+    </CommandString>
+  </Command>
+
+  <!--货架-->
+  <Command ID="12">
+    <CommandString>
+      SELECT *
+      FROM
+      (
+      SELECT ID,SRName AS Text,SRNumber+' '+SRName AS IDText,WorkShopID AS Condition1
+      FROM BCB_t_StorageRack
+      ) T
+      WHERE 1=1
+      ORDER BY IDText
+    </CommandString>
+  </Command>
+
+  <!--货位-->
+  <Command ID="13">
+    <CommandString>
+    </CommandString>
+  </Command>
+
+  <!--规格-->
+  <Command ID="14">
+    <CommandString>
+    </CommandString>
+  </Command>
+
+  <!--用户配置数据类别-->
+  <Command ID="15">
+    <CommandString>
+      SELECT *
+      FROM
+      (
+      SELECT DispValue AS ID,DispText AS Text,DispValue+' '+DispText AS IDText,DISPSORT Sort,DispValue AS Condition1
+      FROM BCB_T_MasterInfo
+      WHERE ITEMCODE ='UCTYPE'
+      ) T
+      WHERE 1=1 {0}
+      ORDER BY Sort,IDText
+    </CommandString>
+  </Command>
+
+  <!--用户-->
+  <Command ID="16">
+    <CommandString>
+      SELECT *
+      FROM
+      (
+      SELECT ID,UserName AS Text,UserId+' '+UserName AS IDText,IsEnable AS Condition1,FactoryNumber AS Condition2
+      FROM BCB_T_User
+      ) T
+      WHERE 1=1 {0}
+      ORDER BY IDText
+    </CommandString>
+  </Command>
+  <!---->
+  <Command ID="18">
+    <CommandString>
+      SELECT *
+      FROM
+      (
+      SELECT DispValue AS ID,DispText AS Text,DispValue+' '+DispText AS IDText,DISPSORT Sort,DispValue AS Condition1
+      FROM BCB_T_MasterInfo
+      WHERE ITEMCODE ='PurchaseType'
+      ) T
+      WHERE 1=1 {0}
+      ORDER BY Sort,IDText
+    </CommandString>
+  </Command>
+  
+</SqlCommand>

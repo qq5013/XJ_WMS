@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TABLE name="CMD_COLOR" ChineseName="规格信息" PrimaryKey="COLOR_CODE" OrderBy="COLOR_CODE" ViewName="View_CMD_Color">
+  <FIELD ShowInFieldQuery="1" >
+    <FieldName>PRODUCT_Model</FieldName>
+    <FieldTitle>产品型号</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  
+  <FIELD ShowInFieldQuery="1" >
+    <FieldName>COLOR_NAME</FieldName>
+    <FieldTitle>规格名称</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="1" >
+    <FieldName>COLOR_CODE</FieldName>
+    <FieldTitle>规格代码</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  
+</TABLE>

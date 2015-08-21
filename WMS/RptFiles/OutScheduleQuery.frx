@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="11/27/2014 15:25:51" ReportInfo.Modified="06/10/2015 11:29:28" ReportInfo.CreatorVersion="1.9.9.0">
+  <Dictionary>
+    <TableDataSource Name="OutScheduleQuery" ReferenceName="OutScheduleQuery" DataType="System.Int32" Enabled="true">
+      <Column Name="Flag" DataType="System.Byte"/>
+      <Column Name="ScheduleNo" DataType="System.String"/>
+      <Column Name="BillDate" DataType="System.DateTime"/>
+      <Column Name="SourceNo" DataType="System.String"/>
+      <Column Name="DriverType" DataType="System.String"/>
+      <Column Name="CustomerID" DataType="System.String"/>
+      <Column Name="ParCustomerID" DataType="System.String"/>
+      <Column Name="CustPerson" DataType="System.String"/>
+      <Column Name="CustPhone" DataType="System.String"/>
+      <Column Name="LinkPerson" DataType="System.String"/>
+      <Column Name="LinkPhone" DataType="System.String"/>
+      <Column Name="LinkAddress" DataType="System.String"/>
+      <Column Name="Memo" DataType="System.String"/>
+      <Column Name="Creator" DataType="System.String"/>
+      <Column Name="CreateDate" DataType="System.DateTime"/>
+      <Column Name="Updater" DataType="System.String"/>
+      <Column Name="UpdateDate" DataType="System.DateTime"/>
+      <Column Name="CheckUser" DataType="System.String"/>
+      <Column Name="CheckDate" DataType="System.DateTime"/>
+      <Column Name="CustName" DataType="System.String"/>
+      <Column Name="ParCustName" DataType="System.String"/>
+      <Column Name="TotalQty" DataType="System.Int32"/>
+      <Column Name="TotalAmount" DataType="System.Decimal"/>
+      <Column Name="Transport" DataType="System.String"/>
+      <Column Name="ProductModel" DataType="System.String"/>
+      <Column Name="ProductFModel" DataType="System.String"/>
+      <Column Name="ProductName" DataType="System.String"/>
+      <Column Name="ColorName" DataType="System.String"/>
+      <Column Name="PlanQty" DataType="System.Int32"/>
+      <Column Name="Price" DataType="System.Decimal"/>
+      <Column Name="Amount" DataType="System.Decimal"/>
+      <Column Name="PlanDate" DataType="System.DateTime"/>
+      <Column Name="RealQty" DataType="System.Int32"/>
+      <Column Name="CustomerType" DataType="System.Byte"/>
+      <Column Name="AreaSation" DataType="System.String"/>
+      <Column Name="PlanDate1" DataType="System.DateTime"/>
+      <Column Name="NotOutStockQty" DataType="System.Int32"/>
+      <Column Name="Memo1" DataType="System.String"/>
+      <Column Name="Transport1" DataType="System.String"/>
+    </TableDataSource>
+    <Total Name="PlanQtyTotal" Expression="[OutScheduleQuery.PlanQty]" Evaluator="Data1" PrintOn="ReportSummary1"/>
+    <Total Name="AmountTotal" Expression="[OutScheduleQuery.Amount]" Evaluator="Data1" PrintOn="ReportSummary1"/>
+    <Total Name="RealTotal" Expression="[OutScheduleQuery.RealQty]" Evaluator="Data1" PrintOn="ReportSummary1"/>
+    <Total Name="NotStockTotal" Expression="[OutScheduleQuery.NotOutStockQty]" Evaluator="Data1" PrintOn="ReportSummary1"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="400" PaperHeight="210" LeftMargin="3" RightMargin="3" Guides="1.13">
+    <PageHeaderBand Name="PageHeader1" Width="1489.32" Height="26.46">
+      <TableObject Name="Table2" Width="1461.64" Height="26.46" Border.Lines="Bottom">
+        <TableColumn Name="Column20" Width="58.82"/>
+        <TableColumn Name="Column21"/>
+        <TableColumn Name="Column22" Width="56.7"/>
+        <TableColumn Name="Column23" Width="120.7"/>
+        <TableColumn Name="Column24"/>
+        <TableColumn Name="Column25"/>
+        <TableColumn Name="Column26" Width="56.7"/>
+        <TableColumn Name="Column27"/>
+        <TableColumn Name="Column28"/>
+        <TableColumn Name="Column29"/>
+        <TableColumn Name="Column30"/>
+        <TableColumn Name="Column31"/>
+        <TableColumn Name="Column32"/>
+        <TableColumn Name="Column33"/>
+        <TableColumn Name="Column34"/>
+        <TableColumn Name="Column35"/>
+        <TableColumn Name="Column36" Width="90.39"/>
+        <TableColumn Name="Column37" Width="195.68"/>
+        <TableColumn Name="Column38" Width="88.85"/>
+        <TableRow Name="Row2" Height="26.46">
+          <TableCell Name="Cell40" Text="排单状态" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell41" Text="销售单号" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell42" Text="归属地" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell43" Text="经销客户" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell44" Text="产品型号" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell45" Text="工厂型号" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell46" Text="规格" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell47" Text="数量" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell48" Text="单价" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell49" Text="金额" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell50" Text="已排单" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell51" Text="未排单" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell52" Text="接单日期" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell53" Text="预出库日" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell54" Text="答复交期" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell55" Text="收货人" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell56" Text="收货电话" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell57" Text="收货地址" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell58" Text="来源单号" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+      </TableObject>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="30.46" Width="1489.32" Height="26.46" DataSource="OutScheduleQuery">
+      <TableObject Name="Table1" Width="1461.64" Height="26.46">
+        <TableColumn Name="Column1" Width="58.82"/>
+        <TableColumn Name="Column2"/>
+        <TableColumn Name="Column3" Width="56.7"/>
+        <TableColumn Name="Column4" Width="120.7"/>
+        <TableColumn Name="Column5"/>
+        <TableColumn Name="Column6"/>
+        <TableColumn Name="Column7" Width="56.7"/>
+        <TableColumn Name="Column8"/>
+        <TableColumn Name="Column9"/>
+        <TableColumn Name="Column10"/>
+        <TableColumn Name="Column11"/>
+        <TableColumn Name="Column12"/>
+        <TableColumn Name="Column13"/>
+        <TableColumn Name="Column14"/>
+        <TableColumn Name="Column15"/>
+        <TableColumn Name="Column16"/>
+        <TableColumn Name="Column17" Width="90.39"/>
+        <TableColumn Name="Column18" Width="195.68"/>
+        <TableColumn Name="Column19" Width="88.85"/>
+        <TableRow Name="Row1" Height="26.46">
+          <TableCell Name="Cell1" Text="[IIf([OutScheduleQuery.PlanQty]-[OutScheduleQuery.RealQty]==0,&quot;已排单&quot;,IIf([OutScheduleQuery.PlanQty]-[OutScheduleQuery.RealQty]&gt;0 &amp;&amp; [OutScheduleQuery.RealQty]!=0,&quot;部分排单&quot;,&quot;未排单&quot;))]" Font="宋体, 9pt"/>
+          <TableCell Name="Cell2" Text="[OutScheduleQuery.ScheduleNo]" Font="宋体, 9pt"/>
+          <TableCell Name="Cell3" Text="[OutScheduleQuery.AreaSation]" Font="宋体, 9pt"/>
+          <TableCell Name="Cell4" Text="[OutScheduleQuery.CustName]" Font="宋体, 9pt"/>
+          <TableCell Name="Cell5" Text="[OutScheduleQuery.ProductModel]" Font="宋体, 9pt"/>
+          <TableCell Name="Cell26" Text="[OutScheduleQuery.ProductFModel]" Font="宋体, 9pt"/>
+          <TableCell Name="Cell27" Text="[OutScheduleQuery.ColorName]" Font="宋体, 9pt"/>
+          <TableCell Name="Cell28" Text="[OutScheduleQuery.PlanQty]" Font="宋体, 9pt"/>
+          <TableCell Name="Cell29" Text="[OutScheduleQuery.Price]" Font="宋体, 9pt"/>
+          <TableCell Name="Cell30" Text="[OutScheduleQuery.Amount]" Font="宋体, 9pt"/>
+          <TableCell Name="Cell31" Text="[OutScheduleQuery.RealQty]" Font="宋体, 9pt"/>
+          <TableCell Name="Cell32" Text="[OutScheduleQuery.NotOutStockQty]" Font="宋体, 9pt"/>
+          <TableCell Name="Cell33" Text="[IIf(Year([OutScheduleQuery.BillDate])==1,&quot;&quot;,FormatDateTime([OutScheduleQuery.BillDate],&quot;Short Date&quot;))]&#13;&#10;" Font="宋体, 9pt"/>
+          <TableCell Name="Cell34" Text="[IIf(Year([OutScheduleQuery.PlanDate1])==1,&quot;&quot;,FormatDateTime([OutScheduleQuery.PlanDate1],&quot;Short Date&quot;))]&#13;&#10;" Font="宋体, 9pt"/>
+          <TableCell Name="Cell35" Text="[OutScheduleQuery.Memo1]" Font="宋体, 9pt"/>
+          <TableCell Name="Cell36" Text="[OutScheduleQuery.LinkPerson]" Font="宋体, 9pt"/>
+          <TableCell Name="Cell37" Text="[OutScheduleQuery.LinkPhone]" Font="宋体, 9pt"/>
+          <TableCell Name="Cell38" Text="[OutScheduleQuery.LinkAddress]" Font="宋体, 9pt"/>
+          <TableCell Name="Cell39" Text="[OutScheduleQuery.SourceNo]" Font="宋体, 9pt"/>
+        </TableRow>
+      </TableObject>
+    </DataBand>
+    <ReportSummaryBand Name="ReportSummary1" Top="60.92" Width="1489.32" Height="26.46">
+      <TableObject Name="Table3" Width="1461.64" Height="26.46" Border.Lines="Top">
+        <TableColumn Name="Column39" Width="58.82"/>
+        <TableColumn Name="Column40"/>
+        <TableColumn Name="Column41" Width="56.7"/>
+        <TableColumn Name="Column42" Width="120.7"/>
+        <TableColumn Name="Column43"/>
+        <TableColumn Name="Column44"/>
+        <TableColumn Name="Column45" Width="56.7"/>
+        <TableColumn Name="Column46"/>
+        <TableColumn Name="Column47"/>
+        <TableColumn Name="Column48"/>
+        <TableColumn Name="Column49"/>
+        <TableColumn Name="Column50"/>
+        <TableColumn Name="Column51"/>
+        <TableColumn Name="Column52"/>
+        <TableColumn Name="Column53"/>
+        <TableColumn Name="Column54"/>
+        <TableColumn Name="Column55" Width="90.39"/>
+        <TableColumn Name="Column56" Width="195.68"/>
+        <TableColumn Name="Column57" Width="88.85"/>
+        <TableRow Name="Row3" Height="26.46">
+          <TableCell Name="Cell59" Font="宋体, 9pt"/>
+          <TableCell Name="Cell60" Font="宋体, 9pt"/>
+          <TableCell Name="Cell61" Font="宋体, 9pt"/>
+          <TableCell Name="Cell62" Font="宋体, 9pt"/>
+          <TableCell Name="Cell63" Font="宋体, 9pt"/>
+          <TableCell Name="Cell64" Font="宋体, 9pt"/>
+          <TableCell Name="Cell65" Text="合计：" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell66" Text="[PlanQtyTotal]" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell67" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell68" Text="[AmountTotal]" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell69" Text="[RealTotal]" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell70" Text="[NotStockTotal]" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell71" Font="宋体, 9pt"/>
+          <TableCell Name="Cell72" Font="宋体, 9pt"/>
+          <TableCell Name="Cell73" Font="宋体, 9pt"/>
+          <TableCell Name="Cell74" Font="宋体, 9pt"/>
+          <TableCell Name="Cell75" Font="宋体, 9pt"/>
+          <TableCell Name="Cell76" Font="宋体, 9pt"/>
+          <TableCell Name="Cell77" Font="宋体, 9pt"/>
+        </TableRow>
+      </TableObject>
+    </ReportSummaryBand>
+    <PageFooterBand Name="PageFooter1" Top="91.38" Width="1489.32" Height="33.25"/>
+  </ReportPage>
+</Report>

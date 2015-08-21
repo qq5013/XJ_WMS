@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SqlCommand>
+
+  <!--出库任务-->
+  <Command ID="SelectNextTask">
+    <CommandString>
+      select top 1 TaskNo,CellCode,NewCellCode,TaskType
+      from WCS_TASK inner join CMD_WH_CELL cell on WCS_TASK.CellCode=cell.CELL_CODE
+      where TaskTmp=1  and ((TaskType in (2,4,5,6) and State in (0,1)) or (TaskType=3 and State in (3,4))) and {0}
+      order by cell.SHELF_CODE,cell.CELL_CODE
+    </CommandString>
+  </Command>
+
+  <Command ID="SelectHasTask">
+    <CommandString>
+      select top 1 TaskNo,CellCode,NewCellCode,TaskType
+      from WCS_TASK inner join CMD_WH_CELL cell on WCS_TASK.CellCode=cell.CELL_CODE
+      where TaskTmp=1  and TaskType=5 and State&gt;0 and {0}
+      order  by  cell.SHELF_CODE,cell.CELL_CODE
+    </CommandString>
+  </Command>
+
+  <!--任务信息-->
+  <Command ID="SelectTask">
+    <CommandString>
+      select * from WCS_TASK where TaskTmp=1 and TaskNo=@TaskNo
+    </CommandString>
+  </Command>
+
+  <Command ID="SelectTaskCellInfo">
+    <CommandString>
+      select task.*,cell.CELL_NAME,shelf.SHELF_NAME from WCS_Task task
+      inner join CMD_WH_CELL cell on task.CellCode=cell.CELL_CODE
+      inner join CMD_WH_SHELF shelf on cell.SHELF_CODE=shelf.SHELF_CODE
+      where TaskTmp=1 and TaskNo=@TaskNo
+    </CommandString>
+  </Command>
+  
+  <Command ID="SpUpdateTaskFinished">
+    <CommandString>
+      sp_UpdateTaskFinished
+    </CommandString>
+  </Command>
+  <Command ID="UpdateTaskState">
+    <CommandString>
+      update WCS_TASK set State=@State where CellCode in (select cellcode from WCS_TASK where  TaskNo=@TaskNo)
+    </CommandString>
+  </Command>
+
+  <Command ID="SelectShelf">
+    <CommandString>
+      select SHELF_NAME,SHELF_CODE  from CMD_WH_SHELF  shelf inner join CMD_WH_AREA area
+      on shelf.AREA_CODE=area.AREA_CODE
+      where area.AREA_Type=1
+    </CommandString>
+  </Command>
+
+  <Command ID="SelectTaskByWhere">
+    <CommandString>
+      select * from WCS_TASK where TaskTmp=1 and {0} order by {1}
+    </CommandString>
+  </Command>
+
+
+  <Command ID="SPTestTask">
+    <CommandString>
+      sp_TestTaskInOut
+    </CommandString>
+  </Command>
+
+  <Command ID="SelectCellListByInTaskNo">
+    <CommandString>
+      select CELL_CODE,CELL_NAME from CMD_WH_CELL cmdCell
+      where IS_ACTIVE=1 and  exists (
+      select 1 from WCS_Task task inner join CMD_WH_CELL cell on task.CellCode=cell.CELL_CODE and cell.SHELF_CODE=cmdCell.SHELF_CODE where TaskNo=@TaskNo)
+    </CommandString>
+  </Command>
+  <Command ID="SelectMaxCellByInTaskNo">
+    <CommandString>
+      select isnull(MAX(CELL_CODE),'') as CELL_CODE from CMD_WH_CELL cmdCell
+      where IN_DATE is not null and  exists (
+      select 1 from WCS_Task task inner join CMD_WH_CELL cell on task.CellCode=cell.CELL_CODE and cell.SHELF_CODE=cmdCell.SHELF_CODE where TaskNo=@TaskNo)
+    </CommandString>
+  </Command>
+
+  <Command ID="spGetNewCell">
+    <CommandString>
+      sp_GetNewCell
+    </CommandString>
+  </Command>
+
+  <Command ID="SelectOutTaskByRepate">
+    <CommandString>
+      select * from WCS_TASK task1 inner join CMD_WH_CELL cell1 on cell1.CELL_CODE=task1.CellCode where task1.State=0 and
+      exists(select 1 from WCS_TASK task2 inner join CMD_WH_CELL cell2 on cell2.CELL_CODE=task2.CellCode and cell2.SHELF_CODE=cell1.SHELF_CODE
+      and task1.TaskType=task2.TaskType and task1.TaskTmp=task2.TaskTmp and task1.CellCode&lt;task2.CellCode where task2.State=1  and task2.TaskNo=@TaskNo )
+    </CommandString>
+  </Command>
+
+  <Command ID="SelectOutTaskByRepateCell">
+    <CommandString>
+      select * from   CMD_WH_CELL cell1  where
+      exists(select 1 from WCS_TASK task2 inner join CMD_WH_CELL cell2 on cell2.CELL_CODE=task2.CellCode and cell2.SHELF_CODE=cell1.SHELF_CODE
+      and Cell1.CELL_CODE&lt;task2.CellCode where  task2.State=1  and task2.TaskNo= @TaskNo) and IN_DATE is not null
+      and not exists(select 1 from WCS_TASK where cell1.CELL_CODE=WCS_TASK.CellCode )
+    </CommandString>
+  </Command>
+  
+
+</SqlCommand>

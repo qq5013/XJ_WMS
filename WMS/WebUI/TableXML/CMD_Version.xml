@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TABLE name="CMD_VERSION" ChineseName="版本信息" PrimaryKey="VERSION_CODE" OrderBy="VERSION_CODE" ViewName="CMD_VERSION">
+
+  <FIELD ShowInFieldQuery="1" >
+    <FieldName>VERSION_CODE</FieldName>
+    <FieldTitle>版本代码</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+
+  <FIELD ShowInFieldQuery="1" >
+    <FieldName>VERSION_NAME</FieldName>
+    <FieldTitle>版本名称</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="0">
+    <FieldName>MEMO</FieldName>
+    <FieldTitle>备注</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+
+</TABLE>

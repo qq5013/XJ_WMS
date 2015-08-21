@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TABLE name="CMD_WH_AREA" ChineseName="库区信息" PrimaryKey="AREA_CODE" OrderBy="AREA_CODE" ViewName="CMD_WH_AREA">
+
+	<FIELD DisplayWhenSelect="T" DisplayWhenQuery="T" DisplayWhenEdit="T" HIDDEN="F" ColumnIndex="00">
+		<FieldName>AREA_CODE</FieldName>
+		<FieldTitle>库区代码</FieldTitle>
+		<Width>100</Width>
+		<HeadTextHeight></HeadTextHeight>
+		<ItemHeight></ItemHeight>
+		<DataType>string</DataType>
+		<DefaultValue></DefaultValue>
+		<ControlID>txt_AREA_CODE</ControlID>
+		<ControlType>TextBox</ControlType>
+		<NotNull>N</NotNull>
+		<Validate onfocus="" onblur=""></Validate>
+	</FIELD>
+
+	<FIELD DisplayWhenSelect="T" DisplayWhenQuery="T" DisplayWhenEdit="T" HIDDEN="F" ColumnIndex="01">
+		<FieldName>AREA_NAME</FieldName>
+		<FieldTitle>库区名称</FieldTitle>
+		<Width>100</Width>
+		<HeadTextHeight></HeadTextHeight>
+		<ItemHeight></ItemHeight>
+		<DataType>string</DataType>
+		<DefaultValue></DefaultValue>
+		<ControlID>txt_AREA_NAME</ControlID>
+		<ControlType>TextBox</ControlType>
+		<NotNull>N</NotNull>
+		<Validate onfocus="" onblur=""></Validate>
+	</FIELD>
+
+</TABLE>

@@ -1,0 +1,8 @@
+F:\WLMQ\BLL\bin\Debug\BLL.dll
+F:\WLMQ\BLL\bin\Debug\BLL.pdb
+F:\WLMQ\BLL\bin\Debug\IDAL.dll
+F:\WLMQ\BLL\bin\Debug\Util.dll
+F:\WLMQ\BLL\bin\Debug\IDAL.pdb
+F:\WLMQ\BLL\bin\Debug\Util.pdb
+F:\WLMQ\BLL\obj\Debug\BLL.dll
+F:\WLMQ\BLL\obj\Debug\BLL.pdb

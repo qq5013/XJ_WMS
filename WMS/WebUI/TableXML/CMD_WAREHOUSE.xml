@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TABLE name="CMD_WAREHOUSE" ChineseName="仓库信息" PrimaryKey="WAREHOUSE_CODE" OrderBy="WAREHOUSE_CODE" ViewName="CMD_WAREHOUSE">
+
+	<FIELD DisplayWhenSelect="T" DisplayWhenQuery="T" DisplayWhenEdit="T" HIDDEN="F" ColumnIndex="00">
+		<FieldName>WAREHOUSE_CODE</FieldName>
+		<FieldTitle>仓库代码</FieldTitle>
+		<Width>100</Width>
+		<HeadTextHeight></HeadTextHeight>
+		<ItemHeight></ItemHeight>
+		<DataType>string</DataType>
+		<DefaultValue></DefaultValue>
+		<ControlID>txt_WAREHOUSE_CODE</ControlID>
+		<ControlType>TextBox</ControlType>
+		<NotNull>N</NotNull>
+		<Validate onfocus="" onblur=""></Validate>
+	</FIELD>
+
+	<FIELD DisplayWhenSelect="T" DisplayWhenQuery="T" DisplayWhenEdit="T" HIDDEN="F" ColumnIndex="01">
+		<FieldName>WAREHOUSE_NAME</FieldName>
+		<FieldTitle>仓库名称</FieldTitle>
+		<Width>100</Width>
+		<HeadTextHeight></HeadTextHeight>
+		<ItemHeight></ItemHeight>
+		<DataType>string</DataType>
+		<DefaultValue></DefaultValue>
+		<ControlID>txt_WAREHOUSE_NAME</ControlID>
+		<ControlType>TextBox</ControlType>
+		<NotNull>N</NotNull>
+		<Validate onfocus="" onblur=""></Validate>
+	</FIELD>
+
+</TABLE>

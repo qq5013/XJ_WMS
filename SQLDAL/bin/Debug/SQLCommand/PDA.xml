@@ -1,0 +1,689 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SqlCommand>
+   
+  <!--获取托盘明细-->
+  <Command ID="GetPalletRecord">
+    <CommandString>
+      select ROW_NUMBER() OVER(ORDER BY rowid) as 序号, sub.Barcode as 条形码,sub.ProductID as 产品编码,PRODUCT.PRODUCT_PartsName as 产品部件,isnull(color.COLOR_NAME,'') as 规格,sub.Qty as 数量 from WMS_PalletSub sub
+      left join CMD_PRODUCT  Product on sub.ProductID=product.PRODUCT_CODE
+      left join CMD_COLOR color on sub.ColorID=color.COLOR_CODE and color.PRODUCT_CODE=SUBSTRING(sub.productid,1,5)
+
+      where sub.PalletCode=@PalletCode
+      ORDER BY rowid desc
+    </CommandString>
+  </Command>
+  
+  <Command ID="SpInsertPalletDetailByCode">
+    <CommandString>
+      Sp_InsertPalletDetailByCode
+    </CommandString>
+  </Command>
+  <Command ID="SpInsertPalletDetailByCodeMulit">
+    <CommandString>
+      Sp_InsertPalletDetailByCodeMulit
+    </CommandString>
+  </Command>
+  <Command ID="SpInsertPalletDetailByNoCode">
+    <CommandString>
+      Sp_InsertPalletDetailByNoCode
+    </CommandString>
+  </Command>
+  
+  <Command ID="SpCancelPalletDetail">
+    <CommandString>
+      Sp_CancelPalletDetail
+    </CommandString>
+  </Command>
+
+  <Command ID="SpCreateInStockBill">
+    <CommandString>
+      sp_CreateInStock
+    </CommandString>
+  </Command>
+
+  <Command ID="SpCreateInStockBill2">
+    <CommandString>
+      sp_CreateInStock2
+    </CommandString>
+  </Command>
+
+  <Command ID="SpCreateInStockBill3">
+    <CommandString>
+      sp_CreateInStock3
+    </CommandString>
+  </Command>
+  
+  <Command ID="UpdatePalletFinished">
+    <CommandString>
+      update WCS_TASK set State=1 where PalletCode=@PalletCode and state=0
+    </CommandString>
+  </Command>
+
+  <Command ID="spGetCellByPallectCode">
+    <CommandString>
+      sp_GetCell
+    </CommandString>
+  </Command>
+  
+  <Command ID="GetCellInfoByPallectCode">
+    <CommandString>
+      select   area.AREA_CODE,area.AREA_NAME,area.AREA_Type,shelf.SHELF_CODE,shelf.SHELF_NAME,CELL.CELL_CODE,cell.CELL_NAME from CMD_WH_CELL Cell
+      inner join CMD_WH_SHELF shelf on cell.SHELF_CODE=shelf.SHELF_CODE
+      inner join CMD_WH_AREA area on area.AREA_CODE=shelf.AREA_CODE
+      where PALLET_CODE=@PalletCode
+    </CommandString>
+  </Command>
+
+  <!--更新开始入库-->
+  <Command ID="UpdateInStockTaskStart">
+    <CommandString>
+      update WCS_TASK set State=3 where TaskType=1 and TaskNo=@TaskNo  
+    </CommandString>
+  </Command>
+  
+  <!--入库判断前一个货位是否还未入库-->
+
+  <Command ID="SelectHasNotInStockByShelf">
+    <CommandString>
+      select   CELL_CODE, CELL_NAME from CMD_WH_CELL Cell
+      where SHELF_CODE= @ShelfCode and CELL_CODE &lt; @CellCode and PALLET_CODE!='' and IN_DATE is Null
+    </CommandString>
+  </Command>
+
+  <Command ID="SPUpdateInStockTaskFinished">
+    <CommandString>
+      SP_UpdateInStockTaskFinished
+    </CommandString>
+  </Command>
+
+  <Command ID="SelectTaskTemp">
+    <CommandString>
+      select  库区, 货架, 货位, 数量, 型号,规格, 托盘 from (
+      select AREA_NAME as 库区,SHELF_NAME as 货架,CELL_NAME  as 货位,SUM(task.Quantity) as 数量,product.PRODUCT_MODEL as 型号,COLOR_NAME as 规格, PalletCode as 托盘,area.AREA_CODE,shelf.SHELF_CODE,task.TaskNo
+      from WCS_TASK task
+      left join CMD_WH_CELL CELL on task.CellCode=cell.CELL_CODE
+      left join CMD_WH_SHELF Shelf on cell.SHELF_CODE=shelf.SHELF_CODE
+      left join CMD_WH_AREA Area on AREA.AREA_CODE=cell.AREA_CODE
+      left join CMD_PRODUCT Product on Product.PRODUCT_CODE=task.ProductID
+      left join CMD_COLOR Color on color.COLOR_CODE=task.ColorID and color.PRODUCT_CODE=SUBSTRING(task.ProductID,1,5)
+      where State=0 and TaskTmp=0 and task.PalletCode!='' and TaskType=2
+      group by PalletCode,AREA_NAME,SHELF_NAME,CELL_NAME,CELL_CODE,ProductID, product.PRODUCT_MODEL,PRODUCT.PRODUCT_PartsName,COLOR_NAME,task.ColorID,area.AREA_CODE,shelf.SHELF_CODE,task.TaskNo
+      union all
+      select AREA_NAME as 库区,SHELF_NAME as 货架,CELL_NAME  as 货位, task.Quantity as 数量 ,product.PRODUCT_MODEL as 型号,COLOR_NAME as 规格, PalletCode as 托盘 ,area.AREA_CODE,shelf.SHELF_CODE,task.TaskNo
+      from WCS_TASK task
+      left join CMD_WH_CELL CELL on task.CellCode=cell.CELL_CODE
+      left join CMD_WH_SHELF Shelf on cell.SHELF_CODE=shelf.SHELF_CODE
+      left join CMD_WH_AREA Area on AREA.AREA_CODE=cell.AREA_CODE
+      left join V4_CMD_PRODUCT Product on Product.PRODUCT_CODE=task.ProductID
+      left join CMD_COLOR Color on color.COLOR_CODE=task.ColorID and color.PRODUCT_CODE=task.ProductID
+      where State=0 and TaskTmp=0 and task.PalletCode='' and TaskType=2 ) tmp
+      order by AREA_CODE,SHELF_CODE,TaskNo
+    </CommandString>
+  </Command>
+  <!--备货时，根据产品条码，显示备货信息-->
+  <Command ID="SelectTaskByBarCode">
+    <CommandString>
+      select area.AREA_NAME,shelf.SHELF_NAME,cell.CELL_NAME, task.CellCode,task.PalletCode,task.Quantity,task.TaskNo,task.ProductID,task.ColorID,color.COLOR_NAME,Product.PRODUCT_PartsName from WMS_PalletSub sub
+      inner join WCS_TASK task on sub.PalletCode=task.PalletCode
+      inner join CMD_WH_CELL Cell on cell.CELL_CODE=task.CellCode
+      inner join CMD_WH_AREA Area on Area.AREA_CODE=Cell.AREA_CODE
+      inner join CMD_WH_SHELF Shelf on shelf.SHELF_CODE=cell.SHELF_CODE
+      left join CMD_COLOR Color on color.COLOR_CODE=task.ColorID and color.PRODUCT_CODE=task.ProductID
+      left join CMD_PRODUCT  Product on Product.PRODUCT_CODE=task.ProductID
+      where LockQty>0  and task.State=0 and task.TaskTmp=0 and Barcode=@Barcode and task.PalletCode!=''  and task.TaskType=2
+      union all
+      select area.AREA_NAME,shelf.SHELF_NAME,cell.CELL_NAME, task.CellCode,task.PalletCode,task.Quantity,task.TaskNo,task.ProductID,task.ColorID,color.COLOR_NAME,product.PRODUCT_NAME  as PRODUCT_PartsName  from CMD_WareHouseProductDetail detail
+      left join WCS_TASK task on task.ProductID=substring(detail.ProductID,1,5) and task.ColorID =detail.ColorID
+      left join CMD_WH_CELL Cell on cell.CELL_CODE=task.CellCode
+      left join CMD_WH_AREA Area on Area.AREA_CODE=Cell.AREA_CODE
+      left join CMD_WH_SHELF Shelf on shelf.SHELF_CODE=cell.SHELF_CODE
+      left join CMD_COLOR Color on color.COLOR_CODE=task.ColorID and color.PRODUCT_CODE=task.ProductID
+      left join  V4_CMD_PRODUCT Product on PRODUCT.Product_Code =task.ProductID
+      where task.PalletCode='' and task.State=0 and Barcode=@Barcode    and task.TaskType=2
+      union all
+      select area.AREA_NAME,shelf.SHELF_NAME,cell.CELL_NAME, task.CellCode,task.PalletCode,task.Quantity,task.TaskNo,task.ProductID,task.ColorID,color.COLOR_NAME,PRODUCT_NAME as PRODUCT_PartsName from WMS_PalletSub sub
+      left join WCS_TASK task on task.ProductID=substring(sub.ProductID,1,5) and task.ColorID =sub.ColorID
+      left join CMD_WH_CELL Cell on cell.CELL_CODE=task.CellCode
+      left join CMD_WH_AREA Area on Area.AREA_CODE=Cell.AREA_CODE
+      left join CMD_WH_SHELF Shelf on shelf.SHELF_CODE=cell.SHELF_CODE
+      left join CMD_COLOR Color on color.COLOR_CODE=task.ColorID and color.PRODUCT_CODE=task.ProductID
+      left join V4_CMD_PRODUCT  Product on Product.PRODUCT_CODE=task.ProductID
+      where LockQty>0  and task.State=0 and task.TaskTmp=0 and Barcode=@Barcode and task.PalletCode=''   and task.TaskType=2
+    </CommandString>
+  </Command>
+
+  <Command ID="SelectTaskByProductID">
+    <CommandString>
+      select area.AREA_NAME,shelf.SHELF_NAME,cell.CELL_NAME, task.CellCode,task.PalletCode,task.Quantity,task.TaskNo,task.ProductID,task.ColorID,color.COLOR_NAME,Product.PRODUCT_PartsName
+      from WMS_PalletSub sub
+      inner join WCS_TASK task on sub.PalletCode=task.PalletCode
+      inner join CMD_WH_CELL Cell on cell.CELL_CODE=task.CellCode
+      inner join CMD_WH_AREA Area on Area.AREA_CODE=Cell.AREA_CODE
+      inner join CMD_WH_SHELF Shelf on shelf.SHELF_CODE=cell.SHELF_CODE
+      left join CMD_COLOR Color on color.COLOR_CODE=task.ColorID and color.PRODUCT_CODE=task.ProductID
+      left join CMD_PRODUCT  Product on Product.PRODUCT_CODE=task.ProductID
+      where LockQty>0  and task.State=0 and task.TaskTmp=0  and sub.ProductID=@ProductID and sub.ColorID=@ColorID and sub.Barcode='' and task.PalletCode!='' and task.billid=''
+      union all
+      select area.AREA_NAME,shelf.SHELF_NAME,cell.CELL_NAME, task.CellCode,task.PalletCode,task.Quantity,task.TaskNo,task.ProductID,task.ColorID,color.COLOR_NAME,Product.PRODUCT_PartsName
+      from CMD_WareHouseProduct sub
+      inner join WCS_TASK task on sub.ProductID=task.ProductID and sub.ColorID=task.ColorID
+      left join CMD_WH_CELL Cell on cell.CELL_CODE=task.CellCode
+      left join CMD_WH_AREA Area on Area.AREA_CODE=Cell.AREA_CODE
+      left join CMD_WH_SHELF Shelf on shelf.SHELF_CODE=cell.SHELF_CODE
+      left join CMD_COLOR Color on color.COLOR_CODE=task.ColorID and color.PRODUCT_CODE=task.ProductID
+      left join CMD_PRODUCT  Product on substring(Product.PRODUCT_CODE,1,5)=task.ProductID
+      where sub.Flag=1 and sub.LockQty>0  and task.State=0 and task.TaskTmp=0  and sub.ProductID=substring(@ProductID,1,5) and sub.ColorID= @ColorID and task.PalletCode='' and task.billid=''
+
+    </CommandString>
+  </Command>
+
+  <!--出库备货时，根据托盘条码，显示备货信息-->
+  <Command ID="SelectTaskByPalletCode">
+    <CommandString>
+      select top 1 AREA_NAME,SHELF_NAME,CELL_NAME,CellCode,PalletCode,SUM(Quantity) as Quantity,ProductID,ColorID,PRODUCT_PartsName,COLOR_NAME from (
+      select distinct area.AREA_NAME,shelf.SHELF_NAME,cell.CELL_NAME, task.CellCode,task.PalletCode,task.Quantity,task.ProductID,task.ColorID,product.PRODUCT_PartsName,Color.COLOR_NAME from WMS_PalletSub sub
+      inner join WCS_TASK task on sub.PalletCode=task.PalletCode
+      inner join CMD_WH_CELL Cell on cell.CELL_CODE=task.CellCode
+      inner join CMD_WH_AREA Area on Area.AREA_CODE=Cell.AREA_CODE
+      inner join CMD_WH_SHELF Shelf on shelf.SHELF_CODE=cell.SHELF_CODE
+      left join CMD_COLOR Color on color.COLOR_CODE=task.ColorID and color.PRODUCT_CODE=substring(task.ProductID,1,5)
+      left join CMD_PRODUCT Product on Product.PRODUCT_CODE=task.ProductID
+      where LockQty>0 and task.tasktype=2  and task.State=0 and task.TaskTmp=0 and task.PalletCode=@PalletCode )tmp
+      group by  AREA_NAME,SHELF_NAME,CELL_NAME, CellCode,PalletCode,ProductID,ColorID,PRODUCT_PartsName,COLOR_NAME
+    </CommandString>
+  </Command>
+
+  <Command ID="UpdateTaskState">
+    <CommandString>
+      update WCS_TASK set State=1 where TaskType=2 and TaskTmp=0 and  {0}
+    </CommandString>
+  </Command>
+  <Command ID="UpdateOutStockState">
+    <CommandString>
+      update WMS_Stock set State=3 from WMS_Stock Main inner join WMS_StockSub Sub on main.BillID=sub.BillID and main.Flag=sub.Flag
+      where main.Flag=2 and State=2 and exists(select 1 from WCS_TASK where substring(ProductID,1,5)=sub.ProductID and ColorID=sub.ColorID and TaskType=2 and {0})
+    </CommandString>
+  </Command>
+
+  <Command ID="SelectOutStockScran">
+    <CommandString>
+      <!--select main.BillID as 出库单号, Schedule.LinkPerson as 收货人,Schedule.LinkAddress as 收货地址,main.ScheduleNo as 计划单号,'出库单' as 单别
+      from WMS_Stock main
+      inner join WMS_DeliverSchedule Schedule on main.ScheduleNo=Schedule.ScheduleNo
+      left join CMD_CUSTOMER on Schedule.CustomerID=CMD_CUSTOMER.CUSTOMER_CODE
+      where main.Flag=2 and main.State in(2,3,4)
+      union all
+      select BillID as 出库单号, '' as 收货人,  '' as 收货地址,'' as 计划单号,'移库单' as 单别
+      from WMS_Migration where Flag=1 and State in (2,3) and OutStockType=0
+      union all
+      select BillID as 出库单号, cmd.WAREHOUSE_NAME as 收货人,  '' as 收货地址,'' as 计划单号,'调拨单' as 单别
+      from WMS_Migration inner join CMD_WAREHOUSE cmd on WMS_Migration.StockFunction=cmd.CMD_WAREHOUSE_ID
+      where Flag=2 and State in (2,3) and OutStockType=0-->
+      select 出库单号,收货地址,状态,销售客户,收货人,单别 from (
+      select main.BillID as 出库单号,CMD_CUSTOMER.CUSTOMER_NAME as 销售客户, Schedule.LinkPerson as 收货人,Schedule.LinkAddress as 收货地址,'出库单' as 单别,state,case when State=2 then '未扫描' when State=4 then '扫描完成' else '扫描中' end as 状态
+      from WMS_Stock main
+      inner join WMS_DeliverSchedule Schedule on main.ScheduleNo=Schedule.ScheduleNo
+      left join CMD_CUSTOMER on Schedule.CustomerID=CMD_CUSTOMER.CUSTOMER_CODE
+      where main.Flag=2 and main.State in(2,3,4) and main.Checker=''
+      union all
+      select BillID as 出库单号,'' as 销售客户, cmd.WAREHOUSE_NAME as 收货人,  '' as 收货地址,'调拨单' as 单别,state, case when State=2 then '未扫描' when State=4 then '扫描完成' else '扫描中' end as 状态
+      from WMS_Migration inner join CMD_WAREHOUSE cmd on WMS_Migration.StockFunction=cmd.CMD_WAREHOUSE_ID
+      where Flag=2 and State in (2,3,4) and OutStockType=0) tmp
+      order by state,出库单号
+    </CommandString>
+  </Command>
+  
+  <Command ID="SelectOutStockSub">
+    <CommandString>
+      select ROW_NUMBER() OVER(ORDER BY rowid) as 序号,product.PRODUCT_MODEL as 产品型号,isnull(color.COLOR_NAME,'') as 规格, sub.InStockQty as 数量,sub.ScanQty as 已扫数量,PRODUCT.PRODUCT_NAME as 产品名称
+      from WMS_StockSub sub
+      left join V4_CMD_PRODUCT  Product on sub.ProductID=product.PRODUCT_CODE
+      left join CMD_COLOR color on sub.ColorID=color.COLOR_CODE and color.PRODUCT_CODE=sub.productid
+      where sub.Flag=2 and sub.BillID=@BillID
+    </CommandString>
+  </Command>
+  
+  <Command ID="SelectOutStockDetail">
+    <CommandString>
+      select ROW_NUMBER() OVER(ORDER BY rowid) as 序号, sub.Barcode as 条形码,PRODUCT.PRODUCT_PartsName as 产品部件,isnull(color.COLOR_NAME,'') as 规格
+      from WMS_StockDetail sub
+      left join CMD_PRODUCT  Product on sub.ProductID=product.PRODUCT_CODE
+      left join CMD_COLOR color on sub.ColorID=color.COLOR_CODE and color.PRODUCT_CODE=SUBSTRING(sub.productid,1,5)
+      where sub.Flag=2 and sub.BillID=@BillID
+      order by rowid desc
+    </CommandString>
+  </Command>
+
+  <!--出库扫描-->
+  <Command ID="SpInsertOutStockDetailByCode">
+    <CommandString>
+      Sp_InsertOutStockDetailByCode
+    </CommandString>
+  </Command>
+  <Command ID="SpInsertOutStockDetailByCodeMulit">
+    <CommandString>
+      Sp_InsertOutStockDetailByCodeMulit
+    </CommandString>
+  </Command>
+  <Command ID="SpInsertOutStockDetailByCodePallet">
+    <CommandString>
+      Sp_InsertOutStockDetailByCodePallet
+    </CommandString>
+  </Command>
+  
+  <!--出库无码操作-->
+  
+  <Command ID="SpInsertOutStockDetailByNoCode">
+    <CommandString>
+      Sp_InsertOutStockDetailByNoCode
+    </CommandString>
+  </Command>
+
+
+  <!--扫描完成，更新-->
+<Command ID="SpOutStockCompulete">
+  <CommandString>
+    Sp_OutStockCompulete
+  </CommandString>
+</Command>
+  <!--获取产品型号-->
+  <Command ID="SelectProductByIDName">
+    <CommandString>
+      select Product_Code as ID,PRODUCT_NAME as Name,PRODUCT_MODEL as Model from V4_CMD_PRODUCT where {0}
+    </CommandString>
+  </Command>
+
+  <Command ID="SelectColorByIDName">
+    <CommandString>
+      select COLOR_CODE as ID,COLOR_NAME as Name, COLOR_CODE+SPACE(2)+COLOR_NAME as IDName from CMD_COLOR where {0}
+    </CommandString>
+  </Command>
+
+
+  <Command ID="SelectMTaskTemp">
+    <CommandString>
+
+      select AREA_NAME as '库区',CELL_NAME as  '货位',PalletCode as '托盘', Qty as '数量', PRODUCT_MODEL as '产品型号',PRODUCT_NAME as '产品',COLOR_NAME as '规格' from (
+      select AREA_NAME,SHELF_NAME,CELL_NAME,product.PRODUCT_MODEL,PRODUCT.PRODUCT_NAME,COLOR_NAME, PalletCode,task.Quantity as Qty,CELL_CODE,  ProductID,task.ColorID ,OrderIndex from WCS_TASK task
+      left join CMD_WH_CELL CELL on task.CellCode=cell.CELL_CODE
+      left join CMD_WH_SHELF Shelf on cell.SHELF_CODE=shelf.SHELF_CODE
+      left join CMD_WH_AREA Area on AREA.AREA_CODE=cell.AREA_CODE
+      left join V4_CMD_PRODUCT Product on Product.PRODUCT_CODE=task.ProductID
+      left join CMD_COLOR Color on color.COLOR_CODE=task.ColorID and color.PRODUCT_CODE=SUBSTRING(task.ProductID,1,5)
+      where   task.PalletCode='' and task.billID= @BillID and TaskType in (2,4)
+      union all
+      select AREA_NAME,SHELF_NAME,CELL_NAME,product.PRODUCT_MODEL,PRODUCT.PRODUCT_PartsName as PRODUCT_NAME,COLOR_NAME, PalletCode,task.Quantity as Qty,CELL_CODE,  ProductID,task.ColorID ,OrderIndex from WCS_TASK task
+      left join CMD_WH_CELL CELL on task.CellCode=cell.CELL_CODE
+      left join CMD_WH_SHELF Shelf on cell.SHELF_CODE=shelf.SHELF_CODE
+      left join CMD_WH_AREA Area on AREA.AREA_CODE=cell.AREA_CODE
+      left join CMD_PRODUCT Product on Product.PRODUCT_CODE=task.ProductID
+      left join CMD_COLOR Color on color.COLOR_CODE=task.ColorID and color.PRODUCT_CODE=SUBSTRING(task.ProductID,1,5)
+      where     task.PalletCode!=''  and task.billID=@BillID and TaskType in (2,4)  )
+      tmp order by SHELF_NAME,CELL_CODE
+    </CommandString>
+  </Command>
+
+  <Command ID="SelectMTaskByBarCode">
+    <CommandString>
+      select area.AREA_NAME,shelf.SHELF_NAME,cell.CELL_NAME, task.CellCode,task.PalletCode,task.Quantity,task.ProductID,task.ColorID,task.TaskType,task.TaskNo
+      from WCS_TASK task
+      inner join WMS_PalletSub sub on task.PalletCode=sub.PalletCode
+      inner join CMD_WH_CELL Cell on cell.CELL_CODE=task.CellCode
+      inner join CMD_WH_AREA Area on Area.AREA_CODE=Cell.AREA_CODE
+      inner join CMD_WH_SHELF Shelf on shelf.SHELF_CODE=cell.SHELF_CODE
+      where  task.State=0 and task.TaskTmp=0 and task.billID!='' and sub.Barcode=@Barcode and task.TaskType in (4,6)
+      union all
+      select area.AREA_NAME,shelf.SHELF_NAME,cell.CELL_NAME, task.CellCode,task.PalletCode,task.Quantity,task.ProductID,task.ColorID,task.TaskType,task.TaskNo  from CMD_WareHouseProductDetail detail
+      left join WCS_TASK task on task.ProductID=substring(detail.ProductID,1,5) and task.ColorID =detail.ColorID
+      left join CMD_WH_CELL Cell on cell.CELL_CODE=task.CellCode
+      left join CMD_WH_AREA Area on Area.AREA_CODE=Cell.AREA_CODE
+      left join CMD_WH_SHELF Shelf on shelf.SHELF_CODE=cell.SHELF_CODE
+      left join CMD_COLOR Color on color.COLOR_CODE=task.ColorID and color.PRODUCT_CODE=task.ProductID
+      left join  V4_CMD_PRODUCT Product on PRODUCT.Product_Code =task.ProductID
+      where task.PalletCode='' and task.State=0 and Barcode=@Barcode  and task.billID!=''  and task.TaskType in (4,6)
+      union all
+      select area.AREA_NAME,shelf.SHELF_NAME,cell.CELL_NAME, task.CellCode,task.PalletCode,task.Quantity,task.ProductID,task.ColorID,task.TaskType,task.TaskNo from WMS_PalletSub sub
+      left join WCS_TASK task on task.ProductID=substring(sub.ProductID,1,5) and task.ColorID =sub.ColorID
+      left join CMD_WH_CELL Cell on cell.CELL_CODE=task.CellCode
+      left join CMD_WH_AREA Area on Area.AREA_CODE=Cell.AREA_CODE
+      left join CMD_WH_SHELF Shelf on shelf.SHELF_CODE=cell.SHELF_CODE
+      left join CMD_COLOR Color on color.COLOR_CODE=task.ColorID and color.PRODUCT_CODE=task.ProductID
+      left join CMD_PRODUCT  Product on Product.PRODUCT_CODE=task.ProductID
+      where LockQty>0  and task.State=0 and task.TaskTmp=0 and Barcode=@Barcode and task.PalletCode=''  and task.billID!=''  and task.TaskType in (4,6)
+
+    </CommandString>
+  </Command>
+
+  <Command ID="SelectMTaskByProductID">
+    <CommandString>
+      select area.AREA_NAME,shelf.SHELF_NAME,cell.CELL_NAME, task.CellCode,task.PalletCode,task.Quantity,task.TaskNo,task.ProductID,task.ColorID,color.COLOR_NAME,Product.PRODUCT_PartsName,task.tasktype
+      from WMS_PalletSub sub
+      inner join WCS_TASK task on sub.PalletCode=task.PalletCode
+      inner join CMD_WH_CELL Cell on cell.CELL_CODE=task.CellCode
+      inner join CMD_WH_AREA Area on Area.AREA_CODE=Cell.AREA_CODE
+      inner join CMD_WH_SHELF Shelf on shelf.SHELF_CODE=cell.SHELF_CODE
+      left join CMD_COLOR Color on color.COLOR_CODE=task.ColorID and color.PRODUCT_CODE=task.ProductID
+      left join CMD_PRODUCT  Product on Product.PRODUCT_CODE=task.ProductID
+      where LockQty>0  and task.State=0 and task.TaskTmp=0  and sub.ProductID=@ProductID and sub.ColorID=@ColorID and sub.Barcode='' and task.PalletCode!='' and task.billid!=''
+      union all
+      select area.AREA_NAME,shelf.SHELF_NAME,cell.CELL_NAME, task.CellCode,task.PalletCode,task.Quantity,task.TaskNo,task.ProductID,task.ColorID,color.COLOR_NAME,Product.PRODUCT_PartsName,task.tasktype
+      from CMD_WareHouseProduct sub
+      inner join WCS_TASK task on sub.ProductID=task.ProductID and sub.ColorID=task.ColorID
+      left join CMD_WH_CELL Cell on cell.CELL_CODE=task.CellCode
+      left join CMD_WH_AREA Area on Area.AREA_CODE=Cell.AREA_CODE
+      left join CMD_WH_SHELF Shelf on shelf.SHELF_CODE=cell.SHELF_CODE
+      left join CMD_COLOR Color on color.COLOR_CODE=task.ColorID and color.PRODUCT_CODE=task.ProductID
+      left join CMD_PRODUCT  Product on substring(Product.PRODUCT_CODE,1,5)=task.ProductID
+      where sub.Flag=1 and sub.LockQty>0  and task.State=0 and task.TaskTmp=0  and sub.ProductID=substring(@ProductID,1,5) and sub.ColorID= @ColorID and task.PalletCode='' and task.billid!=''
+
+    </CommandString>
+  </Command>
+
+
+  <Command ID="UpdateMTaskState">
+    <CommandString>
+      Sp_UpdateMigrationTask
+    </CommandString>
+  </Command>
+   
+
+  <Command ID="SelectMigrationScran">
+    <CommandString>
+      select BillID as 返修单号,fact.FactoryName as 返修供应商,case when State=2 then '未扫描' when State=4 then '扫描完成' else '扫描中' end as 状态
+      from WMS_Migration main inner join CMD_Factory fact on main.FactoryID=fact.FactoryID
+      where Flag=1 and State in (2,3,4)  
+    </CommandString>
+  </Command>
+  
+  <Command ID="SelectMigrationDetail">
+    <CommandString>
+      select ROW_NUMBER() OVER(ORDER BY rowid) as 序号, sub.Barcode as 条形码,PRODUCT.PRODUCT_PartsName as 产品部件,isnull(color.COLOR_NAME,'') as 规格
+      from WMS_MigrationDetail sub
+      left join CMD_PRODUCT  Product on sub.ProductID=product.PRODUCT_CODE
+      left join CMD_COLOR color on sub.ColorID=color.COLOR_CODE and color.PRODUCT_CODE=SUBSTRING(sub.productid,1,5)
+      where  sub.BillID=@BillID
+      order by rowid desc
+    </CommandString>
+  </Command>
+  <Command ID="SelectMigrationSub">
+    <CommandString>
+      select ROW_NUMBER() OVER(ORDER BY rowid) as 序号,  product.PRODUCT_MODEL as 产品型号,isnull(color.COLOR_NAME,'') as 规格,sub.Qty as 数量,sub.ScanQty as 已扫数量,PRODUCT.PRODUCT_NAME as 产品名称
+      from WMS_MigrationSub sub
+      left join V4_CMD_PRODUCT  Product on sub.ProductID=product.PRODUCT_CODE
+      left join CMD_COLOR color on sub.ColorID=color.COLOR_CODE and color.PRODUCT_CODE=sub.productid
+      where  sub.BillID=@BillID
+    </CommandString>
+  </Command>
+  <Command ID="SelectMSub">
+    <CommandString>
+      select ROW_NUMBER() OVER(ORDER BY rowid) as 序号,  product.PRODUCT_MODEL as 产品型号,isnull(color.COLOR_NAME,'') as 规格,sub.Qty as 数量,sub.ScanQty as 已扫数量,StarNo as 起始序号,EndNo as 结束序号
+      from WMS_MigrationSub sub
+      left join V4_CMD_PRODUCT  Product on sub.ProductID=product.PRODUCT_CODE
+      left join CMD_COLOR color on sub.ColorID=color.COLOR_CODE and color.PRODUCT_CODE=sub.productid
+      where  sub.BillID=@BillID and sub.Flag=1
+    </CommandString>
+  </Command>
+  <!--移库扫描-->
+  <Command ID="SpInsertMigrationDetailByCode">
+    <CommandString>
+      Sp_InsertMigrationDetailByCode
+    </CommandString>
+  </Command>
+
+  <Command ID="SpInsertMigrationDetailByCodePallet">
+    <CommandString>
+      Sp_InsertMigrationDetailByCodePallet
+    </CommandString>
+  </Command>
+  
+  <Command ID="SpInsertMigrationDetailByCodeMulit">
+    <CommandString>
+      Sp_InsertMigrationDetailByCodeMulit
+    </CommandString>
+  </Command>
+
+  <Command ID="SpInsertMigrationDetailByNoCode">
+    <CommandString>
+      Sp_InsertMigrationDetailByNoCode
+    </CommandString>
+  </Command>
+
+  <Command ID="SpMigrationCompulete">
+    <CommandString>
+      Sp_MigrationCompulete
+    </CommandString>
+  </Command>
+ <!--返修出库扫描-->
+  <Command ID="SpInsertBackMigrationDetailByCode">
+    <CommandString>
+      Sp_InsertBackMigrationDetailByCode
+    </CommandString>
+  </Command>
+
+  <Command ID="SpInsertBackMigrationDetailByCodePallet">
+    <CommandString>
+      Sp_InsertBackMigrationDetailByCodePallet
+    </CommandString>
+  </Command>
+
+  <Command ID="SpInsertBackMigrationDetailByCodeMulit">
+    <CommandString>
+      Sp_InsertBackMigrationDetailByCodeMulit
+    </CommandString>
+  </Command>
+
+  <Command ID="SpInsertBackMigrationDetailByNoCode">
+    <CommandString>
+      Sp_InsertBackMigrationDetailByNoCode
+    </CommandString>
+  </Command>
+
+  <Command ID="SpBackMigrationCompulete">
+    <CommandString>
+      Sp_BackMigrationCompulete
+    </CommandString>
+  </Command>
+
+
+
+
+  <Command ID="SelectBackTaskTemp">
+    <CommandString>
+      select AREA_NAME as 库区,SHELF_NAME as 货架,CELL_NAME  as 货位,Qty as 数量,isnull(PRODUCT_MODEL,'') as 型号,isnull(COLOR_NAME,'') as 规格, PalletCode as 托盘 from   (
+      select AREA_NAME,SHELF_NAME,CELL_NAME,product.PRODUCT_MODEL,PRODUCT.PRODUCT_PartsName as PRODUCT_NAME,COLOR_NAME, PalletCode,task.Quantity as Qty,CELL_CODE,  ProductID,task.ColorID ,OrderIndex
+      from WCS_TASK task
+      left join CMD_WH_CELL CELL on task.CellCode=cell.CELL_CODE
+      left join CMD_WH_SHELF Shelf on cell.SHELF_CODE=shelf.SHELF_CODE
+      left join CMD_WH_AREA Area on AREA.AREA_CODE=cell.AREA_CODE
+      left join CMD_PRODUCT Product on Product.PRODUCT_CODE=task.ProductID
+      left join CMD_COLOR Color on color.COLOR_CODE=task.ColorID and color.PRODUCT_CODE=SUBSTRING(task.ProductID,1,5)
+      where State=0  and TaskType=3 and task.PalletCode!='' )tmp
+    </CommandString>
+  </Command>
+  <!--返库条码扫描-->
+  <Command ID="SelectBackTaskByBarCode">
+    <CommandString>
+      Sp_GetBackCellByCode
+    </CommandString>
+  </Command>
+
+  <Command ID="UpdateBackTaskStart">
+    <CommandString>
+      update WCS_TASK set State=3 where TaskType=3 and TaskNo=@TaskNo  
+    </CommandString>
+  </Command>
+
+  <Command ID="SelectMoveTaskTemp">
+    <CommandString>
+      select AREA_NAME as 库区,SHELF_NAME as 货架,CELL_NAME  as 货位,NewCellName as 新货位,Qty as 数量,isnull(PRODUCT_MODEL,'') as 型号,isnull(COLOR_NAME,'') as 规格, PalletCode as 托盘 from   (
+      select AREA_NAME,SHELF_NAME,cell.CELL_NAME,NewCELL.CELL_NAME as NewCellName,product.PRODUCT_MODEL,PRODUCT.PRODUCT_PartsName as PRODUCT_NAME,COLOR_NAME, PalletCode,task.Quantity as Qty,CELL.CELL_CODE,  ProductID,task.ColorID ,OrderIndex
+      from WCS_TASK task
+      left join CMD_WH_CELL CELL on task.CellCode=cell.CELL_CODE
+      left join CMD_WH_CELL NewCELL on task.NewCellCode=NewCELL.CELL_CODE
+      left join CMD_WH_SHELF Shelf on cell.SHELF_CODE=shelf.SHELF_CODE
+      left join CMD_WH_AREA Area on AREA.AREA_CODE=cell.AREA_CODE
+      left join CMD_PRODUCT Product on Product.PRODUCT_CODE=task.ProductID
+      left join CMD_COLOR Color on color.COLOR_CODE=task.ColorID and color.PRODUCT_CODE=SUBSTRING(task.ProductID,1,5)
+      where State=0  and TaskType=5 and task.taskTmp=0)tmp
+    </CommandString>
+  </Command>
+
+  <Command ID="SelectMoveTaskByBarCode">
+    <CommandString>
+      Sp_GetMoveCellByCode
+    </CommandString>
+  </Command>
+  
+  <Command ID="UpdateMoveTaskFinished">
+    <CommandString>
+      SP_UpdateMoveTaskFinished
+    </CommandString>
+  </Command>
+
+  <!--直出单扫描-->
+  <Command ID="InsertStraightByBarCode">
+    <CommandString>
+      Sp_InsertStraightDetailByCode
+    </CommandString>
+  </Command>
+  <Command ID="SpInsertStraightByBarCodeMulit">
+    <CommandString>
+      Sp_InsertStraightDetailByCodeMulit
+    </CommandString>
+  </Command>
+  <Command ID="InsertStraightByNoCode">
+    <CommandString>
+      Sp_InsertStraightDetailByNoCode
+    </CommandString>
+  </Command>
+  
+  <Command ID="CreateStraight">
+    <CommandString>
+      Sp_CreateStraight
+    </CommandString>
+  </Command>
+  <!--不良品扫描-->
+  <Command ID="InsertBadByBarCode">
+    <CommandString>
+      Sp_InsertBadDetailByCode
+    </CommandString>
+  </Command>
+  <Command ID="CreateMigration">
+    <CommandString>
+      Sp_CreateMigration
+    </CommandString>
+  </Command>
+
+  <!--获取直出单单号-->
+  <Command ID="SelectStraightBill">
+    <CommandString>
+      select BillID as  '发货通知单',LinkAddress as '收货地址',LinkPerson as '收货人',CUSTNAME as '销售客户'
+      from View_WMS_OutStock main
+      where exists(select 1 from WMS_StockSub sub where sub.Flag=main.flag and sub.BillID=main.BillID and sub.InStockQty-sub.ScanQty >0)
+      and BillID not in (select SourceNo from WMS_SCHEDULE where Flag=2 ) and DriverType=1 and TaskChecker!=''
+      ORDER BY BillDate DESC, ScheduleNo DESC
+    </CommandString>
+  </Command>
+
+
+  <Command ID="SelectTempScanDetail">
+    <CommandString>
+      select ROW_NUMBER() OVER(ORDER BY sub.id) as 序号, sub.Barcode as 条形码,sub.ProductID as 产品编码,PRODUCT.PRODUCT_NAME as 产品名称,isnull(color.COLOR_NAME,'') as 规格
+      from PDA_TempScanDetail sub
+      left join CMD_PRODUCT  Product on sub.ProductID=product.PRODUCT_CODE
+      left join CMD_COLOR color on sub.ColorID=color.COLOR_CODE and color.PRODUCT_CODE=SUBSTRING(sub.productid,1,5)
+      where {0}
+      order by sub.id desc
+    </CommandString>
+  </Command>
+
+  <Command ID="SelectStraightSubText">
+    <CommandString>
+      select  ROW_NUMBER() OVER(ORDER BY rowid) as 序号,  PRODUCT.PRODUCT_NAME as 产品名称,product.PRODUCT_MODEL as 产品型号,isnull(color.COLOR_NAME,'') as 规格,sub.InStockQty as 数量
+      from WMS_StockSub sub
+      inner join WMS_Stock main on sub.BillID=main.BillID and sub.Flag=main.Flag
+      LEFT OUTER JOIN dbo.CMD_COLOR AS color ON sub.ColorID = color.COLOR_CODE AND color.PRODUCT_CODE = sub.ProductID
+      LEFT OUTER JOIN dbo.V4_CMD_PRODUCT AS product ON sub.ProductID = product.Product_Code
+      where   main.DriverType=1 and main.BillID=@BillID
+    </CommandString>
+  </Command>
+  
+
+  <!--获取直出单明细-->
+  <Command ID="SelectStraightSub">
+    <CommandString>
+      select sub.* from View_WMS_DeliverScheduleSub sub
+      inner join View_WMS_DeliverSchedule main  on sub.Flag=main.Flag and main.ScheduleNo=sub.ScheduleNo
+      where DriverType='1'  and main.ScheduleNo not in (select SourceNo from WMS_SCHEDULE where Flag=2 ) and NotOutStockQty>0
+    </CommandString>
+  </Command>
+  
+  <!--获取-->
+  <Command ID="SelectShelfIDByTaskNo">
+    <CommandString>
+      select shelf.CMD_WH_SHELF_ID from WCS_TASK Task inner join CMD_WH_CELL CELL on Task.CellCode=cell.CELL_CODE
+      inner join CMD_WH_SHELF Shelf on cell.SHELF_CODE=shelf.SHELF_CODE
+      where Task.TaskNo=@TaskNo
+    </CommandString>
+  </Command>
+
+  <Command ID="SelectPalletCodeByProduct">
+    <CommandString>
+      select distinct   PalletCode from WMS_PalletSub where ProductID=@ProductID and ColorID=@ColorID and Barcode=''
+    </CommandString>
+  </Command>
+
+  <Command ID="SelectRoleByUse">
+    <CommandString>
+      select COUNT(1) from SYS_USERLIST userlist
+      inner join sys_GroupOperationList o on o.GroupID=userlist.GroupID
+      left join sys_ModuleList  m on m.ModuleID=o.ModuleID
+      left join sys_GroupList g on g.GroupID=o.GroupID
+      left join sys_UserLIst  u on u.GroupID=g.GroupID
+      left join sys_Menu      n on n.MenuCode=m.SubModuleCode
+      left join sys_Menu      n2 on n2.MenuCode=substring(n.MenuCode,1,8)
+      where userlist.UserName=@UserName and n.MenuCode='MNU_M00B_00B' and OperatorCode=0
+    </CommandString>
+  </Command>
+
+  <!--盘点组盘-->
+  <Command ID="SpInsertPalletDetailByCodeCheck">
+    <CommandString>
+      Sp_InsertPalletDetailByCodeCheck
+    </CommandString>
+  </Command>
+  <!--盘点组盘-->
+  <Command ID="SpInsertPalletDetailByCodeMulitCheck">
+    <CommandString>
+      Sp_InsertPalletDetailByCodeMulitCheck
+    </CommandString>
+  </Command>
+
+  <!--返修组盘-->
+  <Command ID="SpInsertPalletDetailByCodeReBack">
+    <CommandString>
+      Sp_InsertPalletDetailByCodeReBack
+    </CommandString>
+  </Command>
+  <!--返修组盘-->
+  <Command ID="SpInsertPalletDetailByCodeMulitReBack">
+    <CommandString>
+      Sp_InsertPalletDetailByCodeMulitReBack
+    </CommandString>
+  </Command>
+  <Command ID="SpCancelReBackPalletDetail">
+    <CommandString>
+      Sp_CancelReBackPalletDetail
+    </CommandString>
+  </Command>
+  <Command ID="SelectInStockTask">
+    <CommandString>
+      select task.PalletCode as '托盘',product.PRODUCT_MODEL as '型号', product.PRODUCT_PartsName as '产品',color.COLOR_NAME as '规格', case  when State=0 then '组盘中' when State=1 then '组盘完成' when State=2 then '分配货位' when State=3 then '放货完成' else '入库进行中' end as '状态' ,  TaskNo as '任务号' from WCS_Task task
+      inner join (select distinct ProductID,ColorID,PalletCode from WMS_PalletSub where PalletCode in (select PalletCode from WCS_Task where TaskType=1)) sub on sub.PalletCode=task.PalletCode
+      left join CMD_PRODUCT product on sub.ProductID=product.PRODUCT_CODE
+      left join CMD_COLOR color on  substring(sub.ProductID,1,5)=color.PRODUCT_CODE and color.COLOR_CODE=sub.ColorID
+      where TaskType=1
+    </CommandString>
+  </Command>
+</SqlCommand>
+

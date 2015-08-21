@@ -1,0 +1,16 @@
+F:\WLMQ\SQLDAL\bin\Debug\SQLCommand\Cmd.xml
+F:\WLMQ\SQLDAL\bin\Debug\SQLCommand\ComboBox.xml
+F:\WLMQ\SQLDAL\bin\Debug\SQLCommand\PDA.xml
+F:\WLMQ\SQLDAL\bin\Debug\SQLCommand\Security.xml
+F:\WLMQ\SQLDAL\bin\Debug\SQLCommand\WebService.xml
+F:\WLMQ\SQLDAL\bin\Debug\SQLCommand\WMS.xml
+F:\WLMQ\SQLDAL\bin\Debug\SQLCommand\WCS.xml
+F:\WLMQ\SQLDAL\bin\Debug\SQLDAL.dll
+F:\WLMQ\SQLDAL\bin\Debug\SQLDAL.pdb
+F:\WLMQ\SQLDAL\bin\Debug\IDAL.dll
+F:\WLMQ\SQLDAL\bin\Debug\Util.dll
+F:\WLMQ\SQLDAL\bin\Debug\IDAL.pdb
+F:\WLMQ\SQLDAL\bin\Debug\Util.pdb
+F:\WLMQ\SQLDAL\obj\Debug\SQLDAL.csprojResolveAssemblyReference.cache
+F:\WLMQ\SQLDAL\obj\Debug\SQLDAL.dll
+F:\WLMQ\SQLDAL\obj\Debug\SQLDAL.pdb

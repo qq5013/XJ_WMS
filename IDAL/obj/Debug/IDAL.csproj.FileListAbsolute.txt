@@ -1,0 +1,7 @@
+F:\WLMQ\IDAL\bin\Debug\IDAL.dll
+F:\WLMQ\IDAL\bin\Debug\IDAL.pdb
+F:\WLMQ\IDAL\bin\Debug\Util.dll
+F:\WLMQ\IDAL\bin\Debug\Util.pdb
+F:\WLMQ\IDAL\obj\Debug\IDAL.csprojResolveAssemblyReference.cache
+F:\WLMQ\IDAL\obj\Debug\IDAL.dll
+F:\WLMQ\IDAL\obj\Debug\IDAL.pdb

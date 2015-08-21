@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="05/26/2015 19:29:29" ReportInfo.Modified="07/16/2015 11:03:21" ReportInfo.CreatorVersion="1.9.9.0">
+  <Dictionary>
+    <TableDataSource Name="ProductQuery" ReferenceName="ProductQuery" DataType="System.Int32" Enabled="true">
+      <Column Name="ProductID" DataType="System.String"/>
+      <Column Name="ColorID" DataType="System.String"/>
+      <Column Name="InitQty" DataType="System.Int32"/>
+      <Column Name="InStockQty" DataType="System.Int32"/>
+      <Column Name="OutStockQty" DataType="System.Int32"/>
+      <Column Name="MoveQty" DataType="System.Int32"/>
+      <Column Name="TotalQty" DataType="System.Int32"/>
+      <Column Name="InitBadQty" DataType="System.Int32"/>
+      <Column Name="MoveInQty" DataType="System.Int32"/>
+      <Column Name="ReturnQty" DataType="System.Int32"/>
+      <Column Name="InStockReturnQty" DataType="System.Int32"/>
+      <Column Name="BadOutStockQty" DataType="System.Int32"/>
+      <Column Name="TotalBadQty" DataType="System.Int32"/>
+      <Column Name="UserName" DataType="System.String"/>
+      <Column Name="PRODUCT_NAME" DataType="System.String"/>
+      <Column Name="PRODUCT_MODEL" DataType="System.String"/>
+      <Column Name="PRODUCT_FMODEL" DataType="System.String"/>
+      <Column Name="COLOR_NAME" DataType="System.String"/>
+      <Column Name="TransferInQty" DataType="System.Int32"/>
+      <Column Name="TransferOutQty" DataType="System.Int32"/>
+      <Column Name="StockID" DataType="System.Int32"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="350" PaperHeight="210" LeftMargin="3" RightMargin="3">
+    <PageHeaderBand Name="PageHeader1" Width="1300.32" Height="18.9">
+      <TableObject Name="Table2" Width="1289.57" Height="18.9" Border.Lines="Bottom">
+        <TableColumn Name="Column18" Width="126.77"/>
+        <TableColumn Name="Column19" Width="80.55"/>
+        <TableColumn Name="Column20"/>
+        <TableColumn Name="Column21"/>
+        <TableColumn Name="Column22"/>
+        <TableColumn Name="Column23"/>
+        <TableColumn Name="Column24"/>
+        <TableColumn Name="Column25"/>
+        <TableColumn Name="Column26"/>
+        <TableColumn Name="Column27"/>
+        <TableColumn Name="Column35"/>
+        <TableColumn Name="Column28"/>
+        <TableColumn Name="Column29"/>
+        <TableColumn Name="Column30"/>
+        <TableColumn Name="Column31" Width="75.6"/>
+        <TableColumn Name="Column32"/>
+        <TableColumn Name="Column33"/>
+        <TableColumn Name="Column34" Width="80.55"/>
+        <TableRow Name="Row2">
+          <TableCell Name="Cell18" Text="产品名称" Padding="1, 1, 1, 1" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell19" Text="产品型号" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell20" Text="工厂型号" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell21" Text="规格" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell22" Text="期初数量" HorzAlign="Right" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell23" Text="入库数量" HorzAlign="Right" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell24" Text="出库数量" HorzAlign="Right" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell25" Text="移出数量" HorzAlign="Right" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell26" Text="调出数量" HorzAlign="Right" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell27" Text="调入数量" HorzAlign="Right" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell35" Text="良品销退" HorzAlign="Right" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell28" Text="期末数量" HorzAlign="Right" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell29" Text="不良期初" HorzAlign="Right" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell30" Text="移入数量" HorzAlign="Right" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell31" Text="不良品销退" HorzAlign="Right" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell32" Text="采购退货" HorzAlign="Right" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell33" Text="其它出库" HorzAlign="Right" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell34" Text="不良品期末" HorzAlign="Right" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+      </TableObject>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="22.9" Width="1300.32" Height="26.46" CanGrow="true" CanBreak="true" DataSource="ProductQuery">
+      <TableObject Name="Table1" Width="1291.08" Height="26.46">
+        <TableColumn Name="Column1" Width="126.77"/>
+        <TableColumn Name="Column2" Width="80.55"/>
+        <TableColumn Name="Column3"/>
+        <TableColumn Name="Column4"/>
+        <TableColumn Name="Column5"/>
+        <TableColumn Name="Column6"/>
+        <TableColumn Name="Column7"/>
+        <TableColumn Name="Column8"/>
+        <TableColumn Name="Column9"/>
+        <TableColumn Name="Column10"/>
+        <TableColumn Name="Column36"/>
+        <TableColumn Name="Column11"/>
+        <TableColumn Name="Column12"/>
+        <TableColumn Name="Column13"/>
+        <TableColumn Name="Column14" Width="75.6"/>
+        <TableColumn Name="Column15"/>
+        <TableColumn Name="Column16"/>
+        <TableColumn Name="Column17" Width="82.06"/>
+        <TableRow Name="Row1" Height="26.46">
+          <TableCell Name="Cell1" Text="[ProductQuery.PRODUCT_NAME]" Padding="1, 1, 1, 1" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell2" Text="[ProductQuery.PRODUCT_MODEL]" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell3" Text="[ProductQuery.PRODUCT_FMODEL]" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell4" Text="[ProductQuery.COLOR_NAME]" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell5" Text="[ProductQuery.InitQty]" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell6" Text="[ProductQuery.InStockQty]" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell7" Text="[ProductQuery.OutStockQty]" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell8" Text="[ProductQuery.MoveQty]" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell9" Text="[ProductQuery.TransferOutQty]" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell10" Text="[ProductQuery.TransferInQty]" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell36" Text="[ProductQuery.ReturnQty]" HorzAlign="Right" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell11" Text="[ProductQuery.TotalQty]" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell12" Text="[ProductQuery.InitBadQty]" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell13" Text="[ProductQuery.MoveInQty]" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell14" Text="[ProductQuery.BadReturnQty]" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell15" Text="[ProductQuery.InStockReturnQty]" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell16" Text="[ProductQuery.BadOutStockQty]" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell17" Text="[ProductQuery.TotalBadQty]" HorzAlign="Right" Font="宋体, 9pt"/>
+        </TableRow>
+      </TableObject>
+    </DataBand>
+  </ReportPage>
+</Report>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TABLE name="View_CMD_Customer" ChineseName="客户信息" PrimaryKey="CUSTOMER_CODE" OrderBy="CUSTOMER_CODE" ViewName="View_CMD_Customer">
+
+
+
+<FIELD ShowInFieldQuery="1" >
+  <FieldName>CUSTOMER_NAME</FieldName>
+  <FieldTitle>客户名称</FieldTitle>
+  <DataType>string</DataType>
+</FIELD>
+  <FIELD ShowInFieldQuery="1">
+    <FieldName>PlayCUSTOMER_NAME</FieldName>
+    <FieldTitle>子公司</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+ 
+  <FIELD ShowInFieldQuery="1">
+    <FieldName>AreaSation</FieldName>
+    <FieldTitle>归属地</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="0">
+    <FieldName>CustomerTypeName</FieldName>
+    <FieldTitle>客户类别</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="1" >
+    <FieldName>CUSTOMER_CODE</FieldName>
+    <FieldTitle>客户代码</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="0">
+    <FieldName>PLAYCUSTOMER_CODE</FieldName>
+    <FieldTitle>子公司编码</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="0">
+    <FieldName>CustomerType</FieldName>
+    <FieldTitle>客户类别编码</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+
+
+
+</TABLE>

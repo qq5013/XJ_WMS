@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="WriteReplyToPurchaseOrder">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="replyXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WriteReplyToPurchaseOrderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="WriteReplyToPurchaseOrderResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="WriteReplyToPurchaseOrderSoapIn">
+    <wsdl:part name="parameters" element="tns:WriteReplyToPurchaseOrder" />
+  </wsdl:message>
+  <wsdl:message name="WriteReplyToPurchaseOrderSoapOut">
+    <wsdl:part name="parameters" element="tns:WriteReplyToPurchaseOrderResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WmsServiceSoap">
+    <wsdl:operation name="WriteReplyToPurchaseOrder">
+      <wsdl:input message="tns:WriteReplyToPurchaseOrderSoapIn" />
+      <wsdl:output message="tns:WriteReplyToPurchaseOrderSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WmsServiceSoap" type="tns:WmsServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="WriteReplyToPurchaseOrder">
+      <soap:operation soapAction="http://tempuri.org/WriteReplyToPurchaseOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WmsServiceSoap12" type="tns:WmsServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="WriteReplyToPurchaseOrder">
+      <soap12:operation soapAction="http://tempuri.org/WriteReplyToPurchaseOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WmsService">
+    <wsdl:port name="WmsServiceSoap" binding="tns:WmsServiceSoap">
+      <soap:address location="http://110.80.15.139:18888/WebService/WmsService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WmsServiceSoap12" binding="tns:WmsServiceSoap12">
+      <soap12:address location="http://110.80.15.139:18888/WebService/WmsService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

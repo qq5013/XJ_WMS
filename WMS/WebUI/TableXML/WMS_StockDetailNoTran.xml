@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TABLE name="View_WMS_StockDetialNoTran" ChineseName="出库序号调拨" PrimaryKey="BarCode" OrderBy="BarCode" ViewName="View_WMS_StockDetialNoTran">
+
+  <FIELD ShowInFieldQuery="1" >
+    <FieldName>BarCode</FieldName>
+    <FieldTitle>条形码</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="1" >
+    <FieldName>ProductID</FieldName>
+    <FieldTitle>产品编码</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="1">
+    <FieldName>ProdName</FieldName>
+    <FieldTitle>产品部件</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="1">
+    <FieldName>ColorID</FieldName>
+    <FieldTitle>规格编码</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="1">
+    <FieldName>ColName</FieldName>
+    <FieldTitle>规格</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+</TABLE>

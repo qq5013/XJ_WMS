@@ -1,0 +1,4 @@
+F:\WLMQ\Util\bin\Debug\Util.dll
+F:\WLMQ\Util\bin\Debug\Util.pdb
+F:\WLMQ\Util\obj\Debug\Util.dll
+F:\WLMQ\Util\obj\Debug\Util.pdb
