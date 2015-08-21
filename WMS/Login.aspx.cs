@@ -23,7 +23,7 @@ namespace WMS
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-
+            //测试
             Request.Cookies.Clear();
             if (txtUserName.Text.Trim() != "")
             {
