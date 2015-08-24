@@ -40,19 +40,19 @@
     </Reference>
     <Reference Include="FastReport, Version=1.1.1.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\FastReport.dll</HintPath>
+      <HintPath>..\Library\FastReport.dll</HintPath>
     </Reference>
     <Reference Include="FastReport.Bars, Version=1.9.9.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\FastReport.Bars.dll</HintPath>
+      <HintPath>..\Library\FastReport.Bars.dll</HintPath>
     </Reference>
     <Reference Include="FastReport.Editor, Version=1.9.9.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\FastReport.Editor.dll</HintPath>
+      <HintPath>..\Library\FastReport.Editor.dll</HintPath>
     </Reference>
     <Reference Include="FastReport.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\FastReport.Web.dll</HintPath>
+      <HintPath>..\Library\FastReport.Web.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.JScript" />
