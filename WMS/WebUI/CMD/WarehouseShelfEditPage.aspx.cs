@@ -26,45 +26,38 @@ namespace WMS.WebUI.CMD
             {
                 if (Request.QueryString["CMD_WH_SHELF_ID"] != null)
                 {
-                    dtShelf = bll.FillDataTable("Cmd.SelectShelf", new DataParameter[] { new DataParameter("{0}", " SHELF_CODE='" + Request.QueryString["CMD_WH_SHELF_ID"] + "'") });
+                    dtShelf = bll.FillDataTable("Cmd.SelectShelf", new DataParameter[] { new DataParameter("{0}", " ShelfCode='" + Request.QueryString["CMD_WH_SHELF_ID"] + "'") });
 
-                    this.txtShelfID.Text = dtShelf.Rows[0]["CMD_WH_SHELF_ID"].ToString();
-                    this.txtWhCode.Text = dtShelf.Rows[0]["WAREHOUSE_CODE"].ToString();
-                    this.txtAreaCode.Text = dtShelf.Rows[0]["AREA_CODE"].ToString();
-                    this.txtShelfCode.Text = dtShelf.Rows[0]["SHELF_CODE"].ToString();
-                    this.txtShelfName.Text = dtShelf.Rows[0]["SHELF_NAME"].ToString();
-                    this.txtCellRows.Text = dtShelf.Rows[0]["ROW_COUNT"].ToString();
-                    this.txtCellCols.Text = dtShelf.Rows[0]["COLUMN_COUNT"].ToString();
-                    this.txtProductID.Text = dtShelf.Rows[0]["DefaultProduct"].ToString();
-                    this.txtProductName.Text = bll.GetFieldValue("CMD_PRODUCT", "PRODUCT_PartsName", string.Format("PRODUCT_CODE = '{0}'", this.txtProductID.Text));
-                    this.txtColorID.Text = dtShelf.Rows[0]["DefaultColor"].ToString();
-                    this.txtColorName.Text = bll.GetFieldValue("CMD_COLOR", "COLOR_NAME", string.Format("PRODUCT_CODE = '{0}' and COLOR_CODE='{1}'", this.txtProductID.Text.Length==0?"": this.txtProductID.Text.Substring(0,5),this.txtColorID.Text)); ;
+                    this.txtShelfID.Text = dtShelf.Rows[0]["ShelfCode"].ToString();
+
+                    this.txtWHID.Text = dtShelf.Rows[0]["WarehouseCode"].ToString();
+                    this.txtWhName.Text = bll.GetFieldValue("CMD_Warehouse", "WarehouseName", "WarehouseCode='" + this.txtWHID.Text + "'");
+                    this.txtAreaID.Text = dtShelf.Rows[0]["AreaCode"].ToString();
+                    this.txtAreaName.Text = bll.GetFieldValue("CMD_Area", "AreaName", "AreaCode='" + this.txtAreaID.Text + "'");
+                    this.txtShelfCode.Text = dtShelf.Rows[0]["ShelfCode"].ToString();
+                    this.txtShelfName.Text = dtShelf.Rows[0]["ShelfName"].ToString();
+                    this.txtCellRows.Text = dtShelf.Rows[0]["Rows"].ToString();
+                    this.txtCellCols.Text = dtShelf.Rows[0]["Columns"].ToString();
+                  
                     this.txtMemo.Text = dtShelf.Rows[0]["MEMO"].ToString();
                     this.ddlActive.SelectedValue = dtShelf.Rows[0]["IsActive"].ToString();
 
-                    int rowCount = bll.GetRowCount("CMD_WH_CELL", "SHELF_CODE='" + dtShelf.Rows[0]["SHELF_CODE"].ToString() + "' and PALLET_CODE!=''");
-                    if (rowCount > 0)
-                    {
-                        this.Button1.Visible = false;
-                        this.Button2.Visible = false;
-                    }
-                    else
-                    {
-                        this.Button1.Visible = true;
-                        this.Button2.Visible = true;
-                    }
+                 
                 }
                 else if (Request.QueryString["AREACODE"] != null)
                 {
-
-                    this.txtWhCode.Text = "01";
-                    this.txtAreaCode.Text = Request.QueryString["AREACODE"];
+                    this.txtAreaID.Text = Request.QueryString["AREACODE"];
+                    this.txtWHID.Text = bll.GetFieldValue("CMD_Area", "WarehouseCode", "AreaCode='" + this.txtAreaID.Text + "'");
+                    this.txtWhName.Text = bll.GetFieldValue("CMD_Warehouse", "WarehouseName", "WarehouseCode='" + this.txtWHID.Text + "'");
+                    this.txtAreaName.Text = bll.GetFieldValue("CMD_Area", "AreaName", "AreaCode='" + this.txtAreaID.Text + "'");
+                    this.txtShelfID.Text = "";
+                    
                     int RowCount = bll.GetRowCount("CMD_WH_SHELF",string.Format( "AREA_CODE='{0}'",Request.QueryString["AREACODE"])) + 1;
                     this.txtShelfCode.Text = Request.QueryString["AREACODE"] + RowCount.ToString().PadLeft(3, '0');
 
                    
                 }
-                SetTextReadOnly(txtShelfCode, this.txtWhCode, this.txtAreaCode, this.txtCellCols, this.txtCellRows);
+                SetTextReadOnly(txtShelfCode, this.txtWhName, this.txtAreaName, this.txtCellCols, this.txtCellRows);
             }
         }
         protected void btnSave_Click(object sender, EventArgs e)
@@ -73,24 +66,23 @@ namespace WMS.WebUI.CMD
             {
                 if (this.txtShelfID.Text.Trim().Length == 0)
                 {
-                    int count = bll.GetRowCount("CMD_WH_SHELF", string.Format("SHELF_CODE='{0}'", this.txtShelfCode.Text));
+                    int count = bll.GetRowCount("CMD_WH_SHELF", string.Format("ShelfCode='{0}'", this.txtShelfCode.Text));
                     if (count > 0)
                     {
-                        WMS.App_Code.JScript.Instance.ShowMessage(this, "此仓库编码已存在，不能新增！");
+                        WMS.App_Code.JScript.Instance.ShowMessage(this, "此货架编码已存在，不能新增！");
                         return;
                     }
                      
                     bll.ExecNonQuery("Cmd.InsertShelf", new DataParameter[] { 
-                                                                                new DataParameter("@SHELF_CODE", this.txtShelfCode.Text),
-                                                                                new DataParameter("@SHELF_NAME", this.txtShelfName.Text.Trim().Replace("\'", "\''")),
-                                                                                new DataParameter("@ROW_COUNT",  this.txtCellRows.Text),
-                                                                                new DataParameter("@COLUMN_COUNT", this.txtCellCols.Text.Trim()),
-                                                                                new DataParameter("@WAREHOUSE_CODE",  this.txtWhCode.Text),
-                                                                                new DataParameter("@AREA_CODE", this.txtAreaCode.Text.Trim()),
+                                                                                new DataParameter("@WarehouseCode", this.txtWHID.Text),
+                                                                                new DataParameter("@AreaCode", this.txtAreaID.Text.Trim()),
+                                                                                new DataParameter("@ShelfCode",  this.txtShelfCode.Text),
+                                                                                new DataParameter("@ShelfName", this.txtShelfName.Text.Trim()),
+                                                                                new DataParameter("@Rows",  this.txtCellRows.Text),
+                                                                                new DataParameter("@Columns", this.txtCellCols.Text.Trim()),
                                                                                 new DataParameter("@IsActive", this.ddlActive.SelectedValue),
-                                                                                new DataParameter("@MEMO", this.txtMemo.Text.Trim()),
-                                                                                new DataParameter("@DefaultProduct",  this.txtProductID.Text),
-                                                                                new DataParameter("@DefaultColor", this.txtColorID.Text.Trim())});
+                                                                                new DataParameter("@Memo", this.txtMemo.Text.Trim())
+                                                                                });
                     //this.btnContinue.Enabled = true;
                     //this.btnSave.Enabled = false;
                     WMS.App_Code.JScript.Instance.RegisterScript(this, "ReloadParent();");
@@ -98,16 +90,13 @@ namespace WMS.WebUI.CMD
                 }
                 else
                 {
-                    bll.ExecNonQuery("Cmd.UpdateShelf", new DataParameter[] { new DataParameter("@SHELF_CODE", this.txtShelfCode.Text),
-                                                                              new DataParameter("@SHELF_NAME", this.txtShelfName.Text.Trim().Replace("\'", "\''")), 
-                                                                              new DataParameter("@ROW_COUNT",  this.txtCellRows.Text),
-                                                                              new DataParameter("@COLUMN_COUNT", this.txtCellCols.Text.Trim()),
-                                                                              new DataParameter("@WAREHOUSE_CODE",  this.txtWhCode.Text),
-                                                                              new DataParameter("@AREA_CODE", this.txtAreaCode.Text.Trim()),
-                                                                              new DataParameter("@IsActive", this.ddlActive.SelectedValue),
-                                                                              new DataParameter("@MEMO", this.txtMemo.Text.Trim()), 
-                                                                              new DataParameter("@DefaultProduct",  this.txtProductID.Text),
-                                                                              new DataParameter("@DefaultColor", this.txtColorID.Text.Trim()),
+                    bll.ExecNonQuery("Cmd.UpdateShelf", new DataParameter[] { new DataParameter("@WarehouseCode", this.txtWHID.Text),
+                                                                                new DataParameter("@AreaCode", this.txtAreaID.Text.Trim()),
+                                                                                new DataParameter("@ShelfName", this.txtShelfName.Text.Trim()),
+                                                                                new DataParameter("@Rows",  this.txtCellRows.Text),
+                                                                                new DataParameter("@Columns", this.txtCellCols.Text.Trim()),
+                                                                                new DataParameter("@IsActive", this.ddlActive.SelectedValue),
+                                                                                new DataParameter("@Memo", this.txtMemo.Text.Trim()),
                                                                               new DataParameter("{0}",  this.txtShelfID.Text)});
 
                     
@@ -137,8 +126,8 @@ namespace WMS.WebUI.CMD
 
         protected void btnDelete_Click(object sender, EventArgs e)
         {
-            string whcode = this.txtWhCode.Text;
-            string areacode = this.txtAreaCode.Text;
+            string whcode = this.txtWHID.Text;
+            string areacode = this.txtAreaID.Text;
             string shelfCode = this.txtShelfCode.Text;
             string shelfid = this.txtShelfID.Text;
 

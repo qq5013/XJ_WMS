@@ -161,10 +161,15 @@
         <table style="width:100%; background-color:WHITE;" cellpadding="0" cellspacing="0">
            <tr>
              <td class="maintable" colspan="2" align="right">
-                    <asp:Button ID="btnNewWarehouse" Text="新增仓库" runat="server" CssClass="ButtonCreate"  OnClientClick="return OpenEditWarehouse()" />  
-                    <asp:Button ID="btnNewArea" runat="server" Text="增加库区" CssClass="ButtonCreate" OnClientClick="return OpenEditArea()"/>
-                    <asp:Button ID="btnNewShelf" runat="server" Text="增加货架" CssClass="ButtonCreate" OnClientClick="return OpenEditShelf()"/>
-                    <asp:Button ID="btnNewCell" runat="server" Text="增加货位" CssClass="ButtonCreate" OnClientClick="return OpenEditCell()"/>
+                    <asp:Button ID="btnNewWarehouse" Text="新增仓库" runat="server" 
+                        CssClass="ButtonCreate"  OnClientClick="return OpenEditWarehouse()" 
+                        Visible="False" />  
+                    <asp:Button ID="btnNewArea" runat="server" Text="增加库区" CssClass="ButtonCreate" 
+                        OnClientClick="return OpenEditArea()" Visible="False"/>
+                    <asp:Button ID="btnNewShelf" runat="server" Text="增加货架" CssClass="ButtonCreate" 
+                        OnClientClick="return OpenEditShelf()" Visible="False"/>
+                    <asp:Button ID="btnNewCell" runat="server" Text="增加货位" CssClass="ButtonCreate" 
+                        OnClientClick="return OpenEditCell()" Visible="False"/>
 
                      <asp:Button ID="btnCancel" Text="退出" runat="server" CssClass="ButtonExit" OnClientClick="Exit();"  />            
              </td>

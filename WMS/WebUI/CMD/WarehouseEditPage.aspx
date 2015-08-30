@@ -51,14 +51,7 @@
          <td><asp:TextBox ID="txtWhName" runat="server"  CssClass="TextBox" Width="140px" onpropertychange="javascript:setMaxLength(this,20);"></asp:TextBox>
          </td>
       </tr>
-      <tr>
-         <td class="tdTitle"><font color="red">*</font>K3编码</td>
-         <td><asp:TextBox ID="txtK3" runat="server" CssClass="TextBox" Width="140px"></asp:TextBox>
-         </td>
-         <td class="tdTitle"></td> 
-         <td> 
-         </td>
-      </tr>
+      
       <tr>
          <td class="tdTitle">备注</td> 
          <td colspan="3"><asp:TextBox ID="txtMemo" runat="server" CssClass="MultilineTextbox" Width="376px" Rows="10" TextMode="MultiLine" MaxLength="246"></asp:TextBox>

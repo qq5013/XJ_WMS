@@ -9,17 +9,17 @@
   </Command>
   <Command ID="DeleteWarehouse">
     <CommandString>
-      DELETE FROM CMD_WAREHOUSE WHERE WAREHOUSE_CODE='{0}'
+      DELETE FROM CMD_WAREHOUSE WHERE WarehouseCode='{0}'
     </CommandString>
   </Command>
   <Command ID="InsertWarehouse">
     <CommandString>
-      Insert into CMD_WAREHOUSE (WAREHOUSE_CODE,WAREHOUSE_NAME,MEMO,IsManage,OtherCode) values(@WAREHOUSE_CODE,@WAREHOUSE_NAME,@MEMO,0,@OtherCode)
+      Insert into CMD_WAREHOUSE (WarehouseCode,WarehouseName,MEMO) values(@WarehouseCode,@WarehouseName,@MEMO)
     </CommandString>
   </Command>
   <Command ID="UpdateWarehouse">
     <CommandString>
-      update CMD_WAREHOUSE set WAREHOUSE_CODE=@WAREHOUSE_CODE,WAREHOUSE_NAME=@WAREHOUSE_NAME,MEMO=@MEMO,OtherCode=@OtherCode  where CMD_WAREHOUSE_ID={0}
+      update CMD_WAREHOUSE set WarehouseCode=@WarehouseCode,WarehouseName=@WarehouseName,MEMO=@MEMO  where WarehouseCode={0}
     </CommandString>
   </Command>
 
@@ -38,13 +38,13 @@
   
   <Command ID="InsertArea">
     <CommandString>
-      Insert into CMD_WH_AREA(AREA_CODE,AREA_NAME,WAREHOUSE_CODE,MEMO,AREA_Function,AREA_StockType,AREA_Type)
-      values(@AREA_CODE,@AREA_NAME,@WAREHOUSE_CODE,@MEMO,@AREA_Function,@AREA_StockType,@AREA_Type)
+      Insert into CMD_Area(WarehouseCode,AreaCode,AreaName,Memo)
+      values(@WarehouseCode,@AreaCode,@AreaName,@Memo)
     </CommandString>
   </Command>
   <Command ID="UpdateArea">
     <CommandString>
-      update CMD_WH_AREA set AREA_CODE=@AREA_CODE,AREA_NAME=@AREA_NAME,WAREHOUSE_CODE=@WAREHOUSE_CODE,MEMO=@MEMO,AREA_Function=@AREA_Function,AREA_StockType=@AREA_StockType,AREA_Type=@AREA_Type where CMD_WH_AREA_ID={0}
+      update CMD_Area set AreaName=@AreaName,Memo=@Memo where AreaCode={0}
     </CommandString>
   </Command>
   
@@ -52,22 +52,22 @@
   <!--货架信息-->
   <Command ID="SelectShelf">
     <CommandString>
-      SELECT * FROM CMD_Shelf where {0} ORDER BY AREA_CODE,SHELF_CODE
+      SELECT * FROM CMD_Shelf where {0} ORDER BY AreaCode,ShelfCode
     </CommandString>
   </Command>
   <Command ID="DeleteShelf">
     <CommandString>
-      delete from CMD_Shelf WHERE CMD_WH_SHELF_ID='{0}'
+      delete from CMD_Shelf WHERE ShelfCode='{0}'
     </CommandString>
   </Command>
   <Command ID="InsertShelf">
     <CommandString>
-      Insert into CMD_Shelf (SHELF_CODE,SHELF_NAME,ROW_COUNT,COLUMN_COUNT,WAREHOUSE_CODE,AREA_CODE,IsActive,MEMO,DefaultProduct,DefaultColor) values(@SHELF_CODE,@SHELF_NAME,@ROW_COUNT,@COLUMN_COUNT,@WAREHOUSE_CODE,@AREA_CODE,@IsActive,@MEMO,@DefaultProduct,@DefaultColor)
+      Insert into CMD_Shelf (WarehouseCode,AreaCode,ShelfCode,ShelfName,Rows,Columns,Memo,IsActive) values(@WarehouseCode,@AreaCode,@ShelfCode,@ShelfName,@Rows,@Columns,@Memo,@IsActive)
     </CommandString>
   </Command>
   <Command ID="UpdateShelf">
     <CommandString>
-      update CMD_Shelf set SHELF_CODE=@SHELF_CODE,SHELF_NAME=@SHELF_NAME,ROW_COUNT=@ROW_COUNT,COLUMN_COUNT=@COLUMN_COUNT,WAREHOUSE_CODE=@WAREHOUSE_CODE,AREA_CODE=@AREA_CODE,IsActive=@IsActive,MEMO=@MEMO,DefaultProduct=@DefaultProduct,DefaultColor=@DefaultColor  where CMD_WH_SHELF_ID={0}
+      update CMD_Shelf set  ShelfName=@ShelfName,Rows=@Rows,Columns=@Columns,WarehouseCode=@WarehouseCode,AreaCode=@AreaCode,IsActive=@IsActive,Memo=@Memo where ShelfCode='{0}'
     </CommandString>
   </Command>
   
@@ -75,25 +75,25 @@
  <!--货位信息-->
   <Command ID="SelectCell">
     <CommandString>
-      select * from CMD_WH_CELL WHERE {0} ORDER BY AREA_CODE,SHELF_CODE,CELL_CODE
+      select * from CMD_Cell WHERE {0} ORDER BY AreaCode,ShelfCode,CellCode
     </CommandString>
   </Command>
   <Command ID="DeleteCell">
     <CommandString>
-      delete from CMD_WH_CELL WHERE CMD_CELL_ID='{0}'
+      delete from CMD_Cell WHERE CellCode='{0}'
     </CommandString>
   </Command>
   <Command ID="InsertCell">
     <CommandString>
-      Insert into CMD_WH_CELL(CELL_CODE,CELL_NAME,AREA_CODE,SHELF_CODE,CELL_ROW,CELL_COLUMN,IS_ACTIVE,IS_LOCK,MEMO)
-      values(@CELL_CODE,@CELL_NAME,@AREA_CODE,@SHELF_CODE,@CELL_ROW,@CELL_COLUMN,@IS_ACTIVE,@IS_LOCK,@MEMO)
+      Insert into CMD_Cell(CellCode,CellName,AreaCode,ShelfCode,CellRow,CellColumn,IsActive,IsLock,Memo)
+      values(@CellCode,@CellName,@AreaCode,@ShelfCode,@CellRow,@CellColumn,@IsActive,@IsLock,@Memo)
     </CommandString>
   </Command>
   <Command ID="UpdateCell">
     <CommandString>
-      update CMD_WH_CELL set CELL_CODE=@CELL_CODE,CELL_NAME=@CELL_NAME,AREA_CODE=@AREA_CODE,SHELF_CODE=@SHELF_CODE,CELL_ROW=@CELL_ROW,
-      CELL_COLUMN=@CELL_COLUMN,IS_ACTIVE=@IS_ACTIVE,IS_LOCK=@IS_LOCK,MEMO=@MEMO
-      where CMD_CELL_ID={0}
+      update CMD_Cell set  CellName=@CellName,AreaCode=@AreaCode,ShelfCode=@ShelfCode,CellRow=@CellRow,
+      CellColumn=@CellColumn,IsActive=@IsActive,IsLock=@IsLock,Memo=@Memo
+      where CellCode={0}
     </CommandString>
   </Command>
 
@@ -109,12 +109,10 @@
       union all
       select AreaCode as id,WarehouseCode as PID,  '库区:'+AreaName as name from  CMD_Area
       union all
-      select ShelfCode as id,AreaCode as PID,'货架:'+ShelfName+SPACE(2)+ ISNULL(product.ProductName,'')+case when product.PRODUCT_MODEL is null then '' else '('+product.PRODUCT_MODEL+')' end  + ISNULL(color.COLOR_NAME,'') as name
-      from CMD_WH_SHELF shelf
-      left join CMD_PRODUCT product on shelf.DefaultProduct=product.Product_Code
-      left join CMD_COLOR color on  shelf.DefaultColor=color.COLOR_CODE and substring(shelf.DefaultProduct,1,5)=color.PRODUCT_CODE
+      select ShelfCode as id,AreaCode as PID,'货架:'+ShelfName as name
+      from CMD_Shelf shelf
       union all
-      select CELL_CODE as id,SHELF_CODE as pid,'货位:'+CELL_NAME as name from CMD_WH_CELL
+      select CellCode as id,ShelfCode as pid,'货位:'+CellName as name from CMD_Cell
     </CommandString>
   </Command>
   

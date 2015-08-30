@@ -31,6 +31,7 @@
             window.open("BatchAssignedProduct.aspx", "", "height=410, width=600,top=200px,left=300px, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no")
         }
     </script>
+     
 </head>
 <body style="margin-left:20px;">
     <form id="form1" runat="server">
@@ -39,55 +40,34 @@
                    <table>
                       <tr style="display:none;">
                       <td colspan="4">
-                          <asp:TextBox ID="txtAreaID" runat="server" CssClass="HiddenControl"></asp:TextBox>
+                          <asp:TextBox ID="txtAreaID" runat="server" CssClass="HiddenControl" 
+                              Width="71px"></asp:TextBox><asp:TextBox ID="txtWHID" runat="server" 
+                              CssClass="HiddenControl" Width="72px"></asp:TextBox>
                           <input class="ButtonCreate" name="btnBack" onclick="openwin()" type="button" value="批量分配指定卷烟" />
                         </td>
                        </tr>
                       <tr>
-                         <td class="tdTitle" style="height: 26px"><font color="red">*</font>仓库编码</td>
-                         <td style="height: 26px" align="left">
-                         <asp:TextBox ID="txtWhCode" runat="server" CssClass="TextBox" Width="140px" onfocus="CannotEdit(this)"></asp:TextBox>
+                         <td class="tdTitle" style="height: 26px"><font color="red">*</font>仓库名称</td>
+                         <td style="height: 26px" align="left" colspan="2">
+                         <asp:TextBox ID="txtWhName" runat="server" CssClass="TextBox" Width="211px" ></asp:TextBox>
                          </td>
-                         <td class="tdTitle"><font color="red">*</font>库区编码</td>
+                          
+                         <td>&nbsp;</td>
+                      </tr>                   
+                      <tr>
+                         <td class="tdTitle"><font color="red">*</font>库区编码</td> 
                          <td><asp:TextBox ID="txtAreaCode" runat="server" CssClass="TextBox" Width="140px" 
                                  onpropertychange="javascript:setMaxLength(this,10);"></asp:TextBox>
                              
                          </td>
-                      </tr>                   
-                      <tr>
-                         <td class="tdTitle"><font color="red">*</font>库区名称</td> 
-                         <td><asp:TextBox ID="txtAreaName" runat="server"  CssClass="TextBox" Width="140px" onpropertychange="javascript:setMaxLength(this,20);"></asp:TextBox>
-                         </td>
                          <td class="tdTitle">
-                             出入库方式
+                             <font color="red">*</font>库区名称
                           </td> 
                          <td  >
-                            <asp:DropDownList ID="ddlStockType" runat="server" Width="140px">
-                                 <asp:ListItem Selected="True" Value="0">先进先出</asp:ListItem>
-                                 <asp:ListItem  Value="1">先进后出</asp:ListItem>
-                             </asp:DropDownList>
+                             <asp:TextBox ID="txtAreaName" runat="server"  CssClass="TextBox" Width="140px" onpropertychange="javascript:setMaxLength(this,20);"></asp:TextBox>
                          </td>
                       </tr>
-                       <tr>
-                         <td class="tdTitle">库区存储</td> 
-                         <td align="left">
-                             <asp:DropDownList ID="ddlFunction" runat="server" Width="140px">
-                                 <asp:ListItem Selected="True" Value="0">存储区</asp:ListItem>
-                                 <asp:ListItem  Value="1">出库周转区</asp:ListItem>
-                                 <asp:ListItem  Value="2">展览区</asp:ListItem>
-                                 <asp:ListItem  Value="3">不良品区</asp:ListItem>
-                             </asp:DropDownList>
-                         </td>
-                         <td class="tdTitle">
-                            库区货位
-                         </td> 
-                         <td  >
-                             <asp:DropDownList ID="ddlType" runat="server" Width="140px">
-                                 <asp:ListItem Selected="True" Value="0">平库</asp:ListItem>
-                                 <asp:ListItem  Value="1">密集库</asp:ListItem>
-                             </asp:DropDownList>
-                         </td>
-                      </tr>
+                     
                       <tr>
                          <td class="tdTitle">备注</td>
                          <td colspan="3">

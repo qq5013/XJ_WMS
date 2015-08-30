@@ -26,20 +26,21 @@ namespace WMS.WebUI.CMD
             {
                 if (Request.QueryString["WAREHOUSE_CODE"] != null)
                 {
-                   
-                    dtHouse = bll.FillDataTable("Cmd.SelectWarehouse", new DataParameter[] { new DataParameter("{0}", "WAREHOUSE_CODE='" + Request.QueryString["WAREHOUSE_CODE"] + "'") });
 
-                    this.txtWHID.Text = dtHouse.Rows[0]["CMD_WAREHOUSE_ID"].ToString();
-                    this.txtWhCode.Text = dtHouse.Rows[0]["WAREHOUSE_CODE"].ToString();
-                    this.txtWhName.Text = dtHouse.Rows[0]["WAREHOUSE_NAME"].ToString();
+                    dtHouse = bll.FillDataTable("Cmd.SelectWarehouse", new DataParameter[] { new DataParameter("{0}", "WarehouseCode='" + Request.QueryString["WAREHOUSE_CODE"] + "'") });
+
+                    this.txtWHID.Text = dtHouse.Rows[0]["WarehouseCode"].ToString();
+                    this.txtWhCode.Text = dtHouse.Rows[0]["WarehouseCode"].ToString();
+                    this.txtWhName.Text = dtHouse.Rows[0]["WarehouseName"].ToString();
                     this.txtMemo.Text = dtHouse.Rows[0]["MEMO"].ToString();
-                    this.txtK3.Text = dtHouse.Rows[0]["OtherCode"].ToString();
-                    this.txtWhCode.ReadOnly = true;
+
+                    SetTextReadOnly(this.txtWhCode);
                     
                 }
                 else
                 {
-                    this.txtWhCode.Text = bll.GetNewID("CMD_WAREHOUSE", "WAREHOUSE_CODE", "1=1");
+                    this.txtWHID.Text = "";
+                    this.txtWhCode.Text = bll.GetNewID("CMD_WAREHOUSE", "WarehouseCode", "1=1");
                 }
             }
         }
@@ -47,22 +48,22 @@ namespace WMS.WebUI.CMD
         {
             if (this.txtWHID.Text.Trim().Length == 0)//新增
             {
-                int count = bll.GetRowCount("CMD_WAREHOUSE", string.Format("WAREHOUSE_CODE='{0}'", this.txtWhCode.Text));
+                int count = bll.GetRowCount("CMD_WAREHOUSE", string.Format("WarehouseCode='{0}'", this.txtWhCode.Text));
                 if (count > 0)
                 {
                     WMS.App_Code.JScript.Instance.ShowMessage(this, "此仓库编码已存在，不能新增！");
                     return;
                 }
                 //新增
-                bll.ExecNonQuery("Cmd.InsertWarehouse", new DataParameter[] { new DataParameter("@WAREHOUSE_CODE", this.txtWhCode.Text), new DataParameter("@WAREHOUSE_NAME", this.txtWhName.Text.Trim().Replace("\'", "\''")), new DataParameter("@MEMO", this.txtMemo.Text.Trim()),new DataParameter("@OtherCode",this.txtK3.Text) });
+                bll.ExecNonQuery("Cmd.InsertWarehouse", new DataParameter[] { new DataParameter("@WarehouseCode", this.txtWhCode.Text), new DataParameter("@WarehouseName", this.txtWhName.Text.Trim().Replace("\'", "\''")), new DataParameter("@MEMO", this.txtMemo.Text.Trim()) });
                 WMS.App_Code.JScript.Instance.RegisterScript(this, "ReloadParent();");
                 AddOperateLog("仓库管理", "添加仓库信息");
             }
             else
             {
                 //更新
-                bll.ExecNonQuery("Cmd.UpdateWarehouse", new DataParameter[] { new DataParameter("@WAREHOUSE_CODE", this.txtWhCode.Text), new DataParameter("@WAREHOUSE_NAME", this.txtWhName.Text.Trim().Replace("\'", "\''")), 
-                                        new DataParameter("@MEMO", this.txtMemo.Text.Trim()),new DataParameter("@OtherCode",this.txtK3.Text),new DataParameter("{0}",this.txtWHID.Text) });
+                bll.ExecNonQuery("Cmd.UpdateWarehouse", new DataParameter[] { new DataParameter("@WarehouseCode", this.txtWhCode.Text), new DataParameter("@WarehouseName", this.txtWhName.Text.Trim().Replace("\'", "\''")), 
+                                        new DataParameter("@MEMO", this.txtMemo.Text.Trim()),new DataParameter("{0}",this.txtWhCode.Text) });
 
                 WMS.App_Code.JScript.Instance.RegisterScript(this, "UpdateParent();");
                 AddOperateLog("仓库管理", "修改仓库信息");
@@ -81,7 +82,7 @@ namespace WMS.WebUI.CMD
         protected void btnDelete_Click(object sender, EventArgs e)
         {
             string whcode = this.txtWhCode.Text;
-            DataTable dtTemp = bll.FillDataTable("Cmd.SelectArea", new DataParameter[] { new DataParameter("{0}", "WAREHOUSE_CODE='" + whcode + "'") });
+            DataTable dtTemp = bll.FillDataTable("Cmd.SelectArea", new DataParameter[] { new DataParameter("{0}", "WarehouseCode='" + whcode + "'") });
             int count = dtTemp.Rows.Count;
 
             

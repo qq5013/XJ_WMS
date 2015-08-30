@@ -58,15 +58,6 @@ namespace WMS.WebUI.CMD {
         protected global::System.Web.UI.WebControls.TextBox txtWhName;
         
         /// <summary>
-        /// txtK3 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtK3;
-        
-        /// <summary>
         /// txtMemo 控件。
         /// </summary>
         /// <remarks>
