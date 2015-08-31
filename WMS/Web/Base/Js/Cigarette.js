@@ -118,7 +118,7 @@ var grid = Ext.create("Ext.grid.Panel", {
                             scope: this, //添加
                             handler: function () {
                                 getSelectedTableName();
-                                syswin.show();
+                                edit_win.show();
                             }
                         },
                         { iconCls: 'icon-exit',
