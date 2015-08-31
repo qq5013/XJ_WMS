@@ -158,7 +158,7 @@
                 success: function (response) {
                     var json = Ext.JSON.decode(response.responseText)
                     Ext.each(json, function (el) {
-                        debugger;
+                       // debugger;
                         var panel = Ext.create('Ext.panel.Panel', {
                             //id: el.id, id不能加，加了会出错
                             title: el.text,

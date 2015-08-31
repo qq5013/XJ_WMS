@@ -40,13 +40,22 @@ namespace WMS.WebUI.CMD {
         protected global::System.Web.UI.WebControls.TextBox txtAreaID;
         
         /// <summary>
-        /// txtWhCode 控件。
+        /// txtWHID 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtWhCode;
+        protected global::System.Web.UI.WebControls.TextBox txtWHID;
+        
+        /// <summary>
+        /// txtWhName 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtWhName;
         
         /// <summary>
         /// txtAreaCode 控件。
@@ -65,33 +74,6 @@ namespace WMS.WebUI.CMD {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtAreaName;
-        
-        /// <summary>
-        /// ddlStockType 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlStockType;
-        
-        /// <summary>
-        /// ddlFunction 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlFunction;
-        
-        /// <summary>
-        /// ddlType 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlType;
         
         /// <summary>
         /// txtMemo 控件。

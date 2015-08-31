@@ -37,12 +37,14 @@
                   <legend>货位</legend>   
                    <table>
                       <tr style="display:none;"><td colspan="4"><asp:TextBox ID="txtCELLID" runat="server"  CssClass="HiddenControl"></asp:TextBox>
+                      <asp:TextBox ID="txtAreaID" runat="server"  CssClass="HiddenControl"></asp:TextBox>
+                      <asp:TextBox ID="txtShelfID" runat="server"  CssClass="HiddenControl"></asp:TextBox>
                           <input class="ButtonCreate" name="btnBack" onclick="openwin()" type="button" value="批量分配指定卷烟" /></td></tr>
                       <tr>                        
-                         <td class="tdTitle"><font color="red">*</font>库区编码</td>
-                         <td><asp:TextBox ID="txtAreaCode" runat="server" CssClass="TextBox" onfocus="CannotEdit(this)"></asp:TextBox></td> 
-                         <td class="tdTitle"><font color="red">*</font>货架编码</td>
-                         <td  ><asp:TextBox ID="txtShelfCode" runat="server" CssClass="TextBox" onfocus="CannotEdit(this)"></asp:TextBox>
+                         <td class="tdTitle"><font color="red">*</font>库区名称</td>
+                         <td><asp:TextBox ID="txtAreaName" runat="server" CssClass="TextBox" ></asp:TextBox></td> 
+                         <td class="tdTitle"><font color="red">*</font>货架名称</td>
+                         <td  ><asp:TextBox ID="txtShelfName" runat="server" CssClass="TextBox" ></asp:TextBox>
                          </td>
                       </tr>
                       <tr>

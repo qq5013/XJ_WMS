@@ -17,10 +17,13 @@
 *.cache
 *.ilk
 *.log
-[Bb]in
+[Bb]in/
 [Dd]ebug*/
+[Dd]ebug/SQLCommand/
+
 *.lib
 *.sbr
+DB.xml
 obj/
 [Rr]elease*/
 _ReSharper*/
