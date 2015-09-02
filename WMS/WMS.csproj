@@ -6192,7 +6192,7 @@
     <Content Include="Css\leftmenu.css" />
     <Content Include="Css\op.css" />
     <Content Include="DB.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
     <Content Include="ext-3.3.1\adapter\ext\ext-base-debug.js" />
