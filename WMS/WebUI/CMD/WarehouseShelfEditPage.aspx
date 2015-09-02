@@ -54,13 +54,13 @@
       
 
     </script>
-    
+
 </head>
-<body style="margin-left:20px;">
+<body style="margin-left:20px; height: 286px;">
     <form id="form1" runat="server">
-            <fieldset style="width: 509px">
+            <fieldset style="width: 509px; height:260px">
                 <legend>货架</legend>   
-                   <table>
+                   <table style=" width:99%; height:98%">
                       <tr style="display:none;"><td colspan="4">
                       <asp:TextBox ID="txtShelfID" runat="server" CssClass="HiddenControl" Width="61px"></asp:TextBox>
                           <asp:TextBox ID="txtWHID" runat="server" CssClass="HiddenControl" Width="61px"></asp:TextBox>
@@ -71,11 +71,9 @@
                       <tr>
                          <td class="tdTitle"><font color="red">*</font>仓库名称</td>
                          <td>
-                             <asp:TextBox ID="txtWhName" runat="server" CssClass="TextBox" Width="140px" 
-                                 onfocus="CannotEdit(this)"></asp:TextBox></td>
+                             <asp:TextBox ID="txtWhName" runat="server" CssClass="TextBox" Width="140px"></asp:TextBox></td>
                          <td class="tdTitle"><font color="red">*</font>库区名称</td>
-                         <td><asp:TextBox ID="txtAreaName" runat="server" CssClass="TextBox" Width="140px" 
-                                 onfocus="CannotEdit(this)"></asp:TextBox></td>
+                         <td><asp:TextBox ID="txtAreaName" runat="server" CssClass="TextBox" Width="140px"></asp:TextBox></td>
                          
                       </tr>
                       <tr>
@@ -110,13 +108,14 @@
                       </tr>     
                       <tr>
                          <td class="tdTitle">备注</td> 
-                         <td colspan="3" style="text-align: left"><asp:TextBox ID="txtMemo" runat="server"  
+                         <td colspan="3" style="text-align: left">
+                             <asp:TextBox ID="txtMemo" runat="server"  
                                  CssClass="MultilineTextBox" Width="376px" Rows="10" TextMode="MultiLine" 
-                                 Height="94px"></asp:TextBox>
+                                 Height="85px"></asp:TextBox>
                          </td>
                       </tr> 
                      
-                      <tr><td colspan="4" align="center"  style="height:35px; text-align:center;">
+                      <tr><td colspan="4" align="center"  style="height:25px; text-align:center;">
                           <asp:Button ID="btnSave" runat="server" Text="保存" CssClass="button" OnClick="btnSave_Click" OnClientClick="return CheckBeforeSubmit()"/>
                          </td>
                          </tr>                                                                                

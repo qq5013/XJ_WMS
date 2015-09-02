@@ -29,17 +29,40 @@
         function openwin() {
             window.open("BatchAssignedProduct.aspx", "", "height=410px, width=600px,top=200px,left=300px, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no")
         }
+        function CheckBeforeSubmit() {
+            var cellcode = document.getElementById('txtCellCode').value;
+            var cellname = document.getElementById('txtCellName').value;
+
+            if (cellcode == "") {
+                alert('货位编码不能为空！');
+                return false;
+            }
+            if (cellname == "") {
+                alert('货位名称不能为空！');
+                return false;
+            }
+
+        }
+
+        function clear(id) {
+            alert(id)
+            document.getElementById(id).value = "";
+        }
     </script>
 </head>
-<body style="margin-left:20px;">
+<body style="margin-left:20px; height: 286px;">
     <form id="form1" runat="server">
-         <fieldset style="width: 550px">
+         <fieldset style="width: 506px; height:230px">
                   <legend>货位</legend>   
-                   <table>
-                      <tr style="display:none;"><td colspan="4"><asp:TextBox ID="txtCELLID" runat="server"  CssClass="HiddenControl"></asp:TextBox>
-                      <asp:TextBox ID="txtAreaID" runat="server"  CssClass="HiddenControl"></asp:TextBox>
-                      <asp:TextBox ID="txtShelfID" runat="server"  CssClass="HiddenControl"></asp:TextBox>
-                          <input class="ButtonCreate" name="btnBack" onclick="openwin()" type="button" value="批量分配指定卷烟" /></td></tr>
+                   <table  style=" width:99%; height:98%">
+                      <tr style="display:none;">
+                        <td colspan="4" style=" height:30px">
+                          <asp:TextBox ID="txtCELLID" runat="server"  CssClass="HiddenControl"></asp:TextBox>
+                          <asp:TextBox ID="txtAreaID" runat="server"  CssClass="HiddenControl"></asp:TextBox>
+                          <asp:TextBox ID="txtShelfID" runat="server"  CssClass="HiddenControl"></asp:TextBox>
+                          <input class="ButtonCreate" name="btnBack" onclick="openwin()" type="button" value="批量分配指定卷烟" />
+                        </td>
+                      </tr>
                       <tr>                        
                          <td class="tdTitle"><font color="red">*</font>库区名称</td>
                          <td><asp:TextBox ID="txtAreaName" runat="server" CssClass="TextBox" ></asp:TextBox></td> 
@@ -82,7 +105,8 @@
                       </tr> 
                       <tr>
                          <td class="tdTitle">备注</td> 
-                         <td colspan="3" style="text-align: left"><asp:TextBox ID="txtMemo" runat="server"  
+                         <td colspan="3" style="text-align: left">
+                             <asp:TextBox ID="txtMemo" runat="server"  
                                  CssClass="MultilineTextBox" Width="376px" Rows="10" TextMode="MultiLine" 
                                  Height="71px"></asp:TextBox>
                          </td>
@@ -94,26 +118,6 @@
                     </table>  
               </fieldset>
     </form>
-<script type="text/javascript">
-    function CheckBeforeSubmit() {
-        var cellcode = document.getElementById('txtCellCode').value;
-        var cellname = document.getElementById('txtCellName').value;
-       
-        if (cellcode == "") {
-            alert('货位编码不能为空！');
-            return false;
-        }
-        if (cellname == "") {
-            alert('货位名称不能为空！');
-            return false;
-        }
 
-    }
-
-    function clear(id) {
-        alert(id)
-        document.getElementById(id).value = "";
-    }
-</script>
 </body>
 </html>

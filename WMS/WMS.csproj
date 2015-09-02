@@ -417,6 +417,13 @@
     <Compile Include="WebUI\CMD\WarehouseSetPage.aspx.designer.cs">
       <DependentUpon>WarehouseSetPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WebUI\CMD\WarehouseSetPage1.aspx.cs">
+      <DependentUpon>WarehouseSetPage1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\CMD\WarehouseSetPage1.aspx.designer.cs">
+      <DependentUpon>WarehouseSetPage1.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebUI\CMD\WarehouseShelfEditPage.aspx.cs">
       <DependentUpon>WarehouseShelfEditPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5764,6 +5771,7 @@
     <Content Include="JQuery\jquery.ztree.core-3.5.js" />
     <Content Include="JScript\JsDDL.js" />
     <Content Include="UserControl\Calendar.ascx" />
+    <Content Include="WebUI\CMD\WarehouseSetPage1.aspx" />
     <Content Include="WebUI\InStock\ScheduleSubEdit.aspx" />
     <Content Include="WebUI\InStock\TempPage.aspx" />
     <Content Include="WebUI\Query\Cell.aspx" />
@@ -6003,6 +6011,7 @@
     <Content Include="WebUI\TableXML\WMS_DeliverTransferDetail.xml" />
     <None Include="Web References\PurchaseOrder\WmsService.wsdl" />
     <Content Include="Web\Ashx\MainHandler.ashx" />
+    <Content Include="WebUI\CMD\WareHouseTree.ashx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Common\FontSelectModal.aspx" />

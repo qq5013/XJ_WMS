@@ -50,7 +50,7 @@ namespace WMS.WebUI.CMD
                     this.txtAreaCode.Text = bll.GetNewID("CMD_Area", "AreaCode", "1=1");
                  
                 }
-                SetTextReadOnly(this.txtAreaCode, this.txtWhName);
+                SetTextReadOnly(this.txtAreaCode, this.txtWhName,this.txtWHID);
             }
             else
             {
