@@ -51,54 +51,54 @@
     </script>
      
 </head>
-<body style="margin-left:20px; height: 286px;">
-    <form id="form1" runat="server">
-              <fieldset style="width: 509px; height: 260px;" >
-                   <legend>仓库库区</legend>   
-                   <table  style=" width:99%; height:98%">
-                      <tr style="display:none;">
-                      <td colspan="4">
-                          <asp:TextBox ID="txtAreaID" runat="server" CssClass="HiddenControl" 
-                              Width="71px"></asp:TextBox>
-                          <input class="ButtonCreate" name="btnBack" onclick="openwin()" type="button" value="批量分配指定卷烟" />
-                        </td>
-                       </tr>
-                      <tr>
-                         <td class="tdTitle" style="height: 26px"><font color="red">*</font>仓库编码</td>
-                         <td style="height: 26px" align="left">
-                         <asp:TextBox ID="txtWHID" runat="server" CssClass="TextBox" Width="140px" ></asp:TextBox>
-                         </td>
+<body style="margin-left:20px; height: 299px;">
+    <form id="form1" runat="server" style=" height:98%">
+        <fieldset style="width: 509px; height: 260px;" >
+            <legend>仓库库区</legend>   
+            <table  style=" width:99%; height:84%">
+                <tr style="display:none; height:20px">
+                <td colspan="4" >
+                    <asp:TextBox ID="txtAreaID" runat="server" CssClass="HiddenControl" 
+                        Width="71px"></asp:TextBox>
+                    <input class="ButtonCreate" name="btnBack" onclick="openwin()" type="button" value="批量分配指定卷烟" />
+                </td>
+                </tr>
+                <tr>
+                    <td class="tdTitle" style="height: 26px"><font color="red">*</font>仓库编码</td>
+                    <td style="height: 26px" align="left">
+                    <asp:TextBox ID="txtWHID" runat="server" CssClass="TextBox" Width="140px" ></asp:TextBox>
+                    </td>
                           
-                         <td class="tdTitle" style="height: 26px"><font color="red">*</font>仓库名称</td>
-                         <td style="height: 26px" align="left"><asp:TextBox ID="txtWhName" runat="server" CssClass="TextBox" Width="140px"></asp:TextBox></td>
-                      </tr>                   
-                      <tr>
-                         <td class="tdTitle"><font color="red">*</font>库区编码</td> 
-                         <td style="height: 26px" align="left"><asp:TextBox ID="txtAreaCode" runat="server" CssClass="TextBox" Width="140px"></asp:TextBox>
+                    <td class="tdTitle" style="height: 26px"><font color="red">*</font>仓库名称</td>
+                    <td style="height: 26px" align="left"><asp:TextBox ID="txtWhName" runat="server" CssClass="TextBox" Width="140px"></asp:TextBox></td>
+                </tr>                   
+                <tr>
+                    <td class="tdTitle"><font color="red">*</font>库区编码</td> 
+                    <td style="height: 26px" align="left"><asp:TextBox ID="txtAreaCode" runat="server" CssClass="TextBox" Width="140px"></asp:TextBox>
                              
-                         </td>
-                         <td class="tdTitle">
-                             <font color="red">*</font>库区名称
-                          </td> 
-                         <td style="height: 26px" align="left" >
-                             <asp:TextBox ID="txtAreaName" runat="server"  CssClass="TextBox" Width="140px" onpropertychange="javascript:setMaxLength(this,20);"></asp:TextBox>
-                         </td>
-                      </tr>
+                    </td>
+                    <td class="tdTitle">
+                        <font color="red">*</font>库区名称
+                    </td> 
+                    <td style="height: 26px" align="left" >
+                        <asp:TextBox ID="txtAreaName" runat="server"  CssClass="TextBox" Width="140px" onpropertychange="javascript:setMaxLength(this,20);"></asp:TextBox>
+                    </td>
+                </tr>
                      
-                      <tr>
-                         <td class="tdTitle">备注</td>
-                         <td colspan="3" align="left">
-                             <asp:TextBox ID="txtMemo" runat="server" CssClass="MultilineTextbox" 
-                                 Width="379px" Rows="10" TextMode="MultiLine" Height="161px"></asp:TextBox>
-                         </td>
-                      </tr>
-                      <tr><td  align="center" colspan="4" style="height:35px; text-align:center;">
-                          &nbsp;
-                          <asp:Button ID="btnSave" runat="server" CssClass="button" Text="保存" OnClick="btnSave_Click"  OnClientClick="return CheckBeforeSubmit()"/>
+                <tr>
+                    <td class="tdTitle">备注</td>
+                    <td colspan="3" align="left">
+                        <asp:TextBox ID="txtMemo" runat="server" CssClass="MultilineTextbox" 
+                            Width="386px" Rows="10" TextMode="MultiLine" Height="116px"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr><td  align="center" colspan="4" style="height:35px; text-align:center;">
+                    &nbsp;
+                    <asp:Button ID="btnSave" runat="server" CssClass="button" Text="保存" OnClick="btnSave_Click"  OnClientClick="return CheckBeforeSubmit()"/>
                           
-                      </td></tr>
-                    </table>  
-              </fieldset>
+                </td></tr>
+            </table>  
+        </fieldset>
     </form>
     
 </body>

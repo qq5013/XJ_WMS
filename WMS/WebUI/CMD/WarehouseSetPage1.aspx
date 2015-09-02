@@ -134,11 +134,10 @@
              </td>
            </tr>
            <tr>
-              <td  style="width:300px;">
-                <div id="div_tree" style="overflow:auto; width:300px; height:500px;background-color:#bad5eb;">
+              <td  style="width:300px; ">
+                <div id="div_tree" style="overflow:auto; width:300px; height:400px; border-right:2">
 		            
 	            </div>
-
               </td>
           
                <td style="vertical-align:top; padding-left:10px; overflow:hidden"> <!--编辑区-->
@@ -146,9 +145,9 @@
                    <img alt="仓库" src="../../images/ico_home.gif" border="0"  />当前选中的节点：
                    <asp:Label ID="lblCurrentNode" runat="server" ForeColor="#404040"></asp:Label> 
                 </div>
-                <div style="width:100%; height:473px; overflow:hidden;">
+                <div style="width:100%; height:420px; overflow:hidden;">
                     
-                   <iframe id="frame" runat="server" src="" style="width:100%; height:460px; overflow:hidden"   bordercolor="white" frameborder="0"></iframe>
+                   <iframe id="frame" runat="server" src="" style="width:100%; height:400px; overflow:hidden"   bordercolor="white" frameborder="0"></iframe>
                 </div>
               </td>
             </tr>
