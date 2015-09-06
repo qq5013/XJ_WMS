@@ -99,7 +99,7 @@ namespace IDAL
         /// <param name="recordCount">总记录条数</param>
         /// <param name="parameters">参数数组</param>
         /// <returns>表</returns>
-        DataTable GetDataPage(string commandID, int currentPage, int pageSize,out int TotalCount, params object[] parameters);
+        DataTable GetDataPage(string commandID, int currentPage, int pageSize,out int TotalCount, out int PageCount,params object[] parameters);
 
         /// <summary>
         /// 根据命令ID获取对应的SQL命令

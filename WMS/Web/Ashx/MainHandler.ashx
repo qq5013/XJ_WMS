@@ -23,7 +23,8 @@ public class MainHandler : IHttpHandler, IRequiresSessionState
         BLL.BLLBase bll = new BLL.BLLBase();
 
         int totalCount = 0;
-        DataTable dt = bll.GetDataPage(formID, page, pageSize, out totalCount, new DataParameter[] { new DataParameter("{0}", filter) });
+        int pageCount;
+        DataTable dt = bll.GetDataPage(formID, page, pageSize, out totalCount,out pageCount, new DataParameter[] { new DataParameter("{0}", filter) });
 
         string json = JsonHelper.Dtb2Json(dt);
         json = "{\"total\":\"" + totalCount + "\",\"items\":" + json + "}";

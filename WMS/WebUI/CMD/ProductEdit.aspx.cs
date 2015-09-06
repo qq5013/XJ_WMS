@@ -43,7 +43,7 @@ namespace WMS.WebUI.CMD
                 
                
 
-                writeJsvar(FormID, TableName, PrimaryKey, ID);
+                writeJsvar(FormID,SqlCmd, ID);
                 
             }
         }

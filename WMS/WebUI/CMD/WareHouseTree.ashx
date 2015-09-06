@@ -11,9 +11,7 @@ public class WareHouseTree : IHttpHandler, IRequiresSessionState
 {
     
     public void ProcessRequest (HttpContext context) {
-        context.Response.ContentType = "text/plain";
-
-        string UserName = context.Session["G_user"].ToString(); 
+        context.Response.ContentType = "text/plain"; 
         BLL.BLLBase bll = new BLL.BLLBase();
         DataTable dtWareHouse = bll.FillDataTable("Cmd.SelectWarehouse", new DataParameter[] { new DataParameter("{0}", "1=1") });
         string json = "[{id:0,text:'仓库资料',leaf:false";
@@ -86,13 +84,20 @@ public class WareHouseTree : IHttpHandler, IRequiresSessionState
                 json += "id:'" + dr["AreaCode"].ToString() + "'";
                 json += ",text:'" + dr["AreaName"].ToString() + "'";
 
-                if (shelfTree.Length > 0)
+                if (dtArea.Rows.Count == 1)
                 {
-
-                    json += ",leaf:false" + shelfTree + "}";
+                    if (shelfTree.Length > 0)
+                        json += ",leaf:false" + shelfTree + "}]";
+                    else
+                        json += ",leaf:true }]";
                 }
                 else
-                    json += ",leaf:true}";
+                {
+                    if (shelfTree.Length > 0)
+                        json += ",leaf:false" + shelfTree + "}";
+                    else
+                        json += ",leaftrue}";
+                }
             }
             else if (j > 0 && j < dtArea.Rows.Count - 1)
             {
@@ -138,31 +143,40 @@ public class WareHouseTree : IHttpHandler, IRequiresSessionState
                 json += ",children:[{";
                 json += "id:'" + dr["ShelfCode"].ToString() + "'";
                 json += ",text:'" + dr["ShelfName"].ToString() + "'";
-                json += ",leaf:false";
-                if (shelfTree.Length > 0)
-                    json += shelfTree + "}";
+                
+                if (dtShelf.Rows.Count == 1)
+                {
+                    if (shelfTree.Length > 0)
+                        json += ",leaf:false" + shelfTree + "}]";
+                    else
+                        json += ",leaf:true }]";
+                }
                 else
-                    json += "}";
+                {
+                    if (shelfTree.Length > 0)
+                        json += ",leaf:false" + shelfTree + "}";
+                    else
+                        json += ",leaf:true}";
+                }
             }
             else if (j > 0 && j < dtShelf.Rows.Count - 1)
             {
                 json += ",{id:'" + dr["ShelfCode"].ToString() + "'";
                 json += ",text:'" + dr["ShelfName"].ToString() + "'";
-                json += ",leaf:false";
+                
                 if (shelfTree.Length > 0)
-                    json += shelfTree + "}";
+                    json +=",leaf:false "+ shelfTree + "}";
                 else
-                    json += "}";
+                    json += ",leaf:true}";
             }
             else
             {
                 json += ",{id:'" + dr["ShelfCode"].ToString() + "'";
                 json += ",text:'" + dr["ShelfName"].ToString() + "'";
-                json += ",leaf:false";
                 if (shelfTree.Length > 0)
-                    json += shelfTree + "}]";
+                    json +=",leaf:false "+ shelfTree + "}]";
                 else
-                    json += "}]";
+                    json += ",leaf:true}]";
             }
 
 
@@ -189,7 +203,15 @@ public class WareHouseTree : IHttpHandler, IRequiresSessionState
                 json += ",children:[{";
                 json += "id:'" + dr["CellCode"].ToString() + "'";
                 json += ",text:'" + dr["CellName"].ToString() + "'";
-                json += ",leaf:true}";
+                if (dtShelf.Rows.Count == 1)
+                {
+                    json += ",leaf:true}]";
+                }
+                else
+                {
+                    json += ",leaf:true}";
+                }
+                
             }
             else if (j > 0 && j < dtShelf.Rows.Count - 1)
             {

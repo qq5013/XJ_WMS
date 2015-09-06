@@ -32,7 +32,7 @@ namespace WMS.WebUI.InStock
             {
                 DataTable dt = bll.FillDataTable("WMS.SelectInStock", new DataParameter[] { new DataParameter("{0}", string.Format("{0}='{1}'", PrimaryKey, ID)) });
                 BindData(dt);
-                writeJsvar(FormID, TableName, PrimaryKey, ID);
+                writeJsvar(FormID,SqlCmd, ID);
                 BindPageSize();
                 HdfActiveTab.Value = "0";
             }

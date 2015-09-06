@@ -25,7 +25,7 @@ namespace WMS.WebUI.CMD
             {
                 DataTable dt = bll.FillDataTable("Cmd.SelectCustomer", new DataParameter[] { new DataParameter("{0}", string.Format("CUSTOMER_CODE='{0}'", ID)) });
                 BindData(dt);
-                writeJsvar(FormID, TableName, PrimaryKey, ID);
+                writeJsvar(FormID,SqlCmd, ID);
             }
         }
 

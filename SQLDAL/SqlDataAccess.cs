@@ -256,9 +256,10 @@ namespace SQLDAL
             return SqlHelper.ExecuteScalar(ConnectionString, commandType, cmdText, param);
         }
 
-        public DataTable GetDataPage(string commandID,   int currentPage, int pageSize, out int TotalCount, params object[] parameters)
+        public DataTable GetDataPage(string commandID,   int currentPage, int pageSize, out int TotalCount,out int PageCount, params object[] parameters)
         {
             TotalCount = 0;
+            PageCount = 0;
             string cmdText = GetCommandText(commandID);
             CommandType commandType = GetCommandType(commandID);
             SqlParameter[] param = ConvertParam(parameters, ref cmdText, commandType);
@@ -286,7 +287,7 @@ namespace SQLDAL
             }
 
             Util.Log.Debug(GetNoParamCommandText(commandID, cmdText, param));
-            int PageCount = GetPageCount(TotalCount, pageSize);
+             PageCount = GetPageCount(TotalCount, pageSize);
             if (currentPage == 0 || currentPage > PageCount)
             {
                 currentPage = PageCount;

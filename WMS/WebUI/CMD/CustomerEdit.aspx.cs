@@ -37,7 +37,7 @@ namespace WMS.WebUI.CMD
                 }
                 SetTextReadOnly(this.txtPLAYCUSTOMER_CODE, this.txtPlayCustomer_Name);
 
-                writeJsvar(FormID, TableName, PrimaryKey, ID);
+                writeJsvar(FormID,SqlCmd, ID);
                 
             }
         }

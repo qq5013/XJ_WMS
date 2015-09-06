@@ -6,12 +6,12 @@
     <script type="text/javascript" src='<%=ResolveUrl("~/JQuery/jquery-1.8.3.min.js") %>'></script>
     <script language="javascript" type="text/javascript">
         $(document).ready(function () {
-            window.moveTo(0, 0);
-            window.resizeTo(screen.availWidth, screen.availHeight);
-            var top = screen.availHeight / 2 - 153;
-            var left = screen.availWidth / 2 - 275;
-            divLogin.style.top = top;
-            divLogin.style.left = left;
+//            window.moveTo(0, 0);
+//            window.resizeTo(screen.availWidth, screen.availHeight);
+//            var top = screen.availHeight / 2 - 153;
+//            var left = screen.availWidth / 2 - 275;
+//            divLogin.style.top = top;
+//            divLogin.style.left = left;
         });
         function document.onkeydown() {
             if (event.keyCode == 13 && event.srcElement.type != 'button' && event.srcElement.type != 'submit' && event.srcElement.type != 'reset' && event.srcElement.type != 'textarea' && event.srcElement.type != '') {

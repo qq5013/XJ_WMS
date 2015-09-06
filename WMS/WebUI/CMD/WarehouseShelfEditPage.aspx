@@ -55,6 +55,11 @@
 
     </script>
 
+    <style type="text/css">
+        .MultilineTextBox
+        {}
+    </style>
+
 </head>
 <body style="margin-left:20px; height: 286px;">
     <form id="form1" runat="server">
@@ -98,7 +103,7 @@
                       
                       <tr>
                          <td class="tdTitle">是否启用</td> 
-                         <td><asp:DropDownList ID="ddlActive" runat="server">
+                         <td><asp:DropDownList ID="ddlActive" runat="server" Height="16px" Width="97px">
                                  <asp:ListItem Selected="True" Value="1">启用</asp:ListItem>
                                  <asp:ListItem Value="0">未启用</asp:ListItem>
                              </asp:DropDownList>
@@ -110,7 +115,7 @@
                          <td class="tdTitle">备注</td> 
                          <td colspan="3" style="text-align: left">
                              <asp:TextBox ID="txtMemo" runat="server"  
-                                 CssClass="MultilineTextBox" Width="376px" Rows="10" TextMode="MultiLine" 
+                                 CssClass="MultilineTextBox" Width="390px" Rows="10" TextMode="MultiLine" 
                                  Height="85px"></asp:TextBox>
                          </td>
                       </tr> 

@@ -35,7 +35,7 @@ namespace WMS.WebUI.CMD
                     this.txtID.Text = bll.GetNewID(TableName, "ID", "1=1");
                 }
                 SetTextReadOnly(this.txtProduct, this.txtProductName);
-                writeJsvar(FormID, TableName, PrimaryKey, ID);
+                writeJsvar(FormID,SqlCmd, ID);
                 
             }
         }

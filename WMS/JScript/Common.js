@@ -2,25 +2,8 @@
 function Open() {
     document.execCommand("saveas");
 }
-//新增按钮
-function ShowViewForm(obj) {
-    var BillID = $('#' + obj.id)[0].innerText;
-    var hrefs = location.href.split("/");
-    var urlpath ="/"+ hrefs[3] + "/" + hrefs[4] + "/" + hrefs[5] + "/" + FormID + "View.aspx?SubModuleCode=" + SubModuleCode + "&FormID=" + FormID + "&ID=" + BillID;
-    //window.parent.parent.mainFrame.addTab(urlpath, SubModuleTitle, "tab_" + SubModuleCode + "_View");
-    window.location.href = urlpath;
-    return false;
-}  
-
-
 function Add() {
-//    ID = "";
-//    var hrefs = location.href.split("/");
-//    var h = "/" + hrefs[3] + "/" + hrefs[4] + "/" + hrefs[5] + "/" + FormID + "Edit.aspx?SubModuleCode=" + SubModuleCode + "&FormID=" + FormID + "&ID=" + ID;
-//    window.parent.parent.mainFrame.addTab(h, SubModuleTitle, "tab_" + SubModuleCode + "_ADD");
-
-    var ID = "";
-    window.location.href = FormID + "Edit.aspx?SubModuleCode=" + SubModuleCode + "&FormID=" + FormID + "&ID=" + ID;
+    window.location.href = FormID + "Edit.aspx?SubModuleCode=" + SubModuleCode + "&FormID=" + FormID + "&SqlCmd=" + SqlCmd + "&ID=";
     window.event.returnValue = false;
     return false;
 }
@@ -54,8 +37,8 @@ function Delete(gvName) {
 }
  
 function ViewEdit() {
-    var ID = document.getElementById("txtID").value;
-    location.href = FormID + "Edit.aspx?SubModuleCode=" + SubModuleCode + "&FormID=" + FormID + "&ID=" + ID;
+    var ID = $("#txtID").val();
+    location.href = FormID + "Edit.aspx?SubModuleCode=" + SubModuleCode + "&FormID=" + FormID +"&SqlCmd=" + SqlCmd + "&ID=" + ID;
     window.event.returnValue = false;
     return false;
 }
@@ -69,6 +52,7 @@ function Cancel() {
             location.href = url.replace("Edit", "View");
         else
             location.href = url.replace("Edit", "s");
+        window.event.returnValue = false;
     }
     return false;
 }
@@ -104,15 +88,19 @@ function selectAll(ctlName, bool) {
 }
 
 function regInput(obj, reg, inputStr) {
-    var docSel = document.selection.createRange()
-    if (docSel.parentElement().tagName != "INPUT" || docSel.parentElement().readOnly == true)
-        return false
-    oSel = docSel.duplicate()
-    oSel.text = ""
-    var srcRange = obj.createTextRange()
-    oSel.setEndPoint("StartToStart", srcRange)
-    var str = oSel.text + inputStr + srcRange.text.substr(oSel.text.length)
-    return reg.test(str)
+    if (obj.tagName != "INPUT" || obj.readOnly == true)
+        return false;
+    var str = obj.value;
+    return reg.test(str + inputStr);
+//    var docSel = document.selection.createRange()
+//    if (docSel.parentElement().tagName != "INPUT" || docSel.parentElement().readOnly == true)
+//        return false
+//    oSel = docSel.duplicate()
+//    oSel.text = ""
+//    var srcRange = obj.createTextRange()
+//    oSel.setEndPoint("StartToStart", srcRange)
+//    var str = oSel.text + inputStr + srcRange.text.substr(oSel.text.length)
+//    return reg.test(str)
 }
 
 function trim(theData) {

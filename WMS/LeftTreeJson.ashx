@@ -34,7 +34,7 @@ public class LeftTreeJson : IHttpHandler, IRequiresSessionState
             {
                 string formID = dr[j]["FormID"].ToString();
                 string SubModuleCode = dr[j]["SubModuleCode"].ToString();
-                string url = dr[j]["MenuUrl"].ToString() + "?FormID=" + formID + "&SubModuleCode=" + SubModuleCode;
+                string url = dr[j]["MenuUrl"].ToString() + "?FormID=" + formID + "&SubModuleCode=" + SubModuleCode + "&SqlCmd=" + dr[j]["SqlCmdFlag"].ToString();
                 string iconCls = dr[j]["IconCls"].ToString();
                 if (j == 0)
                 {

@@ -133,9 +133,9 @@ namespace BLL
         /// <param name="TotalCount"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public DataTable GetDataPage(string commandID, int currentPage, int pageSize,out int TotalCount,params DataParameter[] parameters)
+        public DataTable GetDataPage(string commandID, int currentPage, int pageSize, out int TotalCount, out int PageCount, params DataParameter[] parameters)
         {
-            return da.GetDataPage(commandID, currentPage, pageSize,out TotalCount, parameters);
+            return da.GetDataPage(commandID, currentPage, pageSize,out TotalCount, out PageCount,parameters);
         }
         /// <summary>
         /// 获取表TableName的行数

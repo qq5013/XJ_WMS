@@ -72,7 +72,7 @@ namespace WMS.WebUI.SysInfo.UserGroupManage
         #region 数据源绑定
         void GridDataBind()
         {
-            dtGroup = bll.GetDataPage("Security.SelectGroup", pageIndex, pageSize, out totalCount, new DataParameter[] { new DataParameter("{0}", filter) });
+            dtGroup = bll.GetDataPage("Security.SelectGroup", pageIndex, pageSize, out totalCount,out pageCount,  new DataParameter[] { new DataParameter("{0}", filter) });
             if (dtGroup.Rows.Count == 0)
             {
                 dtGroup.Rows.Add(dtGroup.NewRow());

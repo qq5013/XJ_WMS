@@ -31,7 +31,7 @@ namespace WMS.WebUI.OutStock
             {
                 DataTable dt = bll.FillDataTable("WMS.SelectOutStock", new DataParameter[] { new DataParameter("{0}", string.Format("{0}='{1}' and State>=2 and Flag={2}", PrimaryKey, ID, Flag)) });
                 BindData(dt);
-                writeJsvar(FormID, TableName, PrimaryKey, ID);
+                writeJsvar(FormID,SqlCmd, ID);
                 BindPageSize();
                 this.HdfActiveTab.Value = "0";
             }

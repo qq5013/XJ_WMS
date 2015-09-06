@@ -27,7 +27,7 @@ namespace WMS.WebUI.CMD
             {
                 DataTable dt = bll.FillDataTable("Cmd.SelectProductBOM", new DataParameter[] { new DataParameter("{0}", string.Format("Product_Code='{0}' and ColorID='{1}'", ID, ColorID)) });
                 BindData(dt);
-                writeJsvar(FormID, TableName, PrimaryKey, ID);
+                writeJsvar(FormID,SqlCmd, ID);
             }
         }
 

@@ -134,12 +134,12 @@ FILTER:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=
   font-size:9pt;
   text-align:right;
   vertical-align:middle;
-  padding-right:8px;
+  padding-right:3px;
   padding-top:3px;
   padding-bottom:3px;
   height:25px;
   white-space:nowrap;
-  word-break:keep_all;
+  
 }
 
 /*通用模板模块应用的文本框样式*/
@@ -154,7 +154,6 @@ FILTER:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=
 		font-size: 9pt; 
 		color:Black; 
 		font-family: "宋体";
-		width:150px;
 		height:20px;
 		vertical-align:middle;
 }

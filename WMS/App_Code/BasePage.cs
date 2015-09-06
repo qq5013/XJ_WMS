@@ -15,6 +15,10 @@ namespace WMS.App_Code
     {
         protected string SubModuleCode;
         protected string SubModuleTitle;
+        protected string FormID;
+        protected string SqlCmd;
+        protected int pageSize = 15;
+        protected int pageSubSize = 20;
         protected void Page_PreInit(object sender, EventArgs e)
         {
             try
@@ -28,7 +32,11 @@ namespace WMS.App_Code
                     //Response.Write("<script language='javascript'>alert(parent.parent.location.href);parent.parent.location.href='../../WebUI/Start/SessionTimeOut.aspx';</script>");
                     //return;
 
-                } 
+                }
+
+                FormID = Request.QueryString["FormID"];
+                SqlCmd = Request.QueryString["SqlCmd"];
+                SubModuleCode = Request.QueryString["SubModuleCode"];
 
                 //if (!IsPostBack)
                 //    InitLoading();
@@ -38,34 +46,30 @@ namespace WMS.App_Code
                 if (Request.QueryString["SubModuleCode"] != null)
                 {
                     Session["SubModuleCode"] = Request.QueryString["SubModuleCode"];
-                    SubModuleCode = Request.QueryString["SubModuleCode"];
-                }
-                if (Request.QueryString["Type"] != null)
-                {
-                    Session["News_Type"] = Request.QueryString["Type"];
-                }
-                if (Session["G_user"] != null)
-                {
-                    //入库单分配权限控制【一次只允许一个用户进行分配】
+                     
+                } 
+                //if (Session["G_user"] != null)
+                //{
+                //    //入库单分配权限控制【一次只允许一个用户进行分配】
 
-                    if (Session["SubModuleCode"] != null && Session["SubModuleCode"].ToString() != "MNU_M00B_00D" && Application["MNU_M00B_00D"] != null && Application["MNU_M00B_00D"].ToString() == Session["G_user"].ToString())
-                    {
-                        Application["MNU_M00B_00D"] = null;
-                    }
-                    //出库单分配权限控制【一次只允许一个用户进行分配】
+                //    if (Session["SubModuleCode"] != null && Session["SubModuleCode"].ToString() != "MNU_M00B_00D" && Application["MNU_M00B_00D"] != null && Application["MNU_M00B_00D"].ToString() == Session["G_user"].ToString())
+                //    {
+                //        Application["MNU_M00B_00D"] = null;
+                //    }
+                //    //出库单分配权限控制【一次只允许一个用户进行分配】
 
-                    if (Session["SubModuleCode"] != null && Session["SubModuleCode"].ToString() != "MNU_M00E_00D" && Application["MNU_M00E_00D"] != null && Application["MNU_M00E_00D"].ToString() == Session["G_user"].ToString())
-                    {
-                        Application["MNU_M00E_00D"] = null;
-                    }
-                    //移位单生成权限控制【一次只允许一个用户进行生成移位单】
+                //    if (Session["SubModuleCode"] != null && Session["SubModuleCode"].ToString() != "MNU_M00E_00D" && Application["MNU_M00E_00D"] != null && Application["MNU_M00E_00D"].ToString() == Session["G_user"].ToString())
+                //    {
+                //        Application["MNU_M00E_00D"] = null;
+                //    }
+                //    //移位单生成权限控制【一次只允许一个用户进行生成移位单】
 
-                    if (Session["SubModuleCode"] != null && Session["SubModuleCode"].ToString() != "MNU_M00D_00G" && Application["MNU_M00D_00G"] != null && Application["MNU_M00D_00G"].ToString() == Session["G_user"].ToString())
-                    {
-                        Application["MNU_M00D_00G"] = null;
-                    }
+                //    if (Session["SubModuleCode"] != null && Session["SubModuleCode"].ToString() != "MNU_M00D_00G" && Application["MNU_M00D_00G"] != null && Application["MNU_M00D_00G"].ToString() == Session["G_user"].ToString())
+                //    {
+                //        Application["MNU_M00D_00G"] = null;
+                //    }
 
-                }
+                //}
                 //else
                 //{
                     
@@ -108,7 +112,7 @@ namespace WMS.App_Code
                     string[] path = this.Page.Request.Path.Split('/');
                     if (path.Length > 0)
                     {
-                        if (path[path.Length - 1].IndexOf("s", 1) > 0) //s
+                        if (path[path.Length - 1].IndexOf(FormID + "s", 0) >= 0) //s
                         {
                             if ((Button)Page.FindControl("btnAdd") != null)
                                 ((Button)Page.FindControl("btnAdd")).Enabled = false;
@@ -116,8 +120,11 @@ namespace WMS.App_Code
                             if ((Button)Page.FindControl("btnDelete") != null)
                                 ((Button)Page.FindControl("btnDelete")).Enabled = false;
 
+                            if ((Button)Page.FindControl("btnPrint") != null)
+                                ((Button)Page.FindControl("btnPrint")).Enabled = false;
+
                         }
-                        if (path[path.Length - 1].IndexOf("View", 1) > 0)
+                        if (path[path.Length - 1].IndexOf(FormID+"View", 0) >= 0)
                         {
                             if ((Button)Page.FindControl("btnAdd") != null)
                                 ((Button)Page.FindControl("btnAdd")).Enabled = false;
@@ -488,12 +495,11 @@ namespace WMS.App_Code
         /// 往前台 寫入變量\下拉控件js結構\提示信息
         /// </summary>
         ///  <param name="strddlcols">要寫入所有下拉控件名稱 "ddl1,ddl2" </param>
-        public void writeJsvar(string FormID,string TableName,string PrimaryKey, string id)
+        public void writeJsvar(string FormID,string SqlCmd, string id)
         {
             String cstext = "var FormID = '" + FormID + "';" +
-                            "var TableName = '" + TableName + "';" +
-                            "var PrimaryKey = '" + PrimaryKey + "';" +
                             "var id = '" + id.Trim() + "';" +
+                            "var SqlCmd = '" + SqlCmd.Trim() + "';" +
                             "var SubModuleCode='" + SubModuleCode + "';"+
                             "var SubModuleTitle='" + SubModuleTitle + "';";
             
@@ -512,7 +518,7 @@ namespace WMS.App_Code
         /// </summary>
         public string ToYMDHM(object dateobj)
         {
-            return DateFormat(dateobj, "yyyy/MM/dd HH:mm");
+            return DateFormat(dateobj, "yyyy/MM/dd HH:mm:ss");
         }
         private string DateFormat(object dateobj, string strFormat)
         {
@@ -527,6 +533,65 @@ namespace WMS.App_Code
                 if (ctls[i] != null)
                     ctls[i].Attributes.Add("ReadOnly", "true");
             }
+        }
+
+        public void SetBtnEnabled(int PageIndex,string SqlCmd,string Filter, int pageSize, GridView dgview, LinkButton btnFirst, LinkButton btnPre, LinkButton btnNext, LinkButton btnLast, LinkButton btnToPage, Label lblCurrentPage, UpdatePanel UpdatePanel1)
+        {
+            int pageCount = 0;
+            int totalCount = 0;
+            BLL.BLLBase bll = new BLL.BLLBase();
+            DataTable dtView = bll.GetDataPage(SqlCmd, PageIndex, pageSize, out totalCount, out pageCount, new DataParameter[] { new DataParameter("{0}", Filter) });
+
+
+            if (ViewState["CurrentPage"].ToString() == "0" || int.Parse(ViewState["CurrentPage"].ToString()) > pageCount)
+                ViewState["CurrentPage"] = pageCount;
+
+
+
+            if (dtView.Rows.Count == 0)
+            {
+                dtView.Rows.Add(dtView.NewRow());
+                dgview.DataSource = dtView;
+                dgview.DataBind();
+                int columnCount = dgview.Rows[0].Cells.Count;
+                dgview.Rows[0].Cells.Clear();
+                dgview.Rows[0].Cells.Add(new TableCell());
+                dgview.Rows[0].Cells[0].ColumnSpan = columnCount;
+                dgview.Rows[0].Cells[0].Text = "没有符合以上条件的数据,请重新查询 ";
+                dgview.Rows[0].Visible = true;
+
+                btnFirst.Enabled = false;
+                btnPre.Enabled = false;
+                btnNext.Enabled = false;
+                btnLast.Enabled = false;
+                btnToPage.Enabled = false;
+                lblCurrentPage.Visible = false;
+
+            }
+            else
+            {
+                dgview.DataSource = dtView;
+                dgview.DataBind();
+
+                btnLast.Enabled = true;
+                btnFirst.Enabled = true;
+                btnToPage.Enabled = true;
+
+                if (int.Parse(ViewState["CurrentPage"].ToString()) > 1)
+                    btnPre.Enabled = true;
+                else
+                    btnPre.Enabled = false;
+
+                if (int.Parse(ViewState["CurrentPage"].ToString()) < pageCount)
+                    btnNext.Enabled = true;
+                else
+                    btnNext.Enabled = false;
+
+                lblCurrentPage.Visible = true;
+                lblCurrentPage.Text = "共 [" + totalCount.ToString() + "] 笔记录  第 [" + ViewState["CurrentPage"] + "] 页  共 [" + pageCount.ToString() + "] 页";
+
+            }
+            ScriptManager.RegisterStartupScript(UpdatePanel1, UpdatePanel1.GetType(), "Resize", "resize();", true);
         }
     }
 }

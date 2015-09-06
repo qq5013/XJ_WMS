@@ -36,7 +36,7 @@ namespace WMS.WebUI.CMD
                 {
                     this.txtID.Text = "";
                 }
-                writeJsvar(FormID, TableName, PrimaryKey, ID);
+                writeJsvar(FormID,SqlCmd, ID);
                 
             }
         }

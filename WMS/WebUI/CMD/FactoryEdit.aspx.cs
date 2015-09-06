@@ -34,7 +34,7 @@ namespace WMS.WebUI.CMD
                 {
                     this.txtID.Text = bll.GetNewID(TableName, PrimaryKey, "1=1");
                 }
-                writeJsvar(FormID, TableName, PrimaryKey, ID);
+                writeJsvar(FormID,SqlCmd, ID);
                 
             }
         }

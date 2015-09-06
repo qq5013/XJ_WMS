@@ -74,7 +74,7 @@ namespace WMS.WebUI.SysInfo.SystemLog
         #region 数据源绑定
         void GridDataBind()
         {
-            dtLog = bll.GetDataPage("Security.SeleteOperatorLog", pageIndex, pageSize, out totalCount, new DataParameter[] { new DataParameter("{0}", filter) });
+            dtLog = bll.GetDataPage("Security.SeleteOperatorLog", pageIndex, pageSize, out totalCount,out pageCount, new DataParameter[] { new DataParameter("{0}", filter) });
             if (dtLog.Rows.Count == 0)
             {
                 dtLog.Rows.Add(dtLog.NewRow());

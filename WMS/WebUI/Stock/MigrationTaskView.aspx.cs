@@ -45,7 +45,7 @@ namespace WMS.WebUI.Stock
                     ViewState["filter"] = "1=1";
                     ViewState["CurrentPage"] = 1;
                     BindPageSize();
-                    writeJsvar(FormID, TableName, PrimaryKey, "");
+                    writeJsvar(FormID,SqlCmd, "");
                     SetBtnEnabled("");
                 }
                
@@ -203,7 +203,7 @@ namespace WMS.WebUI.Stock
         /// <param name="pageIndex"></param>
         private void BindGrid(int pageIndex)
         {
-            dtGroup = bll.GetDataPage("WMS.SelectMTaskTemp", int.Parse(ViewState["CurrentPage"].ToString()), int.Parse(ViewState["PageSize"].ToString()), out totalCount, new DataParameter[] { new DataParameter("{0}", ViewState["filter"].ToString()) });
+            dtGroup = bll.GetDataPage("WMS.SelectMTaskTemp", int.Parse(ViewState["CurrentPage"].ToString()), int.Parse(ViewState["PageSize"].ToString()), out totalCount,out pageCount, new DataParameter[] { new DataParameter("{0}", ViewState["filter"].ToString()) });
             pageCount = GetPageCount(totalCount, pageSize);
             if (ViewState["CurrentPage"].ToString() == "0" || int.Parse(ViewState["CurrentPage"].ToString()) > pageCount)
                 ViewState["CurrentPage"] = pageCount;

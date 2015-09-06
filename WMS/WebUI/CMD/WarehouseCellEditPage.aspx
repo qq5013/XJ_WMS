@@ -49,6 +49,14 @@
             document.getElementById(id).value = "";
         }
     </script>
+    <style type="text/css">
+        .MultilineTextBox
+        {}
+        .TextBox
+        {}
+        .TextBoxRight
+        {}
+    </style>
 </head>
 <body style="margin-left:20px; height: 286px;">
     <form id="form1" runat="server">
@@ -65,40 +73,42 @@
                       </tr>
                       <tr>                        
                          <td class="tdTitle"><font color="red">*</font>库区名称</td>
-                         <td><asp:TextBox ID="txtAreaName" runat="server" CssClass="TextBox" ></asp:TextBox></td> 
+                         <td><asp:TextBox ID="txtAreaName" runat="server" CssClass="TextBox" Width="148px" ></asp:TextBox></td> 
                          <td class="tdTitle"><font color="red">*</font>货架名称</td>
-                         <td  ><asp:TextBox ID="txtShelfName" runat="server" CssClass="TextBox" ></asp:TextBox>
+                         <td  ><asp:TextBox ID="txtShelfName" runat="server" CssClass="TextBox" 
+                                 Width="142px" ></asp:TextBox>
                          </td>
                       </tr>
                       <tr>
                          <td class="tdTitle"><font color="red">*</font>货位编码</td> 
-                         <td  ><asp:TextBox ID="txtCellCode" runat="server"  CssClass="TextBox"  onpropertychange="javascript:setMaxLength(this,10);"></asp:TextBox>
+                         <td  ><asp:TextBox ID="txtCellCode" runat="server"  CssClass="TextBox" Width="148px"  onpropertychange="javascript:setMaxLength(this,10);"></asp:TextBox>
                          </td>
                          <td class="tdTitle"><font color="red">*</font>货位名称</td> 
-                         <td><asp:TextBox ID="txtCellName" runat="server"  CssClass="TextBox"  onpropertychange="javascript:setMaxLength(this,20);"></asp:TextBox>
+                         <td><asp:TextBox ID="txtCellName" runat="server"  CssClass="TextBox" Width="142px" 
+                                 onpropertychange="javascript:setMaxLength(this,20);"></asp:TextBox>
                          </td>
                       </tr>
                       
                       <tr>
                          <td class="tdTitle">货位层数</td> 
                          <td><asp:TextBox ID="txtCellRows" runat="server"  CssClass="TextBoxRight" 
-                                 Width="126px" onblur="IsNumber(this,'货位层数')">1</asp:TextBox>
+                                 Width="148px" onblur="IsNumber(this,'货位层数')">1</asp:TextBox>
                          </td>
                          <td class="tdTitle">货位列数</td> 
                          <td><asp:TextBox ID="txtCellCols" runat="server"  CssClass="TextBoxRight" 
-                                 Width="124px" onblur="IsNumber(this,'货位列数')"></asp:TextBox>
+                                 Width="142px" onblur="IsNumber(this,'货位列数')"></asp:TextBox>
                          </td>
                       </tr> 
                       <tr>
                          <td class="tdTitle">
                              是否锁定</td> 
-                         <td><asp:DropDownList ID="ddlLock" runat="server">
+                         <td><asp:DropDownList ID="ddlLock" runat="server" Height="16px" Width="68px">
                                  <asp:ListItem Selected="True" Value="1">锁定</asp:ListItem>
                                  <asp:ListItem Value="0">解锁</asp:ListItem>
                              </asp:DropDownList></td>
                          <td class="tdTitle">
                              是否启用</td> 
-                         <td><asp:DropDownList ID="ddlActive" runat="server">
+                         <td><asp:DropDownList ID="ddlActive" runat="server" Height="16px" Width="81px">
                                  <asp:ListItem Selected="True" Value="1">启用</asp:ListItem>
                                  <asp:ListItem Value="0">未启用</asp:ListItem>
                              </asp:DropDownList></td>
@@ -107,7 +117,7 @@
                          <td class="tdTitle">备注</td> 
                          <td colspan="3" style="text-align: left">
                              <asp:TextBox ID="txtMemo" runat="server"  
-                                 CssClass="MultilineTextBox" Width="376px" Rows="10" TextMode="MultiLine" 
+                                 CssClass="MultilineTextBox" Width="390px" Rows="10" TextMode="MultiLine" 
                                  Height="71px"></asp:TextBox>
                          </td>
                       </tr> 

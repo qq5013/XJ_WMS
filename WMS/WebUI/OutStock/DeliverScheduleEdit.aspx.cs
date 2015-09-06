@@ -62,7 +62,7 @@ namespace WMS.WebUI.OutStock
                     BindDataSub();
                 }
                 BindPageSize();
-                writeJsvar(FormID, TableName, PrimaryKey, ID);
+                writeJsvar(FormID,SqlCmd, ID);
                 SetTextReadOnly(this.txtCreateDate, this.txtCreator,this.txtSourceNo);
                 DataTable dtArea=bll.FillDataTable("CMD.SelectAreaSation",null);
                 this.ddlAreaSation.DataValueField = "areasation";

@@ -59,25 +59,26 @@
                      &nbsp;</td>
               </tr>
               <tr>
-                 <td class="tdTitle">
+                 <td class="tdTitle" style="width:15%">
                     <font color="red">*</font>仓库编码
                  </td>
-                 <td>
+                 <td style="width:35%">
                     <asp:TextBox ID="txtWhCode" runat="server" CssClass="TextBox" Width="140px" MaxLength="2"></asp:TextBox>
                  </td>
-                 <td class="tdTitle">
+                 <td class="tdTitle" style="width:15%">
                     <font color="red">*</font>仓库名称
                  </td> 
-                 <td>
-                    <asp:TextBox ID="txtWhName" runat="server"  CssClass="TextBox" Width="140px" MaxLength="20"></asp:TextBox>
+                 <td style="width:35%">
+                    <asp:TextBox ID="txtWhName" runat="server"  CssClass="TextBox" Width="140px" 
+                         MaxLength="20"></asp:TextBox>
                  </td>
               </tr>
       
               <tr>
-                 <td class="tdTitle">备注</td> 
+                 <td class="tdTitle" style="width:15%">备注</td> 
                  <td colspan="3">
                     <asp:TextBox ID="txtMemo" runat="server" CssClass="MultilineTextbox" 
-                         Width="385px" Rows="10" TextMode="MultiLine" MaxLength="246"  
+                         Width="93%" Rows="10" TextMode="MultiLine" MaxLength="246"  
                          Height="164px"></asp:TextBox>
                  </td>
               </tr> 

@@ -55,7 +55,7 @@ namespace WMS.WebUI.CMD
                     
                     BindPageSize();
                     SetBtnEnabled("");
-                    writeJsvar(FormID, TableName, PrimaryKey, "");
+                    writeJsvar(FormID,SqlCmd, "");
                 }
                 
 
@@ -232,7 +232,7 @@ namespace WMS.WebUI.CMD
         /// <param name="pageIndex"></param>
         private void BindGrid(int pageIndex)
         {
-            dtGroup = bll.GetDataPage("CMD.SelectProductBOM", int.Parse(ViewState["CurrentPage"].ToString()), int.Parse(ViewState["PageSize"].ToString()), out totalCount, new DataParameter[] { new DataParameter("{0}", ViewState["filter"].ToString()) });
+            dtGroup = bll.GetDataPage("CMD.SelectProductBOM", int.Parse(ViewState["CurrentPage"].ToString()), int.Parse(ViewState["PageSize"].ToString()), out totalCount, out pageCount, new DataParameter[] { new DataParameter("{0}", ViewState["filter"].ToString()) });
             pageCount = GetPageCount(totalCount, pageSize);
             if (ViewState["CurrentPage"].ToString() == "0" || int.Parse(ViewState["CurrentPage"].ToString()) > pageCount)
                 ViewState["CurrentPage"] = pageCount;

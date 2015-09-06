@@ -97,11 +97,7 @@
     </CommandString>
   </Command>
 
-  <Command ID="UpdateShelfColumnsByShelfCode">
-    <CommandString>
-      update  CMD_WH_SHELF set COLUMN_COUNT=(select COUNT(1) as Qty from CMD_WH_CELL where SHELF_CODE=@ShelfCode) where SHELF_CODE=@ShelfCode
-    </CommandString>
-  </Command>
+   
   
   <Command ID="selectWareHouseTree">
     <CommandString>
@@ -115,7 +111,37 @@
       select CellCode as id,ShelfCode as pid,'货位:'+CellName as name from CMD_Cell
     </CommandString>
   </Command>
-  
+
+  <!--产品类别-->
+  <Command ID="SelectProductType">
+    <CommandString>
+      select cmd.*, house.WarehouseName,area.AreaName from CMD_ProductType cmd
+      inner join CMD_Area area on cmd.AreaCode=area.AreaCode
+      inner join CMD_Warehouse house on area.WarehouseCode=house.WarehouseCode
+      where {0} order by ProductTypeCode
+    </CommandString>
+  </Command>
+
+  <Command ID="InsertProductType">
+    <CommandString>
+      insert into CMD_ProductType(ProductTypeCode,ProductTypeName,WarehouseCode,AreaCode,Memo,Creator,CreateDate,Updater,UpdateDate)
+      values(@ProductTypeCode,@ProductTypeName,@WarehouseCode,@AreaCode,@Memo,@Creator,getdate(),@Updater,getdate())
+    </CommandString>
+  </Command>
+
+  <Command ID="UpdateProductType">
+    <CommandString>
+      update CMD_ProductType set ProductTypeName=@ProductTypeName,WarehouseCode=@WarehouseCode,AreaCode=@AreaCode,Memo=@Memo,Updater=@Updater,UpdateDate=getdate() where ProductTypeCode=@ProductTypeCode
+    </CommandString>
+  </Command>
+  <Command ID="DeleteProductType">
+    <CommandString>
+      delete from CMD_ProductType where ProductTypeCode in({0})
+    </CommandString>
+  </Command>
+
+
+
   <!--卷烟信息-->
   <Command ID="SelectCigarette">
     <CommandString>

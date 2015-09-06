@@ -25,7 +25,7 @@ namespace WMS.WebUI.CMD
             {
                 DataTable dt = bll.FillDataTable("Cmd.SelectFactory", new DataParameter[] { new DataParameter("{0}", string.Format("FactoryID='{0}'", ID)) });
                 BindData(dt);
-                writeJsvar(FormID, TableName, PrimaryKey, ID);
+                writeJsvar(FormID,SqlCmd, ID);
             }
         }
 

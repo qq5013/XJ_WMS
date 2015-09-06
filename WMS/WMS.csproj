@@ -86,7 +86,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\FontSelectModalFrame.aspx.designer.cs">
+    <Compile Include="Css\Common\FontSelectModalFrame.aspx.designer.cs">
       <DependentUpon>FontSelectModalFrame.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Code\AutoSearch.cs">
@@ -100,36 +100,36 @@
     </Compile>
     <Compile Include="App_Code\JScript.cs" />
     <Compile Include="App_Code\LoginUserInfo.cs" />
-    <Compile Include="Common\FontSelectModal.aspx.cs">
+    <Compile Include="Css\Common\FontSelectModal.aspx.cs">
       <DependentUpon>FontSelectModal.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Common\FontSelectModal.aspx.designer.cs">
+    <Compile Include="Css\Common\FontSelectModal.aspx.designer.cs">
       <DependentUpon>FontSelectModal.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Common\FontSelectModalFrame.aspx.cs">
+    <Compile Include="Css\Common\FontSelectModalFrame.aspx.cs">
       <DependentUpon>FontSelectModalFrame.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Common\MistakesPage.aspx.cs">
+    <Compile Include="Css\Common\MistakesPage.aspx.cs">
       <DependentUpon>MistakesPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Common\MistakesPage.aspx.designer.cs">
+    <Compile Include="Css\Common\MistakesPage.aspx.designer.cs">
       <DependentUpon>MistakesPage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Common\Select.aspx.cs">
+    <Compile Include="Css\Common\Select.aspx.cs">
       <DependentUpon>Select.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Common\Select.aspx.designer.cs">
+    <Compile Include="Css\Common\Select.aspx.designer.cs">
       <DependentUpon>Select.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Common\SelectDialog.aspx.cs">
+    <Compile Include="Css\Common\SelectDialog.aspx.cs">
       <DependentUpon>SelectDialog.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Common\SelectDialog.aspx.designer.cs">
+    <Compile Include="Css\Common\SelectDialog.aspx.designer.cs">
       <DependentUpon>SelectDialog.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
@@ -361,6 +361,27 @@
     <Compile Include="WebUI\CMD\Products.aspx.designer.cs">
       <DependentUpon>Products.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WebUI\CMD\ProductTypeEdit.aspx.cs">
+      <DependentUpon>ProductTypeEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\CMD\ProductTypeEdit.aspx.designer.cs">
+      <DependentUpon>ProductTypeEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\CMD\ProductTypes.aspx.cs">
+      <DependentUpon>ProductTypes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\CMD\ProductTypes.aspx.designer.cs">
+      <DependentUpon>ProductTypes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\CMD\ProductTypeView.aspx.cs">
+      <DependentUpon>ProductTypeView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\CMD\ProductTypeView.aspx.designer.cs">
+      <DependentUpon>ProductTypeView.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebUI\CMD\ProductView.aspx.cs">
       <DependentUpon>ProductView.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -368,26 +389,26 @@
     <Compile Include="WebUI\CMD\ProductView.aspx.designer.cs">
       <DependentUpon>ProductView.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WebUI\CMD\VersionEdit.aspx.cs">
-      <DependentUpon>VersionEdit.aspx</DependentUpon>
+    <Compile Include="WebUI\CMD\TrainTypeEdit.aspx.cs">
+      <DependentUpon>TrainTypeEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebUI\CMD\VersionEdit.aspx.designer.cs">
-      <DependentUpon>VersionEdit.aspx</DependentUpon>
+    <Compile Include="WebUI\CMD\TrainTypeEdit.aspx.designer.cs">
+      <DependentUpon>TrainTypeEdit.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WebUI\CMD\Versions.aspx.cs">
-      <DependentUpon>Versions.aspx</DependentUpon>
+    <Compile Include="WebUI\CMD\TrainTypes.aspx.cs">
+      <DependentUpon>TrainTypes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebUI\CMD\Versions.aspx.designer.cs">
-      <DependentUpon>Versions.aspx</DependentUpon>
+    <Compile Include="WebUI\CMD\TrainTypes.aspx.designer.cs">
+      <DependentUpon>TrainTypes.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WebUI\CMD\VersionView.aspx.cs">
-      <DependentUpon>VersionView.aspx</DependentUpon>
+    <Compile Include="WebUI\CMD\TrainTypeView.aspx.cs">
+      <DependentUpon>TrainTypeView.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebUI\CMD\VersionView.aspx.designer.cs">
-      <DependentUpon>VersionView.aspx</DependentUpon>
+    <Compile Include="WebUI\CMD\TrainTypeView.aspx.designer.cs">
+      <DependentUpon>TrainTypeView.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebUI\CMD\WarehouseAreaEditPage.aspx.cs">
       <DependentUpon>WarehouseAreaEditPage.aspx</DependentUpon>
@@ -1012,7 +1033,7 @@
     <Compile Include="Web\InStock\InStockBill.aspx.designer.cs">
       <DependentUpon>InStockBill.aspx</DependentUpon>
     </Compile>
-    <Content Include="Common\Select.aspx" />
+    <Content Include="Css\Common\Select.aspx" />
     <Content Include="Css\default.css" />
     <Content Include="Css\Detail.css" />
     <Content Include="Css\icon.css" />
@@ -5771,6 +5792,12 @@
     <Content Include="JQuery\jquery.ztree.core-3.5.js" />
     <Content Include="JScript\JsDDL.js" />
     <Content Include="UserControl\Calendar.ascx" />
+    <Content Include="WebUI\CMD\ProductTypeEdit.aspx" />
+    <Content Include="WebUI\CMD\ProductTypes.aspx" />
+    <Content Include="WebUI\CMD\ProductTypeView.aspx" />
+    <Content Include="WebUI\CMD\TrainTypeEdit.aspx" />
+    <Content Include="WebUI\CMD\TrainTypes.aspx" />
+    <Content Include="WebUI\CMD\TrainTypeView.aspx" />
     <Content Include="WebUI\CMD\WarehouseSetPage1.aspx" />
     <Content Include="WebUI\InStock\ScheduleSubEdit.aspx" />
     <Content Include="WebUI\InStock\TempPage.aspx" />
@@ -5882,9 +5909,6 @@
     <Content Include="WebUI\CMD\ProductEdit.aspx" />
     <Content Include="WebUI\CMD\Products.aspx" />
     <Content Include="WebUI\CMD\ProductView.aspx" />
-    <Content Include="WebUI\CMD\VersionEdit.aspx" />
-    <Content Include="WebUI\CMD\Versions.aspx" />
-    <Content Include="WebUI\CMD\VersionView.aspx" />
     <Content Include="WebUI\InStock\InStockEdit.aspx" />
     <Content Include="WebUI\InStock\InStockReturnEdit.aspx" />
     <Content Include="WebUI\InStock\InStockReturns.aspx" />
@@ -6014,10 +6038,10 @@
     <Content Include="WebUI\CMD\WareHouseTree.ashx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Common\FontSelectModal.aspx" />
-    <Content Include="Common\FontSelectModalFrame.aspx" />
-    <Content Include="Common\MistakesPage.aspx" />
-    <Content Include="Common\SelectDialog.aspx" />
+    <Content Include="Css\Common\FontSelectModal.aspx" />
+    <Content Include="Css\Common\FontSelectModalFrame.aspx" />
+    <Content Include="Css\Common\MistakesPage.aspx" />
+    <Content Include="Css\Common\SelectDialog.aspx" />
     <Content Include="Css\Main.css" />
     <Content Include="Images\main\bg.jpg" />
     <Content Include="Images\main\bg001.png" />
@@ -6055,7 +6079,7 @@
     <Content Include="WebUI\SysInfo\UserGroupManage\UserGroup.aspx" />
     <Content Include="WebUI\SysInfo\UserManage\UserList.aspx" />
     <Content Include="App_Themes\Default\Control.skin" />
-    <Content Include="Common\Web.config" />
+    <Content Include="Css\Common\Web.config" />
     <None Include="ExcelLoad\InStock.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

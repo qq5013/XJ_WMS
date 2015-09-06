@@ -47,7 +47,7 @@ namespace WMS.WebUI.OutStock
                     BindDataSub();
                 }
                 BindPageSize();
-                writeJsvar(FormID, TableName, PrimaryKey, ID);
+                writeJsvar(FormID,SqlCmd, ID);
                 SetTextReadOnly(this.txtCreateDate, this.txtCreator);
 
             }

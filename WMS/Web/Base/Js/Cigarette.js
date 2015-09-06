@@ -15,7 +15,7 @@ var grid = Ext.create("Ext.grid.Panel", {
     dock: 'full',
     autoWidth: true,
     frame: true,
-    margin: 0,    
+    margin: 0,
     columnLines: true,
     renderTo: Ext.getBody(),
     selModel: {
@@ -26,9 +26,9 @@ var grid = Ext.create("Ext.grid.Panel", {
     selType: "checkboxmodel",
     columns: [
                 { text: 'NO', xtype: 'rownumberer', width: 40, sortable: false },
-                { text: '卷烟编号', dataIndex: 'CIGARETTECODE', width: 70,renderer:renderUrl },
+                { text: '卷烟编号', dataIndex: 'CIGARETTECODE', width: 70, renderer: renderUrl },
                 { text: '卷烟名称', dataIndex: 'CIGARETTENAME', width: 100 },
-                { text: '件烟条数', dataIndex: 'PALLETNUM', width: 70, xtype: 'numbercolumn', format: '0', editor: {xtype: "numberfield",decimalPrecision: 0,selectOnFocus: true}},
+                { text: '件烟条数', dataIndex: 'PALLETNUM', width: 70, xtype: 'numbercolumn', format: '0', editor: { xtype: "numberfield", decimalPrecision: 0, selectOnFocus: true} },
                 { text: '件烟条码', dataIndex: 'BARCODE', width: 120, editor: "textfield" },
                 { text: '制造商', dataIndex: 'MAKERDESC', width: 240, editor: "textfield" },
                 { text: '省份', dataIndex: 'PROVINCE', editor: "textfield" },
@@ -48,7 +48,7 @@ var grid = Ext.create("Ext.grid.Panel", {
                          dock: 'bottom', //分页 位置  
                          emptyMsg: '没有数据',
                          displayInfo: true,
-                         items:['每页显示',combo],
+                         items: ['每页显示', combo],
                          displayMsg: '当前显示{0}-{1}条记录 / 共{2}条记录 ',
                          beforePageText: '第', afterPageText: '页/共{0}页'
                      },
@@ -85,13 +85,13 @@ var grid = Ext.create("Ext.grid.Panel", {
                                 var record = grid.getSelectionModel().getSelected();
                                 debugger;
                                 alert(record.items[0].data.CIGARETTENAME);
-                                
+
                                 var data = {
                                     CigaretteCode: record.items[0].data.CIGARETTECODE,
                                     CigaretteName: record.items[0].data.CIGARETTENAME,
                                     ShortName: record.items[0].data.SHORTNAME,
                                     Barcode: record.items[0].data.BARCODE,
-                                    Province:record.items[0].data.BARCODE
+                                    Province: record.items[0].data.BARCODE
                                 };
                                 edit_win.down('form').getForm().setValues(data);
                                 edit_win.show();
@@ -129,9 +129,11 @@ var grid = Ext.create("Ext.grid.Panel", {
                                 //var grid = Ext.getCmp("exit").up('#grid1');
                                 var tab = top.window.parent.parent.Ext.getCmp("main");
                                 var title = tab.getActiveTab().title;
+
                                 Ext.Msg.confirm("提示", "确定要关闭" + title + "吗？", function (name) {
-                                    if (name == 'yes')
+                                    if (name == 'yes') {
                                         tab.remove(tab.getActiveTab());
+                                    }
                                 });
                             }
                         }]

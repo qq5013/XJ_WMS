@@ -30,14 +30,6 @@ A:LINK
 body
 {		
     margin:0px;    
-    /*overflow-y:scroll;*/
-	SCROLLBAR-FACE-COLOR: #e7ebf0;
-	SCROLLBAR-HIGHLIGHT-COLOR: #ffffff;
-	SCROLLBAR-SHADOW-COLOR:#0066cc;
-	SCROLLBAR-DARKSHADOW-COLOR: #ffffff;
-	SCROLLBAR-3DLIGHT-COLOR:#799AE1;
-	SCROLLBAR-ARROW-COLOR: #FFFFFF;
-	SCROLLBAR-TRACK-COLOR: #e6e6fa;/*#AABFEC;*/
 	font-size: 10pt;
 	font-family: 微软雅黑;
 	background-color:#EAF2F4;

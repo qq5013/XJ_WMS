@@ -50,6 +50,11 @@
         }
     </script>
      
+    <style type="text/css">
+        .MultilineTextbox
+        {}
+    </style>
+     
 </head>
 <body style="margin-left:20px; height: 299px;">
     <form id="form1" runat="server" style=" height:98%">
@@ -89,7 +94,7 @@
                     <td class="tdTitle">备注</td>
                     <td colspan="3" align="left">
                         <asp:TextBox ID="txtMemo" runat="server" CssClass="MultilineTextbox" 
-                            Width="386px" Rows="10" TextMode="MultiLine" Height="116px"></asp:TextBox>
+                            Width="390px" Rows="10" TextMode="MultiLine" Height="116px"></asp:TextBox>
                     </td>
                 </tr>
                 <tr><td  align="center" colspan="4" style="height:35px; text-align:center;">
