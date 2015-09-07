@@ -175,7 +175,16 @@
   <!--产品信息-->
   <Command ID="SelectProduct">
     <CommandString>
-      Select * from CMD_PRODUCT where {0}
+      select product.*,CCLXFactory.FactoryName as CCLXFactoryName,FCCLXFactory.FactoryName as FCCLXFactoryName,CXFactory.FactoryName as CXFactoryName,
+      ProductType.ProductTypeName ,TrainType.TypeName as TrainTypeName,null as InStockDate,Area.AreaName
+      from CMD_Product product
+      left join CMD_ProductType ProductType on product.ProductTypeCode=ProductType.ProductTypeCode
+      left join CMD_TrainType TrainType on product.TrainTypeCode=TrainType.TypeCode
+      left join CMD_Factory CCLXFactory on product.CCLX_Factory=CCLXFactory.FactoryID
+      left join CMD_Factory FCCLXFactory on product.FCCLX_Factory=FCCLXFactory.FactoryID
+      left join CMD_Factory CXFactory on product.CX_Factory=CXFactory.FactoryID
+      left join CMD_Area Area on product.AreaCode=Area.AreaCode
+      where {0}
     </CommandString>
   </Command>
   <Command ID="DeleteProduct">
@@ -203,59 +212,11 @@
     </CommandString>
   </Command>
 
-  <!--规格信息-->
-  <Command ID="SelectColor">
-    <CommandString>
-      Select ROW_NUMBER() over(order by PRODUCT_CODE,COLOR_CODE) as RowIndex,* from View_CMD_Color where {0} order by PRODUCT_CODE,COLOR_CODE
-    </CommandString>
-  </Command>
-  <Command ID="DeleteColor">
-    <CommandString>
-      delete from CMD_COLOR WHERE ID in({0})
-    </CommandString>
-  </Command>
-  <Command ID="InsertColor">
-    <CommandString>
-      INSERT INTO CMD_COLOR(ID,COLOR_CODE,PRODUCT_CODE,PRODUCT_Model,COLOR_NAME,MEMO,Creator, CreateDate, Updater, UpdateDate)
-      values(@ID,@COLOR_CODE,@PRODUCT_CODE,@PRODUCT_Model,@COLOR_NAME,@MEMO, @Creator, getdate(), @Updater, getdate())
-    </CommandString>
-  </Command>
-  <Command ID="UpdateColor">
-    <CommandString>
-      Update CMD_COLOR Set COLOR_CODE=@COLOR_CODE,COLOR_NAME=@COLOR_NAME,PRODUCT_CODE=@PRODUCT_CODE,MEMO=@MEMO,PRODUCT_Model=@PRODUCT_Model,Updater=@Updater, UpdateDate=getdate() where ID={0}
-    </CommandString>
-  </Command>
-  <!--版本信息-->
-  <Command ID="SelectVersion">
-    <CommandString>
-      Select * from View_CMD_Version where {0}
-    </CommandString>
-  </Command>
-  <Command ID="DeleteVersion">
-    <CommandString>
-      delete from CMD_VERSION WHERE ID in({0})
-    </CommandString>
-  </Command>
-  <Command ID="InsertVersion">
-    <CommandString>
-      INSERT INTO CMD_VERSION(ID,VERSION_CODE,VERSION_NAME,PRODUCT_CODE,MEMO)
-      values(@ID,@VERSION_CODE,@VERSION_NAME,@PRODUCT_CODE,@MEMO)
-    </CommandString>
-  </Command>
-  <Command ID="UpdateVersion">
-    <CommandString>
-      Update CMD_VERSION Set VERSION_CODE=@VERSION_CODE,VERSION_NAME=@VERSION_NAME,PRODUCT_CODE=@PRODUCT_CODE,MEMO=@MEMO where ID={0}
-    </CommandString>
-  </Command>
-  <Command ID="SelectVersionByIDName">
-    <CommandString>
-      Select VERSION_CODE as ID,VERSION_NAME as Name,VERSION_CODE+SPACE(2)+VERSION_NAME as IDName from CMD_VERSION where {0}
-    </CommandString>
-  </Command>
-
+  
+  <!--生产厂家-->
   <Command ID="SelectFactory">
     <CommandString>
-      Select * from CMD_Factory where {0}
+      Select *,case when Flag=1 then '齿侧轮芯厂家' when Flag=2 then '非齿侧轮芯厂家' else '承修厂家' end as FlagName from CMD_Factory  where {0} order by Flag,FactoryID
     </CommandString>
   </Command>
   <Command ID="DeleteFactory">
@@ -265,18 +226,36 @@
   </Command>
   <Command ID="InsertFactory">
     <CommandString>
-      INSERT INTO CMD_Factory(FactoryID, FactoryName, LinkPerson, LinkPhone, Fax, Address, MEMO,Creator, CreateDate, Updater, UpdateDate)
-      values(@FactoryID,@FactoryName,@LinkPerson,@LinkPhone,@Fax,@Address,@MEMO, @Creator, getdate(), @Updater, getdate())
+      INSERT INTO CMD_Factory(FactoryID, Flag,FactoryName, LinkPerson, LinkPhone, Fax, Address, MEMO,Creator, CreateDate, Updater, UpdateDate)
+      values(@FactoryID,@Flag,@FactoryName,@LinkPerson,@LinkPhone,@Fax,@Address,@MEMO, @Creator, getdate(), @Updater, getdate())
     </CommandString>
   </Command>
   <Command ID="UpdateFactory">
     <CommandString>
-      Update CMD_Factory Set FactoryName=@FactoryName,LinkPerson=@LinkPerson,LinkPhone=@LinkPhone,Fax=@Fax, Address=@Address, MEMO=@MEMO,Updater=@Updater, UpdateDate=getdate() where FactoryID='{0}'
+      Update CMD_Factory Set FactoryName=@FactoryName,Flag=@Flag,LinkPerson=@LinkPerson,LinkPhone=@LinkPhone,Fax=@Fax, Address=@Address, MEMO=@MEMO,Updater=@Updater, UpdateDate=getdate() where FactoryID='{0}'
     </CommandString>
   </Command>
-  <Command ID="SelectFactoryByIDName">
+  
+  <!--车型信息-->
+  <Command ID="SelectTrainType">
     <CommandString>
-      select FactoryID as ID,FactoryName as Name, FactoryID+SPACE(2)+FactoryName as IDName from CMD_Factory where {0}
+      Select *  from CMD_TrainType  where {0} order by TypeCode
+    </CommandString>
+  </Command>
+  <Command ID="DeleteTrainType">
+    <CommandString>
+      delete from CMD_TrainType WHERE TypeCode in({0})
+    </CommandString>
+  </Command>
+  <Command ID="InsertTrainType">
+    <CommandString>
+      INSERT INTO CMD_TrainType(TypeCode,TypeName,MEMO,Creator, CreateDate, Updater, UpdateDate)
+      values(@TypeCode,@TypeName,@MEMO, @Creator, getdate(), @Updater, getdate())
+    </CommandString>
+  </Command>
+  <Command ID="UpdateTrainType">
+    <CommandString>
+      Update CMD_TrainType Set TypeName=@TypeName, MEMO=@MEMO,Updater=@Updater, UpdateDate=getdate() where TypeCode='{0}'
     </CommandString>
   </Command>
 

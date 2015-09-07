@@ -6,10 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using IDAL;
-using Microsoft.Office.Interop;
-using System.Reflection;
-using System.IO;
-
+ 
 
 namespace WMS.WebUI.CMD
 {
@@ -34,10 +31,9 @@ namespace WMS.WebUI.CMD
 
                 writeJsvar(FormID,SqlCmd, "");
             }
-            else
-            {
-                ScriptManager.RegisterStartupScript(this.UpdatePanel1, this.UpdatePanel1.GetType(), "Resize", "resize();", true);
-            }
+             
+            ScriptManager.RegisterStartupScript(this.UpdatePanel1, this.UpdatePanel1.GetType(), "Resize", "resize();", true);
+             
            
         }
         protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)

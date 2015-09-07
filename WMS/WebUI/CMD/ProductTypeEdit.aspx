@@ -12,9 +12,9 @@
         <script type="text/javascript">
             function Save() {
 
-                if (trim($("#txtProductTypeCode").val()) == "") {
+                if (trim($("#txtID").val()) == "") {
                     alert("类别编码不能为空!");
-                    $("#txtProductTypeCode").focus();
+                    $("#txtID").focus();
                     return false;
                 }
 
@@ -101,13 +101,13 @@
                 </tr>
                 <tr>
                   <td align="center"  class="smalltitle" style="width:8%;">
-                        建单人员
+                        修改人员
                   </td> 
                   <td>
                      &nbsp;<asp:TextBox ID="txtUpdater" runat="server" BorderWidth="0" CssClass="TextRead" Width="40%"  ></asp:TextBox> 
                   </td>
                   <td align="center"  class="smalltitle" style="width:8%;">
-                        建单日期
+                        修改日期
                   </td> 
                   <td>
                     &nbsp;<asp:TextBox ID="txtUpdateDate" runat="server" BorderWidth="0" 

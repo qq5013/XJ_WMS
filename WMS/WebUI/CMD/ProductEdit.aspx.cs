@@ -7,116 +7,95 @@ using System.Web.UI.WebControls;
 using System.Data;
 using IDAL;
 
+
 namespace WMS.WebUI.CMD
 {
-    public partial class ProductEdit : WMS.App_Code.BasePage
+    public partial class ProductEdit :App_Code.BasePage
     {
-        protected string FormID;
-        protected string ID;
-        protected string TableName = "CMD_PRODUCT";
-        protected string PrimaryKey = "PRODUCT_CODE";
+        protected string strID;
         BLL.BLLBase bll = new BLL.BLLBase();
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            ID = Request.QueryString["ID"] + "";
-            FormID = Request.QueryString["FormID"] + "";
+            strID = Request.QueryString["ID"] + "";
+           
             if (!IsPostBack)
             {
-                DataTable dtClass = bll.FillDataTable("Cmd.SelectProductClass", null);
-                this.txtPRODUCT_Class.DataSource = dtClass;
-                if (ID != "")
+                BindDropDownList();
+                if (strID != "")
                 {
-                    DataTable dt = bll.FillDataTable("Cmd.SelectProduct", new DataParameter[] { new DataParameter("{0}", string.Format("PRODUCT_CODE='{0}'", ID)) });
+                    DataTable dt = bll.FillDataTable("Cmd.SelectTrainType", new DataParameter[] { new DataParameter("{0}", string.Format("TypeCode='{0}'", strID)) });
                     BindData(dt);
-                    this.txtID.ReadOnly = true;
                     
+                    SetTextReadOnly(this.txtID);
                 }
                 else
                 {
-                 
-                    if (dtClass.Rows.Count > 0)
-                        this.txtPRODUCT_Class.Text = dtClass.Rows[0][0].ToString();
-                    this.chkIsBarCode.Checked = true;
-                    this.chkIsInStock.Checked = true;
-                }
-                
-               
+                    this.txtID.Text = bll.GetNewID("CMD_TrainType", "TypeCode", "1=1");
+                    this.txtCreator.Text = Session["EmployeeCode"].ToString();
+                    this.txtUpdater.Text = Session["EmployeeCode"].ToString();
+                    this.txtCreatDate.Text = ToYMD(DateTime.Now);
+                    this.txtUpdateDate.Text = ToYMD(DateTime.Now);
 
-                writeJsvar(FormID,SqlCmd, ID);
-                
+                }
+
+                writeJsvar(FormID, SqlCmd, strID);
+                SetTextReadOnly(this.txtCreator, this.txtCreatDate, this.txtUpdater, this.txtUpdateDate);
+
             }
         }
+
+        private void BindDropDownList()
+        {
+            
+        }
+
+
         private void BindData(DataTable dt)
         {
             if (dt.Rows.Count > 0)
             {
-                this.txtID.Text = dt.Rows[0]["PRODUCT_CODE"].ToString();
-                this.txtPRODUCT_NAME.Text = dt.Rows[0]["PRODUCT_NAME"].ToString();
-                this.txtPRODUCT_PartsName.Text = dt.Rows[0]["PRODUCT_PartsName"].ToString();
-                this.txtPRODUCT_MODEL.Text = dt.Rows[0]["PRODUCT_MODEL"].ToString();
-                this.txtPRODUCT_FMODEL.Text = dt.Rows[0]["PRODUCT_FMODEL"].ToString();
-                this.txtPRODUCT_Class.Text = dt.Rows[0]["PRODUCT_Class"].ToString(); 
-                this.txtPACK_QTY.Text = dt.Rows[0]["PACK_QTY"].ToString();
-                this.txtPALLET_QTY.Text = dt.Rows[0]["PALLET_QTY"].ToString();
-                this.chkIS_MIX.Checked = bool.Parse(dt.Rows[0]["IS_MIX"].ToString());
-                this.chkIsInStock.Checked = bool.Parse(dt.Rows[0]["IsInStock"].ToString());
-                this.chkIsBarCode.Checked = bool.Parse(dt.Rows[0]["IsBarCode"].ToString());
+                this.txtID.Text = dt.Rows[0]["TypeCode"].ToString();
+                this.txtTypeName.Text = dt.Rows[0]["TypeName"].ToString();
+              
                 this.txtMemo.Text = dt.Rows[0]["Memo"].ToString();
-                this.txtProductVolume.Text = dt.Rows[0]["ProductVolume"].ToString();
+                this.txtCreator.Text = dt.Rows[0]["Creator"].ToString();
+                this.txtCreatDate.Text = ToYMD(dt.Rows[0]["CreateDate"]);
+                this.txtUpdater.Text = dt.Rows[0]["Updater"].ToString();
+                this.txtUpdateDate.Text = ToYMD(dt.Rows[0]["UpdateDate"]);
+
             }
         }
-      
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            if (ID == "") //新增
+
+
+            if (strID == "") //新增
             {
-                int Count = bll.GetRowCount(TableName, string.Format("PRODUCT_CODE='{0}'", this.txtID.Text.Trim()));
+                int Count = bll.GetRowCount("CMD_TrainType", string.Format("TypeCode='{0}'", this.txtID.Text));
                 if (Count > 0)
                 {
-                    WMS.App_Code.JScript.Instance.ShowMessage(this.Page, "该用产品编码已经存在！");
+                    WMS.App_Code.JScript.Instance.ShowMessage(this.Page, "该车型编码已经存在！");
                     return;
                 }
 
-                bll.ExecNonQuery("Cmd.InsertProduct", new DataParameter[] { new DataParameter("@PRODUCT_CODE", this.txtID.Text.Trim()),  
-                                                                           new DataParameter("@PRODUCT_PartsName", this.txtPRODUCT_PartsName.Text.Trim()), 
-                                                                           new DataParameter("@PRODUCT_Class", this.txtPRODUCT_Class.Text.Trim()),
-                                                                           new DataParameter("@PRODUCT_NAME", this.txtPRODUCT_NAME.Text.Trim()), 
-                                                                           new DataParameter("@PRODUCT_FMODEL", this.txtPRODUCT_FMODEL.Text.Trim()), 
-                                                                           new DataParameter("@PRODUCT_MODEL", this.txtPRODUCT_MODEL.Text.Trim()), 
-                                                                           new DataParameter("@IS_MIX", this.chkIS_MIX.Checked), 
-                                                                           new DataParameter("@PALLET_QTY", this.txtPALLET_QTY.Text.Trim()), 
-                                                                           new DataParameter("@PACK_QTY", this.txtPACK_QTY.Text.Trim()), 
-                                                                           new DataParameter("@IsBarCode", this.chkIsBarCode.Checked),  
-                                                                           new DataParameter("@IsInStock", this.chkIsInStock.Checked),  
-                                                                           new DataParameter("@MEMO", this.txtMemo.Text.Trim()),
-                                                                           new DataParameter("@ProductVolume", this.txtProductVolume.Text.Trim()),
-                                                                            new DataParameter("@Creator", Session["EmployeeCode"].ToString()),
-                                                                            new DataParameter("@Updater",Session["EmployeeCode"].ToString())  });
-                                                                           
+                bll.ExecNonQuery("Cmd.InsertTrainType", new DataParameter[] { 
+                                                                                new DataParameter("@TypeCode", this.txtID.Text.Trim()),
+                                                                                new DataParameter("@TypeName", this.txtTypeName.Text.Trim()),
+                                                                                new DataParameter("@Memo", this.txtMemo.Text.Trim()),
+                                                                                new DataParameter("@Creator", Session["EmployeeCode"].ToString()),
+                                                                                new DataParameter("@Updater", Session["EmployeeCode"].ToString())
+                                                                              });
             }
             else //修改
             {
-                bll.ExecNonQuery("Cmd.UpdateProduct", new DataParameter[] {new DataParameter("@PRODUCT_PartsName", this.txtPRODUCT_PartsName.Text.Trim()), 
-                                                                           new DataParameter("@PRODUCT_Class", this.txtPRODUCT_Class.Text.Trim()),
-                                                                           new DataParameter("@PRODUCT_NAME", this.txtPRODUCT_NAME.Text.Trim()), 
-                                                                           new DataParameter("@PRODUCT_FMODEL", this.txtPRODUCT_FMODEL.Text.Trim()), 
-                                                                           new DataParameter("@PRODUCT_MODEL", this.txtPRODUCT_MODEL.Text.Trim()), 
-                                                                           new DataParameter("@IS_MIX", this.chkIS_MIX.Checked), 
-                                                                           new DataParameter("@PALLET_QTY", this.txtPALLET_QTY.Text.Trim()), 
-                                                                           new DataParameter("@PACK_QTY", this.txtPACK_QTY.Text.Trim()), 
-                                                                            new DataParameter("@IsBarCode", this.chkIsBarCode.Checked),
-                                                                              new DataParameter("@IsInStock", this.chkIsInStock.Checked),  
-                                                                            new DataParameter("@MEMO", this.txtMemo.Text.Trim()),
-                                                                             new DataParameter("@ProductVolume", this.txtProductVolume.Text.Trim()),
-                                                                             new DataParameter("@Updater",Session["EmployeeCode"].ToString()),
-                                                                           new DataParameter("{0}", this.txtID.Text.Trim()), 
-                                                                        
-                                                                            });
-
+                bll.ExecNonQuery("Cmd.UpdateTrainType", new DataParameter[] {  new DataParameter("@TypeName", this.txtTypeName.Text.Trim()),
+                                                                                 new DataParameter("@Memo", this.txtMemo.Text.Trim()) ,
+                                                                                 new DataParameter("@Updater", Session["EmployeeCode"].ToString()),
+                                                                                 new DataParameter("@ProductTypeCode", this.txtID.Text.Trim())
+                                                                               });
             }
 
-            Response.Redirect(FormID + "View.aspx?SubModuleCode=" + SubModuleCode + "&FormID=" + Server.UrlEncode(FormID) + "&ID=" + Server.UrlEncode(this.txtID.Text));
+            Response.Redirect(FormID + "View.aspx?SubModuleCode=" + SubModuleCode + "&FormID=" + Server.UrlEncode(FormID) + "&SqlCmd=" + SqlCmd + "&ID=" + Server.UrlEncode(this.txtID.Text));
         }
     }
 }

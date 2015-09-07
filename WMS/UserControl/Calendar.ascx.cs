@@ -9,7 +9,7 @@ namespace WMS.UserControl
 {
     public partial class Calendar : System.Web.UI.UserControl
     {
-        string virtualPath;
+       
         protected string JsDateFormat;
         private string _dateFormat;
         bool _ym = false;
