@@ -5718,14 +5718,6 @@
     <Content Include="JQuery\jquery-2.1.3.min.js" />
     <Content Include="JScript\gridPageSize.js" />
     <Content Include="JScript\Resize.js" />
-    <Content Include="laydate\laydate.js" />
-    <Content Include="laydate\need\laydate.css" />
-    <Content Include="laydate\skins\dahong\icon.png" />
-    <Content Include="laydate\skins\dahong\laydate.css" />
-    <Content Include="laydate\skins\default\icon.png" />
-    <Content Include="laydate\skins\default\laydate.css" />
-    <Content Include="laydate\skins\molv\icon.png" />
-    <Content Include="laydate\skins\molv\laydate.css" />
     <Content Include="Login.aspx" />
     <Content Include="MainForm.aspx" />
     <Content Include="JScript\DataProcess.js" />

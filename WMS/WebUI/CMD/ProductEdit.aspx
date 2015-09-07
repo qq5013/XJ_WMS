@@ -10,17 +10,6 @@
         <script type="text/javascript" src="../../JQuery/jquery-2.1.3.min.js"></script>
         <script type="text/javascript" src= "../../JScript/Common.js"></script>
         <script type="text/javascript">
-            $(document).ready(function () {
-                BindEvent();
-            });
-            function BindEvent() {
-                $("#txtTypeName").bind("change", function () {
-                    $("#txtID").val("1234");
-                    return false;
-                });
-            }
-
-
             function Save() {
 
                 if (trim($("#txtID").val()) == "") {
@@ -62,22 +51,26 @@
         <table id="Table1" class="maintable" cellspacing="0" cellpadding="0" width="100%" align="center" bordercolor="#ffffff"
 				border="1" runat="server">			
 				<tr>
-                    <td align="center" class="musttitle" style="width:8%;"  >
+                    <td align="center" class="musttitle" style="width:10%;"  >
                             产品编码
                     </td>
-                    <td  width="30%">
+                    <td  width="23%">
                             &nbsp;<asp:TextBox 
                                 ID="txtID" runat="server" BorderWidth="0" CssClass="TextBox" Width="40%" 
                                 MaxLength="10"  ></asp:TextBox>
                     </td>
-                    <td align="center" class="musttitle" style="width:8%;"  >
+                    <td align="center" class="musttitle" style="width:10%;"  >
                            车型名称
                     </td>
-                    <td width="30%">
+                    <td width="23%">
                             &nbsp;<asp:TextBox ID="txtTypeName" runat="server" BorderWidth="0"  Width="2%" 
                                 MaxLength="30" Height="16px"></asp:TextBox> 
                           &nbsp;<uc1:Calendar ID="txtBillDate" runat="server" Width="50%" />
 
+                    </td>
+                    <td align="center" class="musttitle" style="width:10%;">
+                    </td>
+                    <td width="23%">
                     </td>
                 </tr>
               
@@ -85,9 +78,9 @@
                     <td align="center"  class="smalltitle" style="width:8%;">
                         备注
                     </td>
-                    <td colspan="3">
+                    <td colspan="5">
                         &nbsp;<asp:TextBox ID="txtMemo" runat="server" CssClass="MultiLineTextBox" 
-                            TextMode="MultiLine" Height="102px" Width="74%"></asp:TextBox>
+                            TextMode="MultiLine" Height="102px" Width="98%"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
@@ -104,6 +97,10 @@
                     &nbsp;<asp:TextBox ID="txtCreatDate" runat="server" BorderWidth="0" 
                           CssClass="TextRead" Width="42%"  ></asp:TextBox> 
                   </td>
+                  <td>
+                  </td>
+                  <td>
+                  </td>
                 </tr>
                 <tr>
                   <td align="center"  class="smalltitle" style="width:8%;">
@@ -118,6 +115,10 @@
                   <td>
                     &nbsp;<asp:TextBox ID="txtUpdateDate" runat="server" BorderWidth="0" 
                           CssClass="TextRead" Width="42%"  ></asp:TextBox> 
+                  </td>
+                  <td>
+                  </td>
+                  <td>
                   </td>
                 </tr>		
 		</table>
