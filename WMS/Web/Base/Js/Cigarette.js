@@ -127,6 +127,7 @@ var grid = Ext.create("Ext.grid.Panel", {
                             scope: this, //添加
                             handler: function () {
                                 //var grid = Ext.getCmp("exit").up('#grid1');
+                                debugger
                                 var tab = top.window.parent.parent.Ext.getCmp("main");
                                 var title = tab.getActiveTab().title;
 

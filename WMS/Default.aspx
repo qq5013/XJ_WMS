@@ -193,7 +193,7 @@
                 activeTab: 0,
                 items: [{
                     title: 'index',
-                    loader: { url: 'Default.htm', scripts: true, nocache: true }
+                    loader: { url: 'Index/Main.aspx', scripts: true, nocache: true }
                 }]
             });
             function addtab(id, link, name) {
