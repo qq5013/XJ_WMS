@@ -5,17 +5,14 @@
     font-size:10pt;  
     border: 0px #ff0000 solid; 
     background-color:Transparent;
-/*     BORDER-BOTTOM: #ffffff 0px solid;  
-    BORDER-LEFT: #93bee2 0px solid;  
-    BORDER-RIGHT: #93bee2 0px solid;  
-    BORDER-TOP: #93bee2 0px solid; */
     background-image:url(../images/op/refresh.png); 
     background-repeat:no-repeat;
-    CURSOR: hand; 
-    padding-left:15px;
+    CURSOR: pointer; 
+    padding-left:18px;
     font-style: normal ; 
     line-height:16px;
     height:16px;
+    vertical-align:middle;
 }
 
 /* 图表分析*/
@@ -25,17 +22,14 @@
     font-size:10pt;  
     border: 0px #ff0000 solid; 
     background-color:Transparent;
-/*     BORDER-BOTTOM: #ffffff 0px solid;  
-    BORDER-LEFT: #93bee2 0px solid;  
-    BORDER-RIGHT: #93bee2 0px solid;  
-    BORDER-TOP: #93bee2 0px solid; */
     background-image:url(../images/op/chart.gif); 
     background-repeat:no-repeat;
-    CURSOR: hand; 
-    padding-left:15px;
+    CURSOR: pointer; 
+    padding-left:18px;
     font-style: normal ; 
     height:16px;
     line-height:16px;
+    vertical-align:middle;
 }
 
 /* 汇总统计（添加、累计）*/
@@ -45,17 +39,14 @@
     font-size:10pt;
     border: 0px #ff0000 solid; 
     background-color:Transparent;
-/*     BORDER-BOTTOM: #ffffff 0px solid;  
-    BORDER-LEFT: #93bee2 0px solid;  
-    BORDER-RIGHT: #93bee2 0px solid;  
-    BORDER-TOP: #93bee2 0px solid; */
     background-image:url(../images/op/chart_add.gif); 
     background-repeat:no-repeat;
-    CURSOR: hand; 
-    padding-left:15px;
+    CURSOR: pointer; 
+    padding-left:18px;
     font-style: normal ; 
     height:16px;
     line-height:16px;
+    vertical-align:middle;
 }
 
 
@@ -67,17 +58,14 @@
     font-size:10pt;  
     border: 0px #ff0000 solid; 
     background-color:Transparent;
-/*     BORDER-BOTTOM: #ffffff 0px solid;  
-    BORDER-LEFT: #93bee2 0px solid;  
-    BORDER-RIGHT: #93bee2 0px solid;  
-    BORDER-TOP: #93bee2 0px solid; */
     background-image:url(../images/op/view.gif); 
     background-repeat:no-repeat;
-    CURSOR: hand; 
-    padding-left:15px;
+    CURSOR: pointer; 
+    padding-left:18px;
     font-style: normal ; 
     height:16px;
     line-height:16px;
+    vertical-align:middle;
 }
 
 
@@ -88,17 +76,14 @@
     font-size:10pt;  
     border: 0px #ff0000 solid; 
     background-color:Transparent;
-/*     BORDER-BOTTOM: #ffffff 0px solid;  
-    BORDER-LEFT: #93bee2 0px solid;  
-    BORDER-RIGHT: #93bee2 0px solid;  
-    BORDER-TOP: #93bee2 0px solid; */
     background-image:url(../images/op/select.gif); 
     background-repeat:no-repeat;
-    CURSOR: hand; 
-    padding-left:15px;
+    CURSOR: pointer; 
+    padding-left:18px;
     font-style: normal ; 
     height:16px;
     line-height:16px;
+    vertical-align:middle;
 }
 
 /* 返回*/
@@ -108,17 +93,14 @@
     font-size:10pt;  
     border: 0px #ff0000 solid; 
     background-color:Transparent;
-/*     BORDER-BOTTOM: #ffffff 0px solid;  
-    BORDER-LEFT: #93bee2 0px solid;  
-    BORDER-RIGHT: #93bee2 0px solid;  
-    BORDER-TOP: #93bee2 0px solid; */
     background-image:url(../images/op/back.gif); 
     background-repeat:no-repeat;
-    CURSOR: hand; 
-    padding-left:15px;
+    CURSOR: pointer; 
+    padding-left:18px;
     font-style: normal ; 
     height:16px;
     line-height:16px;
+    vertical-align:middle;
 }
 
 /* 取消*/
@@ -128,17 +110,14 @@
     font-size:10pt;  
     border: 0px #ff0000 solid; 
     background-color:Transparent;
-/*     BORDER-BOTTOM: #ffffff 0px solid;  
-    BORDER-LEFT: #93bee2 0px solid;  
-    BORDER-RIGHT: #93bee2 0px solid;  
-    BORDER-TOP: #93bee2 0px solid; */
     background-image:url(../images/op/cancel.gif); 
     background-repeat:no-repeat;
-    CURSOR: hand; 
-    padding-left:15px;
+    CURSOR: pointer; 
+    padding-left:18px;
     font-style: normal ; 
     height:16px;
     line-height:16px;
+    vertical-align:middle;
 } 
 
 /* 清空*/
@@ -148,17 +127,14 @@
     font-size:10pt;  
     border: 0px #ff0000 solid; 
     background-color:Transparent;
-/*     BORDER-BOTTOM: #ffffff 0px solid;  
-    BORDER-LEFT: #93bee2 0px solid;  
-    BORDER-RIGHT: #93bee2 0px solid;  
-    BORDER-TOP: #93bee2 0px solid; */
     background-image:url(../images/op/clear.gif); 
     background-repeat:no-repeat;
-    CURSOR: hand; 
-    padding-left:15px;
+    CURSOR: pointer; 
+    padding-left:18px;
     font-style: normal ; 
     height:16px;
     line-height:16px;
+    vertical-align:middle;
 } 
 .ButtonClear2
 {
@@ -168,7 +144,7 @@
     background-color:Transparent;
     background-image:url(../images/op/clear2.gif); 
     background-repeat:no-repeat;
-    CURSOR: hand; 
+    CURSOR: pointer; 
     height:22px;
     width:18px;
 } 
@@ -186,7 +162,7 @@
     BORDER-TOP: #93bee2 0px solid; */
     background-image:url(../images/op/trash.gif); 
     background-repeat:no-repeat;
-    CURSOR: hand; 
+    CURSOR: pointer; 
     padding-left:15px;
     font-style: normal ; 
     height:16px;
@@ -200,16 +176,14 @@
     font-size:10pt;  
     border: 0px #ff0000 solid; 
     background-color:Transparent;
-/*     BORDER-BOTTOM: #ffffff 0px solid;  
-    BORDER-LEFT: #93bee2 0px solid;  
-    BORDER-RIGHT: #93bee2 0px solid;  
-    BORDER-TOP: #93bee2 0px solid; */
     background-image:url('../images/op/save.png'); 
     background-repeat:no-repeat;
-    CURSOR: hand; 
+    CURSOR: pointer; 
     padding-left:15px;
     font-style: normal; 
+    height:16px;
     line-height:16px;
+    vertical-align:middle;
 }
 
 
@@ -220,17 +194,14 @@
     font-size:10pt;  
     border: 0px #ff0000 solid; 
     background-color:Transparent;
-/*     BORDER-BOTTOM: #ffffff 0px solid;  
-    BORDER-LEFT: #93bee2 0px solid;  
-    BORDER-RIGHT: #93bee2 0px solid;  
-    BORDER-TOP: #93bee2 0px solid; */
     background-image:url('../images/op/create.png'); 
     background-repeat:no-repeat;
-    CURSOR: hand; 
-    padding-left:15px;
+    cursor: pointer; 
+    padding-left:20px;
     font-style: normal;
     height:16px;
     line-height:16px;
+    vertical-align:middle;
 }
 
 /* 修改*/
@@ -240,17 +211,14 @@
     font-size:10pt;  
     border: 0px #ff0000 solid; 
     background-color:Transparent;
-/*     BORDER-BOTTOM: #ffffff 0px solid;  
-    BORDER-LEFT: #93bee2 0px solid;  
-    BORDER-RIGHT: #93bee2 0px solid;  
-    BORDER-TOP: #93bee2 0px solid; */
     background-image:url(../images/op/modify.gif); 
     background-repeat:no-repeat;
-    CURSOR: hand; 
-    padding-left:15px;
+    CURSOR: pointer; 
+    padding-left:20px;
     font-style: normal ; 
     height:16px;
     line-height:16px;
+    vertical-align:middle;
 }
 
 /* 删除*/
@@ -260,17 +228,14 @@
     font-size:10pt;  
     border: 0px #ff0000 solid; 
     background-color:Transparent;
-/*     BORDER-BOTTOM: #ffffff 0px solid;  
-    BORDER-LEFT: #93bee2 0px solid;  
-    BORDER-RIGHT: #93bee2 0px solid;  
-    BORDER-TOP: #93bee2 0px solid; */
     background-image:url(../images/op/del.png); 
     background-repeat:no-repeat;
-    CURSOR: hand; 
-    padding-left:15px;
+    CURSOR: pointer; 
+    padding-left:20px;
     font-style: normal ; 
     height:16px;
     line-height:16px;
+    vertical-align:middle;
 }
 
 /* 下载 */
@@ -280,17 +245,14 @@
     font-size:10pt;  
     border: 0px #ff0000 solid; 
     background-color:Transparent;
-/*     BORDER-BOTTOM: #ffffff 0px solid;  
-    BORDER-LEFT: #93bee2 0px solid;  
-    BORDER-RIGHT: #93bee2 0px solid;  
-    BORDER-TOP: #93bee2 0px solid; */
     background-image:url(../images/op/down.jpg); 
     background-repeat:no-repeat;
-    CURSOR: hand; 
-    padding-left:15px;
+    CURSOR: pointer; 
+    padding-left:20px;
     font-style: normal ; 
     height:16px;
     line-height:16px;
+    vertical-align:middle;
 }
 
 /* 导出到EXCEL*/
@@ -300,17 +262,14 @@
     font-size:10pt;  
     border: 0px #ff0000 solid; 
     background-color:Transparent;
-/*     BORDER-BOTTOM: #ffffff 0px solid;  
-    BORDER-LEFT: #93bee2 0px solid;  
-    BORDER-RIGHT: #93bee2 0px solid;  
-    BORDER-TOP: #93bee2 0px solid; */
     background-image:url(../images/op/excel.gif); 
     background-repeat:no-repeat;
-    CURSOR: hand; 
-    padding-left:15px;
+    CURSOR: pointer; 
+    padding-left:20px;
     font-style: normal ; 
     height:16px;
     line-height:16px;
+    vertical-align:middle;
 }
 
 /* 打印*/
@@ -320,17 +279,14 @@
     font-size:10pt;  
     border: 0px #ff0000 solid; 
     background-color:Transparent;
-/*     BORDER-BOTTOM: #ffffff 0px solid;  
-    BORDER-LEFT: #93bee2 0px solid;  
-    BORDER-RIGHT: #93bee2 0px solid;  
-    BORDER-TOP: #93bee2 0px solid; */
     background-image:url(../images/op/print.png); 
     background-repeat:no-repeat;
-    CURSOR: hand; 
-    padding-left:15px;
+    CURSOR: pointer; 
+    padding-left:20px;
     font-style: normal ; 
     height:16px;
     line-height:16px;
+    vertical-align:middle;
 }
 
 /* 查询*/
@@ -342,11 +298,12 @@
     background-color:Transparent;
     background-image:url('../images/op/query.png'); 
     background-repeat:no-repeat;
-    CURSOR: hand; 
-    padding-left:15px;
+    CURSOR: pointer; 
+    padding-left:20px;
     font-style: normal; 
     line-height:16px;
     height:16px;
+    vertical-align:middle;
 }
 
 /* 退出*/
@@ -362,11 +319,12 @@
     BORDER-TOP: #93bee2 0px solid; */
     background-image:url(../images/op/exit.png); 
     background-repeat:no-repeat;
-    CURSOR: hand; 
-    padding-left:15px;
+    CURSOR: pointer; 
+    padding-left:18px;
     font-style: normal ; 
     height:16px;
     line-height:16px;
+    vertical-align:middle;
 }
 
 /* 审核*/
@@ -376,15 +334,12 @@
     font-size:10pt;  
     border: 0px #ff0000 solid; 
     background-color:Transparent;
-/*     BORDER-BOTTOM: #ffffff 0px solid;  
-    BORDER-LEFT: #93bee2 0px solid;  
-    BORDER-RIGHT: #93bee2 0px solid;  
-    BORDER-TOP: #93bee2 0px solid; */
     background-image:url('../images/op/priv_0.gif'); 
     background-repeat:no-repeat;
-    CURSOR: hand; 
-    padding-left:15px;
+    CURSOR: pointer; 
+    padding-left:20px;
     font-style: normal;
+    vertical-align:middle;
 }
 
 
@@ -394,17 +349,14 @@
     font-size:10pt;  
     border: 0px #ff0000 solid; 
     background-color:Transparent;
-/*     BORDER-BOTTOM: #ffffff 0px solid;  
-    BORDER-LEFT: #93bee2 0px solid;  
-    BORDER-RIGHT: #93bee2 0px solid;  
-    BORDER-TOP: #93bee2 0px solid; */
     background-image:url(../images/op/priv_2.gif); 
     background-repeat:no-repeat;
-    CURSOR: hand; 
+    CURSOR: pointer; 
     padding-left:10px;
     font-style: normal ; 
     height:16px;
     line-height:16px;
+    vertical-align:middle;
 }
 
 
@@ -441,7 +393,7 @@
     border: 0px #ff0000 solid; 
     background-image:url(../images/op/Icon.DatePick.gif); 
     background-repeat:no-repeat;
-    CURSOR: hand; 
+    CURSOR: pointer; 
     font-style: normal ; 
     height:18px;
     width:20px;
@@ -452,7 +404,7 @@
     border: 0px #ff0000 solid; 
     background-image:url(../images/op/viewpic.gif); 
     background-repeat:no-repeat;
-    CURSOR: hand; 
+    CURSOR: pointer; 
     font-style: normal ; 
     height:18px;
     width:18px;
@@ -464,16 +416,13 @@
     font-size:9pt;  
     border: 0px #ff0000 solid; 
     background-color:Transparent;
-/*     BORDER-BOTTOM: #ffffff 0px solid;  
-    BORDER-LEFT: #93bee2 0px solid;  
-    BORDER-RIGHT: #93bee2 0px solid;  
-    BORDER-TOP: #93bee2 0px solid; */
     background-image:url(../images/op/first.png); 
     background-repeat:no-repeat;
     CURSOR: hand; 
     padding-left:16px;
     font-style: normal ; 
-    height:20px;
+    height:16px;
+    vertical-align:middle;
 }
 /* 上一笔*/
 .ButtonPre
@@ -482,17 +431,14 @@
     font-size:9pt;  
     border: 0px #ff0000 solid; 
     background-color:Transparent;
-/*     BORDER-BOTTOM: #ffffff 0px solid;  
-    BORDER-LEFT: #93bee2 0px solid;  
-    BORDER-RIGHT: #93bee2 0px solid;  
-    BORDER-TOP: #93bee2 0px solid; */
     background-image:url(../images/op/previous.png); 
     background-repeat:no-repeat;
-    CURSOR: hand; 
+    CURSOR: pointer; 
     padding-left:16px;
     font-style: normal ; 
     height:16px;
     line-height:16px;
+    vertical-align:middle;
 }
 /* 下一笔*/
 .ButtonNext
@@ -501,17 +447,14 @@
     font-size:9pt;  
     border: 0px #ff0000 solid; 
     background-color:Transparent;
-/*     BORDER-BOTTOM: #ffffff 0px solid;  
-    BORDER-LEFT: #93bee2 0px solid;  
-    BORDER-RIGHT: #93bee2 0px solid;  
-    BORDER-TOP: #93bee2 0px solid; */
     background-image:url(../images/op/next.png); 
     background-repeat:no-repeat;
-    CURSOR: hand; 
+    CURSOR: pointer; 
     padding-left:16px;
     font-style: normal ; 
     height:16px;
     line-height:16px;
+    vertical-align:middle;
 }
 /* 尾笔*/
 .ButtonLast
@@ -520,15 +463,12 @@
     font-size:9pt;  
     border: 0px #ff0000 solid; 
     background-color:Transparent;
-/*     BORDER-BOTTOM: #ffffff 0px solid;  
-    BORDER-LEFT: #93bee2 0px solid;  
-    BORDER-RIGHT: #93bee2 0px solid;  
-    BORDER-TOP: #93bee2 0px solid; */
     background-image:url(../images/op/last.png); 
     background-repeat:no-repeat;
-    CURSOR: hand; 
+    CURSOR: pointer; 
     padding-left:16px;
     font-style: normal ; 
     height:16px;
     line-height:16px;
+    vertical-align:middle;
 }
