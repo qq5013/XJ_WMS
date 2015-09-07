@@ -2,74 +2,90 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
 using IDAL;
+
 
 namespace WMS.WebUI.CMD
 {
-    public partial class ProductView : WMS.App_Code.BasePage
+    public partial class ProductView :App_Code.BasePage
     {
-        protected string FormID;
-        protected string ID;
-        protected string TableName = "CMD_PRODUCT";
-        protected string PrimaryKey = "PRODUCT_CODE";
-
+        private string strID;
+        private string TableName = "CMD_TrainType";
+        private string PrimaryKey = "TypeCode";
         BLL.BLLBase bll = new BLL.BLLBase();
         protected void Page_Load(object sender, EventArgs e)
         {
-            ID = Request.QueryString["ID"] + "";
-            FormID = Request.QueryString["FormID"] + "";
+            strID = Request.QueryString["ID"] + "";
             if (!IsPostBack)
             {
-                DataTable dt = bll.FillDataTable("Cmd.SelectProduct", new DataParameter[] { new DataParameter("{0}", string.Format("PRODUCT_CODE='{0}'", ID)) });
+                BindDropDownList();
+                DataTable dt = bll.FillDataTable("Cmd.SelectTrainType", new DataParameter[] { new DataParameter("{0}", string.Format("TypeCode='{0}'", strID)) });
                 BindData(dt);
-                writeJsvar(FormID,SqlCmd, ID);
+                writeJsvar(FormID, SqlCmd, strID);
             }
+        }
+
+        #region 绑定方法
+        private void BindDropDownList()
+        {
+             
+
         }
 
         private void BindData(DataTable dt)
         {
             if (dt.Rows.Count > 0)
             {
-                this.txtID.Text = dt.Rows[0]["PRODUCT_CODE"].ToString();
-                this.txtPRODUCT_NAME.Text = dt.Rows[0]["PRODUCT_NAME"].ToString();
-                this.txtPRODUCT_PartsName.Text = dt.Rows[0]["PRODUCT_PartsName"].ToString();
-                this.txtPRODUCT_MODEL.Text = dt.Rows[0]["PRODUCT_MODEL"].ToString();
-                this.txtPRODUCT_FMODEL.Text = dt.Rows[0]["PRODUCT_FMODEL"].ToString();
-                this.txtPRODUCT_Class.Text = dt.Rows[0]["PRODUCT_Class"].ToString();
-                this.txtPACK_QTY.Text = dt.Rows[0]["PACK_QTY"].ToString();
-                this.txtPALLET_QTY.Text = dt.Rows[0]["PALLET_QTY"].ToString();
-                this.chkIS_MIX.Checked = bool.Parse(dt.Rows[0]["IS_MIX"].ToString());
-                this.chkIsBarCode.Checked = bool.Parse(dt.Rows[0]["IsBarCode"].ToString());
-                this.chkIsInStock.Checked = bool.Parse(dt.Rows[0]["IsInStock"].ToString());
+                this.txtID.Text = dt.Rows[0]["TypeCode"].ToString();
+                this.txtTypeName.Text = dt.Rows[0]["TypeName"].ToString();
+
                 this.txtMemo.Text = dt.Rows[0]["Memo"].ToString();
-                this.txtProductVolume.Text = dt.Rows[0]["ProductVolume"].ToString();
+                this.txtCreator.Text = dt.Rows[0]["Creator"].ToString();
+                this.txtCreatDate.Text = ToYMD(dt.Rows[0]["CreateDate"]);
+                this.txtUpdater.Text = dt.Rows[0]["Updater"].ToString();
+                this.txtUpdateDate.Text = ToYMD(dt.Rows[0]["UpdateDate"]);
 
             }
+            
         }
-
+        private void BindDataNull()
+        {
+            this.txtID.Text = "";
+            this.txtTypeName.Text = "";
+            this.txtMemo.Text = "";
+            this.txtCreator.Text = "";
+            this.txtCreatDate.Text = "";
+            this.txtUpdater.Text = "";
+            this.txtUpdateDate.Text = "";
+        }
+        #endregion
+        
         protected void btnDelete_Click(object sender, EventArgs e)
         {
             string strID = this.txtID.Text;
-
-            int Count = bll.GetRowCount("VUsed_CMD_Product", string.Format("ProductID='{0}' or ProductID=substring('{0}',1,5) ", strID));
+            int Count = bll.GetRowCount("VUsed_CMD_TrainType", string.Format("TypeCode='{0}'", this.txtID.Text.Trim()));
             if (Count > 0)
             {
-                WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel, "该规格编码还被其它单据使用，请调整后再删除！");
+                WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel, "该车型编码还被其它单据使用，请调整后再删除！");
                 return;
             }
-            bll.ExecNonQuery("Cmd.DeleteProduct", new DataParameter[] { new DataParameter("{0}", "'" + strID + "'") });
+            bll.ExecNonQuery("Cmd.DeleteTrainType", new DataParameter[] { new DataParameter("{0}", "'" + strID + "'") });
 
 
             btnNext_Click(sender, e);
             if (this.txtID.Text == strID)
+            {
                 btnPre_Click(sender, e);
+                if (this.txtID.Text == strID)
+                {
+                    BindDataNull();
+                }
+            }
 
         }
-        
-        
 
         #region 上下笔事件
         protected void btnFirst_Click(object sender, EventArgs e)
@@ -89,6 +105,6 @@ namespace WMS.WebUI.CMD
             BindData(bll.GetRecord("L", TableName, "1=1", PrimaryKey, this.txtID.Text));
         }
         #endregion
-
+        
     }
 }

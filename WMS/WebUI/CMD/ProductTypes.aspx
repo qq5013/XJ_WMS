@@ -17,7 +17,7 @@
             });
         });
         function resize() {
-            var h = document.documentElement.clientHeight -70;
+            var h = document.documentElement.clientHeight -55;
             $("#table-container").css("height", h);
         }
     </script>
@@ -49,7 +49,7 @@
                                     <asp:ListItem Value="Memo">备注</asp:ListItem>
                                  </asp:dropdownlist>
                             </td>
-						    <td class="smalltitle" align="right" width="7%">
+						    <td class="smalltitle" align="center" width="7%">
                                 <asp:Literal ID="Literal2" Text="查询内容" runat="server"></asp:Literal>
                             </td>
 						    <td  width="21%" height="20" valign="middle">&nbsp;<asp:textbox id="txtSearch" 
@@ -69,7 +69,7 @@
                           <td align="right"  style="width:30%" valign="middle">
                              <%-- <asp:Button ID="btnPrint" runat="server" Text="导出" CssClass="ButtonPrint" OnClientClick="return print();"/>--%>
                            
-                            <asp:Button ID="btnAdd" runat="server" Text="新增" OnClientClick="Add();" CssClass="ButtonCreate"/>&nbsp;
+                            <asp:Button ID="btnAdd" runat="server" Text="新增" OnClientClick="return Add();" CssClass="ButtonCreate"/>&nbsp;
                             <asp:Button ID="btnDelete" runat="server" Text="刪除" CssClass="ButtonDel" onclick="btnDeletet_Click" OnClientClick="return Delete('GridView1')" Width="51px"/>&nbsp;
                              <asp:Button ID="btnPrint" runat="server" CssClass="ButtonPrint"   Text="打印" />&nbsp;
                             <asp:Button ID="btnExit" runat="server" Text="离开" CssClass="ButtonExit" OnClientClick="return Exit()" Width="51px" />
@@ -95,7 +95,7 @@
                    </asp:TemplateField>
                   <asp:TemplateField HeaderText="类别编码" SortExpression="ProductTypeCode">
                         <ItemTemplate>
-                            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# "ProductTypeView.aspx?SubModuleCode=" + SubModuleCode+"&FormID=" + FormID +"&SqlCmd="+SqlCmd+ "&ID="+DataBinder.Eval(Container.DataItem, "ProductTypeCode") %>'
+                            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# FormID+"View.aspx?SubModuleCode=" + SubModuleCode+"&FormID=" + FormID +"&SqlCmd="+SqlCmd+ "&ID="+DataBinder.Eval(Container.DataItem, "ProductTypeCode") %>'
                                 Text='<%# DataBinder.Eval(Container.DataItem, "ProductTypeCode")%>'></asp:HyperLink>
                         </ItemTemplate>
                         <ItemStyle Width="12%" Wrap="False" />

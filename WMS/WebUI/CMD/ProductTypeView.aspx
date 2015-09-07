@@ -38,14 +38,14 @@
                         <td align="right">
                            <%-- <asp:Button ID="btnPrint" runat="server" Text="导出" CssClass="ButtonPrint" 
                                 OnClientClick="return print();" />--%>
-                            <asp:Button ID="btnAdd" runat="server" Text="新增" CssClass="ButtonCreate" OnClientClick="Add()"  />
+                            <asp:Button ID="btnAdd" runat="server" Text="新增" CssClass="ButtonCreate" OnClientClick="return Add();"  />
                             <asp:Button ID="btnDelete" runat="server" Text="刪除" CssClass="ButtonDel" OnClientClick="return ViewDelete();"
                                 onclick="btnDelete_Click"  />
                             <asp:Button ID="btnEdit" runat="server" Text="修改" CssClass="ButtonModify" 
                                 OnClientClick="return ViewEdit();" />
-                            <asp:Button ID="btnBack" runat="server" Text="返回" OnClientClick="return Back()" 
+                            <asp:Button ID="btnBack" runat="server" Text="返回" OnClientClick="return Back();" 
                                 CssClass="ButtonBack" />
-                            <asp:Button ID="btnExit" runat="server" Text="离开" OnClientClick="return Exit()" 
+                            <asp:Button ID="btnExit" runat="server" Text="离开" OnClientClick="return Exit();" 
                                 CssClass="ButtonExit"  />
                         
                         </td>
@@ -108,14 +108,14 @@
                     </tr>
                     <tr>
                       <td align="center"  class="smalltitle" style="width:8%;">
-                            建单人员
+                            修改人员
                       </td> 
                       <td>
                          &nbsp;<asp:TextBox ID="txtUpdater" runat="server" BorderWidth="0" 
                               CssClass="TextRead" Width="40%" ReadOnly="True"  ></asp:TextBox> 
                       </td>
                       <td align="center"  class="smalltitle" style="width:8%;">
-                            建单日期
+                            修改日期
                       </td> 
                       <td>
                         &nbsp;<asp:TextBox ID="txtUpdateDate" runat="server" BorderWidth="0" 

@@ -37,8 +37,8 @@ namespace WMS.WebUI.CMD
                     this.txtUpdateDate.Text = ToYMD(DateTime.Now);
 
                 }
-                 
-                writeJsvar(FormID,SqlCmd, ID);
+
+                writeJsvar(FormID, SqlCmd, strID);
                 SetTextReadOnly(this.txtCreator, this.txtCreatDate, this.txtUpdater, this.txtUpdateDate);
 
             }

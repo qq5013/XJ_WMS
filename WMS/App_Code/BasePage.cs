@@ -591,7 +591,7 @@ namespace WMS.App_Code
                 lblCurrentPage.Text = "共 [" + totalCount.ToString() + "] 笔记录  第 [" + ViewState["CurrentPage"] + "] 页  共 [" + pageCount.ToString() + "] 页";
 
             }
-            ScriptManager.RegisterStartupScript(UpdatePanel1, UpdatePanel1.GetType(), "Resize", "resize();", true);
+             
         }
     }
 }
