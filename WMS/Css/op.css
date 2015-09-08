@@ -176,7 +176,7 @@
     background-image:url('../images/op/save.png'); 
     background-repeat:no-repeat;
     CURSOR: pointer; 
-    padding-left:15px;
+    padding-left:18px;
     font-style: normal; 
     height:16px;
     line-height:16px;
@@ -415,7 +415,7 @@
     background-color:Transparent;
     background-image:url(../images/op/first.png); 
     background-repeat:no-repeat;
-    CURSOR: hand; 
+    CURSOR: pointer; 
     padding-left:16px;
     font-style: normal ; 
     height:16px;

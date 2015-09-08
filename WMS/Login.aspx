@@ -33,7 +33,7 @@
 	color:#999999;
 	line-height:50px;
 	margin-left:18px;
-	font-family:"Î¢ÈíÑÅºÚ Light";
+	font-family:"Î¢ÈíÑÅºÚ";
 }
 .uid{
      background:url(images/login/ico-uid.png) no-repeat;
@@ -62,6 +62,7 @@ input{
 	margin-bottom:14px;	
 	font-size:14px;
 	color:#999;
+	line-height:43px;
 }
 .buttonLogin{
 	width:300px;
@@ -104,9 +105,12 @@ input{
 			        <div style="width:338px; height:291px; border:1px solid #E6E6E6; background:#fff;">
 				        <label>»¶Ó­µÇÂ¼</label>
                         <asp:TextBox ID="txtUserName" class="uid" value="" placeholder="ÇëÊäÈëÕÊºÅ" runat="server" />
-                        <asp:TextBox ID="txtPassWord" class="pwd" TextMode="Password" value="" placeholder="ÇëÊäÈëÃÜÂë" runat="server" />		        
+                        <asp:TextBox ID="txtPassWord" class="pwd" TextMode="Password" value="" placeholder="ÇëÊäÈëÃÜÂë" runat="server" />
+                        <div style="padding-left: 20px;height:20px;">
+                        <font size="4" color="red"><asp:Literal ID="ltlMessage" Text="" runat="server"></asp:Literal></font>		
+                        </div>        
 				        <asp:Button ID="btnLogin" CssClass="buttonLogin" runat="server" Text="Á¢¼´µÇÂ¼" OnClick="btnLogin_Click" />				        
-                            <asp:Label ID="labMessage" runat="server" ForeColor="Red" Font-Size="X-Small"></asp:Label>				        
+                        
 			        </div>
 		        </td>
 	          </tr>

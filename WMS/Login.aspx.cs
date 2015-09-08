@@ -92,12 +92,12 @@ namespace WMS
                             BLL.BLLBase bll = new BLL.BLLBase();
                             bll.ExecNonQuery("Security.InsertOperatorLog", new IDAL.DataParameter[]{new IDAL.DataParameter("@LoginUser",this.txtUserName.Text.Trim()),new IDAL.DataParameter("@LoginTime",DateTime.Now),
                                                          new IDAL.DataParameter("@LoginModule","登录页面"),new IDAL.DataParameter("@ExecuteOperator","登录(用户密码有误)")});
-                            labMessage.Text = "对不起,您输入的密码有误!";
+                            ltlMessage.Text = "对不起,您输入的密码有误!";
                         }
                     }
                     else
                     {
-                        labMessage.Text = "对不起,您输入的用户名不存在!";
+                        ltlMessage.Text = "对不起,您输入的用户名不存在!";
                     }
 
                 }
@@ -113,7 +113,7 @@ namespace WMS
             }
             else
             {
-                labMessage.Text = "请输入用户名!";
+                ltlMessage.Text = "请输入用户名!";
             }
         }
     }
