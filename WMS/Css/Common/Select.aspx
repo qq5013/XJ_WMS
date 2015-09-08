@@ -90,7 +90,7 @@
     </asp:UpdateProgress>  
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">                
                 <ContentTemplate>
-         <table class="maintable" cellspacing="0" cellpadding="0" width="100%" align="center" border="1" >
+         <table class="maintable" width="100%" align="center" >
 				<tr> 
 					<td class="smalltitle" align="center" width="10%" >查询栏位</td>
 					<td  width="20%" height="20">&nbsp;

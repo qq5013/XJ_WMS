@@ -186,7 +186,7 @@
                         <td>
                             <asp:TextBox ID="txtGroupName" runat="server" CssClass="TextBox" MaxLength="20" 
                                 Width="134px"></asp:TextBox>
-                            <asp:TextBox ID="txtGroupID" runat="server" Width="0" Height="0" BorderWidth="0"></asp:TextBox>
+                            <asp:TextBox ID="txtGroupID" runat="server" Width="0" Height="0" ></asp:TextBox>
                         </td>
                     </tr>
                     <tr>

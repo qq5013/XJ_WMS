@@ -196,7 +196,7 @@
                         </td>
                         <td>
                             <asp:TextBox ID="txtUserName" runat="server" CssClass="TextBox" Width="140px"></asp:TextBox>
-                            <asp:TextBox ID="txtUserID" runat="server" Width="0" Height="0" BorderWidth="0"></asp:TextBox>
+                            <asp:TextBox ID="txtUserID" runat="server" Width="0" Height="0" ></asp:TextBox>
                         </td>
                     </tr>
                     <tr>

@@ -175,7 +175,7 @@
         <table style="width:100%; background-color:WHITE;" cellpadding="0" cellspacing="0">
            <tr>
              <td  colspan="2" align="right">
-                <table style="width:100%"  class="maintable"  cellspacing="0" cellpadding="0" width="100%" align="center" bordercolor="#ffffff" border="1">
+                <table style="width:100%"  class="maintable"   width="100%" align="center"  >
                     <tr>
                         <td class="smalltitle" align="right" style="height: 24px; width:5%">
                              库区   
