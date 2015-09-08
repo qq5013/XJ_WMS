@@ -6,8 +6,8 @@
 <head id="Head1" runat="server">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title></title>
-    <link rel="stylesheet" type="text/css" href="../../Css/icon.css" />  
-    <link rel="stylesheet" type="text/css" href="../../Css/default.css" />  
+    <link rel="stylesheet" type="text/css" href="../../Css/op.css" />  
+    <link rel="stylesheet" type="text/css" href="../../Css/main.css" />  
     <link rel="stylesheet" type="text/css" href="../../ext/packages/ext-theme-crisp/build/resources/ext-theme-crisp-all.css" /> 
     <script type="text/javascript" src="../../JQuery/jquery-2.1.3.min.js"></script>  
     <script type="text/javascript" src="../../Ext/ext-all.js"></script>  
@@ -121,16 +121,16 @@
            <tr>
              <td class="maintable" colspan="2" align="right">
                     <asp:Button ID="btnNewWarehouse" Text="新增仓库" runat="server" 
-                        CssClass="icon-add"  OnClientClick="return OpenEditWarehouse()" 
+                        CssClass="ButtonCreate"  OnClientClick="return OpenEditWarehouse()" 
                         Visible="False" />  
-                    <asp:Button ID="btnNewArea" runat="server" Text="增加库区" CssClass="icon-add" 
-                        OnClientClick="return OpenEditArea()" Visible="False"/>
-                    <asp:Button ID="btnNewShelf" runat="server" Text="增加货架" CssClass="icon-add" 
+                    <asp:Button ID="btnNewArea" runat="server" Text="增加库区" CssClass="ButtonCreate" 
+                        OnClientClick="return OpenEditArea()" Visible="False" Width="78px"/>
+                    <asp:Button ID="btnNewShelf" runat="server" Text="增加货架" CssClass="ButtonCreate" 
                         OnClientClick="return OpenEditShelf()" Visible="False"/>
-                    <asp:Button ID="btnNewCell" runat="server" Text="增加货位" CssClass="icon-add" 
+                    <asp:Button ID="btnNewCell" runat="server" Text="增加货位" CssClass="ButtonCreate" 
                         OnClientClick="return OpenEditCell()" Visible="False"/>
 
-                     <asp:Button ID="btnCancel" Text="退出" runat="server" CssClass="icon-exit" OnClientClick="Exit();"  />            
+                     <asp:Button ID="btnCancel" Text="退出" runat="server" CssClass="ButtonExit" OnClientClick="Exit();"  />            
              </td>
            </tr>
            <tr>
