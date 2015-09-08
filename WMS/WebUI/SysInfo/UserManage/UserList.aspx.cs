@@ -33,15 +33,9 @@ namespace WMS.WebUI.SysInfo.UserManage
         {
             try
             {
-                if (Session["sys_PageCount"] != null)
-                {
-                    pageSize = Convert.ToInt32(Session["sys_PageCount"].ToString());
-                    pager.PageSize = pageSize;
-                }
-                if (Session["pager_ShowPageIndex"] != null)
-                {
-                    pager.ShowPageIndex = Convert.ToBoolean(Session["pager_ShowPageIndex"].ToString());
-                }
+
+                pager.PageSize = pageSize;
+                 
                
                 if (!IsPostBack)
                 {
@@ -60,6 +54,7 @@ namespace WMS.WebUI.SysInfo.UserManage
                     totalCount = bll.GetRowCount(TableView, filter);
                     GridDataBind();
                 }
+                ScriptManager.RegisterStartupScript(this.UpdatePanel1, this.UpdatePanel1.GetType(), "Resize", "resize();", true);
 
             }
             catch (Exception exp)
@@ -123,7 +118,7 @@ namespace WMS.WebUI.SysInfo.UserManage
             if (e.Row.RowType == DataControlRowType.Header)
             {
                 CheckBox chk = new CheckBox();
-                chk.Attributes.Add("style", " font-weight:bold; text-align:center;word-break:keep-all; white-space:nowrap");
+                 
                 chk.ID = "checkAll";
                 chk.Attributes.Add("onclick", "checkboxChange(this,'gvMain',0);");
                 chk.Text = "操作";
@@ -131,15 +126,7 @@ namespace WMS.WebUI.SysInfo.UserManage
             }
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                if (e.Row.RowIndex % 2 == 0)
-                {
-                    e.Row.BackColor = Color.FromName(Session["grid_EvenRowColor"].ToString());
-                }
-                else
-                {
-                    e.Row.BackColor = Color.FromName(Session["grid_OddRowColor"].ToString());
-                }
-                e.Row.Cells[0].Attributes.Add("style", "word-break:keep-all; white-space:nowrap");
+                 
 
                 CheckBox chk = new CheckBox();
                 //chk.Attributes.Add("onclick","");

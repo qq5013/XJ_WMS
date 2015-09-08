@@ -53,8 +53,8 @@ namespace WMS.WebUI.SysInfo.RoleManage
         private void GridDataBind()
         {
             int TotalCount=0;
-            int PageCount=0;
-            DataTable dtGroup = bll.GetDataPage("Security.SelectGroup", 1, 10000, out TotalCount, out PageCount,new DataParameter[] { new DataParameter("{0}", "1=1") });
+            int PageCount = 0;
+            DataTable dtGroup = bll.GetDataPage("Security.SelectGroup", 1, 10000, out TotalCount,out PageCount, new DataParameter[] { new DataParameter("{0}", "1=1"), new DataParameter("{1}", "GroupName") });
             this.gvGroupList.DataSource = dtGroup;
             this.gvGroupList.DataBind();
             if (!PostBack)

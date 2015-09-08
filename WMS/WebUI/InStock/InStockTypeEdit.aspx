@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ProductTypeEdit.aspx.cs" Inherits="WMS.WebUI.CMD.ProductTypeEdit" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="InStockTypeEdit.aspx.cs" Inherits="WMS.WebUI.InStock.InStockTypeEdit" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -13,14 +13,14 @@
             function Save() {
 
                 if (trim($("#txtID").val()) == "") {
-                    alert("类别编码不能为空!");
+                    alert("类型编码不能为空!");
                     $("#txtID").focus();
                     return false;
                 }
 
-                if (trim($("#txtProductTypeName").val()) == "") {
-                    alert("类别名称不能为空!");
-                    $("#txtProductTypeName").focus();
+                if (trim($("#txtBillTypeName").val()) == "") {
+                    alert("类型名称不能为空!");
+                    $("#txtTypeName").focus();
                     return false;
                 }
                  
@@ -44,44 +44,34 @@
                 </td>
             </tr>
         </table>
-        <table id="Table1" class="maintable" cellspacing="0" cellpadding="0" width="100%" align="center" bordercolor="red"
+        <table id="Table1" class="maintable" cellspacing="0" cellpadding="0" width="100%" align="center" bordercolor="#ffffff"
 				border="1" runat="server">			
 				<tr>
                     <td align="center" class="musttitle" style="width:8%;"  >
-                            类别编码
+                            类型编码
                     </td>
-                    <td colspan="3" class="musttitle">
+                    <td  width="30%">
                             &nbsp;<asp:TextBox 
-                                ID="txtID" runat="server"   
-                                BorderWidth="0" CssClass="TextBox" Width="13%" MaxLength="10"  ></asp:TextBox>&nbsp;&nbsp;</td>
-                         
-                </tr>
-                <tr>
+                                ID="txtID" runat="server" BorderWidth="0" CssClass="TextBox" Width="40%" 
+                                MaxLength="10"  ></asp:TextBox>
+                    </td>
                     <td align="center" class="musttitle" style="width:8%;"  >
-                            类别名称
+                           类型名称
                     </td>
                     <td width="30%">
-                            &nbsp;<asp:TextBox 
-                                ID="txtProductTypeName" runat="server"   
-                                BorderWidth="0" CssClass="TextBox" Width="40%" MaxLength="20" 
-                                 ></asp:TextBox> 
-                    </td>
-                        <td  align="center" class="musttitle" style="width:8%;" >
-                            存放库区 
-                    </td>
-                    <td>
-                        &nbsp;<asp:DropDownList ID="ddlAreaCode" runat="server" Width="42%">
-                        </asp:DropDownList>
+                            &nbsp;<asp:TextBox ID="txtBillTypeName" 
+                                runat="server" BorderWidth="0" CssClass="TextBox" Width="41%" 
+                                MaxLength="30" ></asp:TextBox> 
                     </td>
                 </tr>
-                    
+              
                 <tr>
                     <td align="center"  class="smalltitle" style="width:8%;">
                         备注
                     </td>
                     <td colspan="3">
                         &nbsp;<asp:TextBox ID="txtMemo" runat="server" CssClass="MultiLineTextBox" 
-                            TextMode="MultiLine" Height="102px" Width="66%"></asp:TextBox>
+                            TextMode="MultiLine" Height="102px" Width="74%"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>

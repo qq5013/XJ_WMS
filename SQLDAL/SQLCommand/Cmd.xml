@@ -171,6 +171,32 @@
       Update CMD_COLOR Set COLOR_CODE=@COLOR_CODE,COLOR_NAME=@COLOR_NAME,PRODUCT_CODE=@PRODUCT_CODE,MEMO=@MEMO,PRODUCT_Model=@PRODUCT_Model,Updater=@Updater, UpdateDate=getdate() where ID={0}
     </CommandString>
   </Command>
+
+  <!--单据类型-->
+  <Command ID="SelectBillType">
+    <CommandString>
+      Select * from CMD_BillType where {0} order by BillTypeCode
+    </CommandString>
+  </Command>
+  <Command ID="DeleteBillType">
+    <CommandString>
+      delete from CMD_BillType WHERE BillTypeCode in({0})
+    </CommandString>
+  </Command>
+  <Command ID="InsertBillType">
+    <CommandString>
+      INSERT INTO CMD_BillType(Flag,BillTypeCode,BillTypeName,TaskType,TaskLevel,Memo, Creator, CreateDate, Updater, UpdateDate)
+      values(@Flag,@BillTypeCode,@BillTypeName,@TaskType,@TaskLevel,@Memo, @Creator, getdate(), @Updater, getdate())
+    </CommandString>
+  </Command>
+  <Command ID="UpdateInBillType">
+    <CommandString>
+      Update CMD_BillType Set BillTypeName=@BillTypeName,Memo=@Memo,Updater=@Updater, UpdateDate=getdate() where BillTypeCode=@BillTypeCode
+    </CommandString>
+  </Command>
+  
+  
+  
   
   <!--产品信息-->
   <Command ID="SelectProduct">
