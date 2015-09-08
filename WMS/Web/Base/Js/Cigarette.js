@@ -131,11 +131,11 @@ var grid = Ext.create("Ext.grid.Panel", {
                                 var tab = top.window.parent.parent.Ext.getCmp("main");
                                 var title = tab.getActiveTab().title;
 
-                                Ext.Msg.confirm("提示", "确定要关闭" + title + "吗？", function (name) {
-                                    if (name == 'yes') {
+//                                Ext.Msg.confirm("提示", "确定要关闭" + title + "吗？", function (name) {
+//                                    if (name == 'yes') {
                                         tab.remove(tab.getActiveTab());
-                                    }
-                                });
+//                                    }
+//                                });
                             }
                         }]
                     }],

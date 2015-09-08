@@ -156,17 +156,14 @@
     font-size:10pt;  
     border: 0px #ff0000 solid; 
     background-color:Transparent;
-/*     BORDER-BOTTOM: #ffffff 0px solid;  
-    BORDER-LEFT: #93bee2 0px solid;  
-    BORDER-RIGHT: #93bee2 0px solid;  
-    BORDER-TOP: #93bee2 0px solid; */
     background-image:url(../images/op/trash.gif); 
     background-repeat:no-repeat;
     CURSOR: pointer; 
-    padding-left:15px;
+    padding-left:18px;
     font-style: normal ; 
     height:16px;
     line-height:16px;
+    vertical-align:middle;
 } 
 
 /* 保存*/
