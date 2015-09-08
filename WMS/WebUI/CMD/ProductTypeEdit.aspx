@@ -32,7 +32,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
-        <table style="width: 100%; height: 20px;" class="maintable">
+        <table class="OperationBar">
             <tr>
                 <td align="right">
                     <asp:Button ID="btnCancel" runat="server" Text="放弃" 
@@ -44,8 +44,7 @@
                 </td>
             </tr>
         </table>
-        <table id="Table1" class="maintable"  width="100%" align="center" bordercolor="red"
-				 runat="server">			
+        <table id="Table1" class="maintable"  width="100%" align="center" cellspacing="0" cellpadding="0" bordercolor="#ffffff" border="1" runat="server">			
 				<tr>
                     <td align="center" class="musttitle" style="width:8%;"  >
                             类别编码
@@ -70,18 +69,19 @@
                             存放库区 
                     </td>
                     <td>
-                        &nbsp;<asp:DropDownList ID="ddlAreaCode" runat="server" Width="42%">
+                        &nbsp;<asp:DropDownList ID="ddlAreaCode" runat="server" Width="42%" 
+                            CssClass="TextBox" Height="16px">
                         </asp:DropDownList>
                     </td>
                 </tr>
                     
-                <tr>
+                <tr style="height:108px;">
                     <td align="center"  class="smalltitle" style="width:8%;">
                         备注
                     </td>
-                    <td colspan="3">
-                        &nbsp;<asp:TextBox ID="txtMemo" runat="server" CssClass="MultiLineTextBox" 
-                            TextMode="MultiLine" Height="102px" Width="66%"></asp:TextBox>
+                    <td colspan="3" valign="middle">
+                        &nbsp;<asp:TextBox ID="txtMemo" runat="server" CssClass="TextBox" 
+                            TextMode="MultiLine" Height="104px" Width="66%"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>

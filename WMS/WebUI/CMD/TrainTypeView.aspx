@@ -23,7 +23,7 @@
         </asp:UpdateProgress>  
         <asp:UpdatePanel ID="updatePanel" runat="server" UpdateMode="Conditional">                
             <ContentTemplate>
-                 <table style="width: 100%; height: 20px;" class="maintable">
+                 <table  class="OperationBar">
                     <tr>
                         <td align="right" style="width:60%">
                             <asp:Button ID="btnFirst" runat="server" Text="首笔" CssClass="ButtonFirst" 
@@ -51,7 +51,7 @@
                         </td>
                     </tr>
                  </table>
-                 <table id="Table1" class="maintable"  width="100%" align="center" 
+                 <table id="Table1" class="maintable"  width="100%" align="center" cellspacing="0" cellpadding="0" bordercolor="#ffffff" border="1" 
 				     runat="server">			
 				     <tr>
                         <td align="center" class="musttitle" style="width:8%;"  >

@@ -522,69 +522,6 @@
     <Compile Include="WebUI\Start\Start.aspx.designer.cs">
       <DependentUpon>Start.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WebUI\Stock\MigrationChecks.aspx.cs">
-      <DependentUpon>MigrationChecks.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\Stock\MigrationChecks.aspx.designer.cs">
-      <DependentUpon>MigrationChecks.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebUI\Stock\MigrationCheckView.aspx.cs">
-      <DependentUpon>MigrationCheckView.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\Stock\MigrationCheckView.aspx.designer.cs">
-      <DependentUpon>MigrationCheckView.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebUI\Stock\MigrationEdit.aspx.cs">
-      <DependentUpon>MigrationEdit.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\Stock\MigrationEdit.aspx.designer.cs">
-      <DependentUpon>MigrationEdit.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebUI\Stock\Migrations.aspx.cs">
-      <DependentUpon>Migrations.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\Stock\Migrations.aspx.designer.cs">
-      <DependentUpon>Migrations.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebUI\Stock\MigrationTaskView.aspx.cs">
-      <DependentUpon>MigrationTaskView.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\Stock\MigrationTaskView.aspx.designer.cs">
-      <DependentUpon>MigrationTaskView.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebUI\Stock\MigrationView.aspx.cs">
-      <DependentUpon>MigrationView.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\Stock\MigrationView.aspx.designer.cs">
-      <DependentUpon>MigrationView.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebUI\Stock\MoveEdit.aspx.cs">
-      <DependentUpon>MoveEdit.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\Stock\MoveEdit.aspx.designer.cs">
-      <DependentUpon>MoveEdit.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebUI\Stock\Moves.aspx.cs">
-      <DependentUpon>Moves.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\Stock\Moves.aspx.designer.cs">
-      <DependentUpon>Moves.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebUI\Stock\MoveView.aspx.cs">
-      <DependentUpon>MoveView.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\Stock\MoveView.aspx.designer.cs">
-      <DependentUpon>MoveView.aspx</DependentUpon>
-    </Compile>
     <Compile Include="WebUI\SysInfo\AboutProduct\AboutProduct.aspx.cs">
       <DependentUpon>AboutProduct.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5584,15 +5521,6 @@
     <Content Include="WebUI\Query\WarehouseCellQuery.aspx" />
     <Content Include="WebUI\Start\SessionTimeOut.aspx" />
     <Content Include="WebUI\Start\Start.aspx" />
-    <Content Include="WebUI\Stock\MigrationChecks.aspx" />
-    <Content Include="WebUI\Stock\MigrationCheckView.aspx" />
-    <Content Include="WebUI\Stock\MigrationEdit.aspx" />
-    <Content Include="WebUI\Stock\Migrations.aspx" />
-    <Content Include="WebUI\Stock\MigrationTaskView.aspx" />
-    <Content Include="WebUI\Stock\MigrationView.aspx" />
-    <Content Include="WebUI\Stock\MoveEdit.aspx" />
-    <Content Include="WebUI\Stock\Moves.aspx" />
-    <Content Include="WebUI\Stock\MoveView.aspx" />
     <Content Include="WebUI\TableXML\CMD_Color.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -5814,7 +5742,6 @@
     <None Include="ext-3.3.1\ux\statusbar\css\vssver2.scc" />
     <None Include="ext-3.3.1\ux\statusbar\images\vssver2.scc" />
     <None Include="ext-3.3.1\ux\statusbar\vssver2.scc" />
-    <None Include="ext-3.3.1\ux\treegrid\vssver2.scc" />
     <None Include="ext-3.3.1\ux\vssver2.scc" />
     <Content Include="Images\Web.config" />
     <Content Include="JQuery\Web.config" />
@@ -7204,6 +7131,7 @@
   <ItemGroup>
     <Folder Include="RptFiles\" />
     <Folder Include="WebUI\OutStock\" />
+    <Folder Include="WebUI\Stock\" />
     <Folder Include="Web\Account\" />
     <Folder Include="Web\MoveStock\" />
     <Folder Include="Web\OutStock\" />

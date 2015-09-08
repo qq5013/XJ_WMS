@@ -31,7 +31,7 @@
 <body>
     <form id="form2" runat="server">
     <div>
-        <table style="width: 100%; height: 20px;" class="maintable">
+        <table  class="OperationBar">
             <tr>
                 <td align="right">
                     <asp:Button ID="Button1" runat="server" Text="放弃" 
@@ -43,8 +43,7 @@
                 </td>
             </tr>
         </table>
-        <table id="Table1" class="maintable"  width="100%" align="center" 
-				 runat="server">			
+        <table id="Table1" class="maintable"  width="100%" align="center" cellspacing="0" cellpadding="0" bordercolor="#ffffff" border="1" runat="server">			
 					<tr>
                         <td align="center" class="musttitle" style="width:8%;"  >
                              厂家编码

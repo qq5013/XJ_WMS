@@ -44,7 +44,7 @@
                 </td>
             </tr>
         </table>
-        <table id="Table1" class="maintable"  width="100%" align="center" 
+        <table id="Table1" class="maintable"  width="100%" align="center" cellspacing="0" cellpadding="0" bordercolor="#ffffff" border="1"
 				 runat="server">			
 				<tr>
                     <td align="center" class="musttitle" style="width:8%;"  >
