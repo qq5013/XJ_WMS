@@ -82,7 +82,7 @@ namespace WMS.WebUI.CMD
 
 
             bll.ExecNonQuery("Cmd.DeleteProductType", new DataParameter[] { new DataParameter("{0}", strColorCode) });
-
+            AddOperateLog("产品类别", "删除单号：" + strColorCode.Replace("'-1',", "").Replace(",'-1'", ""));
             SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
 
         }

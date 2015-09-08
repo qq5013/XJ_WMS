@@ -10,8 +10,7 @@
     <script type="text/javascript" src="../../JQuery/jquery-2.1.3.min.js"></script>
     <script type="text/javascript" src= "../../JScript/Common.js"></script>
     <script type="text/javascript" language="javascript">
-    $(document).ready(function () {
-             
+    $(document).ready(function () {     
             $(window).resize(function () {
                 resize();
             });
@@ -50,12 +49,12 @@
 						    <td class="smalltitle" align="center" width="7%">
                                 <asp:Literal ID="Literal2" Text="查询内容" runat="server"></asp:Literal>
                             </td>
-						    <td  width="21%" height="20" valign="middle">&nbsp;<asp:textbox id="txtSearch" 
-                                    tabIndex="1" runat="server" Width="98%" CssClass="TextBox"  
+						    <td  width="26%" height="20" valign="middle">&nbsp;<asp:textbox id="txtSearch" 
+                                    tabIndex="1" runat="server" Width="90%" CssClass="TextBox"  
                                     heigth="16px" ></asp:textbox>
                                
                           </td>
-                          <td width="20%" align="left">
+                          <td width="15%" align="left">
                            &nbsp;<asp:button id="btnSearch" tabIndex="2" runat="server" Width="58px" 
                                     CssClass="ButtonQuery" Text="查询" OnClientClick="return Search()" 
                                     onclick="btnSearch_Click"></asp:button>&nbsp;&nbsp;
@@ -70,7 +69,7 @@
                             <asp:Button ID="btnAdd" runat="server" Text="新增" OnClientClick="return Add();" CssClass="ButtonCreate"/>&nbsp;
                             <asp:Button ID="btnDelete" runat="server" Text="刪除" CssClass="ButtonDel" onclick="btnDeletet_Click" OnClientClick="return Delete('GridView1')" Width="51px"/>&nbsp;
                              <asp:Button ID="btnPrint" runat="server" CssClass="ButtonPrint"   Text="打印" />&nbsp;
-                            <asp:Button ID="btnExit" runat="server" Text="离开" CssClass="ButtonExit" OnClientClick="return Exit()" Width="51px" />
+                            <asp:Button ID="btnExit" runat="server" Text="离开" CssClass="ButtonExit" OnClientClick="return Exit()" Width="51px" />&nbsp;&nbsp;
                             
                           </td>
                     </tr>
@@ -138,7 +137,7 @@
         </asp:GridView>
             </div>
                 <div>
-                    <asp:LinkButton ID="btnFirst" runat="server" OnClick="btnFirst_Click" Text="首页"></asp:LinkButton> 
+                    &nbsp;&nbsp;<asp:LinkButton ID="btnFirst" runat="server" OnClick="btnFirst_Click" Text="首页"></asp:LinkButton> 
                     &nbsp;<asp:LinkButton ID="btnPre" runat="server" OnClick="btnPre_Click" Text="上一页"></asp:LinkButton> 
                     &nbsp;<asp:LinkButton ID="btnNext" runat="server" OnClick="btnNext_Click" Text="下一页"></asp:LinkButton> 
                     &nbsp;<asp:LinkButton ID="btnLast" runat="server" OnClick="btnLast_Click" Text="尾页"></asp:LinkButton> 

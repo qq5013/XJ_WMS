@@ -79,7 +79,7 @@ namespace WMS.WebUI.CMD
                 return;
             }
             bll.ExecNonQuery("Cmd.DeleteFactory", new DataParameter[] { new DataParameter("{0}", "'" + strID + "'") });
-
+            AddOperateLog("生产厂家", "删除单号：" + strID);
 
             btnNext_Click(sender, e);
             if (this.txtID.Text == strID)

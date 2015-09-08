@@ -73,7 +73,7 @@ namespace WMS.WebUI.CMD
                 return;
             }
             bll.ExecNonQuery("Cmd.DeleteTrainType", new DataParameter[] { new DataParameter("{0}", "'" + strID + "'") });
-
+            AddOperateLog("车型资料", "删除单号：" + strID);
 
             btnNext_Click(sender, e);
             if (this.txtID.Text == strID)
