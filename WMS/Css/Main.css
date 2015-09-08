@@ -30,7 +30,7 @@ A:LINK
 body
 {		
     margin:0px;    
-	font-size: 10pt;
+	font-size: 9pt;
 	font-family: 微软雅黑;
 	background-color:#EAF2F4;
 	background-image:url(../images/bg.gif);
@@ -75,6 +75,8 @@ body
    position:relative;
   
  }
+ td,tr { border-color:#ffffff }
+ 
 .title1{font-size:13pt;font-weight:bold;padding: 5px 0px 2px 0px;color:#000000; white-space:nowrap}
 .title2{background-color:#109a42;}
 .titline1{border-bottom: 2px solid #336799}
@@ -87,7 +89,7 @@ body
 {   height: 28px;
     background-color:#7baed9;
     color:#ffffff; 
-    font-family:宋体;   
+    font-family:微软雅黑;   
     font-size: 9pt;
  }
  /*欄位必填項*/
@@ -95,14 +97,14 @@ body
 {   height: 28px;
     background-color:#7baed9;
     color:blue; 
-    font-family:宋体;   
+    font-family:微软雅黑;   
     font-size: 9pt;
  }
 .Login
 {
 	background-color:#f0f1f6;
 	font-size: 10pt;
-	font-family: Arial;
+	font-family: 微软雅黑;
 }
 .subtable
 {
@@ -115,7 +117,7 @@ body
 .table
 {	
 	font-size: 9pt;
-	font-family: Arial;
+	font-family: 微软雅黑;
 }
 
 .LoginTable
@@ -124,24 +126,26 @@ body
 }
 .TextBox
 {
-	border: 1px Inset #c7ccdc;
-    font-size:9pt;
-	font-family:"新細明體",Pmingliu,sans-serif,Arial,Serif,NSimSun,Tahoma,Verdana,'Times New Roman';
+	border: 1px solid blue;
+	height:18px;
     }
-
+.TextRead
+{
+	border: 1px solid blue;
+	height:18px;
+	background-color:Gainsboro;	
+}
 .TextBoxLogon
 {
 	border-right:#c7ccdc 1px Inset;
 	border-top:#c7ccdc 1px Inset;
 	border-left:#c7ccdc 1px Inset;
 	border-bottom:#c7ccdc 1px Inset;
-	font-size:12pt;
-	font-family:Tahoma,Verdana,'Times New Roman';
 }
 .LabelLogon
 {	
 	font-size: 12pt;
-	font-family: Arial;
+	font-family: 微软雅黑;
 }
 .Button
 {
@@ -151,7 +155,7 @@ body
 	border-left:darkgray 1px solod;
 	border-bottom:darkgray 1px solid;
 	font-size:8pt;
-	font-family:Tahoma,Verdana,'Times New Roman';
+	font-family:微软雅黑;
 }
 .cssbtn /*表單中覆核按鈕 */
 {
@@ -175,7 +179,7 @@ body
 	cursor:hand;
 	color: #003399;
 	font-weight:bold;
-	font-family: Tahoma,Verdana,'Times New Roman';
+	font-family: 微软雅黑;
 }
 
 
@@ -238,10 +242,8 @@ body
 {
 	border-right:#c7ccdc 1px solid;
 	border-top:#c7ccdc 1px solid;
-	font-size:8pt;
 	border-left:#c7ccdc 1px solid;
 	border-bottom:#c7ccdc 1px solid;
-	font-family:Tahoma,Verdana,'Times New Roman';
 	width:70px;
 }
 
@@ -251,7 +253,7 @@ body
 	padding-left:5px;
 	font-weight:bold;
 	font-size:12pt;
-	font-family:Tahoma,Verdana,'Times New Roman';
+	font-family:微软雅黑;
 	width:100%;
 	color:Maroon;
 	background-color:#D3E5FA;
@@ -269,7 +271,7 @@ body
 	padding-right:10px;
 	font-weight:bold;
 	font-size:8pt;
-	font-family:Tahoma,Verdana,'Times New Roman';
+	font-family:微软雅黑;
 	width:100%;
 	color:White;
 	background-color:#336699;
@@ -277,7 +279,7 @@ body
 .FooterKc
 {
 	font-size:8pt;
-	font-family:Tahoma,Verdana,'Times New Roman';
+	font-family:微软雅黑;
 	width:100%;
 	color:black;
 	
@@ -289,7 +291,7 @@ body
 	font-size:9pt;
 	font-weight:bold;
 	color:Black;
-	font-family:Tahoma,Verdana,'Time New Roman';
+	font-family:微软雅黑;
 	background-color:#99cc99;
 	text-align:left;
 	vertical-align:bottom;	
@@ -354,7 +356,7 @@ body
 	border-left:#c7ccdc 1px solid;
 	width:140px;
 	border-bottom:#c7ccdc 1px solid;
-	font-family:Tahoma,Verdana,'Times New Roman';
+	font-family:微软雅黑;
 }
 .Search
 {
@@ -427,7 +429,7 @@ body
 }
 textarea
 {
-	font-family:"新細明體",Pmingliu,sans-serif,Arial,Serif,NSimSun,Tahoma,Verdana,'Times New Roman';
+	font-family:微软雅黑,Pmingliu,sans-serif,Arial,Serif,NSimSun,Tahoma,Verdana,'Times New Roman';
 	font-size: 9pt;	
 	color: #000;
 	background-color: #ffffff;
@@ -441,7 +443,7 @@ textarea
 .InputCss {  
     font-size: 9pt; 
     color: #003399;
-    font-family: Tahoma,Verdana,'Times New Roman';
+    font-family: 微软雅黑';
     font-style: normal; 
 	/*background-color: #CCCC99; */
     border-color: #93BEE2 #93BEE2 #93BEE2 #93BEE2 ;
@@ -482,7 +484,7 @@ border-style :solid;
 } 
 .but
 {
-    font-family: Arial,新細明體;
+    font-family: 微软雅黑;
     font-size: 9pt;
     border: 1pt solid #46647E;
     cursor: hand;
@@ -490,7 +492,7 @@ border-style :solid;
 }
 .butBlue
 {
-	font-family:Arial,新細明體;
+	font-family:微软雅黑;
 	font-size:9pt;color:blue;
 	border:1pt solid #46647E;
 	PADDING:3px 1px 1px 1px;
@@ -498,13 +500,7 @@ border-style :solid;
 	BACKGROUND: #398cdd;
 }
 
-.TextRead
-{
-	border: 1px Inset #c7ccdc;
-    font-size:9pt;
-	font-family: auto;
-	background-color:Gainsboro;	
-}
+
 .desktop {
 	background-color:#DBE2EE;
 }
@@ -537,7 +533,7 @@ border-style :solid;
   border-left: 1px solid #7f7f7f;
   border-top: 1px solid #7f7f7f;
   border-right: 1px solid #7f7f7f;
-  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-family: 微软雅黑;
  
 }
 .gvTheGrid thead td,

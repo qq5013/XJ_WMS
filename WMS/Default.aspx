@@ -80,17 +80,6 @@
                         }
                     }),
                     listeners: {
-                        //                        'itemclick': function (view, record, item,
-                        //                                        index, e) {
-                        //                            var id = record.get('id');
-                        //                            var text = record.get('text');
-                        //                            var leaf = record.get('leaf');
-                        //                            if (leaf) {
-                        //                                alert('id-' + id + ',text-' + text
-                        //                                                + ',leaf-' + leaf);
-                        //                            }
-                        //                        },
-
                         'itemclick': function (view, record, item,
                                         index, e) {
                             var id = record.get('id');
