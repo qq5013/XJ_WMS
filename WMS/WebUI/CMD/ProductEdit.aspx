@@ -56,7 +56,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
-        <table style="width: 100%; height: 20px;" class="OperationBar">
+        <table  class="OperationBar">
             <tr>
                 <td align="right">
                     <asp:Button ID="btnCancel" runat="server" Text="放弃" 
@@ -68,15 +68,15 @@
                 </td>
             </tr>
         </table>
-        <table id="Table1" class="maintable" cellspacing="0" cellpadding="0" width="100%" align="center" bordercolor="#ffffff"
-				border="1" runat="server">			
+        <table id="Table1" class="maintable"  width="100%" align="center" cellspacing="0" cellpadding="0" bordercolor="#ffffff" border="1"
+				 runat="server">			
 				<tr>
                     <td align="center" class="musttitle" style="width:12%;"  >
                             产品编码
                     </td>
                     <td  width="21%">
                             &nbsp;<asp:TextBox 
-                                ID="txtID" runat="server" BorderWidth="0" CssClass="TextBox" Width="90%" 
+                                ID="txtID" runat="server"  CssClass="TextBox" Width="90%" 
                                 MaxLength="20"  ></asp:TextBox>
                     </td>
                     <td align="center" class="musttitle" style="width:12%;"  >
@@ -84,7 +84,7 @@
                     </td>
                     <td width="21%">
                             &nbsp;<asp:TextBox 
-                                ID="txtProductName" runat="server" BorderWidth="0" CssClass="TextBox" Width="90%" 
+                                ID="txtProductName" runat="server"  CssClass="TextBox" Width="90%" 
                                 MaxLength="50" ></asp:TextBox> 
                           
 
@@ -109,7 +109,7 @@
                            车轴编号 
                     </td>
                     <td width="21%">
-                            &nbsp;<asp:TextBox ID="txtAxieNo" runat="server" BorderWidth="0"  Width="90%" 
+                            &nbsp;<asp:TextBox ID="txtAxieNo" runat="server"   Width="90%" 
                                 MaxLength="20" CssClass="TextBox" ></asp:TextBox> 
 
                     </td>
@@ -117,7 +117,7 @@
                         轮径</td>
                     <td width="21%">
                         &nbsp;<asp:TextBox ID="txtWheelDiameter" runat="server" 
-                                BorderWidth="0"  Width="90%" CssClass="TextBox" MaxLength="25" ></asp:TextBox> 
+                                  Width="90%" CssClass="TextBox" MaxLength="25" ></asp:TextBox> 
 
                     </td>
                 </tr>
@@ -127,7 +127,7 @@
                     </td>
                     <td  width="21%">
                         &nbsp;<asp:TextBox ID="txtCCZ_Diameter" runat="server" 
-                                BorderWidth="0"  Width="90%" CssClass="TextBox"
+                                  Width="90%" CssClass="TextBox"
                                 MaxLength="25" ></asp:TextBox> 
 
                     </td>
@@ -136,7 +136,7 @@
                     </td>
                     <td width="21%">
                             &nbsp;<asp:TextBox ID="txtFCCZ_Diameter" runat="server" 
-                                BorderWidth="0"  Width="90%" CssClass="TextBox"
+                                  Width="90%" CssClass="TextBox"
                                 MaxLength="25" ></asp:TextBox> 
 
                     </td>
@@ -144,7 +144,7 @@
                         齿侧端轴直径</td>
                     <td width="21%">
                         &nbsp;<asp:TextBox ID="txtCCD_Diameter" runat="server" 
-                                BorderWidth="0"  Width="90%" CssClass="TextBox"
+                                  Width="90%" CssClass="TextBox"
                                 MaxLength="25" ></asp:TextBox> 
 
                     </td>
@@ -155,7 +155,7 @@
                     </td>
                     <td  width="21%">
                         &nbsp;<asp:TextBox ID="txtFCCD_Diameter" runat="server" 
-                                BorderWidth="0"  Width="90%" CssClass="TextBox"
+                                  Width="90%" CssClass="TextBox"
                                 MaxLength="25" ></asp:TextBox> 
 
                     </td>
@@ -163,7 +163,7 @@
                            齿侧选配抱轴瓦尺寸</td>
                     <td width="21%">
                             &nbsp;<asp:TextBox ID="txtCCXPBZW_Size" runat="server" 
-                                BorderWidth="0"  Width="90%" CssClass="TextBox"
+                                  Width="90%" CssClass="TextBox"
                                 MaxLength="25" ></asp:TextBox> 
 
                     </td>
@@ -171,7 +171,7 @@
                         非齿侧选配抱轴瓦尺寸</td>
                     <td width="21%">
                         &nbsp;<asp:TextBox ID="txtFCCXPBZW_Size" runat="server" 
-                                BorderWidth="0"  Width="90%" CssClass="TextBox"
+                                  Width="90%" CssClass="TextBox"
                                 MaxLength="25" ></asp:TextBox> 
 
                     </td>
@@ -181,7 +181,7 @@
                             齿轮编号</td>
                     <td  width="21%">
                         &nbsp;<asp:TextBox ID="txtGearNo" runat="server" 
-                                BorderWidth="0"  Width="90%" CssClass="TextBox"
+                                  Width="90%" CssClass="TextBox"
                                 MaxLength="20" ></asp:TextBox> 
 
                     </td>
@@ -190,7 +190,7 @@
                     </td>
                     <td width="21%">
                             &nbsp;<asp:TextBox ID="txtCCLX_Flag" runat="server" 
-                                BorderWidth="0"  Width="90%" CssClass="TextBox"
+                                  Width="90%" CssClass="TextBox"
                                 MaxLength="25" ></asp:TextBox> 
 
                     </td>
@@ -198,7 +198,7 @@
                         非齿侧轮芯标记</td>
                     <td width="21%">
                         &nbsp;<asp:TextBox ID="txtFCCLX_Flag" runat="server" 
-                                BorderWidth="0"  Width="90%" CssClass="TextBox"
+                                  Width="90%" CssClass="TextBox"
                                 MaxLength="25" ></asp:TextBox> 
 
                     </td>
@@ -209,7 +209,7 @@
                     </td>
                     <td  width="21%">
                         &nbsp;<asp:TextBox ID="txtCCLX_Year" runat="server" 
-                                BorderWidth="0"  Width="90%" CssClass="TextBox" 
+                                  Width="90%" CssClass="TextBox" 
                                 MaxLength="25" ></asp:TextBox> 
 
                     </td>
@@ -218,7 +218,7 @@
                     </td>
                     <td width="21%">
                             &nbsp;<asp:TextBox ID="txtFCCLX_Year" runat="server" 
-                                BorderWidth="0"  Width="90%" CssClass="TextBox"
+                                  Width="90%" CssClass="TextBox"
                                 MaxLength="25" ></asp:TextBox> 
 
                     </td>
@@ -246,7 +246,7 @@
                     </td>
                     <td width="21%">
                             &nbsp;<asp:TextBox ID="txtCCLG_Flag" runat="server" 
-                                BorderWidth="0"  Width="90%" CssClass="TextBox"
+                                  Width="90%" CssClass="TextBox"
                                 MaxLength="25" ></asp:TextBox> 
 
                     </td>
@@ -254,7 +254,7 @@
                         非齿侧轮箍标记</td>
                     <td width="21%">
                         &nbsp;<asp:TextBox ID="txtFCCLG_Flag" runat="server" 
-                                BorderWidth="0"  Width="90%" CssClass="TextBox"
+                                  Width="90%" CssClass="TextBox"
                                 MaxLength="25" ></asp:TextBox> 
 
                     </td>
@@ -264,7 +264,7 @@
                             &nbsp;轮对修程</td>
                     <td  width="21%">
                         &nbsp;<asp:TextBox ID="txtLDXC" runat="server" 
-                                BorderWidth="0"  Width="90%" CssClass="TextBox"
+                                  Width="90%" CssClass="TextBox"
                                 MaxLength="50" ></asp:TextBox> 
 
                     </td>
@@ -296,14 +296,14 @@
                    <td align="center"  class="smalltitle" style="width:12%;">
                        入库时间</td>
                   <td width="21%">
-                      &nbsp;<asp:TextBox ID="txtInstockDate" runat="server" BorderWidth="0" 
+                      &nbsp;<asp:TextBox ID="txtInstockDate" runat="server"  
                           CssClass="TextRead" Width="90%"  ></asp:TextBox> 
                   </td>
                   <td align="center"  class="smalltitle" style="width:12%;">
                         建单人员
                   </td> 
                   <td>
-                    &nbsp;<asp:TextBox ID="txtCreator" runat="server" BorderWidth="0" 
+                    &nbsp;<asp:TextBox ID="txtCreator" runat="server"  
                           CssClass="TextRead" Width="90%"  ></asp:TextBox> 
                   </td>
                 </tr>
@@ -312,21 +312,21 @@
                         建单日期
                   </td> 
                   <td>
-                    &nbsp;<asp:TextBox ID="txtCreatDate" runat="server" BorderWidth="0" 
+                    &nbsp;<asp:TextBox ID="txtCreatDate" runat="server"  
                           CssClass="TextRead" Width="90%"  ></asp:TextBox> 
                   </td>
                   <td align="center"  class="smalltitle" style="width:12%;">
                         修改人员
                   </td> 
                   <td>
-                     &nbsp;<asp:TextBox ID="txtUpdater" runat="server" BorderWidth="0" 
+                     &nbsp;<asp:TextBox ID="txtUpdater" runat="server"  
                           CssClass="TextRead" Width="90%"  ></asp:TextBox> 
                   </td>
                   <td align="center"  class="smalltitle" style="width:12%;">
                         修改日期
                   </td> 
                   <td>
-                    &nbsp;<asp:TextBox ID="txtUpdateDate" runat="server" BorderWidth="0" 
+                    &nbsp;<asp:TextBox ID="txtUpdateDate" runat="server"  
                           CssClass="TextRead" Width="90%"  ></asp:TextBox> 
                   </td>
                   

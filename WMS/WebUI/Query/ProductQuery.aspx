@@ -153,7 +153,7 @@
         </tr>
         <tr runat ="server" id = "rptform" valign="top">
             <td align="left" class="style1"  >
-                <table class="maintable" cellspacing="0" cellpadding="0" width="100%" align="center" bordercolor="#ffffff" border="1" >
+                <table class="maintable"  width="100%" align="center"   >
                     <tr>
                         <td class="smalltitle" align="right" style="height: 24px; width: 5%;">
                             日期区间

@@ -11,7 +11,7 @@
     <table width="600" border="0" align="center" cellpadding="5" cellspacing="0">
 					<tr>
 						<td  class="table_bgcolor">
-							<table width="100%" border="1" cellpadding="5" cellspacing="0" 
+							<table width="100%"  cellpadding="5" cellspacing="0" 
 							
 							class="table_bordercolor"
 							
@@ -21,7 +21,7 @@
 								</tr>
 								<tr>
 									<td height="22">
-										<table cellSpacing="0" cellPadding="0" width="100%" border="0">
+										<table  width="100%">
 											<tr>
 												<td height="22">
 													<asp:Label id="lblMsg" runat="server" Width="100%"></asp:Label>

@@ -119,7 +119,7 @@
             <asp:Panel ID="pnlList" runat="server" Height="480px" Width="100%">
                 <!--工具栏-->
                  <asp:Panel ID="pnlListToolbar" runat="server" Height="30px" Width="100%">
-                    <table style="width: 100%; height: 30px;" class="maintable">
+                    <table  class="OperationBar">
                         <tr>
                             <td style="width:40%;">
                                 <asp:DropDownList ID="ddl_Field" runat="server">
@@ -196,7 +196,7 @@
                         </td>
                         <td>
                             <asp:TextBox ID="txtUserName" runat="server" CssClass="TextBox" Width="140px"></asp:TextBox>
-                            <asp:TextBox ID="txtUserID" runat="server" Width="0" Height="0" BorderWidth="0"></asp:TextBox>
+                            <asp:TextBox ID="txtUserID" runat="server" Width="0" Height="0" ></asp:TextBox>
                         </td>
                     </tr>
                     <tr>

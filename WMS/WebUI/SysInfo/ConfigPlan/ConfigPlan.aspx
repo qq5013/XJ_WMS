@@ -12,7 +12,7 @@
     <form id="form1" runat="server">
     <table  style="width:100%">
       <tr>
-        <td class="OperationBar">
+        <td class="maintable">
             &nbsp;
             <asp:Button ID="btnSave" runat="server" CssClass="ButtonSave" Text="保存" OnClick="btnSave_Click" />
             <asp:Button ID="btnExit" runat="server" CssClass="ButtonExit" Text="退出" OnClientClick="Exit();" />

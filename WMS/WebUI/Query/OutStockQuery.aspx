@@ -142,7 +142,7 @@
         </tr>
         <tr runat ="server" id = "rptform" valign="top">
             <td align="left"  style="width:100%; height:70px"  >
-                <table style="width: 100%; height: 20px;" class="maintable"  cellspacing="0" cellpadding="0" width="100%" align="center" bordercolor="#ffffff"	border="1">
+                <table style="width: 100%; height: 20px;" class="maintable"   width="100%" align="center" 	>
                    <tr>
                         <td  class="smalltitle" align="right" style="height: 24px; width:70px">
                            产品型号 <asp:textbox id="txtProductID"   runat="server" Width="0px" CssClass="TextBox" heigth="0px" style="display:none" ></asp:textbox>

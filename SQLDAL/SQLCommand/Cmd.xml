@@ -206,9 +206,9 @@
       from CMD_Product product
       left join CMD_ProductType ProductType on product.ProductTypeCode=ProductType.ProductTypeCode
       left join CMD_TrainType TrainType on product.TrainTypeCode=TrainType.TypeCode
-      left join CMD_Factory CCLXFactory on product.CCLX_Factory=CCLXFactory.FactoryID
-      left join CMD_Factory FCCLXFactory on product.FCCLX_Factory=FCCLXFactory.FactoryID
-      left join CMD_Factory CXFactory on product.CX_Factory=CXFactory.FactoryID
+      left join CMD_Factory CCLXFactory on product.CCLX_FactoryID=CCLXFactory.FactoryID
+      left join CMD_Factory FCCLXFactory on product.FCCLX_FactoryID=FCCLXFactory.FactoryID
+      left join CMD_Factory CXFactory on product.CX_FactoryID=CXFactory.FactoryID
       left join CMD_Area Area on product.AreaCode=Area.AreaCode
       where {0}
     </CommandString>

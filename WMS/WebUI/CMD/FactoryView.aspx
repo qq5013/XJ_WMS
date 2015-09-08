@@ -22,7 +22,7 @@
         </asp:UpdateProgress>  
         <asp:UpdatePanel ID="updatePanel1" runat="server" UpdateMode="Conditional">                
             <ContentTemplate>
-                 <table style="width: 100%; height: 20px;" class="OperationBar">
+                 <table  class="OperationBar">
                     <tr>
                         <td align="right" style="width:60%">
                             <asp:Button ID="btnFirst" runat="server" Text="首笔" CssClass="ButtonFirst" 
@@ -50,22 +50,22 @@
                         </td>
                     </tr>
                  </table>
-                 <table id="Table1" class="maintable" cellspacing="0" cellpadding="0" width="100%" align="center" bordercolor="#ffffff"
-				border="1" runat="server">			
+                 <table id="Table1" class="maintable"  width="100%" align="center" cellspacing="0" cellpadding="0" bordercolor="#ffffff" border="1"
+				 runat="server">			
 					<tr>
                         <td align="center" class="musttitle" style="width:8%;"  >
                              厂家编码
                         </td>
                         <td  style="width:30%;"  >
                              &nbsp;<asp:TextBox ID="txtID" runat="server"   
-                                 BorderWidth="0" CssClass="TextRead" Width="42%" MaxLength="10" ></asp:TextBox>
+                                  CssClass="TextRead" Width="42%" MaxLength="10" ></asp:TextBox>
                         </td>
                          <td  align="center" class="musttitle" style="width:8%;" >
                              厂家名称
                         </td>
                         <td style="width:30%;">
                          &nbsp;<asp:TextBox 
-                                ID="txtFactoryName" runat="server"  BorderWidth="0"
+                                ID="txtFactoryName" runat="server"  
                                 CssClass="TextRead" Width="43%" MaxLength="50"></asp:TextBox>
                         </td>
                     </tr>
@@ -86,7 +86,7 @@
                         </td>
                         <td style="width:30%;">
                          &nbsp;<asp:TextBox ID="txtLinkPerson" runat="server"   
-                                 BorderWidth="0" CssClass="TextRead" Width="43%" ></asp:TextBox>
+                                  CssClass="TextRead" Width="43%" ></asp:TextBox>
                         </td>
                     </tr>
                     
@@ -96,7 +96,7 @@
                         </td>
                         <td style=" width:30%">
                            &nbsp;<asp:TextBox 
-                                ID="txtLinkPhone" runat="server"  BorderWidth="0"
+                                ID="txtLinkPhone" runat="server"  
                                 CssClass="TextRead" Width="42%"></asp:TextBox>
                         </td>
                         <td  align="center"  style=" width: 8%;" class="smalltitle"  >
@@ -104,7 +104,7 @@
                         </td>
                         <td  style="width:30%;">
                              &nbsp;<asp:TextBox ID="txtFax" runat="server"   
-                                 BorderWidth="0" CssClass="TextRead" Width="43%"></asp:TextBox> 
+                                  CssClass="TextRead" Width="43%"></asp:TextBox> 
                         </td>
                          
                     </tr>
@@ -113,7 +113,7 @@
                              地址
                         </td>
                         <td colspan="3">
-                            &nbsp;<asp:TextBox ID="txtAddress" runat="server"  BorderWidth="0" 
+                            &nbsp;<asp:TextBox ID="txtAddress" runat="server"   
                                 CssClass="TextRead" Width="75%" ></asp:TextBox>
                         </td>
                     </tr>
@@ -131,14 +131,14 @@
                         建单人员
                   </td> 
                   <td style="width:30%;">
-                    &nbsp;<asp:TextBox ID="txtCreator" runat="server" BorderWidth="0" 
+                    &nbsp;<asp:TextBox ID="txtCreator" runat="server"  
                           CssClass="TextRead" Width="42%"  ></asp:TextBox> 
                   </td>
                   <td align="center" class="smalltitle" style="width:8%;">
                         建单日期
                   </td> 
                   <td style="width:30%;">
-                    &nbsp;<asp:TextBox ID="txtCreatDate" runat="server" BorderWidth="0" 
+                    &nbsp;<asp:TextBox ID="txtCreatDate" runat="server"  
                           CssClass="TextRead" Width="43%"  ></asp:TextBox> 
                   </td>
                 </tr>
@@ -147,14 +147,14 @@
                         修改人员
                   </td> 
                   <td style="width:30%;">
-                     &nbsp;<asp:TextBox ID="txtUpdater" runat="server" BorderWidth="0" 
+                     &nbsp;<asp:TextBox ID="txtUpdater" runat="server"  
                           CssClass="TextRead" Width="42%" Height="16px"  ></asp:TextBox> 
                   </td>
                   <td align="center"  class="smalltitle" style="width:8%;">
                         修改日期
                   </td> 
                   <td style="width:30%;">
-                    &nbsp;<asp:TextBox ID="txtUpdateDate" runat="server" BorderWidth="0" 
+                    &nbsp;<asp:TextBox ID="txtUpdateDate" runat="server"  
                           CssClass="TextRead" Width="43%"  ></asp:TextBox> 
                   </td>
                 </tr>				
