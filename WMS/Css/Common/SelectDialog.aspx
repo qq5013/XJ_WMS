@@ -65,7 +65,7 @@
 </head>
 <body style="margin:0 0 0 0; background-color:#f8f8f8; overflow:hidden;" onload="return window_onload()" onunload="return window_onunload()">
     <form id="form1" runat="server">
-      <table  class="OperationBar"><!--search-->
+      <table style="width: 100%; height: 20px;"  class="OperationBar"><!--search-->
          <tr><td style="vertical-align:top;"></td>
            <td style="vertical-align:top;"><asp:DropDownList ID="ddl_Field" runat="server">
               </asp:DropDownList>

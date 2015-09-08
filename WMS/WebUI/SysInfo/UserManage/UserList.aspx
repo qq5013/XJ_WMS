@@ -119,7 +119,7 @@
             <asp:Panel ID="pnlList" runat="server" Height="480px" Width="100%">
                 <!--工具栏-->
                  <asp:Panel ID="pnlListToolbar" runat="server" Height="30px" Width="100%">
-                    <table  class="OperationBar">
+                    <table  style="width: 100%; height: 20px;" class="OperationBar">
                         <tr>
                             <td style="width:40%;">
                                 <asp:DropDownList ID="ddl_Field" runat="server">
