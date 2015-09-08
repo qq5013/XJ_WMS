@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TrainTypes.aspx.cs" Inherits="WMS.WebUI.CMD.TrainTypes" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="InStockTypes.aspx.cs" Inherits="WMS.WebUI.InStock.InStockTypes" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -41,8 +41,7 @@
                                 <asp:Literal ID="Literal1" Text="查询栏位" runat="server"  ></asp:Literal>
                              </td>
 						    <td  width="15%" height="20">&nbsp;<asp:dropdownlist id="ddlField" runat="server" Width="85%" >
-                                    <asp:ListItem Selected="True" Value="TypeCode">车型编码</asp:ListItem>
-                                    <asp:ListItem  Value="TypeName">车型名称</asp:ListItem>
+                                    <asp:ListItem Selected="True" Value="BillTypeName">类型名称</asp:ListItem>
                                     <asp:ListItem Value="Memo">备注</asp:ListItem>
                                  </asp:dropdownlist>
                             </td>
@@ -90,15 +89,15 @@
                       <HeaderStyle Width="60px"></HeaderStyle>
                      <ItemStyle Width="60px" HorizontalAlign="Center"></ItemStyle>
                    </asp:TemplateField>
-                  <asp:TemplateField HeaderText="车型编码" SortExpression="TypeCode">
+                  <asp:TemplateField HeaderText="类型编号" SortExpression="BillTypeCode">
                         <ItemTemplate>
-                            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# FormID+"View.aspx?SubModuleCode=" + SubModuleCode+"&FormID=" + FormID +"&SqlCmd="+SqlCmd+ "&ID="+DataBinder.Eval(Container.DataItem, "TypeCode") %>'
-                                Text='<%# DataBinder.Eval(Container.DataItem, "TypeCode")%>'></asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# FormID+"View.aspx?SubModuleCode=" + SubModuleCode+"&FormID=" + FormID +"&SqlCmd="+SqlCmd+ "&ID="+DataBinder.Eval(Container.DataItem, "BillTypeCode") %>'
+                                Text='<%# DataBinder.Eval(Container.DataItem, "BillTypeCode")%>'></asp:HyperLink>
                         </ItemTemplate>
                         <ItemStyle Width="12%" Wrap="False" />
                         <HeaderStyle Width="12%" Wrap="False" />
                     </asp:TemplateField>
-                    <asp:BoundField DataField="TypeName" HeaderText="车型名称" SortExpression="TypeName">
+                    <asp:BoundField DataField="BillTypeName" HeaderText="类型名称" SortExpression="BillTypeName">
                         <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                         <HeaderStyle Wrap="False" />
                     </asp:BoundField>

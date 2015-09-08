@@ -171,6 +171,32 @@
       Update CMD_COLOR Set COLOR_CODE=@COLOR_CODE,COLOR_NAME=@COLOR_NAME,PRODUCT_CODE=@PRODUCT_CODE,MEMO=@MEMO,PRODUCT_Model=@PRODUCT_Model,Updater=@Updater, UpdateDate=getdate() where ID={0}
     </CommandString>
   </Command>
+
+  <!--单据类型-->
+  <Command ID="SelectBillType">
+    <CommandString>
+      Select * from CMD_BillType where {0} order by BillTypeCode
+    </CommandString>
+  </Command>
+  <Command ID="DeleteBillType">
+    <CommandString>
+      delete from CMD_BillType WHERE BillTypeCode in({0})
+    </CommandString>
+  </Command>
+  <Command ID="InsertBillType">
+    <CommandString>
+      INSERT INTO CMD_BillType(Flag,BillTypeCode,BillTypeName,TaskType,TaskLevel,Memo, Creator, CreateDate, Updater, UpdateDate)
+      values(@Flag,@BillTypeCode,@BillTypeName,@TaskType,@TaskLevel,@Memo, @Creator, getdate(), @Updater, getdate())
+    </CommandString>
+  </Command>
+  <Command ID="UpdateInBillType">
+    <CommandString>
+      Update CMD_BillType Set BillTypeName=@BillTypeName,Memo=@Memo,Updater=@Updater, UpdateDate=getdate() where BillTypeCode=@BillTypeCode
+    </CommandString>
+  </Command>
+  
+  
+  
   
   <!--产品信息-->
   <Command ID="SelectProduct">
@@ -189,29 +215,30 @@
   </Command>
   <Command ID="DeleteProduct">
     <CommandString>
-      delete from CMD_PRODUCT WHERE PRODUCT_CODE in({0})
+      delete from CMD_PRODUCT WHERE ProductCode in({0})
     </CommandString>
   </Command>
   <Command ID="InsertProduct">
     <CommandString>
-      INSERT INTO CMD_PRODUCT(PRODUCT_CODE,PRODUCT_PartsName,PRODUCT_Class,PRODUCT_NAME,PRODUCT_MODEL,PRODUCT_FMODEL,IS_MIX,PALLET_QTY,PACK_QTY,IsBarCode,MEMO,ProductVolume,IsInStock,Creator, CreateDate, Updater, UpdateDate)
-      values(@PRODUCT_CODE,@PRODUCT_PartsName,@PRODUCT_Class,@PRODUCT_NAME,@PRODUCT_MODEL,@PRODUCT_FMODEL,@IS_MIX,@PALLET_QTY,@PACK_QTY,@IsBarCode,@MEMO,@ProductVolume,@IsInStock, @Creator, getdate(), @Updater, getdate())
+      INSERT INTO CMD_PRODUCT(ProductCode, ProductName, ProductTypeCode, TrainTypeCode, AxieNo, WheelDiameter, CCZ_Diameter, FCCZ_Diameter, CCD_Diameter,
+      FCCD_Diameter, CCXPBZW_Size, FCCXPBZW_Size, GearNo, CCLX_Flag, FCCLX_Flag, CCLX_Year, FCCLX_Year, CCLX_Factory, FCCLX_Factory, CX_Factory, CCLG_Flag,
+      FCCLG_Flag, Memo, WarehouseCode, AreaCode, Creator, CreateDate, Updater, UpdateDate, LDXC, CX_DateTime)
+      values(@ProductCode,@ProductName,@ProductTypeCode,@TrainTypeCode,@AxieNo,@WheelDiameter,@CCZ_Diameter,@FCCZ_Diameter,@CCD_Diameter,@FCCD_Diameter,
+      @CCXPBZW_Size,@FCCXPBZW_Size,@GearNo,@CCLX_Flag,@FCCLX_Flag,@CCLX_Year,@FCCLX_Year,@CCLX_Factory,@FCCLX_Factory,@CX_Factory,@CCLG_Flag,
+      @FCCLG_Flag,@Memo,@WarehouseCode,@AreaCode,@Creator,getDate(),@Updater, getDate(),@LDXC, @CX_DateTime)
     </CommandString>
   </Command>
   <Command ID="UpdateProduct">
     <CommandString>
-      Update CMD_PRODUCT Set PRODUCT_PartsName=@PRODUCT_PartsName,PRODUCT_Class=@PRODUCT_Class,PRODUCT_NAME=@PRODUCT_NAME,PRODUCT_FMODEL=@PRODUCT_FMODEL,
-      PRODUCT_MODEL=@PRODUCT_MODEL,IS_MIX=@IS_MIX,IsInStock=@IsInStock,PALLET_QTY=@PALLET_QTY,PACK_QTY=@PACK_QTY,IsBarCode=@IsBarCode,MEMO=@MEMO,ProductVolume=@ProductVolume,Updater=@Updater, UpdateDate=getdate() where PRODUCT_CODE='{0}'
+      Update CMD_PRODUCT Set ProductName=@ProductName,ProductTypeCode=@ProductTypeCode,TrainTypeCode=@TrainTypeCode,AxieNo=@AxieNo,WheelDiameter=@WheelDiameter,
+      CCZ_Diameter=@CCZ_Diameter,FCCZ_Diameter=@FCCZ_Diameter,CCD_Diameter=@CCD_Diameter,FCCD_Diameter=@FCCD_Diameter,CCXPBZW_Size=@CCXPBZW_Size,FCCXPBZW_Size=@FCCXPBZW_Size,
+      GearNo=@GearNo,CCLX_Flag=@CCLX_Flag,FCCLX_Flag=@FCCLX_Flag,CCLX_Year=@CCLX_Year,FCCLX_Year=@FCCLX_Year,CCLX_Factory=@CCLX_Factory,FCCLX_Factory=@FCCLX_Factory,CX_Factory=@CX_Factory,
+      CCLG_Flag=@CCLG_Flag,FCCLG_Flag=@FCCLG_Flag,Memo=@Memo,WarehouseCode=@WarehouseCode,AreaCode=@AreaCode,Updater=@Updater,UpdateDate=getdate(),LDXC=@LDXC,CX_DateTime=@CX_DateTime
+      where ProductCode=@ProductCode
     </CommandString>
   </Command>
 
-   
-  <Command ID="SelectProductClass">
-    <CommandString>
-      select Distinct PRODUCT_Class from CMD_PRODUCT
-    </CommandString>
-  </Command>
-
+  
   
   <!--生产厂家-->
   <Command ID="SelectFactory">

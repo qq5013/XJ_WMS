@@ -6,13 +6,15 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using IDAL;
-namespace WMS.WebUI.CMD
+
+
+namespace WMS.WebUI.InStock
 {
-    public partial class FactoryView :App_Code.BasePage
+    public partial class InStockTypeView :App_Code.BasePage
     {
         private string strID;
-        private string TableName = "CMD_Factory";
-        private string PrimaryKey = "FactoryID";
+        private string TableName = "CMD_BillType";
+        private string PrimaryKey = "BillTypeCode";
         BLL.BLLBase bll = new BLL.BLLBase();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -20,7 +22,7 @@ namespace WMS.WebUI.CMD
             if (!IsPostBack)
             {
                 BindDropDownList();
-                DataTable dt = bll.FillDataTable("Cmd.SelectFactory", new DataParameter[] { new DataParameter("{0}", string.Format("FactoryID='{0}'", strID)) });
+                DataTable dt = bll.FillDataTable("Cmd.SelectBillType", new DataParameter[] { new DataParameter("{0}", string.Format("BillTypeCode='{0}'", strID)) });
                 BindData(dt);
                 writeJsvar(FormID, SqlCmd, strID);
             }
@@ -29,20 +31,17 @@ namespace WMS.WebUI.CMD
         #region 绑定方法
         private void BindDropDownList()
         {
-            
+             
+
         }
 
         private void BindData(DataTable dt)
         {
             if (dt.Rows.Count > 0)
             {
-                this.txtID.Text = dt.Rows[0]["FactoryID"].ToString();
-                this.txtFactoryName.Text = dt.Rows[0]["FactoryName"].ToString();
-                this.ddlFlag.SelectedValue = dt.Rows[0]["Flag"].ToString();
-                this.txtLinkPerson.Text = dt.Rows[0]["LinkPerson"].ToString();
-                this.txtLinkPhone.Text = dt.Rows[0]["LinkPhone"].ToString();
-                this.txtFax.Text = dt.Rows[0]["Fax"].ToString();
-                this.txtAddress.Text = dt.Rows[0]["Address"].ToString();
+                this.txtID.Text = dt.Rows[0]["BillTypeCode"].ToString();
+                this.txtBillTypeName.Text = dt.Rows[0]["BillTypeName"].ToString();
+
                 this.txtMemo.Text = dt.Rows[0]["Memo"].ToString();
                 this.txtCreator.Text = dt.Rows[0]["Creator"].ToString();
                 this.txtCreatDate.Text = ToYMD(dt.Rows[0]["CreateDate"]);
@@ -55,12 +54,7 @@ namespace WMS.WebUI.CMD
         private void BindDataNull()
         {
             this.txtID.Text = "";
-            this.txtFactoryName.Text = "";
-            this.ddlFlag.SelectedValue = "";
-            this.txtLinkPerson.Text = "";
-            this.txtLinkPhone.Text = "";
-            this.txtFax.Text = "";
-            this.txtAddress.Text = "";
+            this.txtBillTypeName.Text = "";
             this.txtMemo.Text = "";
             this.txtCreator.Text = "";
             this.txtCreatDate.Text = "";
@@ -72,14 +66,14 @@ namespace WMS.WebUI.CMD
         protected void btnDelete_Click(object sender, EventArgs e)
         {
             string strID = this.txtID.Text;
-            int Count = bll.GetRowCount("VUsed_CMD_Factory", string.Format("FactoryID='{0}'", this.txtID.Text.Trim()));
+            int Count = bll.GetRowCount("VUsed_CMD_BillType", string.Format("BillTypeCode='{0}'", this.txtID.Text.Trim()));
             if (Count > 0)
             {
-                WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel1, "该厂家编码还被其它单据使用，请调整后再删除！");
+                WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel, "该类型编码还被其它单据使用，请调整后再删除！");
                 return;
             }
-            bll.ExecNonQuery("Cmd.DeleteFactory", new DataParameter[] { new DataParameter("{0}", "'" + strID + "'") });
-            AddOperateLog("生产厂家", "删除单号：" + strID);
+            bll.ExecNonQuery("Cmd.DeleteBillType", new DataParameter[] { new DataParameter("{0}", "'" + strID + "'") });
+            AddOperateLog("入库类型", "删除单号：" + strID);
 
             btnNext_Click(sender, e);
             if (this.txtID.Text == strID)
@@ -96,19 +90,19 @@ namespace WMS.WebUI.CMD
         #region 上下笔事件
         protected void btnFirst_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("F", TableName, "1=1", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("F", TableName, "Flag=1", PrimaryKey, this.txtID.Text));
         }
         protected void btnPre_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("P", TableName, "1=1", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("P", TableName, "Flag=1", PrimaryKey, this.txtID.Text));
         }
         protected void btnNext_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("N", TableName, "1=1", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("N", TableName, "Flag=1", PrimaryKey, this.txtID.Text));
         }
         protected void btnLast_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("L", TableName, "1=1", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("L", TableName, "Flag=1", PrimaryKey, this.txtID.Text));
         }
         #endregion
         

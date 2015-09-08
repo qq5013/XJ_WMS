@@ -6,206 +6,26 @@
 <head id="Head1" runat="server">
     <title>用户信息</title>
 
-    <script type="text/javascript" src="../../../JScript/Calendar.js"></script>
-
+    <script type="text/javascript" src="../../../JQuery/jquery-2.1.3.min.js"></script>
     <script type="text/javascript" src="../../../JScript/Check.js?t=00"></script>
-
-    <link href="../../../css/css.css?t=98" rel="Stylesheet" type="text/css" />
-    <link href="../../../css/op.css" rel="Stylesheet" type="text/css" />
     <script type="text/javascript" src="../../../JScript/Common.js"></script>
-    <script type="text/javascript" src='<%=ResolveUrl("~/JQuery/jquery-1.8.3.min.js") %>'></script>
+    <link href="../../../css/main.css" rel="Stylesheet" type="text/css" />
+    
+    <link href="../../../css/op.css" rel="Stylesheet" type="text/css" />
+  
 
-    <style type="text/css">
-        .even
-        {
-            background: white;
-        }
-        /* 偶数行样式*/.odd
-        {
-            background: AliceBlue;
-        }
-        /* 奇数行样式*/.over
-        {
-            background: #FFFFEE;
-        }
-        .selected
-        {
-            background: #99ffff;
-        }
-    </style>
+    
 
     <script type="text/javascript">
-
-        //$(document).ready(function(){
-        //    // 隔行换色 
-        //    alert();
-        //	$("#gvMain tr:odd").addClass('odd');
-        //	$("#gvMain tr:even:gt(0)").addClass('even');
-        //	
-        //	$("#gvMain tr:gt(0)").mouseover(function(){
-        //		$(this).addClass("over");
-        //	}).mouseout(function(){
-        //		$(this).removeClass("over");
-        //	})
-        //	
-        //	$('#gvMain tr:gt(0)').click(function() {
-        //		//判断当前是否选中
-        //		var hasSelected=$(this).hasClass('selected');
-        //		//如果选中，则移出selected类，否则就加上selected类
-        //		$(this)[hasSelected?"removeClass":"addClass"]('selected')
-        //			//查找内部的checkbox,设置对应的属性。
-        //			.find(':checkbox').attr('checked',!hasSelected);
-        //	});
-        //	
-        //	$('#gvMain tr:lt(1) input').click(function(){
-        // 		 var hasChecked=$(this).attr("checked");
-        // 		 if(hasChecked)
-        // 		 {
-        //		    $('#gvMain tr:gt(0):has(:checked)').addClass('selected');
-        //		 }
-        //		 else
-        //		 {
-        //        	 $('#gvMain tr:gt(0)').removeClass('selected');
-        //         }
-
-
-        //	})
-        //})
-</script>
-
-</head>
-<body>
-    <form id="form1" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server">
-    </asp:ScriptManager>
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server" Visible="true">
-        <ContentTemplate>
-            <!--数据显示-->
-            <asp:Panel ID="pnlList" runat="server" Height="480px" Width="100%">
-                <!--工具栏-->
-                <asp:Panel ID="pnlListToolbar" runat="server" Height="30px" Style="position: relative"
-                    Width="100%">
-                    <table style="width: 100%; height: 20px;" class="OperationBar">
-                        <tr>
-                            <td>
-                                <asp:Button ID="btnQuery" runat="server" Text="查询" OnClick="btnQuery_Click" CssClass="ButtonQuery" />
-                                <asp:Button ID="btnAdd" runat="server" Text="新增" CssClass="ButtonCreate" OnClick="btnCreate_Click"
-                                    Enabled="False" />
-                                <asp:Button ID="btnDelete" runat="server" Text="删除" CssClass="ButtonDel" OnClick="btnDelete_Click"
-                                    OnClientClick="return DelConfirm('btnDelete')" Enabled="False" />
-                                <asp:Button ID="btnExit" runat="server" Text="退出" OnClientClick="Exit();" CssClass="ButtonExit" />
-                            </td>
-                        </tr>
-                    </table>
-                    <table style="width: 100%;" cellpadding="0" cellspacing="1">
-                        <tr>
-                            <td style="height: 22px">
-                                <asp:DropDownList ID="ddl_Field" runat="server">
-                                    <asp:ListItem Selected="True" Value="UserName">用户帐号</asp:ListItem>
-                                    <asp:ListItem Value="EmployeeName">用户姓名</asp:ListItem>
-                                    <asp:ListItem Value="Memo">备注</asp:ListItem>
-                                </asp:DropDownList>
-                                <asp:TextBox ID="txtKeyWords" runat="server" CssClass="TextBox"></asp:TextBox><asp:RadioButton
-                                    GroupName="order" ID="rbASC" runat="server" Text="升" Checked="True" />
-                                <asp:RadioButton GroupName="order" ID="rbDESC" runat="server" Text="降" />
-                            </td>
-                        </tr>
-                    </table>
-                </asp:Panel>
-                <!--数据-->
-                <asp:Panel ID="pnlMain" runat="server" Height="480px" Style="position: relative;
-                    overflow-x: hidden; overflow-y: auto;" Width="100%">
-                    <asp:GridView ID="gvMain" runat="server" Style="position: relative; table-layout: fixed;
-                        width: 100%;" OnRowEditing="gvMain_RowEditing" OnRowDataBound="gvMain_RowDataBound"
-                        CssClass="GridStyle" CellPadding="3" CellSpacing="1" BorderWidth="0px" AutoGenerateColumns="False">
-                        <RowStyle Height="28px" />
-                        <HeaderStyle CssClass="GridHeader" />
-                        <Columns>
-                            <asp:TemplateField HeaderText="操作">
-                                <HeaderStyle Width="60px" />
-                            </asp:TemplateField>
-                            <asp:BoundField DataField="UserName" HeaderText="用户帐号">
-                                <HeaderStyle Width="120px" />
-                            </asp:BoundField>
-                            <asp:BoundField DataField="EmployeeName" HeaderText="用户姓名">
-                                <HeaderStyle Width="100px" />
-                            </asp:BoundField>
-                            <asp:BoundField DataField="Memo" HeaderText="备注"></asp:BoundField>
-                        </Columns>
-                    </asp:GridView>
-                </asp:Panel>
-                <!--分页导航-->
-                <asp:Panel ID="pnlNavigator" runat="server" Height="31px" Style="left: 0px; position: relative;
-                    top: 0px" Width="100%">
-                    <table id="paging" cellpadding="0" cellspacing="0" style="width: 500px;">
-                        <tr>
-                            <td>
-                                <NetPager:AspNetPager ID="pager" runat="server" OnPageChanging="pager_PageChanging"
-                                    ShowPageIndex="false" ShowInputBox="Always" AlwaysShow="true">
-                                </NetPager:AspNetPager>
-                            </td>
-                        </tr>
-                    </table>
-                </asp:Panel>
-            </asp:Panel>
-            <!--编辑-->
-            <asp:Panel ID="pnlEdit" runat="server" Height="480px" Width="100%" Visible="false">
-                <table class="OperationBar">
-                    <tr>
-                        <td>
-                            <asp:Button ID="btnSave" Text=" 保 存" runat="server" OnClick="btnSave_Click" CssClass="ButtonSave"
-                                OnClientClick="return CheckBeforeSubmit()" />
-                            <asp:Button ID="btnCancel" Text="取 消" runat="server" CssClass="ButtonCancel" OnClick="btnCancel_Click" />
-                        </td>
-                    </tr>
-                </table>
-                <table>
-                    <tr>
-                        <td class="tdTitle">
-                            <font color="red">*</font>用户帐号
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtUserName" runat="server" CssClass="TextBox"></asp:TextBox>
-                            <asp:TextBox ID="txtUserID" runat="server" Width="0" Height="0" BorderWidth="0"></asp:TextBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="tdTitle">
-                            用户姓名
-                        </td>
-                        <td>
-                            <table cellpadding="0" cellspacing="0">
-                                <tr>
-                                    <td>
-                                        <asp:TextBox ID="txtEmployeeCode" runat="server" CssClass="TextBox"></asp:TextBox>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="tdTitle">
-                            备注
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtMemo" runat="server" CssClass="MultiLineTextBox" TextMode="MultiLine"></asp:TextBox>
-                        </td>
-                    </tr>
-                </table>
-            </asp:Panel>
-        </ContentTemplate>
-    </asp:UpdatePanel>
-    <!--隐藏数据-->
-    <div>
-        <asp:HiddenField ID="hdnXGQX" Value="0" runat="server" />
-        <asp:HiddenField ID="hdnOpFlag" Value="0" runat="server" />
-    </div>
-    </form>
-
-    <script>
-
-
-        //删除确认
+        $(document).ready(function () {
+            $(window).resize(function () {
+                resize();
+            });
+        });
+        function resize() {
+            var h = document.documentElement.clientHeight - 60;
+            $("#pnlMain").css("height", h);
+        }
         function DelConfirm(btnID) {
             var table = document.getElementById('gvMain');
             var hasChecked = false;
@@ -286,8 +106,134 @@
             document.getElementById('txtEmployeeCode').value = "";
             document.getElementById('txtEmployeeName').value = "";
         }
-
 </script>
+
+</head>
+<body>
+    <form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server" Visible="true">
+        <ContentTemplate>
+            <!--数据显示-->
+            <asp:Panel ID="pnlList" runat="server" Height="480px" Width="100%">
+                <!--工具栏-->
+                 <asp:Panel ID="pnlListToolbar" runat="server" Height="30px" Width="100%">
+                    <table style="width: 100%; height: 30px;" class="maintable">
+                        <tr>
+                            <td style="width:40%;">
+                                <asp:DropDownList ID="ddl_Field" runat="server">
+                                    <asp:ListItem Selected="True" Value="UserName">用户帐号</asp:ListItem>
+                                     <asp:ListItem  Value="EmployeeName">用户姓名</asp:ListItem>
+                                    <asp:ListItem Value="Memo">备注</asp:ListItem>
+                                </asp:DropDownList>
+                                &nbsp;
+                                <asp:TextBox ID="txtKeyWords" runat="server" CssClass="TextBox"></asp:TextBox> &nbsp;
+                                <asp:RadioButton GroupName="order" ID="rbASC" runat="server" Text="升" Checked="True" />
+                                <asp:RadioButton GroupName="order" ID="rbDESC" runat="server" Text="降" />
+                            </td>
+                            <td>
+                                <asp:Button ID="btnQuery" runat="server" Text="查询" OnClick="btnQuery_Click" CssClass="ButtonQuery" />
+                                <asp:Button ID="btnAdd" runat="server" Text="新增" CssClass="ButtonCreate" OnClick="btnCreate_Click"
+                                    Enabled="False" />
+                                <asp:Button ID="btnDelete" runat="server" Text="删除" CssClass="ButtonDel" OnClick="btnDelete_Click"
+                                    OnClientClick="return DelConfirm('btnDelete')" Enabled="False" />
+                                <asp:Button ID="btnExit" runat="server" Text="退出" OnClientClick="Exit();" CssClass="ButtonExit" />
+                            </td>
+                        </tr>
+                         
+                    </table>
+                   
+                </asp:Panel>
+                <!--数据-->
+                 <asp:Panel ID="pnlMain" runat="server" Height="480px" Style="overflow: auto;" Width="100%">
+                    <asp:GridView ID="gvMain" runat="server"  Width="900px" OnRowEditing="gvMain_RowEditing" OnRowDataBound="gvMain_RowDataBound"
+                          SkinID="GridViewSkin"  AutoGenerateColumns="False">
+                        <RowStyle Height="28px" />
+                        <HeaderStyle CssClass="GridHeader" />
+                        <Columns>
+                            <asp:TemplateField HeaderText="操作">
+                                <HeaderStyle Width="60px" />
+                            </asp:TemplateField>
+                            <asp:BoundField DataField="UserName" HeaderText="用户帐号">
+                                <HeaderStyle Width="120px" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="EmployeeName" HeaderText="用户姓名">
+                                <HeaderStyle Width="100px" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="Memo" HeaderText="备注"></asp:BoundField>
+                        </Columns>
+                    </asp:GridView>
+                </asp:Panel>
+                <!--分页导航-->
+                <asp:Panel ID="pnlNavigator" runat="server" Height="30px" Width="100%">
+                    <table id="paging" cellpadding="0" cellspacing="0" style="width: 500px;">
+                        <tr>
+                            <td>
+                                <NetPager:AspNetPager ID="pager" runat="server" OnPageChanging="pager_PageChanging"
+                                    ShowPageIndex="false" ShowInputBox="Always" AlwaysShow="true">
+                                </NetPager:AspNetPager>
+                            </td>
+                        </tr>
+                    </table>
+                </asp:Panel>
+            </asp:Panel>
+            <!--编辑-->
+            <asp:Panel ID="pnlEdit" runat="server" Height="400px" Width="100%" Visible="false">
+                <table class="maintable" width="200px">
+                    <tr>
+                        <td>
+                            <asp:Button ID="btnSave" Text=" 保 存" runat="server" OnClick="btnSave_Click" CssClass="ButtonSave"
+                                OnClientClick="return CheckBeforeSubmit()" />
+                            <asp:Button ID="btnCancel" Text="取 消" runat="server" CssClass="ButtonCancel" OnClick="btnCancel_Click" />
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td class="musttitle">
+                            <font color="red">*</font>用户帐号
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtUserName" runat="server" CssClass="TextBox" Width="140px"></asp:TextBox>
+                            <asp:TextBox ID="txtUserID" runat="server" Width="0" Height="0" BorderWidth="0"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="musttitle">
+                            用户姓名
+                        </td>
+                        <td>
+                            <table cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <asp:TextBox ID="txtEmployeeCode" runat="server" CssClass="TextBox" 
+                                            Width="140px"></asp:TextBox>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="smalltitle">
+                            备注
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtMemo" runat="server" Height="88px"  TextMode="MultiLine"></asp:TextBox>
+                        </td>
+                    </tr>
+                </table>
+            </asp:Panel>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+    <!--隐藏数据-->
+    <div>
+        <asp:HiddenField ID="hdnXGQX" Value="0" runat="server" />
+        <asp:HiddenField ID="hdnOpFlag" Value="0" runat="server" />
+    </div>
+    </form>
+
+     
 
 </body>
 </html>

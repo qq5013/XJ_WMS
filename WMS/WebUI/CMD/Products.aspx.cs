@@ -29,13 +29,12 @@ namespace WMS.WebUI.CMD
                     WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, exp.Message);
                 }
 
-                writeJsvar(FormID,SqlCmd, "");
+                writeJsvar(FormID, SqlCmd, "");
             }
-            else
-            {
-                ScriptManager.RegisterStartupScript(this.UpdatePanel1, this.UpdatePanel1.GetType(), "Resize", "resize();", true);
-            }
-           
+
+            ScriptManager.RegisterStartupScript(this.UpdatePanel1, this.UpdatePanel1.GetType(), "Resize", "resize();", true);
+
+
         }
         protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -83,7 +82,7 @@ namespace WMS.WebUI.CMD
 
 
             bll.ExecNonQuery("Cmd.DeleteProduct", new DataParameter[] { new DataParameter("{0}", strColorCode) });
-
+            AddOperateLog("产品信息", "删除单号：" + strColorCode.Replace("'-1',", "").Replace(",'-1'", ""));
             SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
 
         }

@@ -46,36 +46,35 @@ namespace WMS
                             Session["UserID"] = dtUserList.Rows[0]["UserID"].ToString();
                             Session["GroupID"] = dtUserList.Rows[0]["GroupID"].ToString();
                             Session["G_user"] = dtUserList.Rows[0]["UserName"].ToString();
-                            Session["Client_IP"] = Page.Request.UserHostAddress;
+                            
                             string EmployeeCode = dtUserList.Rows[0]["EmployeeCode"].ToString();
                             App_Code.LoginUserInfo.UserName = dtUserList.Rows[0]["UserName"].ToString();
                             App_Code.LoginUserInfo.UserCode = EmployeeCode;
 
                             Session["EmployeeCode"] = dtUserList.Rows[0]["EmployeeCode"].ToString();
-                            Session["EmployeeName"] = "";
-                            Session["sys_PageCount"] = 15;
+                             
+                            //Session["sys_PageCount"] = 15;
 
 
-                            Session["grid_ColumnTitleFont"] = "楷体_GB2312,Coral,10,加粗";
-                            Session["grid_ContentFont"] = "宋体,Black,10,正常";
+                            //Session["grid_ColumnTitleFont"] = "楷体_GB2312,Coral,10,加粗";
+                            //Session["grid_ContentFont"] = "宋体,Black,10,正常";
 
-                            Session["grid_ColumnTextAlign"] = "1";
-                            Session["grid_ContentTextAlign"] = "1";
-                            Session["grid_NumberColumnAlign"] = "1";
-                            Session["grid_MoneyColumnAlign"] = "1";
-                            Session["grid_SelectMode"] = "0";
-                            Session["grid_IsRefreshBeforeAdd"] = "1";
-                            Session["grid_IsRefreshBeforeUpdate"] = "1";
-                            Session["grid_IsRefreshBeforeDelete"] = "1";
+                            //Session["grid_ColumnTextAlign"] = "1";
+                            //Session["grid_ContentTextAlign"] = "1";
+                            //Session["grid_NumberColumnAlign"] = "1";
+                            //Session["grid_MoneyColumnAlign"] = "1";
+                            //Session["grid_SelectMode"] = "0";
+                            //Session["grid_IsRefreshBeforeAdd"] = "1";
+                            //Session["grid_IsRefreshBeforeUpdate"] = "1";
+                            //Session["grid_IsRefreshBeforeDelete"] = "1";
 
-                            Session["grid_OddRowColor"] = "White";
-                            Session["grid_EvenRowColor"] = "AliceBlue";
-                            Session["sys_PrintForm"] = dtUserList.Rows[0]["sys_PrintForm"].ToString();
-                            string pager_ShowPageIndex = dtUserList.Rows[0]["pager_ShowPageIndex"].ToString();
+                            //Session["grid_OddRowColor"] = "White";
+                            //Session["grid_EvenRowColor"] = "AliceBlue";
+                           
+                         
 
 
-
-                            Session.Timeout = int.Parse(dtUserList.Rows[0]["SessionTimeOut"].ToString());
+                            //Session.Timeout = int.Parse(dtUserList.Rows[0]["SessionTimeOut"].ToString());
                             #region 添加登录日志
 
                             BLL.BLLBase bll = new BLL.BLLBase();

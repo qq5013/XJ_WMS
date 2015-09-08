@@ -389,96 +389,26 @@
     <Compile Include="WebUI\CMD\WarehouseShelfEditPage.aspx.designer.cs">
       <DependentUpon>WarehouseShelfEditPage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WebUI\InStock\InStockEdit.aspx.cs">
-      <DependentUpon>InStockEdit.aspx</DependentUpon>
+    <Compile Include="WebUI\InStock\InStockTypeEdit.aspx.cs">
+      <DependentUpon>InStockTypeEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebUI\InStock\InStockEdit.aspx.designer.cs">
-      <DependentUpon>InStockEdit.aspx</DependentUpon>
+    <Compile Include="WebUI\InStock\InStockTypeEdit.aspx.designer.cs">
+      <DependentUpon>InStockTypeEdit.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WebUI\InStock\InStockReturnEdit.aspx.cs">
-      <DependentUpon>InStockReturnEdit.aspx</DependentUpon>
+    <Compile Include="WebUI\InStock\InStockTypes.aspx.cs">
+      <DependentUpon>InStockTypes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebUI\InStock\InStockReturnEdit.aspx.designer.cs">
-      <DependentUpon>InStockReturnEdit.aspx</DependentUpon>
+    <Compile Include="WebUI\InStock\InStockTypes.aspx.designer.cs">
+      <DependentUpon>InStockTypes.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WebUI\InStock\InStockReturns.aspx.cs">
-      <DependentUpon>InStockReturns.aspx</DependentUpon>
+    <Compile Include="WebUI\InStock\InStockTypeView.aspx.cs">
+      <DependentUpon>InStockTypeView.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebUI\InStock\InStockReturns.aspx.designer.cs">
-      <DependentUpon>InStockReturns.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebUI\InStock\InStockReturnView.aspx.cs">
-      <DependentUpon>InStockReturnView.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\InStock\InStockReturnView.aspx.designer.cs">
-      <DependentUpon>InStockReturnView.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebUI\InStock\InStocks.aspx.cs">
-      <DependentUpon>InStocks.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\InStock\InStocks.aspx.designer.cs">
-      <DependentUpon>InStocks.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebUI\InStock\InStockView.aspx.cs">
-      <DependentUpon>InStockView.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\InStock\InStockView.aspx.designer.cs">
-      <DependentUpon>InStockView.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebUI\InStock\ScheduleEdit.aspx.cs">
-      <DependentUpon>ScheduleEdit.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\InStock\ScheduleEdit.aspx.designer.cs">
-      <DependentUpon>ScheduleEdit.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebUI\InStock\Schedules.aspx.cs">
-      <DependentUpon>Schedules.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\InStock\Schedules.aspx.designer.cs">
-      <DependentUpon>Schedules.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebUI\InStock\ScheduleSubEdit.aspx.cs">
-      <DependentUpon>ScheduleSubEdit.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\InStock\ScheduleSubEdit.aspx.designer.cs">
-      <DependentUpon>ScheduleSubEdit.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebUI\InStock\ScheduleView.aspx.cs">
-      <DependentUpon>ScheduleView.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\InStock\ScheduleView.aspx.designer.cs">
-      <DependentUpon>ScheduleView.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebUI\InStock\StraightEdit.aspx.cs">
-      <DependentUpon>StraightEdit.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\InStock\StraightEdit.aspx.designer.cs">
-      <DependentUpon>StraightEdit.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebUI\InStock\Straights.aspx.cs">
-      <DependentUpon>Straights.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\InStock\Straights.aspx.designer.cs">
-      <DependentUpon>Straights.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebUI\InStock\StraightView.aspx.cs">
-      <DependentUpon>StraightView.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\InStock\StraightView.aspx.designer.cs">
-      <DependentUpon>StraightView.aspx</DependentUpon>
+    <Compile Include="WebUI\InStock\InStockTypeView.aspx.designer.cs">
+      <DependentUpon>InStockTypeView.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebUI\InStock\TempPage.aspx.cs">
       <DependentUpon>TempPage.aspx</DependentUpon>
@@ -5718,14 +5648,6 @@
     <Content Include="JQuery\jquery-2.1.3.min.js" />
     <Content Include="JScript\gridPageSize.js" />
     <Content Include="JScript\Resize.js" />
-    <Content Include="laydate\laydate.js" />
-    <Content Include="laydate\need\laydate.css" />
-    <Content Include="laydate\skins\dahong\icon.png" />
-    <Content Include="laydate\skins\dahong\laydate.css" />
-    <Content Include="laydate\skins\default\icon.png" />
-    <Content Include="laydate\skins\default\laydate.css" />
-    <Content Include="laydate\skins\molv\icon.png" />
-    <Content Include="laydate\skins\molv\laydate.css" />
     <Content Include="Login.aspx" />
     <Content Include="MainForm.aspx" />
     <Content Include="JScript\DataProcess.js" />
@@ -5744,7 +5666,9 @@
     <Content Include="WebUI\CMD\TrainTypes.aspx" />
     <Content Include="WebUI\CMD\TrainTypeView.aspx" />
     <Content Include="WebUI\CMD\WarehouseSetPage1.aspx" />
-    <Content Include="WebUI\InStock\ScheduleSubEdit.aspx" />
+    <Content Include="WebUI\InStock\InStockTypeEdit.aspx" />
+    <Content Include="WebUI\InStock\InStockTypes.aspx" />
+    <Content Include="WebUI\InStock\InStockTypeView.aspx" />
     <Content Include="WebUI\InStock\TempPage.aspx" />
     <Content Include="WebUI\Query\Cell.aspx" />
     <Content Include="WebUI\Query\CellQuery.aspx" />
@@ -5845,18 +5769,6 @@
     <Content Include="WebUI\CMD\ProductEdit.aspx" />
     <Content Include="WebUI\CMD\Products.aspx" />
     <Content Include="WebUI\CMD\ProductView.aspx" />
-    <Content Include="WebUI\InStock\InStockEdit.aspx" />
-    <Content Include="WebUI\InStock\InStockReturnEdit.aspx" />
-    <Content Include="WebUI\InStock\InStockReturns.aspx" />
-    <Content Include="WebUI\InStock\InStockReturnView.aspx" />
-    <Content Include="WebUI\InStock\InStocks.aspx" />
-    <Content Include="WebUI\InStock\InStockView.aspx" />
-    <Content Include="WebUI\InStock\ScheduleEdit.aspx" />
-    <Content Include="WebUI\InStock\Schedules.aspx" />
-    <Content Include="WebUI\InStock\ScheduleView.aspx" />
-    <Content Include="WebUI\InStock\StraightEdit.aspx" />
-    <Content Include="WebUI\InStock\Straights.aspx" />
-    <Content Include="WebUI\InStock\StraightView.aspx" />
     <Content Include="WebUI\OutStock\DeliverChecks.aspx" />
     <Content Include="WebUI\OutStock\DeliverCheckView.aspx" />
     <Content Include="WebUI\OutStock\DeliverEdit.aspx" />

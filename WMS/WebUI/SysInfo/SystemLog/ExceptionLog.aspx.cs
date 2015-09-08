@@ -32,16 +32,8 @@ namespace WMS.WebUI.SysInfo.SystemLog
         {
             try
             {
-                if (Session["sys_PageCount"] != null)
-                {
-                    pageSize = Convert.ToInt32(Session["sys_PageCount"].ToString());
-                    pager.PageSize = pageSize;
-                }
-                if (Session["pager_ShowPageIndex"] != null)
-                {
-                    pager.ShowPageIndex = Convert.ToBoolean(Session["pager_ShowPageIndex"].ToString());
-                }
 
+                pager.PageSize = pageSize;
                 if (!IsPostBack)
                 {
                     if (this.btnDelete.Enabled)
@@ -63,6 +55,7 @@ namespace WMS.WebUI.SysInfo.SystemLog
                     GridDataBind();
                 }
 
+                ScriptManager.RegisterStartupScript(this.UpdatePanel1, this.UpdatePanel1.GetType(), "Resize", "resize();", true);
             }
             catch (Exception exp)
             {
@@ -74,7 +67,7 @@ namespace WMS.WebUI.SysInfo.SystemLog
         #region 数据源绑定
         void GridDataBind()
         {
-            dtLog = bll.GetDataPage("Security.SeleteExceptionalLog", pageIndex, pageSize, out totalCount, out pageCount,new DataParameter[] { new DataParameter("{0}", filter) });
+            dtLog = bll.GetDataPage("Security.SeleteExceptionalLog", pageIndex, pageSize, out totalCount,out pageCount, new DataParameter[] { new DataParameter("{0}", filter) });
             if (dtLog.Rows.Count == 0)
             {
                 dtLog.Rows.Add(dtLog.NewRow());
@@ -108,7 +101,6 @@ namespace WMS.WebUI.SysInfo.SystemLog
             if (e.Row.RowType == DataControlRowType.Header)
             {
                 CheckBox chk = new CheckBox();
-                chk.Attributes.Add("style", " font-weight:bold; text-align:center;word-break:keep-all; white-space:nowrap");
                 chk.ID = "checkAll";
                 chk.Attributes.Add("onclick", "checkboxChange(this,'gvMain',0);");
                 chk.Text = "";
@@ -116,16 +108,7 @@ namespace WMS.WebUI.SysInfo.SystemLog
             }
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                if (e.Row.RowIndex % 2 == 0)
-                {
-                    e.Row.BackColor = Color.FromName(Session["grid_EvenRowColor"].ToString());
-                }
-                else
-                {
-                    e.Row.BackColor = Color.FromName(Session["grid_OddRowColor"].ToString());
-                }
-                e.Row.Cells[0].Attributes.Add("style", "word-break:keep-all; white-space:nowrap");
-
+                
                 CheckBox chk = new CheckBox();
                 e.Row.Cells[0].Controls.Add(chk);
             }
@@ -184,13 +167,13 @@ namespace WMS.WebUI.SysInfo.SystemLog
             string end = System.DateTime.Now.AddDays(1).ToString();
             try
             {
-                if (this.txtDateStart.Text.Trim().Length > 0)
+                if (this.txtDateStart.tDate.Text.Trim().Length > 0)
                 {
-                    start = Convert.ToDateTime(this.txtDateStart.Text.Trim()).ToString();
+                    start = Convert.ToDateTime(this.txtDateStart.tDate.Text.Trim()).ToString();
                 }
-                if (this.txtDateEnd.Text.Trim().Length > 0)
+                if (this.txtDateEnd.tDate.Text.Trim().Length > 0)
                 {
-                    end = Convert.ToDateTime(this.txtDateEnd.Text.Trim()).AddDays(1).ToString();
+                    end = Convert.ToDateTime(this.txtDateEnd.tDate.Text.Trim()).AddDays(1).ToString();
                 }
             }
             catch

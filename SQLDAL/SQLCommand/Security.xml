@@ -3,14 +3,8 @@
   <!--根据用户名，获取用户信息，登陆时使用-->
   <Command ID="SelectUserInfoByUserName">
     <CommandString>
-      select a.*,d.sys_PageCount,d.grid_ColumnTitleFont,d.grid_ContentFont,
-      d.grid_ColumnTextAlign,d.grid_ContentTextAlign,d.grid_NumberColumnAlign,
-      d.grid_MoneyColumnAlign,d.grid_SelectMode,d.grid_OddRowColor,
-      d.grid_EvenRowColor,d.grid_IsRefreshBeforeAdd,d.grid_IsRefreshBeforeUpdate,
-      d.grid_IsRefreshBeforeDelete,d.sys_PrintForm,d.pager_ShowPageIndex,
-      e.ParameterValue as SessionTimeOut
+      select a.*,e.ParameterValue as SessionTimeOut
       from sys_UserList a
-      left join sys_UserSysInfo d on a.UserID=d.UserID
       left join sys_SystemParameter e on e.ParameterName='sys_SessionTimeOut'
       where UserName=@UserName
     </CommandString>
@@ -120,7 +114,7 @@
       order by n2.OrderIndex
     </CommandString>
   </Command>
-  
+
   <!--获取用户有权限操作的二级模块-->
   <Command ID="SelectUserOperateSubModule">
     <CommandString>
@@ -184,7 +178,7 @@
 
   <Command ID="SelectGroup">
     <CommandString>
-      select * from sys_GroupList where {0}
+      select * from sys_GroupList where {0} order by {1}
     </CommandString>
   </Command> 
   
@@ -204,7 +198,7 @@
 
   <Command ID="SeleteOperatorLog">
     <CommandString>
-      select * from sys_OperatorLog WHERE {0}
+      select * from sys_OperatorLog WHERE {0} order by {1}
     </CommandString>
   </Command>
   <!--删除操作记录-->

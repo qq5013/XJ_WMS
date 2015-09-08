@@ -78,7 +78,7 @@ namespace WMS.WebUI.CMD
             }
             bll.ExecNonQuery("Cmd.DeleteProductType", new DataParameter[] { new DataParameter("{0}", "'" + strID + "'") });
 
-
+            AddOperateLog("产品类别", "删除单号：" + strID);
             btnNext_Click(sender, e);
             if (this.txtID.Text == strID)
             {
