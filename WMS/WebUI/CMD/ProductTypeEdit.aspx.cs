@@ -51,7 +51,14 @@ namespace WMS.WebUI.CMD
             this.ddlAreaCode.DataTextField = "AreaName";
             this.ddlAreaCode.DataSource = dtArea;
             this.ddlAreaCode.DataBind();
- 
+
+            //for (int i = 0; i < ddlAreaCode.Items.Count; i++)
+            //    this.ddlAreaCode.Items[i].Attributes.Add("style", "font-family:微软雅黑;font-size:20px");
+            DataTable dt = bll.FillDataTable("Cmd.SelectArea", new DataParameter[] { new DataParameter("{0}", "1=1") });
+            this.listProject.DataValueField = "AreaCode";
+            this.listProject.DataTextField = "AreaName";
+            this.listProject.DataSource = dt;
+            this.listProject.DataBind();
         }
 
 
