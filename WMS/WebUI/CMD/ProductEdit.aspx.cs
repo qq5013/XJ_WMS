@@ -114,9 +114,9 @@ namespace WMS.WebUI.CMD
                 this.txtFCCLX_Flag.Text = dt.Rows[0]["FCCLX_Flag"].ToString();
                 this.txtCCLX_Year.Text = dt.Rows[0]["CCLX_Year"].ToString();
                 this.txtFCCLX_Year.Text = dt.Rows[0]["FCCLX_Year"].ToString();
-                this.ddlCCLX_Factory.SelectedValue = dt.Rows[0]["CCLX_Factory"].ToString();
-                this.ddlFCCLX_Factory.SelectedValue = dt.Rows[0]["FCCLX_Factory"].ToString();
-                this.ddlCX_Factory.SelectedValue = dt.Rows[0]["CX_Factory"].ToString();
+                this.ddlCCLX_Factory.SelectedValue = dt.Rows[0]["CCLX_FactoryID"].ToString();
+                this.ddlFCCLX_Factory.SelectedValue = dt.Rows[0]["FCCLX_FactoryID"].ToString();
+                this.ddlCX_Factory.SelectedValue = dt.Rows[0]["CX_FactoryID"].ToString();
                 this.txtCCLG_Flag.Text = dt.Rows[0]["CCLG_Flag"].ToString();
                 this.txtFCCLG_Flag.Text = dt.Rows[0]["FCCLG_Flag"].ToString();
                 this.ddlAreaCode.SelectedValue = dt.Rows[0]["AreaCode"].ToString();

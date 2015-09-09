@@ -16,7 +16,7 @@
             });
         });
         function resize() {
-            var h = document.documentElement.clientHeight -55;
+            var h = document.documentElement.clientHeight -58;
             $("#table-container").css("height", h);
         }
     </script>
@@ -35,12 +35,12 @@
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">                
             <ContentTemplate>
                 <div>
-                    <table  class="OperationBar">
-                    <tr>
+                    <table style="width: 100%; height: 20px;">
+                        <tr>
 						    <td class="smalltitle" align="center" width="7%" >
                                 <asp:Literal ID="Literal1" Text="查询栏位" runat="server"  ></asp:Literal>
                              </td>
-						    <td  width="15%" height="20">&nbsp;<asp:dropdownlist id="ddlField" runat="server" Width="85%" >
+						    <td  width="15%" >&nbsp;<asp:dropdownlist id="ddlField" runat="server" Width="85%" >
                                     <asp:ListItem Selected="True" Value="ProductTypeCode">产品类别</asp:ListItem>
                                     <asp:ListItem  Value="ProductTypeName">类别名称</asp:ListItem>
                                      <asp:ListItem Value="AreaCode" >库区编码</asp:ListItem>
@@ -51,9 +51,9 @@
 						    <td class="smalltitle" align="center" width="7%">
                                 <asp:Literal ID="Literal2" Text="查询内容" runat="server"></asp:Literal>
                             </td>
-						    <td  width="26%" height="20" valign="middle">&nbsp;<asp:textbox id="txtSearch" 
+						    <td  width="26%" valign="middle">&nbsp;<asp:textbox id="txtSearch" 
                                     tabIndex="1" runat="server" Width="90%" CssClass="TextBox"  
-                                    heigth="16px" ></asp:textbox>
+                                   ></asp:textbox>
                                
                           </td>
                           <td width="15%" align="left">

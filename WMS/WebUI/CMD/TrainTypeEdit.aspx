@@ -32,7 +32,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
-        <table  class="OperationBar">
+        <table  style="width: 100%; height: 20px;" class="OperationBar">
             <tr>
                 <td align="right">
                     <asp:Button ID="btnCancel" runat="server" Text="放弃" 

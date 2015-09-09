@@ -117,7 +117,7 @@
      <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
            <ContentTemplate> 
-        <table   class="OperationBar" cellpadding="0" cellspacing="0">
+        <table style="width: 100%; height: 24px;"  cellpadding="0" cellspacing="0">
            <tr>
              <td colspan="2" align="right">
                     <asp:Button ID="btnNewWarehouse" Text="新增仓库" runat="server" 

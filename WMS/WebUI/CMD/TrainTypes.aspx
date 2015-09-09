@@ -16,7 +16,7 @@
             });
         });
         function resize() {
-            var h = document.documentElement.clientHeight -55;
+            var h = document.documentElement.clientHeight -58;
             $("#table-container").css("height", h);
         }
     </script>
@@ -35,7 +35,7 @@
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">                
             <ContentTemplate>
                 <div>
-                    <table  class="OperationBar">
+                    <table  style="width: 100%; height: 20px;" >
                     <tr>
 						    <td class="smalltitle" align="center" width="7%" >
                                 <asp:Literal ID="Literal1" Text="查询栏位" runat="server"  ></asp:Literal>
