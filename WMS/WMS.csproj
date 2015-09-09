@@ -389,6 +389,20 @@
     <Compile Include="WebUI\CMD\WarehouseShelfEditPage.aspx.designer.cs">
       <DependentUpon>WarehouseShelfEditPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WebUI\InStock\InStockEdit.aspx.cs">
+      <DependentUpon>InStockEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\InStock\InStockEdit.aspx.designer.cs">
+      <DependentUpon>InStockEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\InStock\InStocks.aspx.cs">
+      <DependentUpon>InStocks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\InStock\InStocks.aspx.designer.cs">
+      <DependentUpon>InStocks.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebUI\InStock\InStockTypeEdit.aspx.cs">
       <DependentUpon>InStockTypeEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -409,6 +423,13 @@
     </Compile>
     <Compile Include="WebUI\InStock\InStockTypeView.aspx.designer.cs">
       <DependentUpon>InStockTypeView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\InStock\InStockView.aspx.cs">
+      <DependentUpon>InStockView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\InStock\InStockView.aspx.designer.cs">
+      <DependentUpon>InStockView.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebUI\InStock\TempPage.aspx.cs">
       <DependentUpon>TempPage.aspx</DependentUpon>
@@ -5393,9 +5414,12 @@
     <Content Include="WebUI\CMD\TrainTypes.aspx" />
     <Content Include="WebUI\CMD\TrainTypeView.aspx" />
     <Content Include="WebUI\CMD\WarehouseSetPage1.aspx" />
+    <Content Include="WebUI\InStock\InStockEdit.aspx" />
+    <Content Include="WebUI\InStock\InStocks.aspx" />
     <Content Include="WebUI\InStock\InStockTypeEdit.aspx" />
     <Content Include="WebUI\InStock\InStockTypes.aspx" />
     <Content Include="WebUI\InStock\InStockTypeView.aspx" />
+    <Content Include="WebUI\InStock\InStockView.aspx" />
     <Content Include="WebUI\InStock\TempPage.aspx" />
     <Content Include="WebUI\Query\Cell.aspx" />
     <Content Include="WebUI\Query\CellQuery.aspx" />

@@ -117,9 +117,9 @@
      <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
            <ContentTemplate> 
-        <table style="width: 100%; height: 24px;"  cellpadding="0" cellspacing="0">
-           <tr>
-             <td colspan="2" align="right">
+        <table style="width: 100%; height: 24px;" cellpadding="0" cellspacing="0">
+           <tr  class="maintable" >
+             <td  style="height:24px" colspan="2" align="right">
                     <asp:Button ID="btnNewWarehouse" Text="新增仓库" runat="server" 
                         CssClass="ButtonCreate"  OnClientClick="return OpenEditWarehouse()" 
                         Visible="False" />  
