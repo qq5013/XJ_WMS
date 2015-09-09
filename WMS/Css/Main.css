@@ -4,6 +4,7 @@
 	font-weight: bold;
 	color: #003399;
 	text-decoration: none;
+	font-family: 微软雅黑;
 }
 A:ACTIVE {
 
@@ -193,15 +194,17 @@ body
 
 select
 {
-    position:relative;   
-    left:-2px;   
+    border-style: none;
+	border-color: inherit;
+	border-width: 0px;
+	position:relative;   
+    left:3px;   
     top:0px;
     font-family:微软雅黑;   
     font-size:12px;   
     width:183px;   
     line-height:16px;   
-    border:0px;   
-}
+    }
 
 .bottomtable /*底部前两个表格*/
 {
