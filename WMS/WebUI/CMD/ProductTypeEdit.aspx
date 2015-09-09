@@ -7,6 +7,36 @@
     <title></title>
         <link href="~/Css/Main.css" type="text/css" rel="stylesheet" /> 
         <link href="~/Css/op.css" type="text/css" rel="stylesheet" /> 
+        <style type="text/css">
+        .box   
+          {   
+                  border:1px   solid   #C0C0C0;   
+                  width:182px;   
+                  height:19px;   
+                  clip:rect(0px,181px,18px,0px);   
+                  overflow:hidden;   
+          }   
+          .box2   
+          {   
+                  border:1px   solid   #F4F4F4;   
+                  width:180px;   
+                  height:17px;   
+                  clip:rect(0px,179px,16px,0px);   
+                  overflow:hidden;   
+          }   
+          select.nice   
+          {   
+                  position:relative;   
+                  left:-2px;   
+                  top:-2px;
+                  font-family:微软雅黑;   
+                  font-size:12px;   
+                  width:183px;   
+                  line-height:14px;   
+                  border:0px;   
+                  color:#414141;   
+          }   
+          </style>
         <script type="text/javascript" src="../../JQuery/jquery-2.1.3.min.js"></script>
         <script type="text/javascript" src= "../../JScript/Common.js"></script>
         <script type="text/javascript">
@@ -70,8 +100,11 @@
                     </td>
                     <td>
                         &nbsp;<asp:DropDownList ID="ddlAreaCode" runat="server" Width="42%" 
-                            CssClass="TextBox" Height="16px">
+                            Height="16px">
                         </asp:DropDownList>
+                        <span   class="box"><span   class="box2">
+    <asp:dropdownlist   id=listProject   runat="server" CssClass="nice"></asp:dropdownlist>
+    </span></span> 
                     </td>
                 </tr>
                     
