@@ -128,7 +128,7 @@ body
 {
 	border: 1px solid blue;
 	height:18px;
-    }
+}
 .TextRead
 {
 	border: 1px solid blue;
@@ -591,8 +591,15 @@ border-style :solid;
 } 
 select
 {
-    font-size:9pt;
-	font-family:"新細明體",Pmingliu,sans-serif,Arial,Serif,NSimSun,Tahoma,Verdana,'Times New Roman';	
+    position:relative;   
+    left:-2px;   
+    top:-2px;
+    font-family:微软雅黑;   
+    font-size:12px;   
+    width:183px;   
+    line-height:14px;   
+    border:0px;   
+    color:#414141;   
 }
 
 .bottomtable /*底部前两个表格*/
