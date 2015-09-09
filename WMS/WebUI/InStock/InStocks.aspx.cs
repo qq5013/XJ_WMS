@@ -17,12 +17,12 @@ namespace WMS.WebUI.InStock
         {
             if (!IsPostBack)
             {
-                ViewState["filter"] = "Flag=1";
+                ViewState["filter"] = "1=1";
                 ViewState["CurrentPage"] = 1;
 
                 try
                 {
-                    SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), "CMD.SelectBillType", ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+                    SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()),SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
                 }
                 catch (Exception exp)
                 {

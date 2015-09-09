@@ -1,12 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <SqlCommand>
-  <!--采购订单 -->
-  <Command ID="SelectScheduleInnerSub">
+  <!--入库单据 -->
+  <Command ID="SelectBillMaster">
     <CommandString>
-      select distinct Main.* from View_WMS_Schedule Main
-      inner join WMS_SCHEDULESUB Sub on main.Flag=sub.Flag and main.ScheduleNo=sub.ScheduleNo
+      select main.*,area.AreaName,billtype.BillTypeName,TrainType.TypeName,Facotry.FactoryName
+      from WMS_BillMaster main
+      inner join CMD_BillType BillType on main.BillTypeCode=BillType.BillTypeCode
+      inner join CMD_TrainType TrainType on main.TrainTypeCode=TrainType.TypeCode
+      inner join CMD_Area area on main.AreaCode=area.AreaCode
+      left join CMD_Factory Facotry on main.FactoryID=Facotry.FactoryID
       where {0}
-      ORDER BY BillDate DESC, Main.ScheduleNo DESC
+      ORDER BY BillDate DESC, Main.BillID DESC
     </CommandString>
   </Command>
   

@@ -37,7 +37,7 @@ namespace WMS.WebUI.InStock
                     this.txtUpdateDate.Text = ToYMD(DateTime.Now);
 
                 }
-
+                ScriptManager.RegisterStartupScript(this.updatePanel1, this.updatePanel1.GetType(), "Resize", "resize();", true);
                 writeJsvar(FormID, SqlCmd, strID);
                 SetTextReadOnly(this.txtCreator, this.txtCreatDate, this.txtUpdater, this.txtUpdateDate);
 
@@ -55,7 +55,7 @@ namespace WMS.WebUI.InStock
             if (dt.Rows.Count > 0)
             {
                 this.txtID.Text = dt.Rows[0]["BillTypeCode"].ToString();
-                this.txtBillTypeName.Text = dt.Rows[0]["BillTypeName"].ToString();
+                 
               
                 this.txtMemo.Text = dt.Rows[0]["Memo"].ToString();
                 this.txtCreator.Text = dt.Rows[0]["Creator"].ToString();
@@ -80,7 +80,7 @@ namespace WMS.WebUI.InStock
 
                 bll.ExecNonQuery("Cmd.InsertBillType", new DataParameter[] { 
                                                                                 new DataParameter("@BillTypeCode", this.txtID.Text.Trim()),
-                                                                                new DataParameter("@BillTypeName", this.txtBillTypeName.Text.Trim()),
+                                                                              
                                                                                 new DataParameter("@Flag", "1"),
                                                                                 new DataParameter("@TaskType", "11"),
                                                                                 new DataParameter("@TaskLevel", 1),
@@ -91,7 +91,7 @@ namespace WMS.WebUI.InStock
             }
             else //修改
             {
-                bll.ExecNonQuery("Cmd.UpdateTrainType", new DataParameter[] {  new DataParameter("@BillTypeName", this.txtBillTypeName.Text.Trim()),
+                bll.ExecNonQuery("Cmd.UpdateTrainType", new DataParameter[] {   
                                                                                  new DataParameter("@Memo", this.txtMemo.Text.Trim()) ,
                                                                                  new DataParameter("@Updater", Session["EmployeeCode"].ToString()),
                                                                                  new DataParameter("@BillTypeCode", this.txtID.Text.Trim())
@@ -99,6 +99,49 @@ namespace WMS.WebUI.InStock
             }
 
             Response.Redirect(FormID + "View.aspx?SubModuleCode=" + SubModuleCode + "&FormID=" + Server.UrlEncode(FormID) + "&SqlCmd=" + SqlCmd + "&ID=" + Server.UrlEncode(this.txtID.Text));
+        }
+
+        protected void btnAddDetail_Click(object sender, EventArgs e)
+        {
+
+        }
+        protected void btnDelDetail_Click(object sender, EventArgs e)
+        { 
+        }
+
+        protected void btnProduct_Click(object sender, EventArgs e)
+        {
+        }
+
+        protected void dgViewSub1_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+
+        }
+
+
+        protected void btnFirstSub1_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void btnPreSub1_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void btnNextSub1_Click(object sender, EventArgs e)
+        {
+             
+        }
+
+        protected void btnLastSub1_Click(object sender, EventArgs e)
+        {
+             
+        }
+
+        protected void btnToPageSub1_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
