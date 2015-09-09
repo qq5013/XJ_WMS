@@ -77,6 +77,10 @@ namespace BLL
         /// <param name="commandID">命令ID</param>
         /// <param name="parameters">参数</param>
         /// <returns>结果集</returns>
+        public DataTable FillDataTable(string commandID)
+        {
+            return da.FillDataTable(commandID, new DataParameter[] { new DataParameter("{0}", "1=1") });
+        }
         public DataTable FillDataTable(string commandID, params DataParameter[] parameters)
         {
             return da.FillDataTable(commandID, parameters);
