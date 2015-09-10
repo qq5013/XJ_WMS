@@ -16,7 +16,7 @@
             });
         });
         function resize() {
-            var h = document.documentElement.clientHeight - 305;
+            var h = document.documentElement.clientHeight - 260;
             $("#table-container").css("height", h);
         }
     </script>
@@ -88,18 +88,35 @@
                               <HeaderStyle Width="60px"></HeaderStyle>
                              <ItemStyle Width="60px" HorizontalAlign="Center"></ItemStyle>
                            </asp:TemplateField>
-                          <asp:TemplateField HeaderText="类型编号" SortExpression="BillTypeCode">
+                           <asp:TemplateField HeaderText="入库单号" SortExpression="BillID">
                                 <ItemTemplate>
-                                    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# FormID+"View.aspx?SubModuleCode=" + SubModuleCode+"&FormID=" + FormID +"&SqlCmd="+SqlCmd+ "&ID="+DataBinder.Eval(Container.DataItem, "BillTypeCode") %>'
-                                        Text='<%# DataBinder.Eval(Container.DataItem, "BillTypeCode")%>'></asp:HyperLink>
+                                    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# FormID+"View.aspx?SubModuleCode=" + SubModuleCode+"&FormID=" + FormID +"&SqlCmd="+SqlCmd+ "&ID="+DataBinder.Eval(Container.DataItem, "BillID") %>'
+                                        Text='<%# DataBinder.Eval(Container.DataItem, "BillID")%>'></asp:HyperLink>
                                 </ItemTemplate>
                                 <ItemStyle Width="12%" Wrap="False" />
                                 <HeaderStyle Width="12%" Wrap="False" />
                             </asp:TemplateField>
-                            <asp:BoundField DataField="BillTypeName" HeaderText="类型名称" SortExpression="BillTypeName">
+                            <asp:TemplateField HeaderText="入库日期" SortExpression="BillDate">
+                                <ItemTemplate>
+                                    <%# ToYMD(DataBinder.Eval(Container.DataItem, "BillDate"))%>
+                                </ItemTemplate>
+                                <HeaderStyle Wrap="False" />
+                                <ItemStyle HorizontalAlign="Left" VerticalAlign="Middle" Wrap="False" />
+                            </asp:TemplateField>
+
+                            <asp:BoundField DataField="BillTypeName" HeaderText="入库类型" SortExpression="BillTypeName">
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
+                            <asp:BoundField DataField="TypeName" HeaderText="车型" SortExpression="TypeName">
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="FactoryName" HeaderText="工厂" SortExpression="FactoryName">
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+
                             <asp:BoundField DataField="Memo" HeaderText="备注" 
                                 SortExpression="Memo" >
                                 <ItemStyle HorizontalAlign="Left" Width="15%" Wrap="False" />
@@ -153,28 +170,23 @@
                         </td>
                     </tr>
                 </table>
-                 <div id="divSub" style="overflow: auto; WIDTH: 100%; HEIGHT: 200px">
-                    <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" SkinID="GridViewSkin" Width="1100px" OnRowDataBound="GridView1_RowDataBound">
+                 <div id="divSub" style="overflow: auto; WIDTH: 100%; HEIGHT: 155px">
+                    <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" SkinID="GridViewSkin" Width="1100px">
                         <Columns>
-                            <asp:TemplateField >
-                                <HeaderTemplate>
-                                <input type="checkbox" onclick="selectAll('GridView1',this.checked);" />                    
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                <asp:CheckBox id="cbSelect" runat="server" ></asp:CheckBox>                   
-                                </ItemTemplate>
-                              <HeaderStyle Width="60px"></HeaderStyle>
-                             <ItemStyle Width="60px" HorizontalAlign="Center"></ItemStyle>
-                           </asp:TemplateField>
-                          <asp:TemplateField HeaderText="类型编号" SortExpression="BillTypeCode">
-                                <ItemTemplate>
-                                    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# FormID+"View.aspx?SubModuleCode=" + SubModuleCode+"&FormID=" + FormID +"&SqlCmd="+SqlCmd+ "&ID="+DataBinder.Eval(Container.DataItem, "BillTypeCode") %>'
-                                        Text='<%# DataBinder.Eval(Container.DataItem, "BillTypeCode")%>'></asp:HyperLink>
-                                </ItemTemplate>
-                                <ItemStyle Width="12%" Wrap="False" />
-                                <HeaderStyle Width="12%" Wrap="False" />
-                            </asp:TemplateField>
-                            <asp:BoundField DataField="BillTypeName" HeaderText="类型名称" SortExpression="BillTypeName">
+                            <asp:BoundField DataField="RowID" HeaderText="序号" SortExpression="RowID">
+                                <ItemStyle HorizontalAlign="Left" Width="5%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="ProductCode" HeaderText="产品编码" SortExpression="ProductCode">
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="ProductName" HeaderText="产品名称" SortExpression="ProductName">
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                           
+                            <asp:BoundField DataField="Quantity" HeaderText="数量" SortExpression="Quantity">
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
@@ -183,31 +195,6 @@
                                 <ItemStyle HorizontalAlign="Left" Width="15%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-                             <asp:BoundField DataField="Creator" HeaderText="建单人员" 
-                                SortExpression="Creator"  >
-                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
-                                <HeaderStyle Wrap="False" />
-                            </asp:BoundField>
-                            <asp:TemplateField HeaderText="建单日期" SortExpression="CreateDate">
-                                <ItemTemplate>
-                                    <%# ToYMD(DataBinder.Eval(Container.DataItem, "CreateDate"))%>
-                                </ItemTemplate>
-                                <HeaderStyle Wrap="False" />
-                                <ItemStyle HorizontalAlign="Left" VerticalAlign="Middle" Wrap="False" />
-                            </asp:TemplateField>
-                            <asp:BoundField DataField="Updater" HeaderText="修改人员" 
-                                SortExpression="Updater"  >
-                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
-                                <HeaderStyle Wrap="False" />
-                            </asp:BoundField>
-                            <asp:TemplateField HeaderText="修改日期" SortExpression="UpdateDate">
-                                <ItemTemplate>
-                                    <%# ToYMD(DataBinder.Eval(Container.DataItem, "UpdateDate"))%>
-                                </ItemTemplate>
-                                <HeaderStyle Wrap="False" />
-                                <ItemStyle HorizontalAlign="Left" VerticalAlign="Middle" Wrap="False" />
-                            </asp:TemplateField>
-               
                         </Columns>
                         <PagerSettings Visible="False" />
                     </asp:GridView>
@@ -225,7 +212,7 @@
                     &nbsp;<asp:Label ID="lblPageSub" runat="server" ></asp:Label>
                 </div>
                 <div>
-                    <asp:Button ID="btnReload" runat="server" Text="" OnClick="btnReload_Click"  CssClass="Hidden" />
+                    <asp:Button ID="btnReload" runat="server" Text="" OnClick="btnReload_Click"  CssClass="HiddenControl" />
                     <asp:HiddenField ID="hdnRowIndex" runat="server" Value="0" />
                     <asp:HiddenField ID="hdnRowValue" runat="server"  />
                 </div>

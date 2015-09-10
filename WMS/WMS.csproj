@@ -86,7 +86,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Css\Common\FontSelectModalFrame.aspx.designer.cs">
+    <Compile Include="Common\FontSelectModalFrame.aspx.designer.cs">
       <DependentUpon>FontSelectModalFrame.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Code\AutoSearch.cs">
@@ -100,36 +100,36 @@
     </Compile>
     <Compile Include="App_Code\JScript.cs" />
     <Compile Include="App_Code\LoginUserInfo.cs" />
-    <Compile Include="Css\Common\FontSelectModal.aspx.cs">
+    <Compile Include="Common\FontSelectModal.aspx.cs">
       <DependentUpon>FontSelectModal.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Css\Common\FontSelectModal.aspx.designer.cs">
+    <Compile Include="Common\FontSelectModal.aspx.designer.cs">
       <DependentUpon>FontSelectModal.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Css\Common\FontSelectModalFrame.aspx.cs">
+    <Compile Include="Common\FontSelectModalFrame.aspx.cs">
       <DependentUpon>FontSelectModalFrame.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Css\Common\MistakesPage.aspx.cs">
+    <Compile Include="Common\MistakesPage.aspx.cs">
       <DependentUpon>MistakesPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Css\Common\MistakesPage.aspx.designer.cs">
+    <Compile Include="Common\MistakesPage.aspx.designer.cs">
       <DependentUpon>MistakesPage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Css\Common\Select.aspx.cs">
+    <Compile Include="Common\Select.aspx.cs">
       <DependentUpon>Select.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Css\Common\Select.aspx.designer.cs">
+    <Compile Include="Common\Select.aspx.designer.cs">
       <DependentUpon>Select.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Css\Common\SelectDialog.aspx.cs">
+    <Compile Include="Common\SelectDialog.aspx.cs">
       <DependentUpon>SelectDialog.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Css\Common\SelectDialog.aspx.designer.cs">
+    <Compile Include="Common\SelectDialog.aspx.designer.cs">
       <DependentUpon>SelectDialog.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
@@ -648,7 +648,7 @@
     <Compile Include="Web\InStock\InStockBill.aspx.designer.cs">
       <DependentUpon>InStockBill.aspx</DependentUpon>
     </Compile>
-    <Content Include="Css\Common\Select.aspx" />
+    <Content Include="Common\Select.aspx" />
     <Content Include="Css\default.css" />
     <Content Include="Css\Detail.css" />
     <Content Include="Css\icon.css" />
@@ -5426,9 +5426,6 @@
     <Content Include="WebUI\Query\CellQuery.aspx" />
     <Content Include="WebUI\Query\OtherProductQuery.aspx" />
     <Content Include="WebUI\Query\OutStockDeliverQuery.aspx" />
-    <Content Include="WebUI\TableXML\CMD_AreaStation.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Web\Base\InBillType.aspx" />
     <Content Include="Web\Base\Cigarette.aspx" />
     <Content Include="Web\Base\CigaretteEdit.aspx" />
@@ -5546,63 +5543,18 @@
     <Content Include="WebUI\Query\WarehouseCellQuery.aspx" />
     <Content Include="WebUI\Start\SessionTimeOut.aspx" />
     <Content Include="WebUI\Start\Start.aspx" />
-    <Content Include="WebUI\TableXML\CMD_Color.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="WebUI\TableXML\CMD_PALLET.xml" />
     <Content Include="WebUI\TableXML\CMD_Product.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="WebUI\TableXML\CMD_ProductBom.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="WebUI\TableXML\CMD_Version.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="WebUI\TableXML\CMD_WAREHOUSE.xml" />
-    <Content Include="WebUI\TableXML\CMD_WH_AREA.xml" />
-    <Content Include="WebUI\TableXML\CMD_WH_CELL.xml" />
-    <Content Include="WebUI\TableXML\CMD_WH_SHELF.xml" />
-    <Content Include="WebUI\TableXML\CMD_WH_SHELFMove.xml" />
-    <Content Include="WebUI\TableXML\SRT_AREA.xml" />
-    <Content Include="WebUI\TableXML\CMD_CUSTOMER.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="WebUI\TableXML\SRT_ROUTE.xml" />
-    <Content Include="WebUI\TableXML\WMS_OutStockDetailNoReturn.xml" />
-    <Content Include="WebUI\TableXML\WMS_OutStockSubNoReturn.xml" />
-    <Content Include="WebUI\TableXML\WMS_BIZ_TYPE.xml" />
-    <Content Include="WebUI\TableXML\WMS_PRODUCT.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="WebUI\TableXML\CMD_Factory.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="WebUI\TableXML\WMS_Stock.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="WebUI\TableXML\WMS_StockDetailNoTran.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="WebUI\TableXML\WMS_StockSubNoTran.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="WebUI\TableXML\WMS_OtherDeliver.xml" />
-    <Content Include="WebUI\TableXML\WMS_OtherDeliverDetail.xml" />
-    <Content Include="WebUI\TableXML\WMS_DeliverTransfer.xml" />
-    <Content Include="WebUI\TableXML\WMS_DeliverTransferDetail.xml" />
     <None Include="Web References\PurchaseOrder\WmsService.wsdl" />
     <Content Include="Web\Ashx\MainHandler.ashx" />
     <Content Include="WebUI\CMD\WareHouseTree.ashx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Css\Common\FontSelectModal.aspx" />
-    <Content Include="Css\Common\FontSelectModalFrame.aspx" />
-    <Content Include="Css\Common\MistakesPage.aspx" />
-    <Content Include="Css\Common\SelectDialog.aspx" />
+    <Content Include="Common\FontSelectModal.aspx" />
+    <Content Include="Common\FontSelectModalFrame.aspx" />
+    <Content Include="Common\MistakesPage.aspx" />
+    <Content Include="Common\SelectDialog.aspx" />
     <Content Include="Css\Main.css" />
     <Content Include="Images\main\bg.jpg" />
     <Content Include="Images\main\bg001.png" />
@@ -5640,7 +5592,7 @@
     <Content Include="WebUI\SysInfo\UserGroupManage\UserGroup.aspx" />
     <Content Include="WebUI\SysInfo\UserManage\UserList.aspx" />
     <Content Include="App_Themes\Default\Control.skin" />
-    <Content Include="Css\Common\Web.config" />
+    <Content Include="Common\Web.config" />
     <None Include="ExcelLoad\InStock.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

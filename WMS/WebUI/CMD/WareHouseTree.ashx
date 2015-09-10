@@ -13,7 +13,7 @@ public class WareHouseTree : IHttpHandler, IRequiresSessionState
     public void ProcessRequest (HttpContext context) {
         context.Response.ContentType = "text/plain"; 
         BLL.BLLBase bll = new BLL.BLLBase();
-        DataTable dtWareHouse = bll.FillDataTable("Cmd.SelectWarehouse", new DataParameter[] { new DataParameter("{0}", "1=1") });
+        DataTable dtWareHouse = bll.FillDataTable("Cmd.SelectWarehouse");
         string json = "[{id:0,text:'仓库资料',leaf:false";
         
         //仓库

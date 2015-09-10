@@ -1,30 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<TABLE name="V4_CMD_PRODUCT" ChineseName="产品信息" PrimaryKey="PRODUCT_CODE" OrderBy="PRODUCT_CODE" ViewName="V4_CMD_PRODUCT">
-  <FIELD ShowInFieldQuery="1">
-    <FieldName>PRODUCT_MODEL</FieldName>
-    <FieldTitle>产品型号</FieldTitle>
+<TABLE name="CMD_Product" ChineseName="产品信息" PrimaryKey="ProductCode" OrderBy="ProductCode" ViewName="VCMD_PRODUCT">
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="5">
+    <FieldName>ProductCode</FieldName>
+    <FieldTitle>产品编码</FieldTitle>
     <DataType>double</DataType>
   </FIELD>
-  <FIELD ShowInFieldQuery="1" >
-    <FieldName>PRODUCT_NAME</FieldName>
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="3">
+    <FieldName>ProductName</FieldName>
     <FieldTitle>产品名称</FieldTitle>
     <DataType>string</DataType>
   </FIELD>
-  <FIELD ShowInFieldQuery="1" >
-    <FieldName>PRODUCT_FMODEL</FieldName>
-    <FieldTitle>工厂型号</FieldTitle>
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="4">
+    <FieldName>ProductTypeName</FieldName>
+    <FieldTitle>产品类型</FieldTitle>
     <DataType>string</DataType>
   </FIELD>
-  <FIELD ShowInFieldQuery="0" >
-    <FieldName>PRODUCT_CODE</FieldName>
-    <FieldTitle>产品编码</FieldTitle>
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="1">
+    <FieldName>TrainTypeName</FieldName>
+    <FieldTitle>车型</FieldTitle>
     <DataType>string</DataType>
   </FIELD>
-  <FIELD ShowInFieldQuery="0" >
-    <FieldName>PRODUCT_Class</FieldName>
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="2">
+    <FieldName>AxieNo</FieldName>
+    <FieldTitle>车轴编号</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="0" ShowQueryIndex="3">
+    <FieldName>WheelDiameter</FieldName>
+    <FieldTitle>轴径</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="0" ShowQueryIndex="0">
+    <FieldName>LDXC</FieldName>
+    <FieldTitle>轮对修程</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="0" ShowQueryIndex="0">
+    <FieldName>CXFactoryName</FieldName>
     <FieldTitle>产品类别</FieldTitle>
     <DataType>string</DataType>
   </FIELD>
- 
-
 </TABLE>

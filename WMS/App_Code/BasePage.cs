@@ -534,7 +534,7 @@ namespace WMS.App_Code
                     ctls[i].Attributes.Add("ReadOnly", "true");
             }
         }
-
+        //主表显示
         public void SetBtnEnabled(int PageIndex,string SqlCmd,string Filter, int pageSize, GridView dgview, LinkButton btnFirst, LinkButton btnPre, LinkButton btnNext, LinkButton btnLast, LinkButton btnToPage, Label lblCurrentPage, UpdatePanel UpdatePanel1)
         {
             int pageCount = 0;
@@ -592,6 +592,76 @@ namespace WMS.App_Code
 
             }
              
+        }
+
+
+       
+        //子表显示
+        public void MovePage(string strState, GridView dgv, int pageindex, LinkButton btnFirst, LinkButton btnPre, LinkButton btnNext, LinkButton btnLast, LinkButton btnToPage, Label lblPage)
+        {
+            if (strState.ToLower() == "edit")
+            {
+                UpdateTempSub(dgv);
+            }
+
+            int pindex = pageindex;
+            if (pindex < 0) pindex = 0;
+            if (pindex >= dgv.PageCount) pindex = dgv.PageCount - 1;
+            DataTable dt1 = (DataTable)Session[FormID + "_" + strState + "_" + dgv.ID];
+           
+
+            if (dt1.Rows.Count > 0)
+            {
+                dgv.PageIndex = pindex;
+                dgv.DataSource = dt1;
+                dgv.DataBind();
+
+                bool blnvalue = dgv.PageCount > 1 ? true : false;
+                btnLast.Enabled = blnvalue;
+                btnFirst.Enabled = blnvalue;
+                btnToPage.Enabled = blnvalue;
+
+
+                if (dgv.PageIndex >= 1)
+                    btnPre.Enabled = true;
+                else
+                    btnPre.Enabled = false;
+
+                if ((dgv.PageIndex + 1) < dgv.PageCount)
+                    btnNext.Enabled = true;
+                else
+                    btnNext.Enabled = false;
+
+                lblPage.Visible = true;
+                lblPage.Text = "共 [" + dt1.Rows.Count.ToString() + "] 条记录  页次 " + (dgv.PageIndex + 1) + " / " + dgv.PageCount.ToString();
+            }
+            else
+            {
+                DataTable dtNew = dt1.Clone();
+                dtNew.Rows.Add(dtNew.NewRow());
+                dgv.DataSource = dtNew;
+                dgv.DataBind();
+                int columnCount = dgv.Rows[0].Cells.Count;
+                dgv.Rows[0].Cells.Clear();
+                dgv.Rows[0].Cells.Add(new TableCell());
+                dgv.Rows[0].Cells[0].ColumnSpan = columnCount;
+                dgv.Rows[0].Cells[0].Text = "没有明细资料，请新增";
+                dgv.Rows[0].Visible = true;
+
+                btnFirst.Enabled = false;
+                btnPre.Enabled = false;
+                btnNext.Enabled = false;
+                btnLast.Enabled = false;
+                btnToPage.Enabled = false;
+                lblPage.Visible = false;
+            }
+           
+        }
+
+
+        public virtual void UpdateTempSub(GridView dgv)
+        {
+
         }
     }
 }

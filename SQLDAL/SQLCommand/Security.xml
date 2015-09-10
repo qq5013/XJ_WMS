@@ -308,7 +308,7 @@
 
   <Command ID="SelectTmpAutoCode">
     <CommandString>
-      select *  from Sys_TmpAutoCode where {0}
+      select *  from Sys_AutoCode where {0}
     </CommandString>
   </Command>
   

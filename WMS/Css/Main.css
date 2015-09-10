@@ -198,7 +198,7 @@ select
 	border-color: inherit;
 	border-width: 0px;
 	position:relative;   
-    left:3px;   
+    left:0px;   
     top:0px;
     font-family:微软雅黑;   
     font-size:12px;   
@@ -218,4 +218,11 @@ select
 .OperationBar
 {
     background-image: url(../images/bg_op2.jpg);
+}
+.HiddenControl
+{
+	border:0px;
+	width:0px;
+	height:0px;
+	display:none;
 }

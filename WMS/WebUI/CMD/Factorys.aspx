@@ -65,7 +65,7 @@
                                     CssClass="ButtonQuery" Text="查询" OnClientClick="return Search()" 
                                     onclick="btnSearch_Click"></asp:button>&nbsp;&nbsp;
                               <asp:Button ID="btnRefresh" runat="server" CssClass="ButtonRefresh" 
-                                  onclick="btnSearch_Click" OnClientClick="return Refresh()" tabIndex="2" 
+                                   OnClientClick="return Refresh()" tabIndex="2" 
                                   Text="刷新" Width="58px" />
                           
                           </td>
