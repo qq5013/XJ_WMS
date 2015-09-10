@@ -9,15 +9,33 @@
         <link href="~/Css/op.css" type="text/css" rel="stylesheet" /> 
         <script type="text/javascript" src="../../JQuery/jquery-2.1.3.min.js"></script>
         <script type="text/javascript" src= "../../JScript/Common.js"></script>
+        <script type="text/javascript" src="../../JScript/DataProcess.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
                 $(window).resize(function () {
                     resize();
+                    BindEvent();
                 });
             });
             function resize() {
                 var h = document.documentElement.clientHeight - 225;
                 $("#Sub-container").css("height", h);
+            }
+            function BindEvent() {
+                $("[ID$='btnProduct']").bind("click", function () {
+                    var where = "AreaCode='" + $('#ddlAreaCode').val() + "'";
+                    return GetMulSelectValue('CMD_Product', 'hdnMulSelect', where);
+                });
+                $("[ID$='ProductCode']").bind("change", function () {
+                    var txtID = this.id;
+                    var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and ProductCode='" + $('#' + txtID).val() + "'";
+
+                    getWhereBaseData('CMD_Product', txtID + "," + txtID.replace("ProductCode", "ProductName"), 'ProductCode,ProductName', where);
+                });
+                $("[ID$='ProductCode']").bind("dblclick", function () {
+                    var where = "AreaCode='" + $('#ddlAreaCode').val() + "'";
+                    return GetMulSelectValue('CMD_Product', 'hdnMulSelect', where);
+                });
             }
 
 
@@ -73,7 +91,7 @@
                                 入库日期
                         </td>
                         <td  width="25%">
-                                &nbsp;<uc1:Calendar ID="txtBillDate" Width="90%" runat="server"  /></td>
+                                &nbsp;<uc1:Calendar ID="txtBillDate" runat="server"  /></td>
                         <td align="center" class="musttitle" style="width:8%;"  >
                                 入库单号
                         </td>
@@ -94,21 +112,20 @@
                         <td align="center" class="musttitle" style="width:8%;"  >
                                 库区</td>
                         <td  width="25%">
-                                &nbsp;<asp:DropDownList ID="ddlAerea" runat="server" Width="90%">
+                                &nbsp;<asp:DropDownList ID="ddlAreaCode" runat="server" Width="90%">
                             </asp:DropDownList>
                         </td>
                         <td align="center" class="musttitle" style="width:8%;"  >
-                                车型
+                                工厂
                         </td>
                         <td width="25%">
-                                &nbsp;<asp:DropDownList ID="ddlTrainTypeCode" runat="server" Width="90%">
-                            </asp:DropDownList>
+                                &nbsp;<asp:DropDownList ID="ddlFactoryID" runat="server" Width="90%">
+                                </asp:DropDownList>
                         </td>
-                            <td align="center" class="musttitle" style="width:8%;">
-                                工厂</td>
+                        <td align="center"   style="width:8%;">
+                        </td>
                         <td width="26%">
-                        &nbsp;<asp:DropDownList ID="ddlFactoryID" runat="server" Width="90%">
-                            </asp:DropDownList>
+                        &nbsp;
                         </td>
                     </tr>
               
@@ -154,7 +171,7 @@
                                     <asp:Label ID="RowID" runat="server" Text=""></asp:Label>
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Center" />
-                                <HeaderStyle Width="4%" ForeColor="Blue" />
+                                <HeaderStyle Width="4%"  />
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="产品编码">
                                     <ItemTemplate>
@@ -162,7 +179,7 @@
                                         ID="btnProduct"  CssClass="ButtonCss" Width="20px" runat="server"  Text="..." OnClick="btnProduct_Click" />
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Left" />
-                                <HeaderStyle Width="10%" ForeColor="Blue" />
+                                <HeaderStyle Width="10%"  />
                             </asp:TemplateField>
                                 
                                 <asp:TemplateField HeaderText="产品名称">
@@ -170,7 +187,7 @@
                                     <asp:TextBox ID="ProductName" runat="server" Width="98%"  CssClass="TextBox" ></asp:TextBox> 
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Left" />
-                                <HeaderStyle  Width="15%"  ForeColor="Blue"/>
+                                <HeaderStyle  Width="15%" />
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="数量">
                                 <ItemTemplate>
@@ -179,14 +196,14 @@
                                     ondrop="return regInput(this,/^\d+$/,event.dataTransfer.getData('Text'))" onfocus="TextFocus(this);"></asp:TextBox> 
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Left" />
-                                <HeaderStyle Width="8%" ForeColor="Blue" />
+                                <HeaderStyle Width="8%" />
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="备注">
                                 <ItemTemplate>
                                     <asp:TextBox ID="SubMemo" runat="server" Width="98%"  CssClass="TextBox" ></asp:TextBox> 
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Left" />
-                                <HeaderStyle  Width="20%"  ForeColor="Blue"/>
+                                <HeaderStyle  Width="20%" />
                             </asp:TemplateField>
                         </Columns>
                         <PagerSettings Visible="false" />
@@ -250,6 +267,8 @@
                         </td>
                 </tr>
 		    </table>
+
+            <input type="hidden" runat="server" id="hdnMulSelect" /> 
             </ContentTemplate>
         </asp:UpdatePanel>
     </form>

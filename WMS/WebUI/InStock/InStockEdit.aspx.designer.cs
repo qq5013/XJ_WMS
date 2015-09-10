@@ -112,22 +112,13 @@ namespace WMS.WebUI.InStock {
         protected global::System.Web.UI.WebControls.DropDownList ddlBillTypeCode;
         
         /// <summary>
-        /// ddlAerea 控件。
+        /// ddlAreaCode 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlAerea;
-        
-        /// <summary>
-        /// ddlTrainTypeCode 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTrainTypeCode;
+        protected global::System.Web.UI.WebControls.DropDownList ddlAreaCode;
         
         /// <summary>
         /// ddlFactoryID 控件。
@@ -281,5 +272,14 @@ namespace WMS.WebUI.InStock {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtUpdateDate;
+        
+        /// <summary>
+        /// hdnMulSelect 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden hdnMulSelect;
     }
 }

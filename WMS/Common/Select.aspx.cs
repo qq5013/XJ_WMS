@@ -71,13 +71,33 @@ namespace WMS.Common
                         TableView = TableName;
                     }
 
+                    DataTable dtFieldQuery = new DataTable();
+                    DataColumn dc1 = new DataColumn("FieldDisplay", typeof(string));
+                    DataColumn dc2 = new DataColumn("FieldValue", typeof(string));
+                    DataColumn dc3 = new DataColumn("FieldIndex", typeof(int));
+                    dtFieldQuery.Columns.Add(dc1);
+                    dtFieldQuery.Columns.Add(dc2);
+                    dtFieldQuery.Columns.Add(dc3);
 
                     foreach (XmlNode node in nodeTable.ChildNodes)
                     {
                         fieldList.Append(node.ChildNodes[0].InnerText + ",");
                         htFields.Add(node.ChildNodes[0].InnerText, node.ChildNodes[1].InnerText);
                         if (node.Attributes["ShowInFieldQuery"].Value == "1")
-                            this.ddlFieldName.Items.Add(new ListItem(node.ChildNodes[1].InnerText, node.ChildNodes[0].InnerText));
+                        {
+                            DataRow dr = dtFieldQuery.NewRow();
+                            dr.BeginEdit();
+                            dr["FieldDisplay"] = node.ChildNodes[1].InnerText;
+                            dr["FieldValue"] = node.ChildNodes[0].InnerText;
+                            dr["FieldIndex"] = int.Parse(node.Attributes["ShowQueryIndex"].Value);
+                            dr.EndEdit();
+                            dtFieldQuery.Rows.Add(dr);
+                        }
+                    }
+                    DataRow[] drs = dtFieldQuery.Select("", "FieldIndex");
+                   for(int i=0;i<drs.Length;i++)
+                   {
+                       this.ddlFieldName.Items.Add(new ListItem(drs[i]["FieldDisplay"].ToString(), drs[i]["FieldValue"].ToString()));
                     }
                     fieldList.Remove(fieldList.Length - 1, 1);
                     queryFields = fieldList.ToString(); 
@@ -102,6 +122,8 @@ namespace WMS.Common
                     pageIndex=int.Parse(ViewState["pageIndex"].ToString());
                     TableView = ViewState["tableView"].ToString();
                 }
+
+                ScriptManager.RegisterStartupScript(this.UpdatePanel1, this.UpdatePanel1.GetType(), "Resize", "resize();", true);
 
             }
             catch (Exception exp)

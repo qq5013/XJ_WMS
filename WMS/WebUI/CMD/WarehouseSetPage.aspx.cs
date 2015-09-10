@@ -55,7 +55,7 @@ namespace WMS.WebUI.CMD
         //{
             
         //    this.tvWarehouse.Nodes.Clear();
-        //    dtHouse = bll.FillDataTable("Cmd.SelectWarehouse", new DataParameter[] { new DataParameter("{0}", "1=1") });
+        //    dtHouse = bll.FillDataTable("Cmd.SelectWarehouse");
             
         //    //仓库
         //    foreach (DataRow row in dtHouse.Rows)
@@ -67,7 +67,7 @@ namespace WMS.WebUI.CMD
         //        tvWarehouse.Nodes.Add(node);
         //    }
         //    //库区
-        //    DataTable dtTemp = bll.FillDataTable("Cmd.SelectArea", new DataParameter[] { new DataParameter("{0}", "1=1") });
+        //    DataTable dtTemp = bll.FillDataTable("Cmd.SelectArea");
         //    if (dtTemp.Rows.Count > 0)
         //    {
         //        foreach (DataRow r in dtTemp.Rows)
@@ -85,7 +85,7 @@ namespace WMS.WebUI.CMD
         //        }
         //    }
         //    //货架
-        //    dtTemp = bll.FillDataTable("Cmd.SelectShelf", new DataParameter[] { new DataParameter("{0}", "1=1") });
+        //    dtTemp = bll.FillDataTable("Cmd.SelectShelf");
         //    foreach (DataRow r2 in dtTemp.Rows)
         //    {
         //        TreeNode nodeArea = tvWarehouse.FindNode(r2["WAREHOUSE_CODE"].ToString() + "/" + r2["AREA_CODE"].ToString());
@@ -98,7 +98,7 @@ namespace WMS.WebUI.CMD
 
         //    }
         //    //货位
-        //    dtTemp = bll.FillDataTable("Cmd.SelectCell", new DataParameter[] { new DataParameter("{0}", "1=1") });
+        //    dtTemp = bll.FillDataTable("Cmd.SelectCell");
         //    foreach (DataRow r3 in dtTemp.Rows)
         //    {
         //        TreeNode nodeShelf = tvWarehouse.FindNode(r3["WAREHOUSE_CODE"].ToString() + "/" + r3["AREA_CODE"].ToString() + "/" + r3["SHELF_CODE"].ToString());
@@ -127,7 +127,7 @@ namespace WMS.WebUI.CMD
 
         protected void Change()
         {
-            //DataTable dtTemp = bll.FillDataTable("Cmd.SelectArea", new DataParameter[] { new DataParameter("{0}", "1=1") });
+            //DataTable dtTemp = bll.FillDataTable("Cmd.SelectArea");
             //int i = 0;
             //string areatype;
             //this.lblCurrentNode.Text = tvWarehouse.SelectedNode.Text;
@@ -183,7 +183,7 @@ namespace WMS.WebUI.CMD
             //TreeView1.Visible = false;
             //TreeView1.Nodes.Clear();
            
-            //dtHouse = bll.FillDataTable("Cmd.SelectWarehouse", new DataParameter[] { new DataParameter("{0}", "1=1") });
+            //dtHouse = bll.FillDataTable("Cmd.SelectWarehouse");
 
             ////仓库
             //foreach (DataRow row in dtHouse.Rows)
@@ -195,7 +195,7 @@ namespace WMS.WebUI.CMD
             //    TreeView1.Nodes.Add(node);
             //}
 
-            //DataTable dtTemp = bll.FillDataTable("Cmd.SelectArea", new DataParameter[] { new DataParameter("{0}", "1=1") });
+            //DataTable dtTemp = bll.FillDataTable("Cmd.SelectArea");
             //if (dtTemp.Rows.Count > 0)
             //{
             //    foreach (DataRow r in dtTemp.Rows)
@@ -213,7 +213,7 @@ namespace WMS.WebUI.CMD
             //    }
             //}
             ////货架
-            //dtTemp = bll.FillDataTable("Cmd.SelectShelf", new DataParameter[] { new DataParameter("{0}", "1=1") });
+            //dtTemp = bll.FillDataTable("Cmd.SelectShelf");
             //foreach (DataRow r2 in dtTemp.Rows)
             //{
             //    TreeNode nodeArea = TreeView1.FindNode(r2["WAREHOUSE_CODE"].ToString() + "/" + r2["AREA_CODE"].ToString());
@@ -226,7 +226,7 @@ namespace WMS.WebUI.CMD
 
             //}
             ////货位
-            //dtTemp = bll.FillDataTable("Cmd.SelectCell", new DataParameter[] { new DataParameter("{0}", "1=1") });
+            //dtTemp = bll.FillDataTable("Cmd.SelectCell");
             //foreach (DataRow r3 in dtTemp.Rows)
             //{
             //    TreeNode nodeShelf = TreeView1.FindNode(r3["WAREHOUSE_CODE"].ToString() + "/" + r3["AREA_CODE"].ToString() + "/" + r3["SHELF_CODE"].ToString());

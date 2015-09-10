@@ -212,7 +212,7 @@
                     &nbsp;<asp:Label ID="lblPageSub" runat="server" ></asp:Label>
                 </div>
                 <div>
-                    <asp:Button ID="btnReload" runat="server" Text="" OnClick="btnReload_Click"  CssClass="Hidden" />
+                    <asp:Button ID="btnReload" runat="server" Text="" OnClick="btnReload_Click"  CssClass="HiddenControl" />
                     <asp:HiddenField ID="hdnRowIndex" runat="server" Value="0" />
                     <asp:HiddenField ID="hdnRowValue" runat="server"  />
                 </div>

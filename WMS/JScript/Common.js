@@ -144,121 +144,74 @@ function HandleMouseEvent(evt) {
 
 var ClickCount = 1;
 function mykeyDown() {
-    if (isChrome()) {
-        var isie = (document.all) ? true : false;
-        var key;
-        var srcobj;
-        // if the agent is an IE browser, it's easy to do this.
-        if (isie) {
-            key = event.keyCode;
-            srcobj = event.srcElement;
-        }
-        else {
-            key = event.which;
-            srcobj = event.target;
-        }
-        if (key == 13 && srcobj.type != 'button' && srcobj.type != 'submit' && srcobj.type != 'reset' && srcobj.type != 'textarea' && srcobj.type != '') {
-            //event.preventDefault();
-            if (isie)
-                event.keyCode = 9;
-            else {
-                var el = getNextElement(event.target);
-                if (el.type != 'hidden' && el.className != 'TextRead' && el.tagName != "SELECT" && el.className != 'detailtextReadOnly')
-                    ;   //nothing to do here.
-                else
-                    while (el.type == 'hidden' || el.className == 'TextRead' || el.tagName == "SELECT" || el.className == 'detailtextReadOnly')
-                        el = getNextElement(el);
-                if (!el)
-                    return false;
-                else {
-                    if (el.id == "btnSearch") {
-                        el.focus();
-                        ClickCount = 0;
-                        $('#btnSearch').click();
-                        return false;
-                    }
-                    else {
-                        if (el.id == "btnToPageSub1" || el.id == "btnToPageSub2" || el.id == "btnToPage") {
-                            el.focus();
-                            ClickCount = 0;
-                            $('#' + el.id)[0].click();
-                            return false;
-                        } else
-                            el.focus();
-                    }
-                }
-                //把提交按钮retrun 为false
-                return false;
-            }
-        }
-        else if (event.keyCode == 40) {
-            var e = document.activeElement;
-            getNextElementByName(e.id)
-        }
-        else if (event.keyCode == 38) {
-            var e = document.activeElement;
-            getPreElementByName(e.id)
-        }
+    var isie = (document.all) ? true : false;
+    var key;
+    var srcobj;
+    // if the agent is an IE browser, it's easy to do this.
+    if (isie) {
+        key = event.keyCode;
+        srcobj = event.srcElement;
     }
     else {
-        if (event.keyCode == 13) {
-            var e = document.activeElement;
-            if (e.id == "txtMemo" || e.id == "txtReplyContent" || e.id == "txtCardNo" || e.id == "txtDescription" || document.activeElement.tagName == "TEXTAREA")
-                return true;
+        key = event.which;
+        srcobj = event.target;
+    }
+    if (key == 13 && srcobj.type != 'button' && srcobj.type != 'submit' && srcobj.type != 'reset' && srcobj.type != 'textarea' && srcobj.type != '') {
+        //event.preventDefault();
+        if (isie)
+            event.keyCode = 9;
+        else {
+            var el = getNextElement(event.target);
+            if (!el)
+                return false;
+            if (el.type != 'hidden' && el.className != 'TextRead' && el.tagName != "SELECT" && el.className != 'detailtextReadOnly')
+                ;   //nothing to do here.
+            else
+                while (el.type == 'hidden')
+                    el = getNextElement(el);
+            if (el.id == "btnSearch") {
+                el.focus();
+                ClickCount = 0;
+                $('#btnSearch').click();
+                event.returnValue = false;
+                return false;
+            }
             else {
-                if (e.id == "txtContent" || e.id == "txtSearch") {
-                    $('#btnSearch').click();
+                if (el.id == "btnToPageSub1" || el.id == "btnToPageSub2" || el.id == "btnToPage") {
+                    el.focus();
+                    ClickCount = 0;
+                    $('#' + el.id)[0].click();
                     event.returnValue = false;
                     return false;
-                }
-                else {
-
-                    if (e.id == "txtPageNo") {
-                        $('#btnToPage')[0].click();
-                        event.returnValue = false;
-                        return false;
-                    }
-                    else {
-
-                        if (e.id == "txtPageNoSub1") {
-                            $('#btnToPageSub1')[0].click();
-                            event.returnValue = false;
-                            return false;
-                        }
-                        else {
-
-                            if (e.id == "txtPageNoSub2") {
-                                $('#btnToPageSub2')[0].click();
-                                event.returnValue = false;
-                                return false;
-                            } else {
-                                event.keyCode = 9;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        else if (event.keyCode == 8) {
-            if (((document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") && document.activeElement.readOnly) || document.activeElement.tagName == "SELECT") {
-                event.returnValue = false;
-                return false;
-            }
-            if (document.activeElement.tagName != "INPUT" && document.activeElement.tagName != "TEXTAREA") {
-                event.returnValue = false;
-                return false;
+                } else
+                    el.focus();
             }
 
-        }
-        else if (event.keyCode == 40) {
-            var e = document.activeElement;
-            getNextElementByName(e.id)
-        }
-        else if (event.keyCode == 38) {
-            var e = document.activeElement;
-            getPreElementByName(e.id)
+            //把提交按钮retrun 为false
+            return false;
         }
     }
+    else if (event.keyCode == 40) {
+        var e = document.activeElement;
+        getNextElementByName(e.id)
+    }
+    else if (event.keyCode == 38) {
+        var e = document.activeElement;
+        getPreElementByName(e.id)
+    }
+    else if (event.keyCode == 8) {
+        if (((document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") &&
+             document.activeElement.readOnly) || document.activeElement.tagName == "SELECT" || document.activeElement.type == "submit") {
+            event.returnValue = false;
+            return false;
+        }
+        if (document.activeElement.tagName != "INPUT" && document.activeElement.tagName != "TEXTAREA") {
+            event.returnValue = false;
+            return false;
+        }
+
+    }
+
 }
 
 function getNextElementByName(field) {
@@ -322,6 +275,9 @@ function isNumeric(e) {
 
 function getNextElement(field) {
     var form = field.form;
+    if (typeof(form) == "undefined")
+        return null;
+
     for (var e = 0; e < form.elements.length; e++) {
         if (field == form.elements[e])
             break;

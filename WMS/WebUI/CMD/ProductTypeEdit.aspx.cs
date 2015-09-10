@@ -46,7 +46,7 @@ namespace WMS.WebUI.CMD
 
         private void BindDropDownList()
         {
-            DataTable dtArea = bll.FillDataTable("Cmd.SelectArea", new DataParameter[] { new DataParameter("{0}", "1=1") });
+            DataTable dtArea = bll.FillDataTable("Cmd.SelectArea");
             this.ddlAreaCode.DataValueField = "AreaCode";
             this.ddlAreaCode.DataTextField = "AreaName";
             this.ddlAreaCode.DataSource = dtArea;

@@ -46,7 +46,7 @@ namespace WMS.WebUI.CMD
 
         private void BindDropDownList()
         {
-            DataTable dtArea = bll.FillDataTable("Cmd.SelectArea", new DataParameter[] { new DataParameter("{0}", "1=1") });
+            DataTable dtArea = bll.FillDataTable("Cmd.SelectArea");
             this.ddlAreaCode.DataValueField = "AreaCode";
             this.ddlAreaCode.DataTextField = "AreaName";
             this.ddlAreaCode.DataSource = dtArea;
@@ -54,14 +54,14 @@ namespace WMS.WebUI.CMD
 
 
 
-            DataTable ProductType = bll.FillDataTable("Cmd.SelectProductType", new DataParameter[] { new DataParameter("{0}", "1=1") });
+            DataTable ProductType = bll.FillDataTable("Cmd.SelectProductType");
             this.ddlProductTypeCode.DataValueField = "ProductTypeCode";
             this.ddlProductTypeCode.DataTextField = "ProductTypeName";
             this.ddlProductTypeCode.DataSource = ProductType;
             this.ddlProductTypeCode.DataBind();
 
             //ddlTrainTypeCode
-            DataTable TrainType = bll.FillDataTable("Cmd.SelectTrainType", new DataParameter[] { new DataParameter("{0}", "1=1") });
+            DataTable TrainType = bll.FillDataTable("Cmd.SelectTrainType");
             this.ddlTrainTypeCode.DataValueField = "TypeCode";
             this.ddlTrainTypeCode.DataTextField = "TypeName";
             this.ddlTrainTypeCode.DataSource = TrainType;
