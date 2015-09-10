@@ -5385,6 +5385,7 @@
     <Content Include="Images\op\next.png" />
     <Content Include="Images\op\ok.png" />
     <Content Include="Images\op\Previous.png" />
+    <Content Include="Images\op\select.png" />
     <Content Include="Images\top_bg.jpg" />
     <Content Include="Index\Default.aspx" />
     <Content Include="Index\Left.aspx" />
