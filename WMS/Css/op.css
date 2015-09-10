@@ -365,3 +365,19 @@
     line-height:16px;
     vertical-align:middle;
 }
+/* 下载 */
+.ButtonOk
+{
+	font-family: "微软雅黑", "宋体"; 
+    font-size:10pt;  
+    border: 0px #ff0000 solid; 
+    background-color:Transparent;
+    background-image:url(../images/op/ok.jpg); 
+    background-repeat:no-repeat;
+    CURSOR: pointer; 
+    padding-left:20px;
+    font-style: normal ; 
+    height:16px;
+    line-height:16px;
+    vertical-align:middle;
+}

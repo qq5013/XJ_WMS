@@ -45,10 +45,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseObject.cs" />
+    <Compile Include="BasePropertyDescriptor.cs" />
+    <Compile Include="ChineseAttribute.cs" />
     <Compile Include="ConfigHelper.cs" />
     <Compile Include="DBConfigUtil.cs" />
     <Compile Include="DDL.cs" />
     <Compile Include="DESEncrypt.cs" />
+    <Compile Include="DictionaryPropertyDescriptor.cs" />
+    <Compile Include="DictionaryPropertyGridAdapter.cs" />
     <Compile Include="JsonHelper.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Parameter.cs" />

@@ -52,7 +52,7 @@
   <!--货架信息-->
   <Command ID="SelectShelf">
     <CommandString>
-      SELECT * FROM CMD_Shelf where {0} ORDER BY AreaCode,ShelfCode
+      SELECT * FROM CMD_Shelf where {0} ORDER BY ShelfCode,AreaCode
     </CommandString>
   </Command>
   <Command ID="DeleteShelf">
