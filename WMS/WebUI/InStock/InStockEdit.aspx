@@ -52,7 +52,8 @@
                     $("#txtTypeName").focus();
                     return false;
                 }
-                 
+                if (!ChkDelMustValue("dgViewSub1", "ProductCode", "产品型号"))
+                    return false;
                 return true;
             }
            

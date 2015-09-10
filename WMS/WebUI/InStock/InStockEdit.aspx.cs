@@ -154,7 +154,9 @@ namespace WMS.WebUI.InStock
 
                 }
             }
-            UpdateTempSub(this.dgViewSub1);
+            this.dgViewSub1.DataSource = dt;
+            this.dgViewSub1.DataBind();
+            Session[FormID + "_Edit_" + dgViewSub1.ID] = dt;
             MovePage("Edit", this.dgViewSub1, this.dgViewSub1.PageIndex, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
 
         }
@@ -207,8 +209,6 @@ namespace WMS.WebUI.InStock
            
             this.dgViewSub1.DataSource = dt;
             this.dgViewSub1.DataBind();
-            object o = dt.Compute("SUM(Quantity)", "");
-            this.txtTotalQty.Text = o.ToString();
             Session[FormID + "_Edit_dgViewSub1"] = dt;
             MovePage("Edit", this.dgViewSub1, this.dgViewSub1.PageIndex, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
         }
@@ -235,6 +235,9 @@ namespace WMS.WebUI.InStock
                 dr.EndEdit();
             }
             dt1.AcceptChanges();
+
+            object o = dt1.Compute("SUM(Quantity)", "");
+            this.txtTotalQty.Text = o.ToString();
             Session[FormID + "_Edit_" + dgv.ID] = dt1;
         }
 
