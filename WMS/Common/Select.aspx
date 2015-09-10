@@ -136,7 +136,7 @@
 		                </asp:TemplateField>
 		                <asp:TemplateField HeaderText="选取">
 			                <ItemTemplate>
-                                <asp:Button ID="btnSingle" runat="server" Text="选取" CssClass="but"  />
+                                <asp:Button ID="btnSingle" runat="server" Text="选取" CssClass="ButtonSelect"  />
 			                </ItemTemplate>                    
                             <ControlStyle Width="50px" Height="20px" />
 		                </asp:TemplateField>		        
@@ -152,7 +152,7 @@
                 </tr>
                 <tr>
                      <td align="left" style=" width:25%"  >
-                        &nbsp;&nbsp;<asp:Button ID="btnSelect" runat="server" Text="确定" Width="60px" CssClass=" bu" OnClientClick="Select();" />
+                        &nbsp;&nbsp;<asp:Button ID="btnSelect" runat="server" Text="确定" Width="60px" CssClass="ButtonOk" OnClientClick="Select();" />
                     &nbsp;<asp:Button ID="btnClose" runat="server" Text="关闭" Width="60px" CssClass="ButtonExit" OnClientClick="Close()" /></td>
 
                     <td align= "right">
