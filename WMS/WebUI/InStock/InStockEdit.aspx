@@ -73,7 +73,7 @@
                                 入库日期
                         </td>
                         <td  width="25%">
-                                &nbsp;<uc1:Calendar ID="txtBillDate" runat="server" /></td>
+                                &nbsp;<uc1:Calendar ID="txtBillDate" Width="90%" runat="server"  /></td>
                         <td align="center" class="musttitle" style="width:8%;"  >
                                 入库单号
                         </td>

@@ -13,7 +13,19 @@
       ORDER BY BillDate DESC, Main.BillID DESC
     </CommandString>
   </Command>
+
+
+
+  <Command ID="SelectBillDetail">
+    <CommandString>
+      select detail.*,product.ProductName from WMS_BillDetail detail
+      inner join CMD_Product product on detail.ProductCode=product.ProductCode
+      where {0}
+      ORDER BY RowID
+    </CommandString>
+  </Command>
   
+
   <Command ID="SelectSchedule">
     <CommandString>
       select * from View_WMS_Schedule

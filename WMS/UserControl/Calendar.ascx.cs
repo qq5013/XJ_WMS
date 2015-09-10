@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.ComponentModel;
+using System.Web.UI.WebControls;
 
 namespace WMS.UserControl
 {
@@ -15,6 +17,7 @@ namespace WMS.UserControl
         bool _ym = false;
         bool _readonly = false;
         string _changed = "";
+        
         public bool ShowYm
         {
             get
@@ -26,6 +29,8 @@ namespace WMS.UserControl
                 _ym = value;
             }
         }
+        
+
         /// <summary>
         /// 只讀
         /// </summary>
