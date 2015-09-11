@@ -54,6 +54,8 @@
                 }
                 if (!ChkDelMustValue("dgViewSub1", "ProductCode", "产品型号"))
                     return false;
+                if (!ChkDelMustNumericValue("dgViewSub1", "Quantity", "计划数量"))
+                    return false;
                 return true;
             }
            
@@ -177,7 +179,7 @@
                             <asp:TemplateField HeaderText="产品编码">
                                     <ItemTemplate>
                                     <asp:TextBox ID="ProductCode" runat="server"  Width="80%" CssClass="TextBox"></asp:TextBox><asp:Button
-                                        ID="btnProduct"  CssClass="ButtonCss" Width="20px" runat="server"  Text="..." OnClick="btnProduct_Click" />
+                                        ID="btnProduct"  CssClass="ButtonOption" Width="20px" runat="server"  Text="..." OnClick="btnProduct_Click" />
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Left" />
                                 <HeaderStyle Width="10%"  />
@@ -185,7 +187,7 @@
                                 
                                 <asp:TemplateField HeaderText="产品名称">
                                 <ItemTemplate>
-                                    <asp:TextBox ID="ProductName" runat="server" Width="98%"  CssClass="TextBox" ></asp:TextBox> 
+                                    <asp:TextBox ID="ProductName" runat="server" Width="98%"  CssClass="TextRead" ></asp:TextBox> 
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Left" />
                                 <HeaderStyle  Width="15%" />

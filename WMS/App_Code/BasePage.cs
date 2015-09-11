@@ -535,7 +535,7 @@ namespace WMS.App_Code
             }
         }
         //主表显示
-        public void SetBtnEnabled(int PageIndex,string SqlCmd,string Filter, int pageSize, GridView dgview, LinkButton btnFirst, LinkButton btnPre, LinkButton btnNext, LinkButton btnLast, LinkButton btnToPage, Label lblCurrentPage, UpdatePanel UpdatePanel1)
+        public DataTable SetBtnEnabled(int PageIndex,string SqlCmd,string Filter, int pageSize, GridView dgview, LinkButton btnFirst, LinkButton btnPre, LinkButton btnNext, LinkButton btnLast, LinkButton btnToPage, Label lblCurrentPage, UpdatePanel UpdatePanel1)
         {
             int pageCount = 0;
             int totalCount = 0;
@@ -591,6 +591,7 @@ namespace WMS.App_Code
                 lblCurrentPage.Text = "共 [" + totalCount.ToString() + "] 笔记录  第 [" + ViewState["CurrentPage"] + "] 页  共 [" + pageCount.ToString() + "] 页";
 
             }
+            return dtView;
              
         }
 
@@ -606,6 +607,7 @@ namespace WMS.App_Code
 
             int pindex = pageindex;
             if (pindex < 0) pindex = 0;
+            
             if (pindex >= dgv.PageCount) pindex = dgv.PageCount - 1;
             DataTable dt1 = (DataTable)Session[FormID + "_" + strState + "_" + dgv.ID];
            

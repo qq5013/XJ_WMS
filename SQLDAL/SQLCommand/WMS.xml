@@ -5,17 +5,20 @@
     <CommandString>
       select main.*,area.AreaName,billtype.BillTypeName,TrainType.TypeName,Facotry.FactoryName
       from WMS_BillMaster main
-      inner join CMD_BillType BillType on main.BillTypeCode=BillType.BillTypeCode
-      inner join CMD_TrainType TrainType on main.TrainTypeCode=TrainType.TypeCode
-      inner join CMD_Area area on main.AreaCode=area.AreaCode
+      left join CMD_BillType BillType on main.BillTypeCode=BillType.BillTypeCode
+      left join CMD_TrainType TrainType on main.TrainTypeCode=TrainType.TypeCode
+      left join CMD_Area area on main.AreaCode=area.AreaCode
       left join CMD_Factory Facotry on main.FactoryID=Facotry.FactoryID
       where {0}
       ORDER BY BillDate DESC, Main.BillID DESC
     </CommandString>
   </Command>
-
-
-
+  <Command ID="DeleteBillMaster">
+    <CommandString>
+      delete from WMS_BillMaster where BillID in ({0})
+    </CommandString>
+  </Command>
+  
   <Command ID="SelectBillDetail">
     <CommandString>
       select detail.*,product.ProductName from WMS_BillDetail detail
@@ -24,6 +27,45 @@
       ORDER BY RowID
     </CommandString>
   </Command>
+
+  <Command ID="DeleteBillDetail">
+    <CommandString>
+      delete from  WMS_BillDetail where {0}
+    </CommandString>
+  </Command>
+  
+
+  <!--入库单-->
+  <Command ID="InsertInStockBill">
+    <CommandString>
+      insert into WMS_BillMaster(BillID,BillDate,AreaCode,BillTypeCode,FactoryID,Memo,Creator,CreateDate,Updater,UpdateDate)
+      values(@BillID,@BillDate,@AreaCode,@BillTypeCode,@FactoryID,@Memo,@Creator,GETDATE(),@Updater,GETDATE())
+    </CommandString>
+  </Command>
+  <Command ID="UpdateInStock">
+    <CommandString>
+      update WMS_BillMaster set BillDate=@BillDate, AreaCode=@AreaCode,BillTypeCode=@BillTypeCode,FactoryID=@FactoryID,Memo=@Memo,Updater=@Updater,UpdateDate=getdate() where {0}
+    </CommandString>
+  </Command>
+  <Command ID="InsertInStockDetail">
+    <CommandString>
+      insert into WMS_BillDetail(BillID,RowID,ProductCode,Quantity,Memo)
+      values(@BillID,@RowID,@ProductCode,@Quantity,@Memo)
+    </CommandString>
+  </Command>
+  <Command ID="UpdateBillDetail">
+    <CommandString>
+      update WMS_BillDetail set BillID=@BillID,RowID=@RowID,ProductCode=@ProductCode,Quantity=@Quantity,Barcode=@Barcode,CellCode=@CellCode,NewCellCode=@NewCellCode,Memo=@Memo where {0}
+    </CommandString>
+  </Command>
+
+  <Command ID="UpdateCheckInStockBill">
+    <CommandString>
+       update WMS_BillMaster set Checker=@Checker,CheckDate={0},State=@State where BillID=@BillID
+    </CommandString>
+  </Command>
+  
+ 
   
 
   <Command ID="SelectSchedule">

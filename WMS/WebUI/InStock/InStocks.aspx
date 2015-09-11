@@ -108,10 +108,6 @@
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="TypeName" HeaderText="车型" SortExpression="TypeName">
-                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
-                                <HeaderStyle Wrap="False" />
-                            </asp:BoundField>
                             <asp:BoundField DataField="FactoryName" HeaderText="工厂" SortExpression="FactoryName">
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
@@ -122,6 +118,19 @@
                                 <ItemStyle HorizontalAlign="Left" Width="15%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
+                             <asp:BoundField DataField="Checker" HeaderText="审核人员" 
+                                SortExpression="Checker"  >
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:TemplateField HeaderText="审核日期" SortExpression="CheckDate">
+                                <ItemTemplate>
+                                    <%# ToYMD(DataBinder.Eval(Container.DataItem, "CheckDate"))%>
+                                </ItemTemplate>
+                                <HeaderStyle Wrap="False" />
+                                <ItemStyle HorizontalAlign="Left" VerticalAlign="Middle" Wrap="False" />
+                            </asp:TemplateField>
+
                              <asp:BoundField DataField="Creator" HeaderText="建单人员" 
                                 SortExpression="Creator"  >
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
@@ -160,7 +169,7 @@
 					        onpaste="return regInput(this,/^\d+$/,window.clipboardData.getData('Text'))" ondrop="return regInput(this,/^\d+$/,event.dataTransfer.getData('Text'))"
 					        runat="server" Width="56px" CssClass="TextBox" ></asp:textbox>
                     &nbsp;<asp:linkbutton id="btnToPage" runat="server" onclick="btnToPage_Click" Text="跳转"></asp:linkbutton>
-                    &nbsp;<asp:DropDownList ID="ddlPageSize" runat="server" AutoPostBack="True" onselectedindexchanged="ddlPageSize_SelectedIndexChanged" Visible="false"></asp:DropDownList>
+                    &nbsp;<asp:DropDownList ID="ddlPageSize" runat="server" AutoPostBack="True"  Visible="false"></asp:DropDownList>
                     &nbsp;<asp:Label ID="lblCurrentPage" runat="server" ></asp:Label>
                 </div>
                  <table class="maintable" cellpadding="0" cellspacing="0" style="width: 100%; height:24px">
@@ -208,7 +217,7 @@
 					        onpaste="return regInput(this,/^\d+$/,window.clipboardData.getData('Text'))" ondrop="return regInput(this,/^\d+$/,event.dataTransfer.getData('Text'))"
 					        runat="server" Width="56px" CssClass="TextBox" ></asp:textbox>
                     &nbsp;<asp:linkbutton id="btnToPageSub" runat="server" onclick="btnToPage_Click" Text="跳转"></asp:linkbutton>
-                    &nbsp;<asp:DropDownList ID="ddlPageSizeSub" runat="server" AutoPostBack="True" onselectedindexchanged="ddlPageSize_SelectedIndexChanged" Visible="false"></asp:DropDownList>
+                    &nbsp;<asp:DropDownList ID="ddlPageSizeSub" runat="server" AutoPostBack="True" Visible="false"></asp:DropDownList>
                     &nbsp;<asp:Label ID="lblPageSub" runat="server" ></asp:Label>
                 </div>
                 <div>

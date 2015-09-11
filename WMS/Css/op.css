@@ -230,8 +230,9 @@
     background-image:url('../images/op/priv_0.gif'); 
     background-repeat:no-repeat;
     CURSOR: pointer; 
-    padding-left:20px;
+    padding-left:18px;
     font-style: normal;
+    height:16px;
     vertical-align:middle;
 }
 
@@ -245,7 +246,7 @@
     background-image:url(../images/op/priv_2.gif); 
     background-repeat:no-repeat;
     CURSOR: pointer; 
-    padding-left:10px;
+    padding-left:18px;
     font-style: normal ; 
     height:16px;
     line-height:16px;
@@ -274,7 +275,7 @@
 
 .ButtonOption
 {
-    border-bottom: #ffffff 0px solid;  
+    border-bottom: #93bee2 1px solid;  
     BORDER-LEFT: #93bee2 1px solid;  
     BORDER-RIGHT: #93bee2 1px solid;  
     BORDER-TOP: #93bee2 1px solid; 

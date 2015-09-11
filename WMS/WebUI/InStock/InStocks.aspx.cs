@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using IDAL;
- 
+using System.Drawing;
 
 namespace WMS.WebUI.InStock
 {
@@ -17,28 +17,37 @@ namespace WMS.WebUI.InStock
         {
             if (!IsPostBack)
             {
-                ViewState["filter"] = "1=1";
+                ViewState["filter"] = "BillID like 'IS%'";
                 ViewState["CurrentPage"] = 1;
 
                 try
                 {
-                    SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()),SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+                   DataTable dt= SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()),SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+                   SetBindDataSub(dt);
                 }
                 catch (Exception exp)
                 {
                     WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, exp.Message);
                 }
 
-                writeJsvar(FormID, SqlCmd, "");
+               
             }
-
+            writeJsvar(FormID, SqlCmd, "");
             ScriptManager.RegisterStartupScript(this.UpdatePanel1, this.UpdatePanel1.GetType(), "Resize", "resize();", true);
 
 
         }
         protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                if (e.Row.RowIndex == Convert.ToInt32(this.hdnRowIndex.Value))
+                {
+                    e.Row.BackColor = ColorTranslator.FromHtml("#60c0ff");
+                }
+                e.Row.Attributes.Add("onclick", string.Format("$('#hdnRowValue').val('{1}');selectRow({0});", e.Row.RowIndex, ((HyperLink)e.Row.Cells[2].FindControl("HyperLink1")).Text));
+                e.Row.Attributes.Add("style", "cursor:pointer;");
+            }
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -46,7 +55,7 @@ namespace WMS.WebUI.InStock
 
             try
             {
-                ViewState["filter"] = " Flag=1 " + " and " + string.Format("{0} like '%{1}%'", this.ddlField.SelectedValue, this.txtSearch.Text.Trim().Replace("'", ""));
+                ViewState["filter"] = " BillID like 'IS%' " + " and " + string.Format("{0} like '%{1}%'", this.ddlField.SelectedValue, this.txtSearch.Text.Trim().Replace("'", ""));
                 ViewState["CurrentPage"] = 1;
                 SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
 
@@ -90,26 +99,30 @@ namespace WMS.WebUI.InStock
         protected void btnFirst_Click(object sender, EventArgs e)
         {
             ViewState["CurrentPage"] = 1;
-            SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
-
+           DataTable dt= SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+           SetBindDataSub(dt);
         }
+      
 
         protected void btnPre_Click(object sender, EventArgs e)
         {
             ViewState["CurrentPage"] = int.Parse(ViewState["CurrentPage"].ToString()) - 1;
-            SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+           DataTable dt= SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+           SetBindDataSub(dt);
         }
 
         protected void btnNext_Click(object sender, EventArgs e)
         {
             ViewState["CurrentPage"] = int.Parse(ViewState["CurrentPage"].ToString()) + 1;
-            SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+           DataTable dt= SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+           SetBindDataSub(dt);
         }
 
         protected void btnLast_Click(object sender, EventArgs e)
         {
             ViewState["CurrentPage"] = 0;
-            SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+            DataTable dt= SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+            SetBindDataSub(dt);
         }
 
         protected void btnToPage_Click(object sender, EventArgs e)
@@ -120,22 +133,51 @@ namespace WMS.WebUI.InStock
                 PageIndex = 1;
 
             ViewState["CurrentPage"] = PageIndex;
-            SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+            DataTable dt = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+            SetBindDataSub(dt);
         }
-        protected void ddlPageSize_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void SetBindDataSub(DataTable dt)
         {
-
+            string BillID = "";
+            if (dt.Rows.Count > 0)
+            {
+                BillID = dt.Rows[0]["BillID"].ToString(); 
+            }
+            BLL.BLLBase bll = new BLL.BLLBase();
+            DataTable dtSub = bll.FillDataTable("WMS.SelectBillDetail", new DataParameter[] { new DataParameter("{0}", string.Format("BillID='{0}'", BillID)) });
+            Session[FormID + "_S_GridView2"] = dtSub;
+            this.GridView2.DataSource = dtSub;
+            this.GridView2.DataBind();
+            MovePage("S", this.GridView2, 0, btnFirstSub, btnPreSub, btnNextSub, btnLastSub, btnToPageSub, lblPageSub);
         }
-
+        private void BindDataSub(string BillID)
+        {
+            BLL.BLLBase bll = new BLL.BLLBase();
+            DataTable dtSub = bll.FillDataTable("WMS.SelectBillDetail", new DataParameter[] { new DataParameter("{0}", string.Format("BillID='{0}'", BillID)) });
+            Session[FormID + "_S_GridView2"] = dtSub;
+            this.GridView2.DataSource = dtSub;
+            this.GridView2.DataBind();
+            MovePage("S", this.GridView2, 0, btnFirstSub, btnPreSub, btnNextSub, btnLastSub, btnToPageSub, lblPageSub);
+        }
+       
         #endregion
-
-
 
 
         protected void btnReload_Click(object sender, EventArgs e)
         {
-        
-        
+            int i = Convert.ToInt32(this.hdnRowIndex.Value);
+            BindDataSub(this.hdnRowValue.Value);
+            for (int j = 0; j < this.GridView1.Rows.Count; j++)
+            {
+                if (j % 2 == 0)
+                    this.GridView1.Rows[j].BackColor = ColorTranslator.FromHtml("#ffffff");
+                else
+                    this.GridView1.Rows[j].BackColor = ColorTranslator.FromHtml("#E9F2FF");
+                if (j == i)
+                    this.GridView1.Rows[j].BackColor = ColorTranslator.FromHtml("#60c0ff");
+            }
+         
         }
 
        

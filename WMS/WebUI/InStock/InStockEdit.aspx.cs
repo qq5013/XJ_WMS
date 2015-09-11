@@ -92,8 +92,10 @@ namespace WMS.WebUI.InStock
 
         private void BindDataSub()
         {
-            DataTable dt = bll.FillDataTable("WMS.SelectBillDetail");
+            DataTable dt = bll.FillDataTable("WMS.SelectBillDetail", new DataParameter[] { new DataParameter("{0}",string.Format("BillID='{0}'", this.txtID.Text)) });
             Session[FormID + "_Edit_dgViewSub1"] = dt;
+            this.dgViewSub1.DataSource = dt;
+            this.dgViewSub1.DataBind();
             MovePage("Edit", this.dgViewSub1, 0, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
 
         }
@@ -235,6 +237,10 @@ namespace WMS.WebUI.InStock
                 dr.EndEdit();
             }
             dt1.AcceptChanges();
+            if (dt1.Rows.Count > 0)
+                this.ddlAreaCode.Enabled = true;
+            else
+                this.ddlAreaCode.Enabled = false;
 
             object o = dt1.Compute("SUM(Quantity)", "");
             this.txtTotalQty.Text = o.ToString();
@@ -243,35 +249,55 @@ namespace WMS.WebUI.InStock
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-
+            UpdateTempSub(this.dgViewSub1);
+            string[] Commands = new string[3];
+            DataParameter[] para;
 
             if (strID == "") //新增
             {
-                int Count = bll.GetRowCount("CMD_BillType", string.Format("BillTypeCode='{0}'", this.txtID.Text));
+                int Count = bll.GetRowCount("WMS_BillMaster", string.Format("BillID='{0}'", this.txtID.Text.Trim()));
                 if (Count > 0)
                 {
-                    WMS.App_Code.JScript.Instance.ShowMessage(this.Page, "该类型编码已经存在！");
+                    WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel1, "该入库已经存在！");
                     return;
                 }
+                para = new DataParameter[] { 
+                                             new DataParameter("@BillID", this.txtID.Text.Trim()),
+                                             new DataParameter("@BillDate", this.txtBillDate.DateValue),
+                                             new DataParameter("@BillTypeCode",this.ddlBillTypeCode.SelectedValue),
+                                             new DataParameter("@AreaCode",this.ddlAreaCode.SelectedValue),
+                                             new DataParameter("@FactoryID",this.ddlFactoryID.SelectedValue),
+                                             new DataParameter("@Memo", this.txtMemo.Text.Trim()),
+                                             new DataParameter("@Creator", Session["EmployeeCode"].ToString()),
+                                             new DataParameter("@Updater", Session["EmployeeCode"].ToString())
+                                             
+                                              };
+                Commands[0] = "WMS.InsertInStockBill";
 
-                bll.ExecNonQuery("Cmd.InsertBillType", new DataParameter[] { 
-                                                                                new DataParameter("@BillTypeCode", this.txtID.Text.Trim()),
-                                                                              
-                                                                                new DataParameter("@Flag", "1"),
-                                                                                new DataParameter("@TaskType", "11"),
-                                                                                new DataParameter("@TaskLevel", 1),
-                                                                                new DataParameter("@Memo", this.txtMemo.Text.Trim()),
-                                                                                new DataParameter("@Creator", Session["EmployeeCode"].ToString()),
-                                                                                new DataParameter("@Updater", Session["EmployeeCode"].ToString())
-                                                                              });
             }
             else //修改
             {
-                bll.ExecNonQuery("Cmd.UpdateTrainType", new DataParameter[] {   
-                                                                                 new DataParameter("@Memo", this.txtMemo.Text.Trim()) ,
-                                                                                 new DataParameter("@Updater", Session["EmployeeCode"].ToString()),
-                                                                                 new DataParameter("@BillTypeCode", this.txtID.Text.Trim())
-                                                                               });
+                para = new DataParameter[] { 
+                                             new DataParameter("@BillDate", this.txtBillDate.DateValue),
+                                             new DataParameter("@BillTypeCode",this.ddlBillTypeCode.SelectedValue),
+                                             new DataParameter("@AreaCode",this.ddlAreaCode.SelectedValue),
+                                             new DataParameter("@FactoryID",this.ddlFactoryID.SelectedValue),
+                                             new DataParameter("@Memo", this.txtMemo.Text.Trim()),
+                                             new DataParameter("@Updater", Session["EmployeeCode"].ToString()),
+                                             new DataParameter("{0}",string.Format("BillID='{0}'", this.txtID.Text.Trim())) };
+                Commands[0] = "WMS.UpdateInStock";
+            }
+            try
+            {
+                DataTable dt = (DataTable)Session[FormID + "_Edit_dgViewSub1"];
+                Commands[1] = "WMS.DeleteBillDetail";
+                Commands[2] = "WMS.InsertInStockDetail";
+                bll.ExecTran(Commands, para, "BillID", new DataTable[] { dt });
+            }
+            catch (Exception ex)
+            {
+                WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel1, ex.Message);
+                return;
             }
 
             Response.Redirect(FormID + "View.aspx?SubModuleCode=" + SubModuleCode + "&FormID=" + Server.UrlEncode(FormID) + "&SqlCmd=" + SqlCmd + "&ID=" + Server.UrlEncode(this.txtID.Text));
