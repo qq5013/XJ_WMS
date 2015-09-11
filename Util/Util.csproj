@@ -49,6 +49,7 @@
     <Compile Include="BasePropertyDescriptor.cs" />
     <Compile Include="ChineseAttribute.cs" />
     <Compile Include="ConfigHelper.cs" />
+    <Compile Include="ConvertStringChar.cs" />
     <Compile Include="DBConfigUtil.cs" />
     <Compile Include="DDL.cs" />
     <Compile Include="DESEncrypt.cs" />
