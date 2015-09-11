@@ -152,8 +152,8 @@
                 </tr>
                 <tr>
                      <td align="left" style=" width:25%"  >
-                        &nbsp;&nbsp;<asp:Button ID="btnSelect" runat="server" Text="确定" Width="60px" CssClass="ButtonOk" OnClientClick="Select();" />
-                    &nbsp;<asp:Button ID="btnClose" runat="server" Text="关闭" Width="60px" CssClass="ButtonExit" OnClientClick="Close()" /></td>
+                        &nbsp;&nbsp;<asp:Button ID="btnSelect" runat="server" Text="确定" Width="60px" CssClass="ButtonOk" OnClientClick="return Select();" />
+                    &nbsp;<asp:Button ID="btnClose" runat="server" Text="关闭" Width="60px" CssClass="ButtonExit" OnClientClick="return Close();" /></td>
 
                     <td align= "right">
                         <asp:LinkButton ID="btnFirst" runat="server" OnClick="btnFirst_Click" >首页</asp:LinkButton>&nbsp;

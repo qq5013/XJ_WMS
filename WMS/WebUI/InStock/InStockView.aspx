@@ -9,6 +9,18 @@
     <link href="~/Css/op.css" type="text/css" rel="stylesheet" />
     <script type="text/javascript" src="../../JQuery/jquery-2.1.3.min.js"></script>
     <script type="text/javascript" src= "../../JScript/Common.js"></script> 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(window).resize(function () {
+                resize();
+                BindEvent();
+            });
+        });
+        function resize() {
+            var h = document.documentElement.clientHeight - 195;
+            $("#Sub-container").css("height", h);
+        }
+     </script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -51,70 +63,171 @@
                         </td>
                     </tr>
                  </table>
-                 <table id="Table1" class="maintable"  width="100%" align="center" cellspacing="0" cellpadding="0" bordercolor="#ffffff" border="1"
-				     runat="server">			
-				     <tr>
+                   <table id="Table1" class="maintable"  width="100%" align="center" cellspacing="0" cellpadding="0" bordercolor="#ffffff" border="1"
+				         runat="server">			
+				    <tr>
                         <td align="center" class="musttitle" style="width:8%;"  >
-                                类型编码
+                                入库日期
                         </td>
-                        <td  width="30%">
-                                &nbsp;<asp:TextBox ID="txtID" runat="server"   CssClass="TextRead" Width="40%" MaxLength="10" 
-                                    ReadOnly="True"  ></asp:TextBox>
+                        <td  width="25%">
+                                &nbsp;<asp:TextBox ID="txtBillDate" runat="server"  CssClass="TextRead" 
+                                    Width="90%" MaxLength="20" ReadOnly="True" ></asp:TextBox>
                         </td>
                         <td align="center" class="musttitle" style="width:8%;"  >
-                                类型名称
+                                入库单号
                         </td>
-                        <td width="30%">
-                                &nbsp;<asp:TextBox ID="txtBillTypeName" runat="server"  
-                                    CssClass="TextRead" Width="42%" MaxLength="30" ReadOnly="True"></asp:TextBox> 
+                        <td width="25%">
+                                &nbsp;<asp:TextBox ID="txtID" 
+                                    runat="server"  CssClass="TextRead" Width="90%" 
+                                    MaxLength="20" ReadOnly="True" ></asp:TextBox> 
                         </td>
-                         
+                            <td align="center" class="musttitle" style="width:8%;">
+                                入库类型</td>
+                        <td width="26%">
+                            &nbsp;<asp:DropDownList ID="ddlBillTypeCode" runat="server" Width="90%" 
+                                Enabled="False">
+                            </asp:DropDownList>
+                    
+                        </td>
                     </tr>
-                    
-                    
                     <tr>
-                        <td align="center"  class="smalltitle" style="width:8%;">
+                        <td align="center" class="musttitle" style="width:8%;"  >
+                                库区</td>
+                        <td  width="25%">
+                                &nbsp;<asp:DropDownList ID="ddlAreaCode" runat="server" Width="90%" 
+                                    Enabled="False">
+                            </asp:DropDownList>
+                        </td>
+                        <td align="center" class="musttitle" style="width:8%;"  >
+                                工厂
+                        </td>
+                        <td width="25%">
+                                &nbsp;<asp:DropDownList ID="ddlFactoryID" runat="server" Width="90%" 
+                                    Enabled="False">
+                                </asp:DropDownList>
+                        </td>
+                        <td align="center" class="smalltitle"  style="width:8%;">
+                            审核日期
+                        </td>
+                        <td width="26%">
+                        &nbsp;<asp:TextBox ID="txtCheckDate" runat="server" CssClass="TextRead" Width="70%" 
+                                ReadOnly="True"></asp:TextBox>&nbsp;&nbsp;<asp:Button ID="btnCheck" 
+                                runat="server" Text="审核" CssClass="ButtonAudit" 
+                                onclick="btnCheck_Click"  />
+                        </td>
+                    </tr>
+              
+                    <tr style="height:50px">
+                        <td align="center" class="smalltitle"  >
                             备注
                         </td>
-                        <td colspan="3">
+                        <td colspan="5"  valign="middle" >
                             &nbsp;<asp:TextBox ID="txtMemo" runat="server" CssClass="TextRead" 
-                                TextMode="MultiLine" Height="102px" Width="74%" ReadOnly="True"></asp:TextBox>
+                                TextMode="MultiLine" Height="40px" Width="97%" ReadOnly="True"></asp:TextBox>
                         </td>
                     </tr>
+                </table>
+                 <div id="Sub-container" style="overflow: auto; width: 100%; height: 280px" >
+                    <asp:GridView ID="dgViewSub1" runat="server" AutoGenerateColumns="False" SkinID="GridViewSkin"
+                        AllowPaging="True" Width="98%" PageSize="10" onrowdatabound="dgViewSub1_RowDataBound" >
+                        <Columns>
+                            
+
+                             <asp:BoundField DataField="RowID" HeaderText="序号" SortExpression="RowID">
+                                <ItemStyle HorizontalAlign="Left" Width="4%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="ProductCode" HeaderText="产品编码" SortExpression="ProductCode">
+                                <ItemStyle HorizontalAlign="Left" Width="4%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="ProductName" HeaderText="产品名称" SortExpression="ProductName">
+                                <ItemStyle HorizontalAlign="Left" Width="4%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="Quantity" HeaderText="数量" SortExpression="Quantity">
+                                <ItemStyle HorizontalAlign="Left" Width="4%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="Memo" HeaderText="备注" SortExpression="Memo">
+                                <ItemStyle HorizontalAlign="Left" Width="4%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                        </Columns>
+                        <PagerSettings Visible="false" />
+                    </asp:GridView>
+                </div>
+                <table  class=" maintable" style="width:100%; height:25px" > 
                     <tr>
-                      <td align="center"  class="smalltitle" style="width:8%;">
-                            建单人员
-                      </td> 
-                      <td>
-                        &nbsp;<asp:TextBox ID="txtCreator" runat="server"  
-                              CssClass="TextRead" Width="40%" ReadOnly="True"  ></asp:TextBox> 
-                      </td>
-                      <td align="center" class="smalltitle" style="width:8%;">
-                            建单日期
-                      </td> 
-                      <td>
-                        &nbsp;<asp:TextBox ID="txtCreatDate" runat="server"  
-                              CssClass="TextRead" Width="42%" ReadOnly="True"  ></asp:TextBox> 
-                      </td>
+                         <td align="center"  style="width:8%;" class="smalltitle">
+                            审核人员
+                        </td>
+                        <td style="width:17%">
+                            &nbsp;<asp:TextBox ID="txtChecker" runat="server" CssClass="TextRead" Height="16px" ReadOnly="True" Width="90%" style="text-align:right"></asp:TextBox>
+                        </td> 
+
+
+                        <td align="center"  style="width:8%;" class="smalltitle">
+                            数量统计
+                        </td>
+                        <td style="width:17%">
+                            &nbsp;<asp:TextBox ID="txtTotalQty" runat="server" CssClass="TextRead" Height="16px" ReadOnly="True" Width="90%" style="text-align:right"></asp:TextBox>
+                        </td>
+                       
+                        <td align="right">
+                            
+                            <asp:LinkButton ID="btnFirstSub1" runat="server"  
+                                        Text="首页" onclick="btnFirstSub1_Click"></asp:LinkButton> 
+                                            &nbsp;<asp:LinkButton ID="btnPreSub1" runat="server"  
+                                    Text="上一页" onclick="btnPreSub1_Click"></asp:LinkButton> 
+                                    &nbsp;<asp:LinkButton ID="btnNextSub1" runat="server" 
+                                    Text="下一页" onclick="btnNextSub1_Click"></asp:LinkButton> 
+                            &nbsp;<asp:LinkButton ID="btnLastSub1" runat="server"  
+                                        Text="尾页" onclick="btnLastSub1_Click"></asp:LinkButton> 
+                    &nbsp;<asp:textbox id="txtPageNoSub1" onkeypress="return regInput(this,/^\d+$/,String.fromCharCode(event.keyCode))"
+					                onpaste="return regInput(this,/^\d+$/,window.clipboardData.getData('Text'))" ondrop="return regInput(this,/^\d+$/,event.dataTransfer.getData('Text'))"
+					                runat="server" Width="56px" CssClass="TextBox" >
+                                    </asp:textbox>&nbsp;<asp:linkbutton id="btnToPageSub1" runat="server" Text="跳转" onclick="btnToPageSub1_Click"></asp:linkbutton>
+                                &nbsp;
+                                <asp:Label ID="lblCurrentPageSub1" runat="server" ></asp:Label>&nbsp;&nbsp; 
+                            </td>
+                        <td width="1%">
+                        </td>
                     </tr>
+                </table>
+                <table  class="maintable"   style=" width:100%; height:25px" align="center" cellspacing="0" cellpadding="0" border="1">
                     <tr>
-                      <td align="center"  class="smalltitle" style="width:8%;">
+                        <td align="center"  class="smalltitle" style="width:8%;">
+                            建单人员
+                        </td> 
+                        <td style="width:17%">
+                        &nbsp;<asp:TextBox ID="txtCreator" runat="server"  CssClass="TextRead" Width="90%" 
+                                ReadOnly="True"  ></asp:TextBox> 
+                        </td>
+                        <td align="center" class="smalltitle" style="width:8%;">
+                            建单日期
+                        </td> 
+                        <td style="width:17%">
+                        &nbsp;<asp:TextBox ID="txtCreatDate" runat="server"  CssClass="TextRead" 
+                                Width="90%" ReadOnly="True"  ></asp:TextBox> 
+                        </td>
+                        <td align="center"  class="smalltitle" style="width:8%;">
                             修改人员
-                      </td> 
-                      <td>
-                         &nbsp;<asp:TextBox ID="txtUpdater" runat="server"  
-                              CssClass="TextRead" Width="40%" ReadOnly="True"  ></asp:TextBox> 
-                      </td>
-                      <td align="center"  class="smalltitle" style="width:8%;">
+                        </td> 
+                        <td style="width:17%">
+                            &nbsp;<asp:TextBox ID="txtUpdater" runat="server"  CssClass="TextRead" 
+                                Width="90%" ReadOnly="True"  ></asp:TextBox> 
+                        </td>
+                        <td align="center"  class="smalltitle" style="width:8%;">
                             修改日期
-                      </td> 
-                      <td>
-                        &nbsp;<asp:TextBox ID="txtUpdateDate" runat="server"  
-                              CssClass="TextRead" Width="42%" ReadOnly="True"  ></asp:TextBox> 
-                      </td>
-                    </tr>		
-		        </table>
-                
+                        </td> 
+                        <td style="width:17%">
+                        &nbsp;<asp:TextBox ID="txtUpdateDate" runat="server" CssClass="TextRead" 
+                                Width="90%" ReadOnly="True"  ></asp:TextBox> 
+                        </td>
+                </tr>
+		    </table>
+            <asp:HiddenField ID="hdnState" runat="server" />    
             </ContentTemplate>
         </asp:UpdatePanel>
     </form>
