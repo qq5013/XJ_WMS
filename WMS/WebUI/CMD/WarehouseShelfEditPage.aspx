@@ -3,14 +3,12 @@
 <head id="Head1" runat="server">
     <title>库区货架</title>
     <base target="_self" />
-    <script type="text/javascript" src="../../JScript/Check.js?t=00"></script>
     <link href="../../css/main.css" rel="Stylesheet" type="text/css" />
-    <script type="text/javascript" src="../../JScript/SelectDialog.js?t=00"></script>
     <link href="../../css/op.css" rel="Stylesheet" type="text/css" />
-    <script type="text/javascript" src='<%=ResolveClientUrl("~/JQuery/jquery-1.8.3.min.js") %>'></script>
-    <script type="text/javascript" src='<%=ResolveClientUrl("~/JScript/Common.js") %>'></script>
-    <script type="text/javascript" src='<%=ResolveClientUrl("~/JScript/DataProcess.js") %>'></script>
-    <script src="../../JScript/InputLength.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../../JQuery/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src= "../../JScript/Common.js"></script>
+   
+   
     <script type="text/javascript">
         function RefreshParent(path) {
             alert('货架删除成功！');
@@ -55,78 +53,73 @@
 
     </script>
 
-    <style type="text/css">
-        .MultilineTextBox
-        {}
-    </style>
+    
 
 </head>
 <body>
     <form id="form1" runat="server">
-                   <table width="99%" class="maintable" align="center" cellspacing="0" cellpadding="0" bordercolor="#ffffff" border="1">
-                    <tr><td colspan="4">货架</td></tr>
-                      <tr style="display:none;"><td colspan="4">
-                      <asp:TextBox ID="txtShelfID" runat="server" CssClass="HiddenControl" Width="61px"></asp:TextBox>
-                          <asp:TextBox ID="txtWHID" runat="server" CssClass="HiddenControl" Width="61px"></asp:TextBox>
-                          <asp:TextBox ID="txtAreaID" runat="server" CssClass="HiddenControl" 
-                              Width="61px"></asp:TextBox>
-                          <input class="ButtonCreate" name="btnBack" onclick="openwin()" type="button" value="批量分配指定卷烟" /></td>
-                       </tr>
-                      <tr>
-                         <td align="center" class="musttitle" style="width:15%;"><font color="red">*</font>仓库名称</td>
+        <table width="99%" class="maintable" align="center" cellspacing="0" cellpadding="0" bordercolor="#ffffff" border="1">
+            <tr><td colspan="4">货架</td></tr>
+            <tr style="display:none;"><td colspan="4">
+            <asp:TextBox ID="txtShelfID" runat="server" CssClass="HiddenControl" Width="61px"></asp:TextBox>
+                <asp:TextBox ID="txtWHID" runat="server" CssClass="HiddenControl" Width="61px"></asp:TextBox>
+                <asp:TextBox ID="txtAreaID" runat="server" CssClass="HiddenControl" 
+                    Width="61px"></asp:TextBox>
+                <input class="ButtonCreate" name="btnBack" onclick="openwin()" type="button" value="批量分配指定卷烟" /></td>
+            </tr>
+            <tr>
+                <td align="center" class="musttitle" style="width:15%;">仓库名称</td>
                          
-                         <td>
-                             <asp:TextBox ID="txtWhName" runat="server" CssClass="TextBox" Width="80%"></asp:TextBox></td>
-                         <td align="center" class="musttitle" style="width:15%;"><font color="red">*</font>库区名称</td>
-                         <td><asp:TextBox ID="txtAreaName" runat="server" CssClass="TextBox" Width="80%"></asp:TextBox></td>
+                <td style="width:35%;">
+                    <asp:TextBox ID="txtWhName" runat="server" CssClass="TextRead" Width="80%"></asp:TextBox></td>
+                <td align="center" class="musttitle" style="width:15%;">库区名称</td>
+                <td style="width:35%;"><asp:TextBox ID="txtAreaName" runat="server" 
+                        CssClass="TextRead" Width="80%"></asp:TextBox></td>
                          
-                      </tr>
-                      <tr>
-                         <td align="center" class="musttitle" style="width:15%;"><font color="red">*</font>货架编码</td> 
-                         <td><asp:TextBox ID="txtShelfCode" runat="server"  CssClass="TextBox" Width="80%" MaxLength="10"></asp:TextBox>
-                         </td>
-                         <td align="center" class="musttitle" style="width:15%;"><font color="red">*</font>货架名称</td> 
-                         <td><asp:TextBox ID="txtShelfName" runat="server"  CssClass="TextBox" Width="80%" MaxLength="10"></asp:TextBox>
-                         </td>
-                      </tr>
-
-                     
+            </tr>
+            <tr>
+                <td align="center" class="musttitle" style="width:15%;">货架编码</td> 
+                <td><asp:TextBox ID="txtShelfCode" runat="server"  CssClass="TextRead" Width="80%" 
+                        MaxLength="10"></asp:TextBox>
+                </td>
+                <td align="center" class="musttitle" style="width:15%;">货架名称</td> 
+                <td><asp:TextBox ID="txtShelfName" runat="server"  CssClass="TextBox" Width="80%" MaxLength="10"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td align="center" class="smalltitle" style="width:15%;">货架层数</td> 
+                <td><asp:TextBox ID="txtCellRows" runat="server"  CssClass="TextBox" Width="80%" onblur="IsNumber(this,'货架行数')">1</asp:TextBox>
+                </td>
+                <td align="center" class="smalltitle" style="width:15%;">货架列数</td> 
+                <td><asp:TextBox ID="txtCellCols" runat="server"  CssClass="TextBox" Width="80%" onblur="IsNumber(this,'货架列数')">1</asp:TextBox>
+                </td>
+            </tr>  
                       
-                      <tr>
-                         <td align="center" class="smalltitle" style="width:15%;">货架层数</td> 
-                         <td><asp:TextBox ID="txtCellRows" runat="server"  CssClass="TextBox" Width="140px" onblur="IsNumber(this,'货架行数')">1</asp:TextBox>
-                         </td>
-                         <td align="center" class="smalltitle" style="width:15%;">货架列数</td> 
-                         <td><asp:TextBox ID="txtCellCols" runat="server"  CssClass="TextBox" Width="140px" onblur="IsNumber(this,'货架列数')">1</asp:TextBox>
-                         </td>
-                      </tr>  
-                      
-                      <tr>
-                         <td align="center" class="smalltitle" style="width:15%;">是否启用</td> 
-                         <td><asp:DropDownList ID="ddlActive" runat="server">
-                                 <asp:ListItem Selected="True" Value="1">启用</asp:ListItem>
-                                 <asp:ListItem Value="0">未启用</asp:ListItem>
-                             </asp:DropDownList>
-                         </td>
-                         <td align="center" class="musttitle" style="width:15%;">&nbsp;</td> 
-                         <td>&nbsp;</td>
-                      </tr>     
-                      <tr>
-                         <td align="center" class="smalltitle" style="width:15%;">备注</td> 
-                         <td colspan="3" style="text-align: left">
-                             <asp:TextBox ID="txtMemo" runat="server"  
-                                 CssClass="TextBox" Width="80%" Rows="10" TextMode="MultiLine" 
-                                 Height="85px"></asp:TextBox>
-                         </td>
-                      </tr> 
-                     
-                      <tr><td colspan="4" align="center"  style="height:25px; text-align:center;">
-                          <asp:Button ID="btnSave" runat="server" Text="保存" CssClass="ButtonCss" 
-                              OnClick="btnSave_Click" OnClientClick="return CheckBeforeSubmit()" 
-                              Height="26px" Width="57px"/>
-                         </td>
-                         </tr>                                                                                
-                    </table>  
+            <tr>
+                <td align="center" class="smalltitle" style="width:15%;">是否启用</td> 
+                <td><asp:DropDownList ID="ddlActive" runat="server">
+                        <asp:ListItem Selected="True" Value="1">启用</asp:ListItem>
+                        <asp:ListItem Value="0">未启用</asp:ListItem>
+                    </asp:DropDownList>
+                </td>
+                <td align="center" class="musttitle" style="width:15%;">&nbsp;</td> 
+                <td>&nbsp;</td>
+            </tr>     
+            <tr>
+                <td align="center" class="smalltitle" style="width:15%;">备注</td> 
+                <td colspan="3" style="text-align: left; height:75px">
+                    <asp:TextBox ID="txtMemo" runat="server"  
+                        CssClass="TextBox" Width="92%" Rows="10" TextMode="MultiLine" 
+                        Height="65px"></asp:TextBox>
+                </td>
+            </tr>        
+            <tr><td colspan="4" align="center"  style="height:35px; text-align:center;">
+                <asp:Button ID="btnSave" runat="server" Text="保存" CssClass="ButtonCss" 
+                    OnClick="btnSave_Click" OnClientClick="return CheckBeforeSubmit()" 
+                    Height="26px" Width="57px"/>
+                </td>
+                </tr>                                                                                
+        </table>  
     </form>
     
 </body>

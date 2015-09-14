@@ -30,88 +30,39 @@ namespace WMS.WebUI.SysInfo.SystemLog
         #region 窗体加裁
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
-            {
 
-                pager.PageSize = pageSize;
-                if (!IsPostBack)
+
+            if (!IsPostBack)
+            {
+                ViewState["filter"] = "1=1";
+                ViewState["CurrentPage"] = 1;
+                this.btnDeleteAll.Enabled = this.btnDelete.Enabled;
+                try
                 {
-                    if (this.btnDelete.Enabled)
-                    {
-                        this.btnDeleteAll.Enabled = true;
-                    }
-                    totalCount = bll.GetRowCount(TableName, filter);
-                    pager.RecordCount = totalCount;
-                    GridDataBind();
+                    SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, gvMain, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
                 }
-                else
+                catch (Exception exp)
                 {
-                    pageCount = Convert.ToInt32(ViewState["pageCount"]);
-                    pageIndex = Convert.ToInt32(ViewState["pageIndex"]);
-                    totalCount = Convert.ToInt32(ViewState["totalCount"]);
-                    filter = ViewState["filter"].ToString();
-                    OrderByFields = ViewState["OrderByFields"].ToString();
-                    totalCount = bll.GetRowCount(TableName, filter);
-                    GridDataBind();
+                    WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, exp.Message);
                 }
 
-                ScriptManager.RegisterStartupScript(this.UpdatePanel1, this.UpdatePanel1.GetType(), "Resize", "resize();", true);
-            }
-            catch (Exception exp)
-            {
-               WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, exp.Message);
-            }
-        }
-        #endregion
-
-        #region 数据源绑定
-        void GridDataBind()
-        {
-            dtLog = bll.GetDataPage("Security.SeleteExceptionalLog", pageIndex, pageSize, out totalCount,out pageCount, new DataParameter[] { new DataParameter("{0}", filter) });
-            if (dtLog.Rows.Count == 0)
-            {
-                dtLog.Rows.Add(dtLog.NewRow());
-                gvMain.DataSource = dtLog;
-                gvMain.DataBind();
-                int columnCount = gvMain.Rows[0].Cells.Count;
-                gvMain.Rows[0].Cells.Clear();
-                gvMain.Rows[0].Cells.Add(new TableCell());
-                gvMain.Rows[0].Cells[0].ColumnSpan = columnCount;
-                gvMain.Rows[0].Cells[0].Text = "没有符合以上条件的数据,请重新查询 ";
-                gvMain.Rows[0].Visible = true;
-
+                writeJsvar(FormID, SqlCmd, "");
             }
             else
             {
-                this.gvMain.DataSource = dtLog;
-                this.gvMain.DataBind();
+                dtLog = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, gvMain, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
             }
 
-            ViewState["pageIndex"] = pageIndex;
-            ViewState["totalCount"] = totalCount;
-            ViewState["pageCount"] = pageCount;
-            ViewState["filter"] = filter;
-            ViewState["OrderByFields"] = OrderByFields;
+            ScriptManager.RegisterStartupScript(this.UpdatePanel1, this.UpdatePanel1.GetType(), "Resize", "resize();", true);
         }
         #endregion
+
+        
 
         #region GridView绑定
         protected void gvMain_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.Header)
-            {
-                CheckBox chk = new CheckBox();
-                chk.ID = "checkAll";
-                chk.Attributes.Add("onclick", "checkboxChange(this,'gvMain',0);");
-                chk.Text = "";
-                e.Row.Cells[0].Controls.Add(chk);
-            }
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                
-                CheckBox chk = new CheckBox();
-                e.Row.Cells[0].Controls.Add(chk);
-            }
+             
         }
         #endregion
 
@@ -124,7 +75,7 @@ namespace WMS.WebUI.SysInfo.SystemLog
                 string strGroupID = "-1,";
                 for (int i = 0; i < gvMain.Rows.Count; i++)
                 {
-                    CheckBox chk = (CheckBox)gvMain.Rows[i].Cells[0].Controls[0];
+                    CheckBox chk = (CheckBox)(this.gvMain.Rows[i].FindControl("cbSelect"));
                     if (chk.Enabled && chk.Checked)
                     {
                         strGroupID += dtLog.Rows[i]["ExceptionalLogID"].ToString() + ",";
@@ -132,14 +83,9 @@ namespace WMS.WebUI.SysInfo.SystemLog
                 }
                 strGroupID += "-1";
                 bll.ExecNonQuery("Security.DeleteExceptionalLog", new DataParameter[] { new DataParameter("{0}", strGroupID) });
-                totalCount = bll.GetRowCount(TableName, filter);
-                pager.RecordCount = totalCount;
-                if (pageIndex > pager.PageCount)
-                {
-                    pageIndex = pager.PageCount;
-                }
-                GridDataBind();
+              
                 AddOperateLog("系统日志管理", "删除操作日志");
+                SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, gvMain, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
               
             }
             catch (Exception exp)
@@ -152,11 +98,17 @@ namespace WMS.WebUI.SysInfo.SystemLog
         #region 清空日志
         protected void btnDeleteAll_Click(object sender, EventArgs e)
         {
-            bll.ExecNonQuery("Security.DeleteAllExceptionalLog", null);
-            pageIndex = 1;
-            pager.RecordCount = 0;
-            GridDataBind();
-            AddOperateLog("系统日志管理", "清空系统日志");
+            try
+            {
+                bll.ExecNonQuery("Security.DeleteAllExceptionalLog", null);
+
+                AddOperateLog("系统日志管理", "清空系统日志");
+                SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, gvMain, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+            }
+            catch (Exception exp)
+            {
+                WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, exp.Message);
+            }
         }
         #endregion
 
@@ -167,48 +119,68 @@ namespace WMS.WebUI.SysInfo.SystemLog
             string end = System.DateTime.Now.AddDays(1).ToString();
             try
             {
-                if (this.txtDateStart.tDate.Text.Trim().Length > 0)
+                if (this.txtStartDate.tDate.Text.Trim().Length > 0)
                 {
-                    start = Convert.ToDateTime(this.txtDateStart.tDate.Text.Trim()).ToString();
+                    start = Convert.ToDateTime(this.txtStartDate.tDate.Text.Trim()).ToString();
                 }
-                if (this.txtDateEnd.tDate.Text.Trim().Length > 0)
+                if (this.txtEndDate.tDate.Text.Trim().Length > 0)
                 {
-                    end = Convert.ToDateTime(this.txtDateEnd.tDate.Text.Trim()).AddDays(1).ToString();
+                    end = Convert.ToDateTime(this.txtEndDate.tDate.Text.Trim()).AddDays(1).ToString();
                 }
+
+               
+                filter = string.Format("{0} like '{1}%' and (CatchTime>='{2}' and CatchTime<'{3}')", this.ddl_Field.SelectedValue, this.txtKeyWords.Text.Trim().Replace("'", ""), start, end);
+                ViewState["filter"] = filter;
+
+
+                totalCount = bll.GetRowCount(TableName, filter);
+                pageIndex = 1;
+                SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, gvMain, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+
             }
-            catch
+            catch(Exception ex)
             {
-               WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, "输入时间格式不正确！");
+                WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, ex.Message);
                 return;
             }
-
-            filter = string.Format("{0} like '{1}%' and (CatchTime>='{2}' and CatchTime<'{3}')", this.ddl_Field.SelectedValue, this.txtKeyWords.Text.Trim().Replace("'", ""), start, end);
-            ViewState["filter"] = filter;
-            if (rbASC.Checked)
-            {
-                OrderByFields = this.ddl_Field.SelectedValue + " asc ";
-            }
-            else
-            {
-                OrderByFields = this.ddl_Field.SelectedValue + " desc ";
-            }
-
-            totalCount = bll.GetRowCount(TableName,filter);
-            pageIndex = 1;
-            pager.CurrentPageIndex = 1;
-            pager.RecordCount = totalCount;
-            GridDataBind();
         }
         #endregion
 
         # region 分页控件 页码changing事件
-        protected void pager_PageChanging(object src, PageChangingEventArgs e)
+        protected void btnFirst_Click(object sender, EventArgs e)
         {
-            pager.CurrentPageIndex = e.NewPageIndex;
-            pager.RecordCount = totalCount;
-            pageIndex = pager.CurrentPageIndex;
-            ViewState["pageIndex"] = pageIndex;
-            GridDataBind();
+            ViewState["CurrentPage"] = 1;
+            SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, gvMain, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+
+        }
+
+        protected void btnPre_Click(object sender, EventArgs e)
+        {
+            ViewState["CurrentPage"] = int.Parse(ViewState["CurrentPage"].ToString()) - 1;
+            SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, gvMain, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+        }
+
+        protected void btnNext_Click(object sender, EventArgs e)
+        {
+            ViewState["CurrentPage"] = int.Parse(ViewState["CurrentPage"].ToString()) + 1;
+            SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, gvMain, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+        }
+
+        protected void btnLast_Click(object sender, EventArgs e)
+        {
+            ViewState["CurrentPage"] = 0;
+            SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, gvMain, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+        }
+
+        protected void btnToPage_Click(object sender, EventArgs e)
+        {
+            int PageIndex = 0;
+            int.TryParse(this.txtPageNo.Text, out PageIndex);
+            if (PageIndex == 0)
+                PageIndex = 1;
+
+            ViewState["CurrentPage"] = PageIndex;
+            SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, gvMain, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
         }
         #endregion
     }

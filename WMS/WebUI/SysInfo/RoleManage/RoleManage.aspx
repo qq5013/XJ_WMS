@@ -18,7 +18,7 @@
         function UserSet(GroupID, GroupName) {
             var now = new Date();
             var temp = now.getMilliseconds();
-            window.showModalDialog('GroupUserManage.aspx?GroupID=' + GroupID + '&GroupName=' + encodeURI(GroupName) + '&temp=' + temp, temp, 'top=0;left=0;toolbar=no;menubar=yes;scrollbars=no;resizable=yes;location=no;status=no;dialogWidth=300px;dialogHeight=370px');
+            window.showModalDialog('GroupUserManage.aspx?GroupID=' + GroupID + '&GroupName=' + encodeURI(GroupName) + '&temp=' + temp, temp, 'top=0;left=0;toolbar=no;menubar=yes;scrollbars=no;resizable=yes;location=no;status=no;dialogWidth=450px;dialogHeight=500px');
         }
 
         function ShowGroupUserList(GroupID, GroupName) {
@@ -39,7 +39,8 @@
                 <tr>
                  <td style=" vertical-align:top;width: 100%;">
                      <fieldset style="width:298px; height:220px">
-                       <asp:GridView ID="gvGroupList" runat="server" AllowPaging="True" AutoGenerateColumns="False" Font-Size="10pt" OnPageIndexChanging="gvGroupList_PageIndexChanging" OnRowDataBound="gvGroupList_RowDataBound" PageSize="5">
+                       <asp:GridView ID="gvGroupList" runat="server" SkinID="GridViewSkin" AllowPaging="True" AutoGenerateColumns="False"  
+                       OnPageIndexChanging="gvGroupList_PageIndexChanging" OnRowDataBound="gvGroupList_RowDataBound" PageSize="5">
                          <Columns>
                              <asp:BoundField DataField="GroupID" HeaderText="ID">
                                  <HeaderStyle Width="0px" />

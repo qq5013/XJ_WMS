@@ -73,6 +73,13 @@
     </CommandString>
   </Command>
   <!--获取所有用户-->
+  <Command ID="SelectUser">
+    <CommandString>
+      select * from SYS_USERLIST where {0}
+    </CommandString>
+  </Command>
+  
+  <!--获取所有用户-->
   <Command ID="SelectAllUser">
     <CommandString>
       select UserName ,GroupName ,UserID from sys_UserList u left join sys_GroupList g on u.GroupID=g.GroupID 
@@ -178,7 +185,7 @@
 
   <Command ID="SelectGroup">
     <CommandString>
-      select * from sys_GroupList where {0} order by {1}
+      select * from sys_GroupList where {0} order by GroupID
     </CommandString>
   </Command> 
   
@@ -198,7 +205,7 @@
 
   <Command ID="SeleteOperatorLog">
     <CommandString>
-      select * from sys_OperatorLog WHERE {0} order by {1}
+      select * from sys_OperatorLog WHERE {0} order by  LoginTime desc
     </CommandString>
   </Command>
   <!--删除操作记录-->
@@ -216,7 +223,7 @@
   <!--查询系统日志-->
   <Command ID="SeleteExceptionalLog">
     <CommandString>
-      select * from  sys_ExceptionalLog WHERE {0}
+      select * from  sys_ExceptionalLog WHERE {0} order by CatchTime desc
     </CommandString>
   </Command>
   

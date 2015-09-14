@@ -31,7 +31,7 @@
 <body>
     <form id="form2" runat="server">
     <div>
-        <table style="width: 100%; height: 20px;" class="OperationBar">
+        <table style="width: 100%; height: 25px;" class="OperationBar">
             <tr>
                 <td align="right">
                     <asp:Button ID="Button1" runat="server" Text="放弃" 

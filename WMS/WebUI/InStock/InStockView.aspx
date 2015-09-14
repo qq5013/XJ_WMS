@@ -17,7 +17,7 @@
             });
         });
         function resize() {
-            var h = document.documentElement.clientHeight - 195;
+            var h = document.documentElement.clientHeight - 200;
             $("#Sub-container").css("height", h);
         }
      </script>
@@ -35,7 +35,7 @@
         </asp:UpdateProgress>  
         <asp:UpdatePanel ID="updatePanel" runat="server" UpdateMode="Conditional">                
             <ContentTemplate>
-                 <table  style="width: 100%; height: 20px;" class="OperationBar">
+                 <table  style="width: 100%; height: 25px;" class="OperationBar">
                     <tr>
                         <td align="right" style="width:60%">
                             <asp:Button ID="btnFirst" runat="server" Text="首笔" CssClass="ButtonFirst" 
@@ -129,28 +129,28 @@
                 </table>
                  <div id="Sub-container" style="overflow: auto; width: 100%; height: 280px" >
                     <asp:GridView ID="dgViewSub1" runat="server" AutoGenerateColumns="False" SkinID="GridViewSkin"
-                        AllowPaging="True" Width="98%" PageSize="10" onrowdatabound="dgViewSub1_RowDataBound" >
+                        AllowPaging="True" Width="100%" PageSize="10" onrowdatabound="dgViewSub1_RowDataBound" >
                         <Columns>
                             
 
                              <asp:BoundField DataField="RowID" HeaderText="序号" SortExpression="RowID">
-                                <ItemStyle HorizontalAlign="Left" Width="4%" Wrap="False" />
+                                <ItemStyle HorizontalAlign="Left" Width="7%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
                             <asp:BoundField DataField="ProductCode" HeaderText="产品编码" SortExpression="ProductCode">
-                                <ItemStyle HorizontalAlign="Left" Width="4%" Wrap="False" />
+                                <ItemStyle HorizontalAlign="Left" Width="20%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
                             <asp:BoundField DataField="ProductName" HeaderText="产品名称" SortExpression="ProductName">
-                                <ItemStyle HorizontalAlign="Left" Width="4%" Wrap="False" />
+                                <ItemStyle HorizontalAlign="Left" Width="25%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
                             <asp:BoundField DataField="Quantity" HeaderText="数量" SortExpression="Quantity">
-                                <ItemStyle HorizontalAlign="Left" Width="4%" Wrap="False" />
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
                             <asp:BoundField DataField="Memo" HeaderText="备注" SortExpression="Memo">
-                                <ItemStyle HorizontalAlign="Left" Width="4%" Wrap="False" />
+                                <ItemStyle HorizontalAlign="Left" Width="38%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
                         </Columns>

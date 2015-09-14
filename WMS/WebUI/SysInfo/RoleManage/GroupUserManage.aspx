@@ -6,6 +6,11 @@
 <head id="Head1" runat="server">
     <title></title>
     <base target="_self" />
+    <link href="~/Css/Main.css" type="text/css" rel="stylesheet" /> 
+        <link href="~/Css/op.css" type="text/css" rel="stylesheet" /> 
+        <script type="text/javascript" src='<%=ResolveClientUrl("~/JQuery/jquery-1.8.3.min.js") %>'></script>
+        <script type="text/javascript" src='<%=ResolveClientUrl("~/JScript/Common.js") %>'></script>
+        <script type="text/javascript" src='<%=ResolveClientUrl("~/JScript/Ajax.js") %>'></script>  
     <script type="text/javascript">
         function okFunc(url) {
             //      var topFrame =parent.frames['mainFrame'];
@@ -14,34 +19,44 @@
             //      else location.href=url;
         }
     </script>
+     
 </head>
-<body style=" margin:15px 5px 5px 5px;">
+<body  >
     <form id="form1" runat="server">
-    <div>
-        <asp:Label ID="Label1" runat="server" Font-Bold="True" Height="24px" Text="Label"
-            Width="192px" Font-Size="10pt"></asp:Label>
-        <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click"
-            Text="保 存" />
-        </div>
-    <div>
-        <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto" Height="270px" Width="280px">
-         <asp:DataGrid ID="dgUser" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="5" Font-Size="10pt" OnItemDataBound="dgUser_ItemDataBound">
-            <Columns>
-                <asp:BoundColumn DataField="UserName" HeaderText="用户名"></asp:BoundColumn>
-                <asp:BoundColumn DataField="GroupName" HeaderText="所属用户组"></asp:BoundColumn>
-                <asp:ButtonColumn CommandName="Select" HeaderText="用户组设置">
-                </asp:ButtonColumn>
-                <asp:BoundColumn DataField="UserID"></asp:BoundColumn>
-            </Columns>
-            <FooterStyle BackColor="White" ForeColor="#000066" />
-            <SelectedItemStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
-            <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" Mode="NumericPages" />
-            <ItemStyle ForeColor="#000066" />
-            <HeaderStyle BackColor="WhiteSmoke" Font-Bold="True" Font-Italic="False" Font-Overline="False"
+        <table  class="maintable" cellspacing="0" cellpadding="0" bordercolor="#ffffff" width="100%"
+            border="1" runat="server">
+            <tr>
+                <td style="width:30%">
+                   &nbsp;&nbsp;<asp:Label ID="Label1" runat="server" Font-Bold="True" Height="24px" Text="Label"
+                        Width="161px" Font-Size="10pt"></asp:Label>
+                   
+                </td>
+               <td style="width:70%" align="right" >
+                 <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click"
+                        Text="保 存" />&nbsp;&nbsp;
+                </td>
+            </tr>
+        </table>
+        <div id="Sub-container"  style="overflow: auto; width: 100%; height: 100%">
+            <asp:DataGrid ID="dgUser"  runat="server" SkinID="GridViewSkin" AutoGenerateColumns="False" 
+                    CellPadding="5" OnItemDataBound="dgUser_ItemDataBound" Width="95%" 
+                onitemcreated="dgUser_ItemCreated">
+                <Columns>
+                    <asp:BoundColumn DataField="UserName" HeaderText="用户名"></asp:BoundColumn>
+                    <asp:BoundColumn DataField="GroupName" HeaderText="所属用户组"></asp:BoundColumn>
+                    <asp:ButtonColumn CommandName="Select" HeaderText="用户组设置">
+                    </asp:ButtonColumn>
+                    <asp:BoundColumn DataField="UserID"></asp:BoundColumn>
+                </Columns>
+                 <FooterStyle BackColor="White" ForeColor="#000066" />
+                <SelectedItemStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" Mode="NumericPages" />
+                <ItemStyle ForeColor="#000066" />
+                <HeaderStyle BackColor="WhiteSmoke" Font-Bold="True" Font-Italic="False" Font-Overline="False"
                 Font-Strikeout="False" Font-Underline="False" ForeColor="Black" Wrap="False" />
-        </asp:DataGrid>
-        </asp:Panel>
-    </div>
+            </asp:DataGrid>
+         </div>
+   
     </form>
 </body>
 </html>

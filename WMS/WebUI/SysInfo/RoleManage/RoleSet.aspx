@@ -5,31 +5,14 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head id="Head1" runat="server">
-    <title>无标题页</title>
- <style type="text/css">
-    A
-    {
-	    color:black;
-	    text-decoration:none;
-    }
-
-    A:hover
-    {
-	    color:#FE6103;
-	    text-decoration:none; /*underline;*/
-    }
-    A:Active
-    {
-	    text-decoration:none;
-    } 
-</style>
-<script type="text/javascript">
-
-    function Exit() {
-        window.parent.Exit();
-    }
-</script>
- <link href="../../../css/css.css" type="text/css" rel="Stylesheet" />
+    <title>用户信息</title>
+    <script type="text/javascript" src="../../../JQuery/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="../../../JScript/Check.js?t=00"></script>
+    <script type="text/javascript" src="../../../JScript/Common.js"></script>
+    <link href="../../../css/main.css" rel="Stylesheet" type="text/css" />
+    
+    <link href="../../../css/op.css" rel="Stylesheet" type="text/css" />
+   
 </head>
 <body style=" margin:0px 0 0 0;" >
     <form id="form1" runat="server">
