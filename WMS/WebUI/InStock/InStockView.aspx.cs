@@ -163,14 +163,22 @@ namespace WMS.WebUI.InStock
         protected void btnDelete_Click(object sender, EventArgs e)
         {
             string strID = this.txtID.Text;
-            int Count = bll.GetRowCount("VUsed_CMD_BillType", string.Format("BillTypeCode='{0}'", this.txtID.Text.Trim()));
+            int Count = bll.GetRowCount("VUsed_WMS_BillMaster", string.Format("BillID='{0}'", this.txtID.Text.Trim()));
             if (Count > 0)
             {
-                WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel, "该类型编码还被其它单据使用，请调整后再删除！");
+                WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel, "该入库单号已被其它单据使用，请调整后再删除！");
                 return;
             }
-            bll.ExecNonQuery("Cmd.DeleteBillType", new DataParameter[] { new DataParameter("{0}", "'" + strID + "'") });
-            AddOperateLog("入库类型", "删除单号：" + strID);
+ 
+            string[] comds = new string[2];
+            comds[0] = "WMS.DeleteBillMaster";
+            comds[1] = "WMS.DeleteBillDetail";
+            List<DataParameter[]> paras = new List<DataParameter[]>();
+            paras.Add(new DataParameter[] { new DataParameter("{0}", "'" + strID + "'") });
+            paras.Add(new DataParameter[] { new DataParameter("{0}", string.Format("BillID='{0}'", strID)) });
+            bll.ExecTran(comds, paras);
+           
+            AddOperateLog("入库单", "删除单号：" + strID);
 
             btnNext_Click(sender, e);
             if (this.txtID.Text == strID)

@@ -1,21 +1,14 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UserList.aspx.cs" Inherits="WMS.WebUI.SysInfo.UserManage.UserList" %>
-
-<%@ Register Assembly="AspNetPager" Namespace="AspNetPager" TagPrefix="NetPager" %>
-
+ 
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title>用户信息</title>
-
     <script type="text/javascript" src="../../../JQuery/jquery-2.1.3.min.js"></script>
-    <script type="text/javascript" src="../../../JScript/Check.js?t=00"></script>
     <script type="text/javascript" src="../../../JScript/Common.js"></script>
     <link href="../../../css/main.css" rel="Stylesheet" type="text/css" />
-    
     <link href="../../../css/op.css" rel="Stylesheet" type="text/css" />
-  
-
-    
-
     <script type="text/javascript">
         $(document).ready(function () {
             $(window).resize(function () {
@@ -23,8 +16,8 @@
             });
         });
         function resize() {
-            var h = document.documentElement.clientHeight - 60;
-            $("#pnlMain").css("height", h);
+            var h = document.documentElement.clientHeight - 55;
+            $("#table-container").css("height", h);
         }
         function DelConfirm(btnID) {
             var table = document.getElementById('gvMain');
@@ -111,43 +104,59 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server">
-    </asp:ScriptManager>
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server" Visible="true">
-        <ContentTemplate>
-            <!--数据显示-->
-            <asp:Panel ID="pnlList" runat="server" Height="480px" Width="100%">
+    <asp:ScriptManager ID="ScriptManager1" runat="server" />  
+        <asp:UpdateProgress ID="updateprogress" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
+            <ProgressTemplate>            
+                <div id="progressBackgroundFilter" style="display:none"></div>
+                <div id="processMessage"> Loading...<br /><br />
+                        <img alt="Loading" src="../../../images/process/loading.gif" />
+                </div>      
+            </ProgressTemplate> 
+        </asp:UpdateProgress>  
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">                
+            <ContentTemplate>
                 <!--工具栏-->
-                 <asp:Panel ID="pnlListToolbar" runat="server" Height="30px" Width="100%">
-                    <table  style="width: 100%; height: 20px;" class="OperationBar">
-                        <tr>
-                            <td style="width:40%;">
-                                <asp:DropDownList ID="ddl_Field" runat="server">
-                                    <asp:ListItem Selected="True" Value="UserName">用户帐号</asp:ListItem>
-                                     <asp:ListItem  Value="EmployeeName">用户姓名</asp:ListItem>
-                                    <asp:ListItem Value="Memo">备注</asp:ListItem>
-                                </asp:DropDownList>
-                                &nbsp;
-                                <asp:TextBox ID="txtKeyWords" runat="server" CssClass="TextBox"></asp:TextBox> &nbsp;
-                                <asp:RadioButton GroupName="order" ID="rbASC" runat="server" Text="升" Checked="True" />
-                                <asp:RadioButton GroupName="order" ID="rbDESC" runat="server" Text="降" />
-                            </td>
-                            <td>
-                                <asp:Button ID="btnQuery" runat="server" Text="查询" OnClick="btnQuery_Click" CssClass="ButtonQuery" />
-                                <asp:Button ID="btnAdd" runat="server" Text="新增" CssClass="ButtonCreate" OnClick="btnCreate_Click"
-                                    Enabled="False" />
-                                <asp:Button ID="btnDelete" runat="server" Text="删除" CssClass="ButtonDel" OnClick="btnDelete_Click"
-                                    OnClientClick="return DelConfirm('btnDelete')" Enabled="False" />
-                                <asp:Button ID="btnExit" runat="server" Text="退出" OnClientClick="Exit();" CssClass="ButtonExit" />
-                            </td>
-                        </tr>
+            <div id="dvList" runat="server">
+                   <table class="maintable"  width="100%" align="center" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="smalltitle" align="center" width="5%" >
+                            查询栏位
+                        </td>
+                        <td  width="10%"> 
+                            &nbsp;<asp:DropDownList ID="ddl_Field" runat="server" Width="85%">
+                                <asp:ListItem Selected="True" Value="ModuleName">发生模块</asp:ListItem>
+                                <asp:ListItem Value="FunctionName">功能名称</asp:ListItem>
+                            </asp:DropDownList>
+                        </td>
+                            <td class="smalltitle" align="center" width="5%">
+                            查询内容
+                        </td>
+                        <td height="20" width="10%" valign="middle" >
+                                &nbsp;<asp:TextBox ID="txtKeyWords" runat="server" CssClass="TextBox" Width="85%"></asp:TextBox>
+                        </td>
+                        
+                        
+                        <td  width="15%">
+                            <asp:Button ID="btnQuery" runat="server" Text="查询" OnClick="btnQuery_Click" CssClass="ButtonQuery" />
+                            <asp:Button ID="btnRefresh" runat="server" CssClass="ButtonRefresh" OnClientClick="return Refresh()" tabIndex="2"  Text="刷新" Width="58px" />
+                        </td>
+                           
+                        <td align="right" style="width:15%;">
+                            
+                            <asp:Button ID="btnDelete" runat="server" Text="删除" CssClass="ButtonDel" OnClick="btnDelete_Click"
+                                OnClientClick="return DelConfirm('btnDelete')" Enabled="False" />
+                            
+                            <asp:Button ID="btnExit" runat="server" Text="退出" OnClientClick="return Exit();" CssClass="ButtonExit" />
+                        </td>
                          
-                    </table>
+                    </tr>
+                         
+                </table>
                    
-                </asp:Panel>
+               
                 <!--数据-->
-                 <asp:Panel ID="pnlMain" runat="server" Height="480px" Style="overflow: auto;" Width="100%">
-                    <asp:GridView ID="gvMain" runat="server"  Width="900px" OnRowEditing="gvMain_RowEditing" OnRowDataBound="gvMain_RowDataBound"
+                 <div id="table-container" style="overflow: auto; WIDTH: 100%; HEIGHT: 470px">
+                    <asp:GridView ID="gvMain" runat="server"  Width="900px" OnRowEditing="gvMain_RowEditing" OnRowDataBound="gvMain_RowDataBound" 
                           SkinID="GridViewSkin"  AutoGenerateColumns="False">
                         <RowStyle Height="28px" />
                         <HeaderStyle CssClass="GridHeader" />
@@ -158,72 +167,67 @@
                             <asp:BoundField DataField="UserName" HeaderText="用户帐号">
                                 <HeaderStyle Width="120px" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="EmployeeName" HeaderText="用户姓名">
+                            <asp:BoundField DataField="EmployeeCode" HeaderText="用户姓名">
                                 <HeaderStyle Width="100px" />
                             </asp:BoundField>
                             <asp:BoundField DataField="Memo" HeaderText="备注"></asp:BoundField>
                         </Columns>
                     </asp:GridView>
-                </asp:Panel>
+                 </div>
                 <!--分页导航-->
-                <asp:Panel ID="pnlNavigator" runat="server" Height="30px" Width="100%">
-                    <table id="paging" cellpadding="0" cellspacing="0" style="width: 500px;">
-                        <tr>
-                            <td>
-                                <NetPager:AspNetPager ID="pager" runat="server" OnPageChanging="pager_PageChanging"
-                                    ShowPageIndex="false" ShowInputBox="Always" AlwaysShow="true">
-                                </NetPager:AspNetPager>
-                            </td>
-                        </tr>
-                    </table>
-                </asp:Panel>
-            </asp:Panel>
+                  <div>
+                     &nbsp;&nbsp;<asp:LinkButton ID="btnFirst" runat="server" OnClick="btnFirst_Click" Text="首页"></asp:LinkButton> 
+                    &nbsp;<asp:LinkButton ID="btnPre" runat="server" OnClick="btnPre_Click" Text="上一页"></asp:LinkButton> 
+                    &nbsp;<asp:LinkButton ID="btnNext" runat="server" OnClick="btnNext_Click" Text="下一页"></asp:LinkButton> 
+                    &nbsp;<asp:LinkButton ID="btnLast" runat="server" OnClick="btnLast_Click" Text="尾页"></asp:LinkButton> 
+                    &nbsp;<asp:textbox id="txtPageNo" onkeypress="return regInput(this,/^\d+$/,String.fromCharCode(event.keyCode))"
+					        onpaste="return regInput(this,/^\d+$/,window.clipboardData.getData('Text'))" ondrop="return regInput(this,/^\d+$/,event.dataTransfer.getData('Text'))"
+					        runat="server" Width="56px" CssClass="TextBox" ></asp:textbox>
+                    &nbsp;<asp:linkbutton id="btnToPage" runat="server" onclick="btnToPage_Click" Text="跳转"></asp:linkbutton>
+                    &nbsp;<asp:DropDownList ID="ddlPageSize" runat="server" AutoPostBack="True" Visible="false"></asp:DropDownList>
+                    &nbsp;<asp:Label ID="lblCurrentPage" runat="server" ></asp:Label>
+                </div>
+            </div>
             <!--编辑-->
-            <asp:Panel ID="pnlEdit" runat="server" Height="400px" Width="100%" Visible="false">
-                <table class="maintable" width="200px">
+            <div id="dvEdit"   runat="server"  height="400px" width="100%" Visible="false">
+                 
+                <table class="maintable" width="100%" align="center" cellspacing="0" cellpadding="0" >
                     <tr>
-                        <td>
+                        <td colspan="2" style="height:30px">
                             <asp:Button ID="btnSave" Text=" 保 存" runat="server" OnClick="btnSave_Click" CssClass="ButtonSave"
                                 OnClientClick="return CheckBeforeSubmit()" />
                             <asp:Button ID="btnCancel" Text="取 消" runat="server" CssClass="ButtonCancel" OnClick="btnCancel_Click" />
                         </td>
                     </tr>
-                </table>
-                <table>
                     <tr>
-                        <td class="musttitle">
-                            <font color="red">*</font>用户帐号
+                        <td class="musttitle" style="width:8%">
+                            用户帐号
                         </td>
                         <td>
-                            <asp:TextBox ID="txtUserName" runat="server" CssClass="TextBox" Width="140px"></asp:TextBox>
-                            <asp:TextBox ID="txtUserID" runat="server" Width="0" Height="0" ></asp:TextBox>
+                            &nbsp;<asp:TextBox ID="txtUserName" runat="server" CssClass="TextBox" Width="140px"></asp:TextBox>
+                            <asp:TextBox ID="txtUserID" runat="server" CssClass="HiddenControl" Width="0" Height="0" ></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
-                        <td class="musttitle">
+                        <td class="musttitle" style="width:8%">
                             用户姓名
                         </td>
                         <td>
-                            <table cellpadding="0" cellspacing="0">
-                                <tr>
-                                    <td>
-                                        <asp:TextBox ID="txtEmployeeCode" runat="server" CssClass="TextBox" 
-                                            Width="140px"></asp:TextBox>
-                                    </td>
-                                </tr>
-                            </table>
+                           &nbsp;<asp:TextBox ID="txtEmployeeCode" runat="server" CssClass="TextBox" 
+                                Width="156px"></asp:TextBox>         
                         </td>
                     </tr>
                     <tr>
-                        <td class="smalltitle">
+                        <td class="smalltitle" style="width:8%">
                             备注
                         </td>
                         <td>
-                            <asp:TextBox ID="txtMemo" runat="server" Height="88px"  TextMode="MultiLine"></asp:TextBox>
+                            &nbsp;<asp:TextBox ID="txtMemo" runat="server" Height="88px"  TextMode="MultiLine"></asp:TextBox>
                         </td>
                     </tr>
                 </table>
-            </asp:Panel>
+          
+        </div>
         </ContentTemplate>
     </asp:UpdatePanel>
     <!--隐藏数据-->

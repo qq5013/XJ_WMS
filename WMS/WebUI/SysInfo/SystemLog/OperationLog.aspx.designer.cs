@@ -40,6 +40,15 @@ namespace WMS.WebUI.SysInfo.SystemLog {
         protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
+        /// updateprogress 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updateprogress;
+        
+        /// <summary>
         /// UpdatePanel1 控件。
         /// </summary>
         /// <remarks>
@@ -47,24 +56,6 @@ namespace WMS.WebUI.SysInfo.SystemLog {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-        
-        /// <summary>
-        /// pnlList 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlList;
-        
-        /// <summary>
-        /// pnlListToolbar 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlListToolbar;
         
         /// <summary>
         /// ddl_Field 控件。
@@ -85,40 +76,22 @@ namespace WMS.WebUI.SysInfo.SystemLog {
         protected global::System.Web.UI.WebControls.TextBox txtKeyWords;
         
         /// <summary>
-        /// txtDateStart 控件。
+        /// txtStartDate 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::WMS.UserControl.Calendar txtDateStart;
+        protected global::WMS.UserControl.Calendar txtStartDate;
         
         /// <summary>
-        /// txtDateEnd 控件。
+        /// txtEndDate 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::WMS.UserControl.Calendar txtDateEnd;
-        
-        /// <summary>
-        /// rbASC 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbASC;
-        
-        /// <summary>
-        /// rbDESC 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbDESC;
+        protected global::WMS.UserControl.Calendar txtEndDate;
         
         /// <summary>
         /// btnQuery 控件。
@@ -128,6 +101,15 @@ namespace WMS.WebUI.SysInfo.SystemLog {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnQuery;
+        
+        /// <summary>
+        /// btnRefresh 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRefresh;
         
         /// <summary>
         /// btnDelete 控件。
@@ -157,15 +139,6 @@ namespace WMS.WebUI.SysInfo.SystemLog {
         protected global::System.Web.UI.WebControls.Button btnExit;
         
         /// <summary>
-        /// pnlMain 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlMain;
-        
-        /// <summary>
         /// gvMain 控件。
         /// </summary>
         /// <remarks>
@@ -175,21 +148,75 @@ namespace WMS.WebUI.SysInfo.SystemLog {
         protected global::System.Web.UI.WebControls.GridView gvMain;
         
         /// <summary>
-        /// pnlNavigator 控件。
+        /// btnFirst 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlNavigator;
+        protected global::System.Web.UI.WebControls.LinkButton btnFirst;
         
         /// <summary>
-        /// pager 控件。
+        /// btnPre 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::AspNetPager.AspNetPager pager;
+        protected global::System.Web.UI.WebControls.LinkButton btnPre;
+        
+        /// <summary>
+        /// btnNext 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnNext;
+        
+        /// <summary>
+        /// btnLast 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnLast;
+        
+        /// <summary>
+        /// txtPageNo 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPageNo;
+        
+        /// <summary>
+        /// btnToPage 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnToPage;
+        
+        /// <summary>
+        /// ddlPageSize 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPageSize;
+        
+        /// <summary>
+        /// lblCurrentPage 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCurrentPage;
     }
 }

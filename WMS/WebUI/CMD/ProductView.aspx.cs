@@ -159,7 +159,7 @@ namespace WMS.WebUI.CMD
             int Count = bll.GetRowCount("VUsed_CMD_Product", string.Format("ProductCode='{0}'", this.txtID.Text.Trim()));
             if (Count > 0)
             {
-                WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel, "该产品编码还被其它单据使用，请调整后再删除！");
+                WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel, "该产品编码已被其它单据使用，请调整后再删除！");
                 return;
             }
             bll.ExecNonQuery("Cmd.DeleteProduct", new DataParameter[] { new DataParameter("{0}", "'" + strID + "'") });

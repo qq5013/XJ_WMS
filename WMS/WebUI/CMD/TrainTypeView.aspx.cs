@@ -69,7 +69,7 @@ namespace WMS.WebUI.CMD
             int Count = bll.GetRowCount("VUsed_CMD_TrainType", string.Format("TypeCode='{0}'", this.txtID.Text.Trim()));
             if (Count > 0)
             {
-                WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel, "该车型编码还被其它单据使用，请调整后再删除！");
+                WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel, "该车型编码已被其它单据使用，请调整后再删除！");
                 return;
             }
             bll.ExecNonQuery("Cmd.DeleteTrainType", new DataParameter[] { new DataParameter("{0}", "'" + strID + "'") });

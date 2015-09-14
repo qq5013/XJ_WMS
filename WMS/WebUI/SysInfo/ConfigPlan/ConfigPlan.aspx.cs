@@ -25,6 +25,7 @@ namespace WMS.WebUI.SysInfo.ConfigPlan
                 InitSmartTree();
                 QuickDestopBind();
             }
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "Resize", "resize();", true);
         }
 
         public void InitSmartTree()

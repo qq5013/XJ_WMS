@@ -51,7 +51,7 @@
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">                
                 <ContentTemplate>
                 <div>
-                <table  style="width: 100%; height: 20px;" class="OperationBar">
+                <table   style="width: 100%; height: 25px;" class="OperationBar">
                     <tr>
 						    
 						    <td class="smalltitle" align="center" width="6%">

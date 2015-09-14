@@ -180,18 +180,18 @@
                     </tr>
                 </table>
                  <div id="divSub" style="overflow: auto; WIDTH: 100%; HEIGHT: 155px">
-                    <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" SkinID="GridViewSkin" Width="1100px">
+                    <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" SkinID="GridViewSkin" Width="100%">
                         <Columns>
                             <asp:BoundField DataField="RowID" HeaderText="序号" SortExpression="RowID">
-                                <ItemStyle HorizontalAlign="Left" Width="5%" Wrap="False" />
+                                <ItemStyle HorizontalAlign="Left" Width="7%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
                             <asp:BoundField DataField="ProductCode" HeaderText="产品编码" SortExpression="ProductCode">
-                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <ItemStyle HorizontalAlign="Left" Width="20%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
                             <asp:BoundField DataField="ProductName" HeaderText="产品名称" SortExpression="ProductName">
-                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <ItemStyle HorizontalAlign="Left" Width="25%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
                            
@@ -201,7 +201,7 @@
                             </asp:BoundField>
                             <asp:BoundField DataField="Memo" HeaderText="备注" 
                                 SortExpression="Memo" >
-                                <ItemStyle HorizontalAlign="Left" Width="15%" Wrap="False" />
+                                <ItemStyle HorizontalAlign="Left" Width="38%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
                         </Columns>

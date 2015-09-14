@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using IDAL;
+using System.Drawing;
 
 namespace WMS.WebUI.SysInfo.RoleManage
 {
@@ -33,6 +34,16 @@ namespace WMS.WebUI.SysInfo.RoleManage
         }
         protected void dgUser_ItemDataBound(object sender, DataGridItemEventArgs e)
         {
+            DataGridItem row = (DataGridItem)e.Item;
+            if (row.ItemIndex % 2 == 0)
+            {
+                row.BackColor = Color.White;
+            }
+            else
+            {
+                row.BackColor = ColorTranslator.FromHtml("#E9F2FF");
+            }
+           
             if (e.Item.ItemType == ListItemType.AlternatingItem || e.Item.ItemType == ListItemType.Item)
             {
                 CheckBox chk = new CheckBox();
@@ -88,6 +99,11 @@ namespace WMS.WebUI.SysInfo.RoleManage
             }
             
 
+        }
+
+        protected void dgUser_ItemCreated(object sender, DataGridItemEventArgs e)
+        {
+           
         }
     }
 }

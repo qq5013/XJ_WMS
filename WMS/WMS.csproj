@@ -86,9 +86,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\FontSelectModalFrame.aspx.designer.cs">
-      <DependentUpon>FontSelectModalFrame.aspx</DependentUpon>
-    </Compile>
     <Compile Include="App_Code\AutoSearch.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -100,17 +97,6 @@
     </Compile>
     <Compile Include="App_Code\JScript.cs" />
     <Compile Include="App_Code\LoginUserInfo.cs" />
-    <Compile Include="Common\FontSelectModal.aspx.cs">
-      <DependentUpon>FontSelectModal.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Common\FontSelectModal.aspx.designer.cs">
-      <DependentUpon>FontSelectModal.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Common\FontSelectModalFrame.aspx.cs">
-      <DependentUpon>FontSelectModalFrame.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Common\MistakesPage.aspx.cs">
       <DependentUpon>MistakesPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -124,13 +110,6 @@
     </Compile>
     <Compile Include="Common\Select.aspx.designer.cs">
       <DependentUpon>Select.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Common\SelectDialog.aspx.cs">
-      <DependentUpon>SelectDialog.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Common\SelectDialog.aspx.designer.cs">
-      <DependentUpon>SelectDialog.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -5552,10 +5531,7 @@
     <Content Include="WebUI\CMD\WareHouseTree.ashx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Common\FontSelectModal.aspx" />
-    <Content Include="Common\FontSelectModalFrame.aspx" />
     <Content Include="Common\MistakesPage.aspx" />
-    <Content Include="Common\SelectDialog.aspx" />
     <Content Include="Css\Main.css" />
     <Content Include="Images\main\bg.jpg" />
     <Content Include="Images\main\bg001.png" />

@@ -67,7 +67,7 @@ namespace WMS.WebUI.SysInfo.UserGroupManage
         #region 数据源绑定
         void GridDataBind()
         {
-            dtGroup = bll.GetDataPage("Security.SelectGroup", pageIndex, pageSize, out totalCount,out pageCount, new DataParameter[] { new DataParameter("{0}", filter), new DataParameter("{1}", OrderByFields) });
+            dtGroup = bll.GetDataPage("Security.SelectGroup", pageIndex, pageSize, out totalCount,out pageCount, new DataParameter[] { new DataParameter("{0}", filter)});
             if (dtGroup.Rows.Count == 0)
             {
                 dtGroup.Rows.Add(dtGroup.NewRow());
@@ -166,14 +166,7 @@ namespace WMS.WebUI.SysInfo.UserGroupManage
             {
                 filter = string.Format("{0} like '%{1}%'", this.ddl_Field.SelectedValue, this.txtKeyWords.Text.Trim().Replace("'", ""));
                 ViewState["filter"] = filter;
-                if (rbASC.Checked)
-                {
-                    OrderByFields = this.ddl_Field.SelectedValue + " asc ";
-                }
-                else
-                {
-                    OrderByFields = this.ddl_Field.SelectedValue + " desc ";
-                }
+               
 
                 totalCount = bll.GetRowCount(TableName, filter);
                 pageIndex = 1;

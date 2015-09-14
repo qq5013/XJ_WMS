@@ -80,7 +80,7 @@ namespace WMS.WebUI.InStock
                     int Count = bll.GetRowCount("VUsed_CMD_BillType", string.Format("BillTypeCode='{0}'", hk.Text));
                     if (Count > 0)
                     {
-                        WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, GridView1.Rows[i].Cells[2].Text + "入库类型被其它单据使用，请调整后再删除！");
+                        WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, GridView1.Rows[i].Cells[2].Text + "入库单号被其它单据使用，请调整后再删除！");
                         return;
                     }
 
@@ -89,11 +89,18 @@ namespace WMS.WebUI.InStock
             }
             strColorCode += "'-1'";
 
-           
-            bll.ExecNonQuery("Cmd.DeleteBillType", new DataParameter[] { new DataParameter("{0}", strColorCode) });
-            AddOperateLog("入库类型", "删除单号：" + strColorCode.Replace("'-1',", "").Replace(",'-1'", ""));
-            SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
 
+            string[] comds = new string[2];
+            comds[0] = "WMS.DeleteBillMaster";
+            comds[1] = "WMS.DeleteBillDetail";
+            List<DataParameter[]> paras = new List<DataParameter[]>();
+            paras.Add(new DataParameter[] { new DataParameter("{0}", strColorCode) });
+            paras.Add(new DataParameter[] { new DataParameter("{0}", string.Format("BillID in ({0})", strColorCode)) });
+            bll.ExecTran(comds, paras);
+ 
+            AddOperateLog("入库单", "删除单号：" + strColorCode.Replace("'-1',", "").Replace(",'-1'", ""));
+            DataTable dt = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+            SetBindDataSub(dt);
         }
         #region 主档事件
         protected void btnFirst_Click(object sender, EventArgs e)
