@@ -221,7 +221,7 @@
   <Command ID="InsertProduct">
     <CommandString>
       INSERT INTO CMD_PRODUCT(ProductCode, ProductName, ProductTypeCode, TrainTypeCode, AxieNo, WheelDiameter, CCZ_Diameter, FCCZ_Diameter, CCD_Diameter,
-      FCCD_Diameter, CCXPBZW_Size, FCCXPBZW_Size, GearNo, CCLX_Flag, FCCLX_Flag, CCLX_Year, FCCLX_Year, CCLX_Factory, FCCLX_Factory, CX_Factory, CCLG_Flag,
+      FCCD_Diameter, CCXPBZW_Size, FCCXPBZW_Size, GearNo, CCLX_Flag, FCCLX_Flag, CCLX_Year, FCCLX_Year, CCLX_FactoryID, FCCLX_FactoryID, CX_FactoryID, CCLG_Flag,
       FCCLG_Flag, Memo, WarehouseCode, AreaCode, Creator, CreateDate, Updater, UpdateDate, LDXC, CX_DateTime)
       values(@ProductCode,@ProductName,@ProductTypeCode,@TrainTypeCode,@AxieNo,@WheelDiameter,@CCZ_Diameter,@FCCZ_Diameter,@CCD_Diameter,@FCCD_Diameter,
       @CCXPBZW_Size,@FCCXPBZW_Size,@GearNo,@CCLX_Flag,@FCCLX_Flag,@CCLX_Year,@FCCLX_Year,@CCLX_Factory,@FCCLX_Factory,@CX_Factory,@CCLG_Flag,
@@ -232,7 +232,7 @@
     <CommandString>
       Update CMD_PRODUCT Set ProductName=@ProductName,ProductTypeCode=@ProductTypeCode,TrainTypeCode=@TrainTypeCode,AxieNo=@AxieNo,WheelDiameter=@WheelDiameter,
       CCZ_Diameter=@CCZ_Diameter,FCCZ_Diameter=@FCCZ_Diameter,CCD_Diameter=@CCD_Diameter,FCCD_Diameter=@FCCD_Diameter,CCXPBZW_Size=@CCXPBZW_Size,FCCXPBZW_Size=@FCCXPBZW_Size,
-      GearNo=@GearNo,CCLX_Flag=@CCLX_Flag,FCCLX_Flag=@FCCLX_Flag,CCLX_Year=@CCLX_Year,FCCLX_Year=@FCCLX_Year,CCLX_Factory=@CCLX_Factory,FCCLX_Factory=@FCCLX_Factory,CX_Factory=@CX_Factory,
+      GearNo=@GearNo,CCLX_Flag=@CCLX_Flag,FCCLX_Flag=@FCCLX_Flag,CCLX_Year=@CCLX_Year,FCCLX_Year=@FCCLX_Year,CCLX_FactoryID=@CCLX_Factory,FCCLX_FactoryID=@FCCLX_Factory,CX_FactoryID=@CX_Factory,
       CCLG_Flag=@CCLG_Flag,FCCLG_Flag=@FCCLG_Flag,Memo=@Memo,WarehouseCode=@WarehouseCode,AreaCode=@AreaCode,Updater=@Updater,UpdateDate=getdate(),LDXC=@LDXC,CX_DateTime=@CX_DateTime
       where ProductCode=@ProductCode
     </CommandString>
@@ -243,7 +243,11 @@
   <!--生产厂家-->
   <Command ID="SelectFactory">
     <CommandString>
-      Select *,case when Flag=1 then '齿侧轮芯厂家' when Flag=2 then '非齿侧轮芯厂家' else '承修厂家' end as FlagName from CMD_Factory  where {0} order by Flag,FactoryID
+      Select Factory.*,State.StateDesc
+      from CMD_Factory Factory left join Sys_TableState State
+      on Factory.Flag=State.State and State.TableName='CMD_Factory' and State.FieldName='Flag'
+      where {0}
+      order by Flag,FactoryID
     </CommandString>
   </Command>
   <Command ID="DeleteFactory">
