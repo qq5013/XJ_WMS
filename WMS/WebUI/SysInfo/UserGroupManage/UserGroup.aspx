@@ -116,10 +116,10 @@
                             查询栏位
                         </td>
                         <td  width="10%"> 
-                            &nbsp;<asp:DropDownList ID="ddl_Field" runat="server" Width="85%">
-                                <asp:ListItem Selected="True" Value="ModuleName">发生模块</asp:ListItem>
-                                <asp:ListItem Value="FunctionName">功能名称</asp:ListItem>
-                            </asp:DropDownList>
+                            &nbsp; <asp:DropDownList ID="ddl_Field" runat="server">
+                                    <asp:ListItem Selected="True" Value="GroupName">用户组名称</asp:ListItem>
+                                    <asp:ListItem Value="Memo">备注</asp:ListItem>
+                                </asp:DropDownList>
                         </td>
                             <td class="smalltitle" align="center" width="5%">
                             查询内容

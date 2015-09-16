@@ -11,13 +11,13 @@ using System.Drawing;
 namespace WMS.WebUI.InStock
 {
 
-    public partial class InStocks : App_Code.BasePage
+    public partial class InStockTasks : App_Code.BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                ViewState["filter"] = "BillID like 'IS%'";
+                ViewState["filter"] = "Main.BillID like 'IS%' and Main.State in (1,2,3) ";
                 ViewState["CurrentPage"] = 1;
 
                 try
@@ -45,12 +45,8 @@ namespace WMS.WebUI.InStock
                 {
                     e.Row.BackColor = ColorTranslator.FromHtml("#60c0ff");
                 }
-                e.Row.Attributes.Add("onclick", string.Format("$('#hdnRowValue').val('{1}');selectRow({0});", e.Row.RowIndex, ((HyperLink)e.Row.Cells[2].FindControl("HyperLink1")).Text));
+                e.Row.Attributes.Add("onclick", string.Format("$('#hdnRowValue').val('{1}');selectRow({0});", e.Row.RowIndex, e.Row.Cells[1].Text));
                 e.Row.Attributes.Add("style", "cursor:pointer;");
-
-
-                
-
             }
         }
 
@@ -59,7 +55,7 @@ namespace WMS.WebUI.InStock
 
             try
             {
-                ViewState["filter"] = " BillID like 'IS%' " + " and " + string.Format("{0} like '%{1}%'", this.ddlField.SelectedValue, this.txtSearch.Text.Trim().Replace("'", ""));
+                ViewState["filter"] = " main.BillID like 'IS%' and Main.State in (1,2)  " + " and " + string.Format("{0} like '%{1}%'", this.ddlField.SelectedValue, this.txtSearch.Text.Trim().Replace("'", ""));
                 ViewState["CurrentPage"] = 1;
                 SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
 
@@ -70,42 +66,7 @@ namespace WMS.WebUI.InStock
             }
         }
 
-        protected void btnDeletet_Click(object sender, EventArgs e)
-        {
-            string strColorCode = "'-1',";
-            BLL.BLLBase bll = new BLL.BLLBase();
-            for (int i = 0; i < this.GridView1.Rows.Count; i++)
-            {
-                CheckBox cb = (CheckBox)(this.GridView1.Rows[i].FindControl("cbSelect"));
-                if (cb != null && cb.Checked)
-                {
-                    HyperLink hk = (HyperLink)(this.GridView1.Rows[i].FindControl("HyperLink1"));
-                    //判断能否删除
-                    int Count = bll.GetRowCount("VUsed_WMS_BillMaster", string.Format("BillID='{0}'", hk.Text));
-                    if (Count > 0)
-                    {
-                        WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, hk.Text + "入库单号被其它单据使用，请调整后再删除！");
-                        return;
-                    }
-
-                    strColorCode += "'" + hk.Text + "',";
-                }
-            }
-            strColorCode += "'-1'";
-
-
-            string[] comds = new string[2];
-            comds[0] = "WMS.DeleteBillMaster";
-            comds[1] = "WMS.DeleteBillDetail";
-            List<DataParameter[]> paras = new List<DataParameter[]>();
-            paras.Add(new DataParameter[] { new DataParameter("{0}", strColorCode) });
-            paras.Add(new DataParameter[] { new DataParameter("{0}", string.Format("BillID in ({0})", strColorCode)) });
-            bll.ExecTran(comds, paras);
- 
-            AddOperateLog("入库单", "删除单号：" + strColorCode.Replace("'-1',", "").Replace(",'-1'", ""));
-            DataTable dt = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
-            SetBindDataSub(dt);
-        }
+      
         #region 主档事件
         protected void btnFirst_Click(object sender, EventArgs e)
         {
@@ -156,7 +117,7 @@ namespace WMS.WebUI.InStock
                 BillID = dt.Rows[0]["BillID"].ToString(); 
             }
             BLL.BLLBase bll = new BLL.BLLBase();
-            DataTable dtSub = bll.FillDataTable("WMS.SelectBillDetail", new DataParameter[] { new DataParameter("{0}", string.Format("BillID='{0}'", BillID)) });
+            DataTable dtSub = bll.FillDataTable("WMS.SelectBillTask", new DataParameter[] { new DataParameter("{0}", string.Format("BillID='{0}'", BillID)) });
             Session[FormID + "_S_GridView2"] = dtSub;
             this.GridView2.DataSource = dtSub;
             this.GridView2.DataBind();
@@ -165,14 +126,14 @@ namespace WMS.WebUI.InStock
         private void BindDataSub(string BillID)
         {
             BLL.BLLBase bll = new BLL.BLLBase();
-            DataTable dtSub = bll.FillDataTable("WMS.SelectBillDetail", new DataParameter[] { new DataParameter("{0}", string.Format("BillID='{0}'", BillID)) });
+            DataTable dtSub = bll.FillDataTable("WMS.SelectBillTask", new DataParameter[] { new DataParameter("{0}", string.Format("BillID='{0}'", BillID)) });
             Session[FormID + "_S_GridView2"] = dtSub;
             this.GridView2.DataSource = dtSub;
             this.GridView2.DataBind();
             MovePage("S", this.GridView2, 0, btnFirstSub, btnPreSub, btnNextSub, btnLastSub, btnToPageSub, lblPageSub);
         }
        
-        #endregion
+     
 
 
         protected void btnReload_Click(object sender, EventArgs e)
@@ -190,7 +151,100 @@ namespace WMS.WebUI.InStock
             }
          
         }
+        #endregion
+        protected void btnAdd_Click(object sender, EventArgs e)
+        {
+            string strColorCode = "'-1',";
+            BLL.BLLBase bll = new BLL.BLLBase();
+            for (int i = 0; i < this.GridView1.Rows.Count; i++)
+            {
+                CheckBox cb = (CheckBox)(this.GridView1.Rows[i].FindControl("cbSelect"));
+                if (cb != null && cb.Checked)
+                {
+                    string hk = this.GridView1.Rows[i].Cells[1].Text;
+                    //判断能否删除
+                    int State = int.Parse(bll.GetFieldValue("WMS_BillMaster", "State", string.Format("BillID='{0}'", hk)));
+                    if (State == 0)
+                    {
+                        WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, GridView1.Rows[i].Cells[2].Text + "单号还未审核不能作业，请审核后，再进行入库作业。");
+                        BindDataSub(this.hdnRowValue.Value);
+                        return;
+                    }
+                    if (State > 1)
+                    {
+                        WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, GridView1.Rows[i].Cells[2].Text + "单号已经作业，不能再进行入库作业。");
+                        BindDataSub(this.hdnRowValue.Value);
+                        return;
+                    }
 
-       
+                    strColorCode += "'" + hk + "',";
+                }
+            }
+
+            strColorCode += "'-1'";
+            if (strColorCode.Replace("'-1','-1'", "").Trim().Length == 0)
+            {
+                WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1,  "请选择单据！");
+                BindDataSub(this.hdnRowValue.Value);
+                return;
+            }
+            try
+            {
+
+                bll.ExecNonQuery("WMS.SpInstockTask", new DataParameter[] { new DataParameter("@strWhere", strColorCode), new DataParameter("@UserName", Session["EmployeeCode"].ToString()) });
+
+                AddOperateLog("入库单", "入库作业单号：" + strColorCode.Replace("'-1',", "").Replace(",'-1'", ""));
+                DataTable dt = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+                SetBindDataSub(dt);
+            }
+            catch (Exception ex)
+            {
+                WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, ex.Message);
+            }
+
+        }
+
+        protected void btnDeletet_Click(object sender, EventArgs e)
+        {
+            string strColorCode = "'-1',";
+            BLL.BLLBase bll = new BLL.BLLBase();
+            for (int i = 0; i < this.GridView1.Rows.Count; i++)
+            {
+                CheckBox cb = (CheckBox)(this.GridView1.Rows[i].FindControl("cbSelect"));
+                if (cb != null && cb.Checked)
+                {
+                    string hk =  this.GridView1.Rows[i].Cells[1].Text;
+                    //判断能否删除
+                    int State = int.Parse(bll.GetFieldValue("WMS_BillMaster", "State", string.Format("BillID='{0}'", hk )));
+                    if (State<2)
+                    {
+                        WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, GridView1.Rows[i].Cells[1].Text + "单号还未作业，不能进行取消作业。");
+                        BindDataSub(this.hdnRowValue.Value);
+                        return;
+                    }
+                    if (State > 2)
+                    {
+                        WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, GridView1.Rows[i].Cells[1].Text + "单号已经执行，不能再进行取消作业。");
+                        BindDataSub(this.hdnRowValue.Value);
+                        return;
+                    }
+
+                    strColorCode += "'" + hk + "',";
+                }
+            }
+            strColorCode += "'-1'";
+            if (strColorCode.Replace("'-1','-1'", "").Trim().Length == 0)
+            {
+                WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, "请选择单据！");
+                BindDataSub(this.hdnRowValue.Value);
+                return;
+            }
+
+            bll.ExecNonQuery("WMS.SpCancelInstockTask", new DataParameter[] { new DataParameter("@strWhere", strColorCode), new DataParameter("@UserName", Session["EmployeeCode"].ToString()) });
+
+            AddOperateLog("入库单", "入库取消作业单号：" + strColorCode.Replace("'-1',", "").Replace(",'-1'", ""));
+            DataTable dt = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+            SetBindDataSub(dt);
+        }
     }
 }

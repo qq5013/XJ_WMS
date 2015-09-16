@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="InStocks.aspx.cs" Inherits="WMS.WebUI.InStock.InStocks" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="InStockTasks.aspx.cs" Inherits="WMS.WebUI.InStock.InStockTasks" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -68,9 +68,9 @@
                           <td align="right"  style="width:30%" valign="middle">
                              <%-- <asp:Button ID="btnPrint" runat="server" Text="导出" CssClass="ButtonPrint" OnClientClick="return print();"/>--%>
                            
-                            <asp:Button ID="btnAdd" runat="server" Text="新增" OnClientClick="return Add();" CssClass="ButtonCreate"/>&nbsp;
-                            <asp:Button ID="btnDelete" runat="server" Text="刪除" CssClass="ButtonDel" onclick="btnDeletet_Click" OnClientClick="return Delete('GridView1')" Width="51px"/>&nbsp;
-                             <asp:Button ID="btnPrint" runat="server" CssClass="ButtonPrint"   Text="打印" />&nbsp;
+                            <asp:Button ID="btnAdd" runat="server" Text="入库作业" CssClass="ButtonCreate" 
+                                  onclick="btnAdd_Click"/>&nbsp;
+                            <asp:Button ID="btnDelete" runat="server" Text="取消作业" CssClass="ButtonCancel" onclick="btnDeletet_Click" Width="80px"/>&nbsp;
                             <asp:Button ID="btnExit" runat="server" Text="离开" CssClass="ButtonExit" OnClientClick="return Exit()" Width="51px" />&nbsp;&nbsp;
                             
                           </td>
@@ -91,14 +91,10 @@
                               <HeaderStyle Width="60px"></HeaderStyle>
                              <ItemStyle Width="60px" HorizontalAlign="Center"></ItemStyle>
                            </asp:TemplateField>
-                           <asp:TemplateField HeaderText="入库单号" SortExpression="BillID">
-                                <ItemTemplate>
-                                    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# FormID+"View.aspx?SubModuleCode=" + SubModuleCode+"&FormID=" + FormID +"&SqlCmd="+SqlCmd+ "&ID="+DataBinder.Eval(Container.DataItem, "BillID") %>'
-                                        Text='<%# DataBinder.Eval(Container.DataItem, "BillID")%>'></asp:HyperLink>
-                                </ItemTemplate>
-                                <ItemStyle Width="12%" Wrap="False" />
-                                <HeaderStyle Width="12%" Wrap="False" />
-                            </asp:TemplateField>
+                             <asp:BoundField DataField="BillID" HeaderText="入库单号" SortExpression="BillID">
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
                             <asp:TemplateField HeaderText="入库日期" SortExpression="BillDate">
                                 <ItemTemplate>
                                     <%# ToYMD(DataBinder.Eval(Container.DataItem, "BillDate"))%>
@@ -106,7 +102,7 @@
                                 <HeaderStyle Wrap="False" />
                                 <ItemStyle HorizontalAlign="Left" VerticalAlign="Middle" Wrap="False" />
                             </asp:TemplateField>
-                            <asp:BoundField DataField="StateDesc" HeaderText="单据状态" SortExpression="StateDesc">
+                             <asp:BoundField DataField="StateDesc" HeaderText="单据状态" SortExpression="StateDesc">
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
@@ -114,11 +110,10 @@
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="AreaName" HeaderText="库区" SortExpression="AreaName">
+                              <asp:BoundField DataField="AreaName" HeaderText="库区" SortExpression="AreaName">
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-
                             <asp:BoundField DataField="FactoryName" HeaderText="工厂" SortExpression="FactoryName">
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
@@ -141,6 +136,20 @@
                                 <HeaderStyle Wrap="False" />
                                 <ItemStyle HorizontalAlign="Left" VerticalAlign="Middle" Wrap="False" />
                             </asp:TemplateField>
+
+                            <asp:BoundField DataField="Tasker" HeaderText="作业人员" 
+                                SortExpression="Tasker"  >
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:TemplateField HeaderText="作业日期" SortExpression="TaskDate">
+                                <ItemTemplate>
+                                    <%# ToYMD(DataBinder.Eval(Container.DataItem, "TaskDate"))%>
+                                </ItemTemplate>
+                                <HeaderStyle Wrap="False" />
+                                <ItemStyle HorizontalAlign="Left" VerticalAlign="Middle" Wrap="False" />
+                            </asp:TemplateField>
+
 
                              <asp:BoundField DataField="Creator" HeaderText="建单人员" 
                                 SortExpression="Creator"  >
@@ -186,14 +195,14 @@
                  <table class="maintable" cellpadding="0" cellspacing="0" style="width: 100%; height:24px">
                     <tr>
                         <td valign="middle" align="left" height="22px">
-                            <b>入库单明细</b> 
+                            <b>任务明细</b> 
                         </td>
                     </tr>
                 </table>
                  <div id="divSub" style="overflow: auto; WIDTH: 100%; HEIGHT: 155px">
                     <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" SkinID="GridViewSkin" Width="100%">
                         <Columns>
-                            <asp:BoundField DataField="RowID" HeaderText="序号" SortExpression="RowID">
+                            <asp:BoundField DataField="TaskNo" HeaderText="任务号" SortExpression="TaskNo">
                                 <ItemStyle HorizontalAlign="Left" Width="7%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
@@ -210,9 +219,20 @@
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="Memo" HeaderText="备注" 
-                                SortExpression="Memo" >
-                                <ItemStyle HorizontalAlign="Left" Width="38%" Wrap="False" />
+                            <asp:BoundField DataField="StateDesc" HeaderText="状态" SortExpression="StateDesc">
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="CraneNo" HeaderText="堆垛机号" SortExpression="CraneNo">
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="CarNo" HeaderText="小车号" SortExpression="CarNo">
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="CellCode" HeaderText="货位" SortExpression="CellCode">
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
                         </Columns>

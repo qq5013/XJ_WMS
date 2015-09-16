@@ -13,7 +13,7 @@
         $(document).ready(function () {
             $(window).resize(function () {
                 resize();
-                BindEvent();
+                
             });
         });
         function resize() {
@@ -50,6 +50,7 @@
                         <td align="right">
                            <%-- <asp:Button ID="btnPrint" runat="server" Text="导出" CssClass="ButtonPrint" 
                                 OnClientClick="return print();" />--%>
+                            <asp:Button ID="btnCheck" runat="server" Text="审核" CssClass="ButtonAudit" onclick="btnCheck_Click"  />
                             <asp:Button ID="btnAdd" runat="server" Text="新增" CssClass="ButtonCreate" OnClientClick="return Add();"  />
                             <asp:Button ID="btnDelete" runat="server" Text="刪除" CssClass="ButtonDel" OnClientClick="return ViewDelete();"
                                 onclick="btnDelete_Click"  />
@@ -110,10 +111,8 @@
                             审核日期
                         </td>
                         <td width="26%">
-                        &nbsp;<asp:TextBox ID="txtCheckDate" runat="server" CssClass="TextRead" Width="70%" 
-                                ReadOnly="True"></asp:TextBox>&nbsp;&nbsp;<asp:Button ID="btnCheck" 
-                                runat="server" Text="审核" CssClass="ButtonAudit" 
-                                onclick="btnCheck_Click"  />
+                        &nbsp;<asp:TextBox ID="txtCheckDate" runat="server" CssClass="TextRead" Width="90%" 
+                                ReadOnly="True"></asp:TextBox> 
                         </td>
                     </tr>
               

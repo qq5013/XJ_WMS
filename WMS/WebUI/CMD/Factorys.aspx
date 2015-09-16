@@ -43,7 +43,7 @@
                              </td>
 						    <td  width="15%" height="20">&nbsp;
                                 <asp:dropdownlist id="ddlField" runat="server" Width="85%" >
-                                    <asp:ListItem Selected="True" Value="FlagName">厂家类别</asp:ListItem>
+                                    <asp:ListItem Selected="True" Value="StateDesc">厂家类别</asp:ListItem>
                                     <asp:ListItem  Value="FactoryName">厂家名称</asp:ListItem>
                                     <asp:ListItem Value="LinkPerson" >联系人</asp:ListItem>
                                     <asp:ListItem Value="LinkPhone" >联系电话</asp:ListItem>
@@ -104,8 +104,8 @@
                               <ItemStyle Width="10%" Wrap="False" HorizontalAlign="Left"/>
                               <HeaderStyle Width="10%" Wrap="False" />
                            </asp:TemplateField>
-                           <asp:BoundField DataField="FlagName" HeaderText="厂家类别" 
-                                SortExpression="FlagName" >
+                           <asp:BoundField DataField="StateDesc" HeaderText="厂家类别" 
+                                SortExpression="StateDesc" >
                                 <ItemStyle HorizontalAlign="Left" Width="15%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
