@@ -3,12 +3,13 @@
   <!--入库单据 -->
   <Command ID="SelectBillMaster">
     <CommandString>
-      select main.*,area.AreaName,billtype.BillTypeName,TrainType.TypeName,Facotry.FactoryName
+      select main.*,area.AreaName,billtype.BillTypeName,TrainType.TypeName,Facotry.FactoryName,State.StateDesc
       from WMS_BillMaster main
       left join CMD_BillType BillType on main.BillTypeCode=BillType.BillTypeCode
       left join CMD_TrainType TrainType on main.TrainTypeCode=TrainType.TypeCode
       left join CMD_Area area on main.AreaCode=area.AreaCode
       left join CMD_Factory Facotry on main.FactoryID=Facotry.FactoryID
+      left join Sys_TableState State on State.State=main.State and State.TableName='WMS_BillMaster' and State.FieldName='State'
       where {0}
       ORDER BY BillDate DESC, Main.BillID DESC
     </CommandString>
@@ -27,6 +28,17 @@
       ORDER BY RowID
     </CommandString>
   </Command>
+  <Command ID="SelectBillTask">
+    <CommandString>
+      select task.*,Product.ProductName,state.StateDesc from WCS_TASK Task
+      inner join CMD_Product Product on task.ProductCode=Product.ProductCode
+      inner join Sys_TableState state on task.State=state.State and state.TableName='WCS_task' and state.FieldName='State'
+      where {0}
+      order by taskNo
+    </CommandString>
+  </Command>
+  
+  
 
   <Command ID="DeleteBillDetail">
     <CommandString>
@@ -64,9 +76,20 @@
        update WMS_BillMaster set Checker=@Checker,CheckDate={0},State=@State where BillID=@BillID
     </CommandString>
   </Command>
-  
+  <Command ID="SpInstockTask">
+    <CommandString>
+      Sp_InstockTask
+    </CommandString>
+  </Command>
+  <Command ID="SpCancelInstockTask">
+    <CommandString>
+      Sp_InstockCancelTask
+    </CommandString>
+  </Command>
+
  
-  
+
+
 
   <Command ID="SelectSchedule">
     <CommandString>
