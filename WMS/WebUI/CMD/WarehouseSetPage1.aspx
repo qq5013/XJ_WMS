@@ -41,7 +41,7 @@
                         var tNodeID = record.get('id');
                         var text = record.get('text');
                         var tNodeIDLen = tNodeID.length;
-                        document.getElementById("lblCurrentNode").innerHTML = text;
+                        document.getElementById("lblCurrentNode").innerHTML = "当前选中的节点：" + text;
                         $("#hdnNodeID").val(tNodeID);
                         if (tNodeIDLen == 2) {
                             //仓库
@@ -82,7 +82,7 @@
                     });
                     if (!blnReload) {
                         var root = tree.getRootNode().firstChild;
-                        document.getElementById("lblCurrentNode").innerHTML = root.data.text;
+                        document.getElementById("lblCurrentNode").innerHTML = "当前选中的节点：" + root.data.text;
                         $("#frame").attr("src", "WarehouseEditPage.aspx?WAREHOUSE_CODE=" + root.id);
                         $("#hdnNodeID").val(root.id);
                         blnReload = false;
@@ -143,7 +143,7 @@
           
                <td style="vertical-align:top; padding-left:10px; overflow:hidden"> <!--编辑区-->
                 <div id="toptable" style="height:24px;vertical-align:middle; width:100% ">
-                   <img alt="仓库" src="../../images/ico_home.gif" border="0"  />当前选中的节点：
+                   <img alt="仓库" src="../../images/home.png" border="0" />
                    <asp:Label ID="lblCurrentNode" runat="server" ForeColor="#404040" 
                         Font-Names="微软雅黑"></asp:Label> 
                 </div>
