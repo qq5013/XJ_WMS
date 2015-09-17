@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="InStockTasks.aspx.cs" Inherits="WMS.WebUI.InStock.InStockTasks" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="OutStockTasks.aspx.cs" Inherits="WMS.WebUI.OutStock.OutStockTasks" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -41,10 +41,10 @@
                                 <asp:Literal ID="Literal1" Text="查询栏位" runat="server"  ></asp:Literal>
                              </td>
 						    <td  width="15%" height="20">&nbsp;<asp:dropdownlist id="ddlField" runat="server" Width="85%" >
-                                    <asp:ListItem Selected="True" Value="BillTypeName">入库类型</asp:ListItem>
+                                    <asp:ListItem Selected="True" Value="BillTypeName">出库类型</asp:ListItem>
                                     <asp:ListItem Value="AreaName">库区</asp:ListItem>
-                                    <asp:ListItem Value="FactoryName">工厂</asp:ListItem>
-                                    <asp:ListItem Value="BillID">入库单号</asp:ListItem>
+                                    <asp:ListItem Value="FactoryName">工程</asp:ListItem>
+                                    <asp:ListItem Value="BillID">出库单号</asp:ListItem>
                                     <asp:ListItem Value="Memo">备注</asp:ListItem>
                                  </asp:dropdownlist>
                             </td>
@@ -68,7 +68,7 @@
                           <td align="right"  style="width:30%" valign="middle">
                              <%-- <asp:Button ID="btnPrint" runat="server" Text="导出" CssClass="ButtonPrint" OnClientClick="return print();"/>--%>
                            
-                            <asp:Button ID="btnAdd" runat="server" Text="入库作业" CssClass="ButtonCreate" 
+                            <asp:Button ID="btnAdd" runat="server" Text="出库作业" CssClass="ButtonCreate" 
                                   onclick="btnAdd_Click"/>&nbsp;
                             <asp:Button ID="btnDelete" runat="server" Text="取消作业" CssClass="ButtonCancel" onclick="btnDeletet_Click" Width="80px"/>&nbsp;
                             <asp:Button ID="btnExit" runat="server" Text="离开" CssClass="ButtonExit" OnClientClick="return Exit()" Width="51px" />&nbsp;&nbsp;
@@ -91,11 +91,11 @@
                               <HeaderStyle Width="60px"></HeaderStyle>
                              <ItemStyle Width="60px" HorizontalAlign="Center"></ItemStyle>
                            </asp:TemplateField>
-                             <asp:BoundField DataField="BillID" HeaderText="入库单号" SortExpression="BillID">
+                             <asp:BoundField DataField="BillID" HeaderText="出库单号" SortExpression="BillID">
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-                            <asp:TemplateField HeaderText="入库日期" SortExpression="BillDate">
+                            <asp:TemplateField HeaderText="出库日期" SortExpression="BillDate">
                                 <ItemTemplate>
                                     <%# ToYMD(DataBinder.Eval(Container.DataItem, "BillDate"))%>
                                 </ItemTemplate>
@@ -106,7 +106,7 @@
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="BillTypeName" HeaderText="入库类型" SortExpression="BillTypeName">
+                            <asp:BoundField DataField="BillTypeName" HeaderText="出库类型" SortExpression="BillTypeName">
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
@@ -114,11 +114,22 @@
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="FactoryName" HeaderText="工厂" SortExpression="FactoryName">
+                            <asp:BoundField DataField="TypeName" HeaderText="车型" SortExpression="TypeName">
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-
+                            <asp:BoundField DataField="TrainNo" HeaderText="上车号" SortExpression="TrainNo">
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                             <asp:BoundField DataField="AxieLocation" HeaderText="上车轴位" SortExpression="AxieLocation">
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                             <asp:BoundField DataField="Xc" HeaderText="修程" SortExpression="Xc">
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
                             <asp:BoundField DataField="Memo" HeaderText="备注" 
                                 SortExpression="Memo" >
                                 <ItemStyle HorizontalAlign="Left" Width="15%" Wrap="False" />

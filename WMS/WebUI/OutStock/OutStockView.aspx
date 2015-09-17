@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="InStockView.aspx.cs" Inherits="WMS.WebUI.InStock.InStockView" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="OutStockView.aspx.cs" Inherits="WMS.WebUI.OutStock.OutStockView" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -17,7 +17,7 @@
             });
         });
         function resize() {
-            var h = document.documentElement.clientHeight - 200;
+            var h = document.documentElement.clientHeight - 250;
             $("#Sub-container").css("height", h);
         }
      </script>
@@ -64,18 +64,19 @@
                         </td>
                     </tr>
                  </table>
-                   <table id="Table1" class="maintable"  width="100%" align="center" cellspacing="0" cellpadding="0" bordercolor="#ffffff" border="1"
+                    <table id="Table1" class="maintable"  width="100%" align="center" cellspacing="0" cellpadding="0" bordercolor="#ffffff" border="1"
 				         runat="server">			
 				    <tr>
                         <td align="center" class="musttitle" style="width:8%;"  >
-                                入库日期
+                                出库日期
                         </td>
                         <td  width="25%">
-                                &nbsp;<asp:TextBox ID="txtBillDate" runat="server"  CssClass="TextRead" 
-                                    Width="90%" MaxLength="20" ReadOnly="True" ></asp:TextBox>
-                        </td>
+                                &nbsp;<asp:TextBox ID="txtBillDate" 
+                                    runat="server"  CssClass="TextRead" Width="90%" ReadOnly="True" 
+                                     ></asp:TextBox>    
+                       </td>
                         <td align="center" class="musttitle" style="width:8%;"  >
-                                入库单号
+                                出库单号
                         </td>
                         <td width="25%">
                                 &nbsp;<asp:TextBox ID="txtID" 
@@ -83,7 +84,7 @@
                                     MaxLength="20" ReadOnly="True" ></asp:TextBox> 
                         </td>
                             <td align="center" class="musttitle" style="width:8%;">
-                                入库类型</td>
+                                出库类型</td>
                         <td width="26%">
                             &nbsp;<asp:DropDownList ID="ddlBillTypeCode" runat="server" Width="90%" 
                                 Enabled="False">
@@ -100,29 +101,73 @@
                             </asp:DropDownList>
                         </td>
                         <td align="center" class="musttitle" style="width:8%;"  >
-                                工厂
+                                车型
                         </td>
                         <td width="25%">
-                                &nbsp;<asp:DropDownList ID="ddlFactoryID" runat="server" Width="90%" 
+                                &nbsp;<asp:DropDownList ID="ddlTrainTypeCode" runat="server" Width="90%" 
                                     Enabled="False">
                                 </asp:DropDownList>
                         </td>
                         <td align="center" class="smalltitle"  style="width:8%;">
-                            审核日期
+                            上车号
                         </td>
                         <td width="26%">
-                        &nbsp;<asp:TextBox ID="txtCheckDate" runat="server" CssClass="TextRead" Width="90%" 
-                                ReadOnly="True"></asp:TextBox> 
+                        &nbsp;<asp:TextBox ID="txtTrainNo" runat="server" CssClass="TextRead" Width="90%" 
+                                ReadOnly="True"></asp:TextBox>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td align="center"  class="smalltitle" style="width:8%;"  >
+                                上车轴位</td>
+                        <td  width="25%">
+                             &nbsp;<asp:TextBox ID="txtAxieLocation" runat="server" CssClass="TextRead" 
+                                 Width="90%" ReadOnly="True"></asp:TextBox>        
+                        </td>
+                        <td align="center"  class="smalltitle" style="width:8%;"  >
+                                修程
+                        </td>
+                        <td width="25%">
+                             &nbsp;<asp:TextBox ID="txtXc" runat="server" CssClass="TextRead" Width="90%" 
+                                 ReadOnly="True"></asp:TextBox>
+                        </td>
+                        <td align="center"  class="smalltitle"  style="width:8%;">
+                            齿侧内轴
+                        </td>
+                        <td width="26%">
+                        &nbsp;<asp:TextBox ID="txtCcnz" runat="server" CssClass="TextRead" Width="90%" 
+                                ReadOnly="True"></asp:TextBox>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td align="center"  class="smalltitle" style="width:8%;"  >
+                                齿侧外轴</td>
+                        <td  width="25%">
+                                &nbsp;<asp:TextBox ID="txtCcwz" runat="server" CssClass="TextRead" Width="90%" 
+                                    ReadOnly="True"></asp:TextBox>
+                        </td>
+                        <td align="center"  class="smalltitle" style="width:8%;"  >
+                                非齿侧内轴
+                        </td>
+                        <td width="25%">
+                                &nbsp;<asp:TextBox ID="txtFccnz" runat="server" CssClass="TextRead" Width="90%" 
+                                    ReadOnly="True"></asp:TextBox>
+                        </td>
+                        <td align="center" class="smalltitle"   style="width:8%;">
+                            非齿侧外轴
+                        </td>
+                        <td width="26%">
+                        &nbsp;<asp:TextBox ID="txtFccwz" runat="server" CssClass="TextRead" Width="90%" 
+                                ReadOnly="True"></asp:TextBox>
                         </td>
                     </tr>
               
-                    <tr style="height:50px">
+                    <tr style="height:45px">
                         <td align="center" class="smalltitle"  >
                             备注
                         </td>
                         <td colspan="5"  valign="middle" >
-                            &nbsp;<asp:TextBox ID="txtMemo" runat="server" CssClass="TextRead" 
-                                TextMode="MultiLine" Height="40px" Width="97%" ReadOnly="True"></asp:TextBox>
+                            &nbsp;<asp:TextBox ID="txtMemo" runat="server" CssClass="MultiLineTextBox" 
+                                TextMode="MultiLine" Height="30px" Width="97%"></asp:TextBox>
                         </td>
                     </tr>
                 </table>
@@ -158,19 +203,11 @@
                 </div>
                 <table  class=" maintable" style="width:100%; height:25px" > 
                     <tr>
-                         <td align="center"  style="width:8%;" class="smalltitle">
-                            审核人员
-                        </td>
-                        <td style="width:17%">
-                            &nbsp;<asp:TextBox ID="txtChecker" runat="server" CssClass="TextRead" ReadOnly="True" Width="90%"></asp:TextBox>
-                        </td> 
-
-
-                        <td align="center"  style="width:8%;" class="smalltitle">
+                        <td align="center"  style="width:7%;" class="smalltitle">
                             数量统计
                         </td>
-                        <td style="width:17%">
-                            &nbsp;<asp:TextBox ID="txtTotalQty" runat="server" CssClass="TextRead"  ReadOnly="True" Width="90%" style="text-align:right"></asp:TextBox>
+                        <td style="width:9%">
+                            &nbsp;<asp:TextBox ID="txtTotalQty" runat="server" CssClass="TextRead" ReadOnly="True" Width="90%" style="text-align:right"></asp:TextBox>
                         </td>
                        
                         <td align="right">
@@ -196,31 +233,44 @@
                 </table>
                 <table  class="maintable"   style=" width:100%; height:25px" align="center" cellspacing="0" cellpadding="0" border="1">
                     <tr>
-                        <td align="center"  class="smalltitle" style="width:8%;">
+                        <td align="center"  style="width:7%;" class="smalltitle">
+                            审核人员
+                        </td>
+                        <td style="width:9%">
+                            &nbsp;<asp:TextBox ID="txtChecker" runat="server" CssClass="TextRead" ReadOnly="True" Width="90%"></asp:TextBox>
+                        </td> 
+
+                         <td align="center"  style="width:7%;" class="smalltitle">
+                            审核日期
+                        </td>
+                        <td style="width:9%">
+                            &nbsp;<asp:TextBox ID="txtCheckDate" runat="server" CssClass="TextRead" ReadOnly="True" Width="90%" ></asp:TextBox>
+                        </td> 
+                        <td align="center"  class="smalltitle" style="width:7%;">
                             建单人员
                         </td> 
-                        <td style="width:17%">
+                        <td style="width:9%">
                         &nbsp;<asp:TextBox ID="txtCreator" runat="server"  CssClass="TextRead" Width="90%" 
                                 ReadOnly="True"  ></asp:TextBox> 
                         </td>
-                        <td align="center" class="smalltitle" style="width:8%;">
+                        <td align="center" class="smalltitle" style="width:7%;">
                             建单日期
                         </td> 
-                        <td style="width:17%">
+                        <td style="width:9%">
                         &nbsp;<asp:TextBox ID="txtCreatDate" runat="server"  CssClass="TextRead" 
                                 Width="90%" ReadOnly="True"  ></asp:TextBox> 
                         </td>
-                        <td align="center"  class="smalltitle" style="width:8%;">
+                        <td align="center"  class="smalltitle" style="width:7%;">
                             修改人员
                         </td> 
-                        <td style="width:17%">
+                        <td style="width:9%">
                             &nbsp;<asp:TextBox ID="txtUpdater" runat="server"  CssClass="TextRead" 
                                 Width="90%" ReadOnly="True"  ></asp:TextBox> 
                         </td>
-                        <td align="center"  class="smalltitle" style="width:8%;">
+                        <td align="center"  class="smalltitle" style="width:7%;">
                             修改日期
                         </td> 
-                        <td style="width:17%">
+                        <td style="width:13%">
                         &nbsp;<asp:TextBox ID="txtUpdateDate" runat="server" CssClass="TextRead" 
                                 Width="90%" ReadOnly="True"  ></asp:TextBox> 
                         </td>

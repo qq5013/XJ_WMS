@@ -8,9 +8,9 @@ using System.Data;
 using IDAL;
 
 
-namespace WMS.WebUI.InStock
+namespace WMS.WebUI.OutStock
 {
-    public partial class InStockView :App_Code.BasePage
+    public partial class OutStockView :App_Code.BasePage
     {
         private string strID;
         private string TableName = "WMS_BillMaster";
@@ -39,13 +39,13 @@ namespace WMS.WebUI.InStock
             this.ddlAreaCode.DataSource = dtArea;
             this.ddlAreaCode.DataBind();
 
-            DataTable dtFactory = bll.FillDataTable("Cmd.SelectFactory");
-            this.ddlFactoryID.DataValueField = "FactoryID";
-            this.ddlFactoryID.DataTextField = "FactoryName";
-            this.ddlFactoryID.DataSource = dtFactory;
-            this.ddlFactoryID.DataBind();
+            DataTable TrainType = bll.FillDataTable("Cmd.SelectTrainType");
+            this.ddlTrainTypeCode.DataValueField = "TypeCode";
+            this.ddlTrainTypeCode.DataTextField = "TypeName";
+            this.ddlTrainTypeCode.DataSource = TrainType;
+            this.ddlTrainTypeCode.DataBind();
 
-            DataTable dtBillType = bll.FillDataTable("Cmd.SelectBillType", new DataParameter[] { new DataParameter("{0}", "Flag=1") });
+            DataTable dtBillType = bll.FillDataTable("Cmd.SelectBillType", new DataParameter[] { new DataParameter("{0}", "Flag=2") });
             this.ddlBillTypeCode.DataValueField = "BillTypeCode";
             this.ddlBillTypeCode.DataTextField = "BillTypeName";
             this.ddlBillTypeCode.DataSource = dtBillType;
@@ -59,10 +59,17 @@ namespace WMS.WebUI.InStock
             if (dt.Rows.Count > 0)
             {
                 this.txtID.Text = dt.Rows[0]["BillID"].ToString();
-                this.txtBillDate.Text =ToYMD(dt.Rows[0]["BillDate"]);
+                this.txtBillDate.Text = ToYMD(dt.Rows[0]["BillDate"]);
                 this.ddlAreaCode.SelectedValue = dt.Rows[0]["AreaCode"].ToString();
                 this.ddlBillTypeCode.SelectedValue = dt.Rows[0]["BillTypeCode"].ToString();
-                this.ddlFactoryID.SelectedValue = dt.Rows[0]["FactoryID"].ToString();
+                this.ddlTrainTypeCode.SelectedValue = dt.Rows[0]["TrainTypeCode"].ToString();
+                this.txtTrainNo.Text = dt.Rows[0]["TrainNo"].ToString();
+                this.txtAxieLocation.Text = dt.Rows[0]["AxieLocation"].ToString();
+                this.txtXc.Text = dt.Rows[0]["XC"].ToString();
+                this.txtCcnz.Text = dt.Rows[0]["Ccnz"].ToString();
+                this.txtCcwz.Text = dt.Rows[0]["Ccwz"].ToString();
+                this.txtFccnz.Text = dt.Rows[0]["Fccnz"].ToString();
+                this.txtFccwz.Text = dt.Rows[0]["Fccwz"].ToString();
                 this.txtMemo.Text = dt.Rows[0]["Memo"].ToString();
                 this.txtCreator.Text = dt.Rows[0]["Creator"].ToString();
                 this.txtCreatDate.Text = ToYMD(dt.Rows[0]["CreateDate"]);
@@ -70,6 +77,7 @@ namespace WMS.WebUI.InStock
                 this.txtUpdateDate.Text = ToYMD(dt.Rows[0]["UpdateDate"]);
                 this.txtChecker.Text = dt.Rows[0]["Checker"].ToString();
                 this.txtCheckDate.Text = ToYMD(dt.Rows[0]["CheckDate"]);
+                
                 hdnState.Value = dt.Rows[0]["State"].ToString();
                 if (this.txtChecker.Text.Trim()!="")
                 {
@@ -166,7 +174,7 @@ namespace WMS.WebUI.InStock
             int Count = bll.GetRowCount("VUsed_WMS_BillMaster", string.Format("BillID='{0}'", this.txtID.Text.Trim()));
             if (Count > 0)
             {
-                WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel, "该入库单号已被其它单据使用，请调整后再删除！");
+                WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel, "该出库单号已被其它单据使用，请调整后再删除！");
                 return;
             }
  
@@ -178,7 +186,7 @@ namespace WMS.WebUI.InStock
             paras.Add(new DataParameter[] { new DataParameter("{0}", string.Format("BillID='{0}'", strID)) });
             bll.ExecTran(comds, paras);
            
-            AddOperateLog("入库单", "删除单号：" + strID);
+            AddOperateLog("出库单", "删除单号：" + strID);
 
             btnNext_Click(sender, e);
             if (this.txtID.Text == strID)
@@ -266,7 +274,7 @@ namespace WMS.WebUI.InStock
 
 
             bll.ExecNonQuery("WMS.UpdateCheckBillMaster", paras);
-            AddOperateLog("入库单 ", btnCheck.Text + " " + txtID.Text);
+            AddOperateLog("出库单 ", btnCheck.Text + " " + txtID.Text);
 
             DataTable dt = bll.FillDataTable("WMS.SelectBillMaster", new DataParameter[] { new DataParameter("{0}", string.Format("BillID='{0}'", strID)) });
             BindData(dt);

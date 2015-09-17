@@ -8,9 +8,9 @@ using System.Data;
 using IDAL;
 
 
-namespace WMS.WebUI.InStock
+namespace WMS.WebUI.OutStock
 {
-    public partial class InStockEdit :App_Code.BasePage
+    public partial class OutStockEdit :App_Code.BasePage
     {
         protected string strID;
         BLL.BLLBase bll = new BLL.BLLBase();
@@ -32,9 +32,9 @@ namespace WMS.WebUI.InStock
                 {
                     BindDataSub();
 
-                    txtBillDate.changed = "$('#txtID').val(autoCodeByTableName('IS', '1=1','WMS_BillMaster', 'txtBillDate'));";
+                    txtBillDate.changed = "$('#txtID').val(autoCodeByTableName('OS', '1=1','WMS_BillMaster', 'txtBillDate'));";
                     this.txtBillDate.DateValue = DateTime.Now;
-                    this.txtID.Text = bll.GetAutoCodeByTableName("IS", "WMS_BillMaster", DateTime.Now, "1=1");
+                    this.txtID.Text = bll.GetAutoCodeByTableName("OS", "WMS_BillMaster", DateTime.Now, "1=1");
 
                     this.txtCreator.Text = Session["EmployeeCode"].ToString();
                     this.txtUpdater.Text = Session["EmployeeCode"].ToString();
@@ -57,13 +57,13 @@ namespace WMS.WebUI.InStock
             this.ddlAreaCode.DataSource = dtArea;
             this.ddlAreaCode.DataBind();
 
-            DataTable dtFactory = bll.FillDataTable("Cmd.SelectFactory");
-            this.ddlFactoryID.DataValueField = "FactoryID";
-            this.ddlFactoryID.DataTextField = "FactoryName";
-            this.ddlFactoryID.DataSource = dtFactory;
-            this.ddlFactoryID.DataBind();
+            DataTable TrainType = bll.FillDataTable("Cmd.SelectTrainType");
+            this.ddlTrainTypeCode.DataValueField = "TypeCode";
+            this.ddlTrainTypeCode.DataTextField = "TypeName";
+            this.ddlTrainTypeCode.DataSource = TrainType;
+            this.ddlTrainTypeCode.DataBind();
 
-            DataTable dtBillType = bll.FillDataTable("Cmd.SelectBillType",new DataParameter[]{new DataParameter("{0}","Flag=1")});
+            DataTable dtBillType = bll.FillDataTable("Cmd.SelectBillType",new DataParameter[]{new DataParameter("{0}","Flag=2")});
             this.ddlBillTypeCode.DataValueField = "BillTypeCode";
             this.ddlBillTypeCode.DataTextField = "BillTypeName";
             this.ddlBillTypeCode.DataSource = dtBillType;
@@ -80,7 +80,14 @@ namespace WMS.WebUI.InStock
                 this.txtBillDate.DateValue = dt.Rows[0]["BillDate"];
                 this.ddlAreaCode.SelectedValue = dt.Rows[0]["AreaCode"].ToString();
                 this.ddlBillTypeCode.SelectedValue = dt.Rows[0]["BillTypeCode"].ToString();
-                this.ddlFactoryID.SelectedValue = dt.Rows[0]["FactoryID"].ToString();
+                this.ddlTrainTypeCode.SelectedValue = dt.Rows[0]["TrainTypeCode"].ToString();
+                this.txtTrainNo.Text = dt.Rows[0]["TrainNo"].ToString();
+                this.txtAxieLocation.Text = dt.Rows[0]["AxieLocation"].ToString();
+                this.txtXc.Text = dt.Rows[0]["XC"].ToString();
+                this.txtCcnz.Text = dt.Rows[0]["Ccnz"].ToString();
+                this.txtCcwz.Text = dt.Rows[0]["Ccwz"].ToString();
+                this.txtFccnz.Text = dt.Rows[0]["Fccnz"].ToString();
+                this.txtFccwz.Text = dt.Rows[0]["Fccwz"].ToString();
                 this.txtMemo.Text = dt.Rows[0]["Memo"].ToString();
                 this.txtCreator.Text = dt.Rows[0]["Creator"].ToString();
                 this.txtCreatDate.Text = ToYMD(dt.Rows[0]["CreateDate"]);
@@ -223,6 +230,7 @@ namespace WMS.WebUI.InStock
             if (dt1.Rows.Count == 0)
             {
                 this.ddlAreaCode.Enabled = true;
+                this.ddlTrainTypeCode.Enabled = true;
                 return;
             }
             DataRow dr;
@@ -241,8 +249,10 @@ namespace WMS.WebUI.InStock
             }
             dt1.AcceptChanges();
             if (dt1.Rows.Count > 0)
+            {
                 this.ddlAreaCode.Enabled = false;
-             
+                this.ddlTrainTypeCode.Enabled = false;
+            }
 
             object o = dt1.Compute("SUM(Quantity)", "");
             this.txtTotalQty.Text = o.ToString();
@@ -255,12 +265,47 @@ namespace WMS.WebUI.InStock
             string[] Commands = new string[3];
             DataParameter[] para;
 
+            //判断库存
+            DataTable dt = (DataTable)Session[FormID + "_Edit_dgViewSub1"];
+
+            DataTable dtProduct = dt.DefaultView.ToTable("Product", true, new string[] { "ProductCode", "ProductName" });
+
+            for (int i = 0; i < dtProduct.Rows.Count; i++)
+            {
+                object o = dt.Compute("Sum(Quantity)", string.Format("ProductCode='{0}'", dtProduct.Rows[i]["ProductCode"]));
+                if (o != null)
+                {
+                    int Qty = int.Parse(o.ToString());
+
+                    DataTable dtProductQty = bll.FillDataTable("WMS.SelectProductQty", new DataParameter[] { new DataParameter("@BillID", this.txtID.Text), new DataParameter("@ProductCode", dtProduct.Rows[i]["ProductCode"].ToString()) });
+                    int StockQty = 0;
+                    bool blnvalue = false;
+                    if (dtProductQty.Rows.Count == 0)
+                    {
+                        blnvalue = true;
+                    }
+                    else
+                    {
+                        StockQty = int.Parse(dtProductQty.Rows[0]["StockQty"].ToString());
+                        if (Qty > StockQty)
+                            blnvalue = true;
+                    }
+                    if (blnvalue)
+                    {
+
+                        WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel1, dtProduct.Rows[i]["ProductName"].ToString() + "现有库存数量为：" + StockQty.ToString() + ", 库存不足，请修改出库数量。");
+                        return;
+
+                    }
+                }
+
+            }
             if (strID == "") //新增
             {
                 int Count = bll.GetRowCount("WMS_BillMaster", string.Format("BillID='{0}'", this.txtID.Text.Trim()));
                 if (Count > 0)
                 {
-                    WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel1, "该入库单已经存在！");
+                    WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel1, "该出库单已经存在！");
                     return;
                 }
                 para = new DataParameter[] { 
@@ -268,30 +313,44 @@ namespace WMS.WebUI.InStock
                                              new DataParameter("@BillDate", this.txtBillDate.DateValue),
                                              new DataParameter("@BillTypeCode",this.ddlBillTypeCode.SelectedValue),
                                              new DataParameter("@AreaCode",this.ddlAreaCode.SelectedValue),
-                                             new DataParameter("@FactoryID",this.ddlFactoryID.SelectedValue),
+                                             new DataParameter("@TrainTypeCode",this.ddlTrainTypeCode.SelectedValue),
+                                             new DataParameter("@TrainNo",this.txtTrainNo.Text),
+                                             new DataParameter("@AxieLocation",this.txtAxieLocation.Text),
+                                             new DataParameter("@Xc",this.txtXc.Text),
+                                             new DataParameter("@Ccnz",this.txtCcnz.Text),
+                                             new DataParameter("@Ccwz",this.txtCcwz.Text),
+                                             new DataParameter("@Fccnz",this.txtFccnz.Text),
+                                             new DataParameter("@Fccwz",this.txtFccwz.Text),
                                              new DataParameter("@Memo", this.txtMemo.Text.Trim()),
                                              new DataParameter("@Creator", Session["EmployeeCode"].ToString()),
                                              new DataParameter("@Updater", Session["EmployeeCode"].ToString())
                                              
                                               };
-                Commands[0] = "WMS.InsertInStockBill";
+                Commands[0] = "WMS.InsertOutStockBill";
 
             }
             else //修改
             {
                 para = new DataParameter[] { 
                                              new DataParameter("@BillDate", this.txtBillDate.DateValue),
+                                              new DataParameter("@BillDate", this.txtBillDate.DateValue),
                                              new DataParameter("@BillTypeCode",this.ddlBillTypeCode.SelectedValue),
                                              new DataParameter("@AreaCode",this.ddlAreaCode.SelectedValue),
-                                             new DataParameter("@FactoryID",this.ddlFactoryID.SelectedValue),
+                                             new DataParameter("@TrainTypeCode",this.ddlTrainTypeCode.SelectedValue),
+                                             new DataParameter("@TrainNo",this.txtTrainNo.Text),
+                                             new DataParameter("@AxieLocation",this.txtAxieLocation.Text),
+                                             new DataParameter("@Xc",this.txtXc.Text),
+                                             new DataParameter("@Ccnz",this.txtCcnz.Text),
+                                             new DataParameter("@Ccwz",this.txtCcwz.Text),
+                                             new DataParameter("@Fccnz",this.txtFccnz.Text),
+                                             new DataParameter("@Fccwz",this.txtFccwz.Text),
                                              new DataParameter("@Memo", this.txtMemo.Text.Trim()),
                                              new DataParameter("@Updater", Session["EmployeeCode"].ToString()),
                                              new DataParameter("{0}",string.Format("BillID='{0}'", this.txtID.Text.Trim())) };
-                Commands[0] = "WMS.UpdateInStock";
+                Commands[0] = "WMS.UpdateOutStock";
             }
             try
             {
-                DataTable dt = (DataTable)Session[FormID + "_Edit_dgViewSub1"];
                 Commands[1] = "WMS.DeleteBillDetail";
                 Commands[2] = "WMS.InsertInStockDetail";
                 bll.ExecTran(Commands, para, "BillID", new DataTable[] { dt });

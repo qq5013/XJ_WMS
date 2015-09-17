@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="InStockEdit.aspx.cs" Inherits="WMS.WebUI.InStock.InStockEdit" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="OutStockEdit.aspx.cs" Inherits="WMS.WebUI.OutStock.OutStockEdit" %>
 <%@ Register src="../../UserControl/Calendar.ascx" tagname="Calendar" tagprefix="uc1" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -18,17 +18,17 @@
                 });
             });
             function resize() {
-                var h = document.documentElement.clientHeight - 230;
+                var h = document.documentElement.clientHeight - 290;
                 $("#Sub-container").css("height", h);
             }
             function BindEvent() {
                 $("[ID$='btnProduct']").bind("click", function () {
-                    var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and ProductCode not in ('0001','0002') ";
+                    var where = "AreaCode='" + $('#ddlAreaCode').val() + "'  and ProductCode not in ('0001','0002') ";
                     return GetMulSelectValue('CMD_Product', 'hdnMulSelect', where);
                 });
                 $("[ID$='ProductCode']").bind("change", function () {
                     var txtID = this.id;
-                    var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and ProductCode='" + $('#' + txtID).val() + "' and ProductCode not in ('0001','0002')";
+                    var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and ProductCode='" + $('#' + txtID).val() + "'  and ProductCode not in ('0001','0002') ";
 
                     getWhereBaseData('CMD_Product', txtID + "," + txtID.replace("ProductCode", "ProductName"), 'ProductCode,ProductName', where);
                 });
@@ -61,6 +61,7 @@
             }
            
         </script>
+    
 </head>
 <body>
     <form id="form1" runat="server">
@@ -91,12 +92,12 @@
 				         runat="server">			
 				    <tr>
                         <td align="center" class="musttitle" style="width:8%;"  >
-                                入库日期
+                                出库日期
                         </td>
                         <td  width="25%">
                                 &nbsp;<uc1:Calendar ID="txtBillDate" runat="server"  /></td>
                         <td align="center" class="musttitle" style="width:8%;"  >
-                                入库单号
+                                出库单号
                         </td>
                         <td width="25%">
                                 &nbsp;<asp:TextBox ID="txtID" 
@@ -104,7 +105,7 @@
                                     MaxLength="20" ></asp:TextBox> 
                         </td>
                             <td align="center" class="musttitle" style="width:8%;">
-                                入库类型</td>
+                                出库类型</td>
                         <td width="26%">
                             &nbsp;<asp:DropDownList ID="ddlBillTypeCode" runat="server" Width="90%">
                             </asp:DropDownList>
@@ -119,26 +120,66 @@
                             </asp:DropDownList>
                         </td>
                         <td align="center" class="musttitle" style="width:8%;"  >
-                                工厂
+                                车型
                         </td>
                         <td width="25%">
-                                &nbsp;<asp:DropDownList ID="ddlFactoryID" runat="server" Width="90%">
+                                &nbsp;<asp:DropDownList ID="ddlTrainTypeCode" runat="server" Width="90%">
                                 </asp:DropDownList>
                         </td>
-                        <td align="center"   style="width:8%;">
+                        <td align="center" class="smalltitle"  style="width:8%;">
+                            上车号
                         </td>
                         <td width="26%">
-                        &nbsp;
+                        &nbsp;<asp:TextBox ID="txtTrainNo" runat="server" CssClass="TextBox" Width="90%"></asp:TextBox>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td align="center"  class="smalltitle" style="width:8%;"  >
+                                上车轴位</td>
+                        <td  width="25%">
+                             &nbsp;<asp:TextBox ID="txtAxieLocation" runat="server" CssClass="TextBox" 
+                                 Width="90%"></asp:TextBox>        
+                        </td>
+                        <td align="center"  class="smalltitle" style="width:8%;"  >
+                                修程
+                        </td>
+                        <td width="25%">
+                             &nbsp;<asp:TextBox ID="txtXc" runat="server" CssClass="TextBox" Width="90%"></asp:TextBox>
+                        </td>
+                        <td align="center"  class="smalltitle"  style="width:8%;">
+                            齿侧内轴
+                        </td>
+                        <td width="26%">
+                        &nbsp;<asp:TextBox ID="txtCcnz" runat="server" CssClass="TextBox" Width="90%"></asp:TextBox>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td align="center"  class="smalltitle" style="width:8%;"  >
+                                齿侧外轴</td>
+                        <td  width="25%">
+                                &nbsp;<asp:TextBox ID="txtCcwz" runat="server" CssClass="TextBox" Width="90%"></asp:TextBox>
+                        </td>
+                        <td align="center"  class="smalltitle" style="width:8%;"  >
+                                非齿侧内轴
+                        </td>
+                        <td width="25%">
+                                &nbsp;<asp:TextBox ID="txtFccnz" runat="server" CssClass="TextBox" Width="90%"></asp:TextBox>
+                        </td>
+                        <td align="center" class="smalltitle"   style="width:8%;">
+                            非齿侧外轴
+                        </td>
+                        <td width="26%">
+                        &nbsp;<asp:TextBox ID="txtFccwz" runat="server" CssClass="TextBox" Width="90%"></asp:TextBox>
                         </td>
                     </tr>
               
-                    <tr style="height:50px">
+                    <tr style="height:45px">
                         <td align="center" class="smalltitle"  >
                             备注
                         </td>
                         <td colspan="5"  valign="middle" >
                             &nbsp;<asp:TextBox ID="txtMemo" runat="server" CssClass="MultiLineTextBox" 
-                                TextMode="MultiLine" Height="45px" Width="97%"></asp:TextBox>
+                                TextMode="MultiLine" Height="30px" Width="97%"></asp:TextBox>
                         </td>
                     </tr>
                 </table>

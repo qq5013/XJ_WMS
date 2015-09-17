@@ -417,6 +417,55 @@
     <Compile Include="WebUI\InStock\InStockView.aspx.designer.cs">
       <DependentUpon>InStockView.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WebUI\OutStock\OutStockEdit.aspx.cs">
+      <DependentUpon>OutStockEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\OutStock\OutStockEdit.aspx.designer.cs">
+      <DependentUpon>OutStockEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\OutStock\OutStocks.aspx.cs">
+      <DependentUpon>OutStocks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\OutStock\OutStocks.aspx.designer.cs">
+      <DependentUpon>OutStocks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\OutStock\OutStockTasks.aspx.cs">
+      <DependentUpon>OutStockTasks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\OutStock\OutStockTasks.aspx.designer.cs">
+      <DependentUpon>OutStockTasks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\OutStock\OutStockTypeEdit.aspx.cs">
+      <DependentUpon>OutStockTypeEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\OutStock\OutStockTypeEdit.aspx.designer.cs">
+      <DependentUpon>OutStockTypeEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\OutStock\OutStockTypes.aspx.cs">
+      <DependentUpon>OutStockTypes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\OutStock\OutStockTypes.aspx.designer.cs">
+      <DependentUpon>OutStockTypes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\OutStock\OutStockTypeView.aspx.cs">
+      <DependentUpon>OutStockTypeView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\OutStock\OutStockTypeView.aspx.designer.cs">
+      <DependentUpon>OutStockTypeView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\OutStock\OutStockView.aspx.cs">
+      <DependentUpon>OutStockView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\OutStock\OutStockView.aspx.designer.cs">
+      <DependentUpon>OutStockView.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebUI\Query\BarCodeQuery.aspx.cs">
       <DependentUpon>BarCodeQuery.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5402,6 +5451,13 @@
     <Content Include="WebUI\InStock\InStockTypes.aspx" />
     <Content Include="WebUI\InStock\InStockTypeView.aspx" />
     <Content Include="WebUI\InStock\InStockView.aspx" />
+    <Content Include="WebUI\OutStock\OutStockEdit.aspx" />
+    <Content Include="WebUI\OutStock\OutStocks.aspx" />
+    <Content Include="WebUI\OutStock\OutStockTasks.aspx" />
+    <Content Include="WebUI\OutStock\OutStockTypeEdit.aspx" />
+    <Content Include="WebUI\OutStock\OutStockTypes.aspx" />
+    <Content Include="WebUI\OutStock\OutStockTypeView.aspx" />
+    <Content Include="WebUI\OutStock\OutStockView.aspx" />
     <Content Include="WebUI\Query\Cell.aspx" />
     <Content Include="WebUI\Query\CellQuery.aspx" />
     <Content Include="WebUI\Query\OtherProductQuery.aspx" />
@@ -7075,7 +7131,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="RptFiles\" />
-    <Folder Include="WebUI\OutStock\" />
     <Folder Include="WebUI\Stock\" />
     <Folder Include="Web\Account\" />
     <Folder Include="Web\MoveStock\" />

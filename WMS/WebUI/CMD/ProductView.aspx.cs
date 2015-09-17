@@ -180,19 +180,19 @@ namespace WMS.WebUI.CMD
         #region 上下笔事件
         protected void btnFirst_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("F", TableName, "1=1", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("F", TableName, " ProductCode not in ('0001','0002') ", PrimaryKey, this.txtID.Text));
         }
         protected void btnPre_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("P", TableName, "1=1", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("P", TableName, " ProductCode not in ('0001','0002') ", PrimaryKey, this.txtID.Text));
         }
         protected void btnNext_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("N", TableName, "1=1", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("N", TableName, " ProductCode not in ('0001','0002') ", PrimaryKey, this.txtID.Text));
         }
         protected void btnLast_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("L", TableName, "1=1", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("L", TableName, " ProductCode not in ('0001','0002') ", PrimaryKey, this.txtID.Text));
         }
         #endregion
         

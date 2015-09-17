@@ -8,16 +8,16 @@ using System.Data;
 using IDAL;
  
 
-namespace WMS.WebUI.CMD
+namespace WMS.WebUI.OutStock
 {
 
-    public partial class Products : App_Code.BasePage
+    public partial class OutStockTypes : App_Code.BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                ViewState["filter"] = " ProductCode not in ('0001','0002') ";
+                ViewState["filter"] = "Flag=2";
                 ViewState["CurrentPage"] = 1;
 
                 try
@@ -46,7 +46,7 @@ namespace WMS.WebUI.CMD
 
             try
             {
-                ViewState["filter"] =" ProductCode not in ('0001','0002') and "+ string.Format("{0} like '%{1}%'", this.ddlField.SelectedValue, this.txtSearch.Text.Trim().Replace("'", ""));
+                ViewState["filter"] = " Flag=2 " + " and " + string.Format("{0} like '%{1}%'", this.ddlField.SelectedValue, this.txtSearch.Text.Trim().Replace("'", ""));
                 ViewState["CurrentPage"] = 1;
                 SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
 
@@ -68,10 +68,10 @@ namespace WMS.WebUI.CMD
                 {
                     HyperLink hk = (HyperLink)(this.GridView1.Rows[i].FindControl("HyperLink1"));
                     //判断能否删除
-                    int Count = bll.GetRowCount("VUsed_CMD_Product", string.Format("ProductCode='{0}'", hk.Text));
+                    int Count = bll.GetRowCount("VUsed_CMD_BillType", string.Format("BillTypeCode='{0}'", hk.Text));
                     if (Count > 0)
                     {
-                        WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, GridView1.Rows[i].Cells[2].Text + "车型信息被其它单据使用，请调整后再删除！");
+                        WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, GridView1.Rows[i].Cells[2].Text + "入库类型被其它单据使用，请调整后再删除！");
                         return;
                     }
 
@@ -80,9 +80,9 @@ namespace WMS.WebUI.CMD
             }
             strColorCode += "'-1'";
 
-
-            bll.ExecNonQuery("Cmd.DeleteProduct", new DataParameter[] { new DataParameter("{0}", strColorCode) });
-            AddOperateLog("产品信息", "删除单号：" + strColorCode.Replace("'-1',", "").Replace(",'-1'", ""));
+           
+            bll.ExecNonQuery("Cmd.DeleteBillType", new DataParameter[] { new DataParameter("{0}", strColorCode) });
+            AddOperateLog("入库类型", "删除单号：" + strColorCode.Replace("'-1',", "").Replace(",'-1'", ""));
             SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
 
         }
