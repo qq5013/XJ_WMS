@@ -28,12 +28,23 @@
             return false;
         }
         function addTab(id, url, title) {
-            tabPanel.add({
-                id: 'tab_' + id,
-                title: title,
-                html: '<iframe id="frmMain_' + id + '" scrolling="auto" frameborder="1" width="100%" height="100%" src="' + url + '"> </iframe>',
-                closable: true
-            }).show();
+            var exist = false;
+            tabPanel.items.each(function (item) {
+                if (item.title == title) {
+                    var tab = Ext.getCmp(item.id);
+                    tabPanel.setActiveTab(tab);
+                    exist = true;
+                    return;
+                }
+            });
+            if (!exist) {
+                tabPanel.add({
+                    id: 'tab_' + id,
+                    title: title,
+                    html: '<iframe id="frmMain_' + id + '" scrolling="auto" frameborder="1" width="100%" height="100%" src="' + url + '"> </iframe>',
+                    closable: true
+                }).show();
+            }            
         }
         Ext.onReady(function () {
             var topPanel = {
@@ -91,22 +102,11 @@
                             var id = record.get('id');
                             var text = record.get('text');
                             var url = record.get('url');
-                            var exist = false;
 
                             if (record.childNodes.length > 0)
                                 return;
 
-                            tabPanel.items.each(function (item) {
-                                if (item.title == text) {
-                                    var tab = Ext.getCmp(item.id);
-                                    tabPanel.setActiveTab(tab);
-                                    exist = true;
-                                    return;
-                                }
-                            });
-                            if (!exist) {
-                                addTab(id, url, text);
-                            }
+                            addTab(id, url, text)
                         },
                         scope: this
                     }
