@@ -293,7 +293,7 @@ namespace WMS.Common
             {
                 pageIndex = 1;
                 //TableView = ViewState["tableView"].ToString();
-                filter = string.Format(" {0} like '%{1}%' ", this.ddlFieldName.SelectedValue, this.txtContent.Text.Trim());
+                filter = string.Format(" {0} like '%{1}%' ", this.ddlFieldName.SelectedValue, this.txtSearch.Text.Trim());
                 if (Request.QueryString["Where"] != "" && Request.QueryString["Where"] != null)
                 {
                     filter += " AND " + Request.QueryString["Where"].Replace('"', "'"[0]);

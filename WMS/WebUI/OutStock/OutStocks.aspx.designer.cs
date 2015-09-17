@@ -229,58 +229,58 @@ namespace WMS.WebUI.OutStock {
         protected global::System.Web.UI.WebControls.GridView GridView2;
         
         /// <summary>
-        /// btnFirstSub 控件。
+        /// btnFirstSub1 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnFirstSub;
+        protected global::System.Web.UI.WebControls.LinkButton btnFirstSub1;
         
         /// <summary>
-        /// btnPreSub 控件。
+        /// btnPreSub1 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnPreSub;
+        protected global::System.Web.UI.WebControls.LinkButton btnPreSub1;
         
         /// <summary>
-        /// btnNextSub 控件。
+        /// btnNextSub1 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnNextSub;
+        protected global::System.Web.UI.WebControls.LinkButton btnNextSub1;
         
         /// <summary>
-        /// btnLastSub 控件。
+        /// btnLastSub1 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnLastSub;
+        protected global::System.Web.UI.WebControls.LinkButton btnLastSub1;
         
         /// <summary>
-        /// txtToPageSub 控件。
+        /// txtPageNoSub1 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtToPageSub;
+        protected global::System.Web.UI.WebControls.TextBox txtPageNoSub1;
         
         /// <summary>
-        /// btnToPageSub 控件。
+        /// btnToPageSub1 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnToPageSub;
+        protected global::System.Web.UI.WebControls.LinkButton btnToPageSub1;
         
         /// <summary>
         /// ddlPageSizeSub 控件。
@@ -292,13 +292,13 @@ namespace WMS.WebUI.OutStock {
         protected global::System.Web.UI.WebControls.DropDownList ddlPageSizeSub;
         
         /// <summary>
-        /// lblPageSub 控件。
+        /// lblPageSub1 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPageSub;
+        protected global::System.Web.UI.WebControls.Label lblPageSub1;
         
         /// <summary>
         /// btnReload 控件。

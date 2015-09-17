@@ -146,9 +146,16 @@ var ClickCount = 1;
 function mykeyDown() {
     var browser = getBrowserInfo();
     //alert(browser); 
-    var verinfo = (browser + "").replace(/[^0-9.]/ig, ""); 
+    var verinfo = (browser + "").replace(/[^0-9.]/ig, "");
 
-    var isie = (document.all) ? true : false;
+    var isie = false;
+     if (!!window.ActiveXObject || "ActiveXObject" in window)  
+        isie= true;  
+    else  
+        isie= false;  
+
+
+    
     var key;
     var srcobj;
     // if the agent is an IE browser, it's easy to do this.
@@ -162,8 +169,26 @@ function mykeyDown() {
     }
     if (key == 13 && srcobj.type != 'button' && srcobj.type != 'submit' && srcobj.type != 'reset' && srcobj.type != 'textarea' && srcobj.type != '') {
         //event.preventDefault();
-        if (isie)
+        if (isie) {
+            var e = document.activeElement;
+            if (e.id == "txtSearch") {
+                $('#btnSearch')[0].click();
+                event.returnValue = false;
+                return false;
+            }
+            if (e.id == "txtPageNo") {
+                $('#btnToPage')[0].click();
+                event.returnValue = false;
+                return false;
+            }
+            if (e.id == "txtPageNoSub1") {
+                $('#btnToPageSub1')[0].click();
+                event.returnValue = false;
+                return false;
+            }
+
             event.keyCode = 9;
+        }
         else {
             var el = getNextElement(srcobj);
             if (!el)
@@ -176,12 +201,12 @@ function mykeyDown() {
             if (el.id == "btnSearch") {
                 el.focus();
                 ClickCount = 0;
-                $('#btnSearch').click();
+                $('#btnSearch')[0].click();
                 event.returnValue = false;
                 return false;
             }
             else {
-                if (el.id == "btnToPageSub1" || el.id == "btnToPageSub2" || el.id == "btnToPage") {
+                if (el.id == "btnToPage" || el.id == "btnToPageSub1" || el.id == "btnToPageSub2") {
                     el.focus();
                     ClickCount = 0;
                     $('#' + el.id)[0].click();

@@ -240,16 +240,16 @@
                     </asp:GridView>
                 </div>
                 <div style="height:23px;">
-                    &nbsp;&nbsp;<asp:LinkButton ID="btnFirstSub" runat="server" OnClick="btnFirst_Click" Text="首页"></asp:LinkButton> 
-                    &nbsp;<asp:LinkButton ID="btnPreSub" runat="server" OnClick="btnPre_Click" Text="上一页"></asp:LinkButton> 
-                    &nbsp;<asp:LinkButton ID="btnNextSub" runat="server" OnClick="btnNext_Click" Text="下一页"></asp:LinkButton> 
-                    &nbsp;<asp:LinkButton ID="btnLastSub" runat="server" OnClick="btnLast_Click" Text="尾页"></asp:LinkButton> 
-                    &nbsp;<asp:textbox id="txtToPageSub" onkeypress="return regInput(this,/^\d+$/,String.fromCharCode(event.keyCode))"
+                    &nbsp;&nbsp;<asp:LinkButton ID="btnFirstSub1" runat="server" OnClick="btnFirst_Click" Text="首页"></asp:LinkButton> 
+                    &nbsp;<asp:LinkButton ID="btnPreSub1" runat="server" OnClick="btnPre_Click" Text="上一页"></asp:LinkButton> 
+                    &nbsp;<asp:LinkButton ID="btnNextSub1" runat="server" OnClick="btnNext_Click" Text="下一页"></asp:LinkButton> 
+                    &nbsp;<asp:LinkButton ID="btnLastSub1" runat="server" OnClick="btnLast_Click" Text="尾页"></asp:LinkButton> 
+                    &nbsp;<asp:textbox id="txtToPageSub1" onkeypress="return regInput(this,/^\d+$/,String.fromCharCode(event.keyCode))"
 					        onpaste="return regInput(this,/^\d+$/,window.clipboardData.getData('Text'))" ondrop="return regInput(this,/^\d+$/,event.dataTransfer.getData('Text'))"
 					        runat="server" Width="56px" CssClass="TextBox" ></asp:textbox>
-                    &nbsp;<asp:linkbutton id="btnToPageSub" runat="server" onclick="btnToPage_Click" Text="跳转"></asp:linkbutton>
+                    &nbsp;<asp:linkbutton id="btnToPageSub1" runat="server" onclick="btnToPage_Click" Text="跳转"></asp:linkbutton>
                     &nbsp;<asp:DropDownList ID="ddlPageSizeSub" runat="server" AutoPostBack="True" Visible="false"></asp:DropDownList>
-                    &nbsp;<asp:Label ID="lblPageSub" runat="server" ></asp:Label>
+                    &nbsp;<asp:Label ID="lblPageSub1" runat="server" ></asp:Label>
                 </div>
                 <div>
                     <asp:Button ID="btnReload" runat="server" Text="" OnClick="btnReload_Click"  CssClass="HiddenControl" />

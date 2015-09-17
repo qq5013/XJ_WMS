@@ -42,7 +42,7 @@
                              </td>
 						    <td  width="15%" height="20">&nbsp;
                                 <asp:dropdownlist id="ddlField" runat="server" Width="85%" >
-                                    <asp:ListItem Selected="True" Value="TrainTypeName">车型名称</asp:ListItem>
+                                    <asp:ListItem Selected="True" Value="TypeName">车型名称</asp:ListItem>
                                     <asp:ListItem  Value="AxieNo">车轴编号</asp:ListItem>
                                     <asp:ListItem  Value="ProductName">产品名称</asp:ListItem>
                                     <asp:ListItem Value="Memo">备注</asp:ListItem>

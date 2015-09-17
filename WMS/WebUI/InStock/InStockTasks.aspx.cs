@@ -121,7 +121,7 @@ namespace WMS.WebUI.InStock
             Session[FormID + "_S_GridView2"] = dtSub;
             this.GridView2.DataSource = dtSub;
             this.GridView2.DataBind();
-            MovePage("S", this.GridView2, 0, btnFirstSub, btnPreSub, btnNextSub, btnLastSub, btnToPageSub, lblPageSub);
+            MovePage("S", this.GridView2, 0, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblPageSub1);
         }
         private void BindDataSub(string BillID)
         {
@@ -130,7 +130,7 @@ namespace WMS.WebUI.InStock
             Session[FormID + "_S_GridView2"] = dtSub;
             this.GridView2.DataSource = dtSub;
             this.GridView2.DataBind();
-            MovePage("S", this.GridView2, 0, btnFirstSub, btnPreSub, btnNextSub, btnLastSub, btnToPageSub, lblPageSub);
+            MovePage("S", this.GridView2, 0, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblPageSub1);
         }
        
      

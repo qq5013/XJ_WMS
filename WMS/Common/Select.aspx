@@ -109,7 +109,8 @@
                         </td>
 				        <td class="smalltitle" align="center" width="10%">查询内容</td>
 				        <td  width="40%" height="20" valign="middle">&nbsp;
-                            <asp:textbox id="txtContent" tabIndex="1" runat="server" Width="90%" CssClass="TextBox" ></asp:textbox>
+                            <asp:textbox id="txtSearch" tabIndex="1" runat="server" Width="90%" 
+                                CssClass="TextBox" ></asp:textbox>
                         </td>
                         <td width="25%" align="left">
                             &nbsp;<asp:button id="btnSearch" tabIndex="2" runat="server" Width="60px" CssClass="ButtonQuery" Text="查询" OnClientClick="return SelectSearch()" onclick="btnSearch_Click"></asp:button>

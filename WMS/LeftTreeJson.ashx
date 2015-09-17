@@ -26,41 +26,49 @@ public class LeftTreeJson : IHttpHandler, IRequiresSessionState
             
             json += "id:" + dtModules.Rows[i]["ID"].ToString();
             json += ",text:'" + dtModules.Rows[i]["MenuTitle"].ToString() + "'";
-            json += ",leaf:false";
+          
             
             string filter = string.Format("MenuParent='{0}'", dtModules.Rows[i]["MenuTitle"].ToString());
             DataRow[] dr = dtSubModules.Select(filter);
-            for (int j = 0; j < dr.Length; j++)
+            if (dr.Length > 0)
             {
-                string formID = dr[j]["FormID"].ToString();
-                string SubModuleCode = dr[j]["SubModuleCode"].ToString();
-                string url = dr[j]["MenuUrl"].ToString() + "?FormID=" + formID + "&SubModuleCode=" + SubModuleCode + "&SqlCmd=" + dr[j]["SqlCmdFlag"].ToString();
-                string iconCls = dr[j]["IconCls"].ToString();
-                if (j == 0)
+                json += ",leaf:false";
+                for (int j = 0; j < dr.Length; j++)
                 {
-                    json += ",children:[{";
-                    json += "id:" + dr[j]["ID"].ToString();
-                    json += ",text:'" + dr[j]["MenuTitle"].ToString() + "'";
-                    json += ",url:'" + url + "'";
-                    json += ",iconCls:'" + iconCls + "'";
-                    json += ",leaf:true}";
+                    string formID = dr[j]["FormID"].ToString();
+                    string SubModuleCode = dr[j]["SubModuleCode"].ToString();
+                    string url = dr[j]["MenuUrl"].ToString() + "?FormID=" + formID + "&SubModuleCode=" + SubModuleCode + "&SqlCmd=" + dr[j]["SqlCmdFlag"].ToString();
+                    string iconCls = dr[j]["IconCls"].ToString();
+                    if (j == 0)
+                    {
+                        json += ",children:[{";
+                        json += "id:" + dr[j]["ID"].ToString();
+                        json += ",text:'" + dr[j]["MenuTitle"].ToString() + "'";
+                        json += ",url:'" + url + "'";
+                        json += ",iconCls:'" + iconCls + "'";
+                        json += ",leaf:true}";
+                    }
+                    else if (j > 0 && j < dr.Length - 1)
+                    {
+                        json += ",{id:" + dr[j]["ID"].ToString();
+                        json += ",text:'" + dr[j]["MenuTitle"].ToString() + "'";
+                        json += ",url:'" + url + "'";
+                        json += ",iconCls:'" + iconCls + "'";
+                        json += ",leaf:true}";
+                    }
+                    else
+                    {
+                        json += ",{id:" + dr[j]["ID"].ToString();
+                        json += ",text:'" + dr[j]["MenuTitle"].ToString() + "'";
+                        json += ",url:'" + url + "'";
+                        json += ",iconCls:'" + iconCls + "'";
+                        json += ",leaf:true}]}";
+                    }
                 }
-                else if (j > 0 && j < dr.Length - 1)
-                {
-                    json += ",{id:" + dr[j]["ID"].ToString();
-                    json += ",text:'" + dr[j]["MenuTitle"].ToString() + "'";
-                    json += ",url:'" + url + "'";
-                    json += ",iconCls:'" + iconCls + "'";
-                    json += ",leaf:true}";
-                }
-                else
-                {
-                    json += ",{id:" + dr[j]["ID"].ToString();
-                    json += ",text:'" + dr[j]["MenuTitle"].ToString() + "'";
-                    json += ",url:'" + url + "'";
-                    json += ",iconCls:'" + iconCls + "'";
-                    json += ",leaf:true}]}";
-                }
+            }
+            else
+            {
+                json += ",leaf:true}";  
             }
         }
         json += "]";
