@@ -34,7 +34,7 @@
                 bodyStyle: 'border:true;border-width:1px 0 1px 0;background:gray',
                 collapsible: true,
 
-                html: '<div class="header"><table width="100%" height="80" border="0" cellpadding="0" cellspacing="0"  background="Images/top_bg.jpg" style="top: 0px; z-index: inherit"><tr><th align="left" valign="top" scope="col" style="height:80px; background-repeat:no-repeat; width: 100%;" background="Images/banner_1.jpg"><div class="topNav"><a href="javascript:void(0)" id="changeSystem" onclick="changeSystemClick() style="font">切换系统</a><span>|</span><a href="javascript:void(0)" id="changeUser">切换用户</a><span>|</span><a href="javascript:void(0)" id="changePassword">修改密码</a><span>|</span><a href="javascript:void(0)" id="loginOut">退出</a></div></th></tr></table></div>'
+                html: '<div class="header"><table width="100%" height="80" border="0" cellpadding="0" cellspacing="0"  background="Images/top_bg.jpg" style="top: 0px; z-index: inherit"><tr><th align="left" valign="top" scope="col" style="height:80px; background-repeat:no-repeat; width: 100%;" background="Images/banner_1.jpg"><div class="topNav"><a href="Login.aspx" id="changeUser">切换用户</a><span>|</span><a href="WebUI/SysInfo/PwdModify/PwdModify.aspx" id="changePassword">修改密码</a><span>|</span><a href="javascript:void(0)" id="loginOut">退出</a></div></th></tr></table></div>'
             };
             /** 
             * 左,panel.Panel 
