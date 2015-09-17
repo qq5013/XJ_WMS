@@ -144,6 +144,10 @@ function HandleMouseEvent(evt) {
 
 var ClickCount = 1;
 function mykeyDown() {
+    var browser = getBrowserInfo();
+    //alert(browser); 
+    var verinfo = (browser + "").replace(/[^0-9.]/ig, ""); 
+
     var isie = (document.all) ? true : false;
     var key;
     var srcobj;
@@ -161,7 +165,7 @@ function mykeyDown() {
         if (isie)
             event.keyCode = 9;
         else {
-            var el = getNextElement(event.target);
+            var el = getNextElement(srcobj);
             if (!el)
                 return false;
             if (el.type != 'hidden' && el.className != 'TextRead' && el.tagName != "SELECT" && el.className != 'detailtextReadOnly')
@@ -213,7 +217,34 @@ function mykeyDown() {
     }
 
 }
+function getBrowserInfo() {
+    var agent = navigator.userAgent.toLowerCase();
 
+    var regStr_ie = /msie [\d.]+;/gi;
+    var regStr_ff = /firefox\/[\d.]+/gi
+    var regStr_chrome = /chrome\/[\d.]+/gi;
+    var regStr_saf = /safari\/[\d.]+/gi;
+    //IE
+    if (agent.indexOf("msie") > 0) {
+        return agent.match(regStr_ie);
+    }
+
+    //firefox
+    if (agent.indexOf("firefox") > 0) {
+        return agent.match(regStr_ff);
+    }
+
+    //Chrome
+    if (agent.indexOf("chrome") > 0) {
+        return agent.match(regStr_chrome);
+    }
+
+    //Safari
+    if (agent.indexOf("safari") > 0 && agent.indexOf("chrome") < 0) {
+        return agent.match(regStr_saf);
+    }
+
+}
 function getNextElementByName(field) {
     var dd = field.split('_');
     if (dd.length < 3) {
