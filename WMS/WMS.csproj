@@ -557,20 +557,6 @@
     <Compile Include="WebUI\Query\WarehouseCellQuery.aspx.designer.cs">
       <DependentUpon>WarehouseCellQuery.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WebUI\Start\SessionTimeOut.aspx.cs">
-      <DependentUpon>SessionTimeOut.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\Start\SessionTimeOut.aspx.designer.cs">
-      <DependentUpon>SessionTimeOut.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebUI\Start\Start.aspx.cs">
-      <DependentUpon>Start.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\Start\Start.aspx.designer.cs">
-      <DependentUpon>Start.aspx</DependentUpon>
-    </Compile>
     <Compile Include="WebUI\Stock\MoveEdit.aspx.cs">
       <DependentUpon>MoveEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5428,11 +5414,11 @@
     <Content Include="Images\banner.jpg" />
     <Content Include="Images\banner_1.jpg" />
     <Content Include="Images\bottom.jpg" />
+    <Content Include="Images\desk\587.png" />
     <Content Include="Images\desk\parameter.gif" />
     <Content Include="Images\login\headbg.png" />
     <Content Include="Images\login\ico-pwd.png" />
     <Content Include="Images\login\ico-uid.png" />
-    <Content Include="Images\login\ico-valid.png" />
     <Content Include="Images\login\logo.png" />
     <Content Include="Images\login\mainbg.png" />
     <Content Include="Images\login\validcode.png" />
@@ -5570,6 +5556,7 @@
     <None Include="Ext\packages\sencha-charts\build\neptune\sencha-charts-all-debug.scss" />
     <None Include="Ext\packages\sencha-charts\build\neptune\sencha-charts-all-rtl-debug.scss" />
     <Content Include="LeftTreeJson.ashx" />
+    <Content Include="Images\Web.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -5609,8 +5596,6 @@
     <Content Include="WebUI\Query\ProductQuery.aspx" />
     <Content Include="WebUI\Query\WarehouseCell.aspx" />
     <Content Include="WebUI\Query\WarehouseCellQuery.aspx" />
-    <Content Include="WebUI\Start\SessionTimeOut.aspx" />
-    <Content Include="WebUI\Start\Start.aspx" />
     <Content Include="WebUI\TableXML\CMD_Product.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -5621,24 +5606,6 @@
   <ItemGroup>
     <Content Include="Common\MistakesPage.aspx" />
     <Content Include="Css\Main.css" />
-    <Content Include="Images\main\bg.jpg" />
-    <Content Include="Images\main\bg001.png" />
-    <Content Include="Images\main\bg002.png" />
-    <Content Include="Images\main\bg_b.jpg" />
-    <Content Include="Images\main\bg_l.jpg" />
-    <Content Include="Images\main\bg_l_1.jpg" />
-    <Content Include="Images\main\bg_main.jpg" />
-    <Content Include="Images\main\bg_main_1.jpg" />
-    <Content Include="Images\main\bg_r.jpg" />
-    <Content Include="Images\main\bg_r_1.jpg" />
-    <Content Include="Images\main\bg_t.jpg" />
-    <Content Include="Images\main\btn_Css.gif" />
-    <Content Include="Images\main\desk_1024.jpg" />
-    <Content Include="Images\main\desk_1280.jpg" />
-    <Content Include="Images\main\desk_1366.jpg" />
-    <Content Include="Images\main\loading.gif" />
-    <Content Include="Images\main\t.gif" />
-    <Content Include="Images\main\title.jpg" />
     <Content Include="JQuery\jquery-1.8.3.min.js" />
     <Content Include="WebUI\CMD\WarehouseAreaEditPage.aspx" />
     <Content Include="WebUI\CMD\WarehouseCellEditPage.aspx" />
@@ -5785,7 +5752,6 @@
     <None Include="ext-3.3.1\ux\statusbar\images\vssver2.scc" />
     <None Include="ext-3.3.1\ux\statusbar\vssver2.scc" />
     <None Include="ext-3.3.1\ux\vssver2.scc" />
-    <Content Include="Images\Web.config" />
     <Content Include="JQuery\Web.config" />
     <Content Include="JScript\Web.config" />
     <Content Include="ErrorMsg.aspx" />
@@ -5794,7 +5760,6 @@
     <Content Include="web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="WebUI\Start\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Css\css.css" />
@@ -6989,17 +6954,13 @@
     <Content Include="ext-3.3.1\ux\ux-all-debug.js" />
     <Content Include="ext-3.3.1\ux\ux-all.js" />
     <Content Include="ext-3.3.1\ux\XmlTreeLoader.js" />
-    <Content Include="Images\4_08.jpg" />
-    <Content Include="Images\arrow01.gif" />
     <Content Include="Images\bar_bg.gif" />
     <Content Include="Images\bg.jpg" />
-    <Content Include="Images\bg_cell.jpg" />
     <Content Include="Images\bg_head.jpg" />
     <Content Include="Images\bg_head2.jpg" />
     <Content Include="Images\bg_op.jpg" />
     <Content Include="Images\bg_op2.jpg" />
     <Content Include="Images\bg_op3.jpg" />
-    <Content Include="Images\button.gif" />
     <Content Include="Images\desktop\check.gif" />
     <Content Include="Images\desktop\checktype.gif" />
     <Content Include="Images\desktop\class.gif" />
@@ -7049,20 +7010,6 @@
     <Content Include="Images\desk\training.gif" />
     <Content Include="Images\desk\UserGroup.gif" />
     <Content Include="Images\desk\UserInf.gif" />
-    <Content Include="Images\down.gif" />
-    <Content Include="Images\extension\doc.gif" />
-    <Content Include="Images\extension\mdb.gif" />
-    <Content Include="Images\extension\msi.gif" />
-    <Content Include="Images\extension\pdf.gif" />
-    <Content Include="Images\extension\ppt.gif" />
-    <Content Include="Images\extension\rar.gif" />
-    <Content Include="Images\extension\xls.gif" />
-    <Content Include="Images\extension\zip.gif" />
-    <Content Include="Images\fail.gif" />
-    <Content Include="Images\grid3-hrow.gif" />
-    <Content Include="Images\ico_home.gif" />
-    <Content Include="Images\InfoCorrect.jpg" />
-    <Content Include="Images\InfoError.jpg" />
     <Content Include="Images\leftmenu\15.gif" />
     <Content Include="Images\leftmenu\banner.jpg" />
     <Content Include="Images\leftmenu\base.gif" />
@@ -7099,22 +7046,7 @@
     <Content Include="Images\leftmenu\top_left.jpg" />
     <Content Include="Images\leftmenu\top_mid_gao.gif" />
     <Content Include="Images\leftmenu\top_right_gao.gif" />
-    <Content Include="Images\login\button.gif" />
-    <Content Include="Images\login\button.jpg" />
-    <Content Include="Images\login\icon.gif" />
-    <Content Include="Images\login\left_bg.gif" />
-    <Content Include="Images\login\left_table_bg.gif" />
-    <Content Include="Images\login\login_bg.gif" />
-    <Content Include="Images\login\login_bg.jpg" />
-    <Content Include="Images\login\login_bg02.jpg" />
-    <Content Include="Images\main-02.gif" />
     <Content Include="Images\mistakes_bg1.jpg" />
-    <Content Include="Images\myinputbackground_code.gif" />
-    <Content Include="Images\nopic.gif" />
-    <Content Include="Images\ok.ico" />
-    <Content Include="Images\option_bg01.gif" />
-    <Content Include="Images\option_no.gif" />
-    <Content Include="Images\option_selected.gif" />
     <Content Include="Images\op\audit2.gif" />
     <Content Include="Images\op\autocomplete.gif" />
     <Content Include="Images\op\browse2.gif" />
@@ -7124,7 +7056,6 @@
     <Content Include="Images\op\down.jpg" />
     <Content Include="Images\op\excel.gif" />
     <Content Include="Images\op\Icon.DatePick.gif" />
-    <Content Include="Images\op\light.gif" />
     <Content Include="Images\op\modify.gif" />
     <Content Include="Images\op\priv_0.gif" />
     <Content Include="Images\op\priv_2.gif" />
@@ -7134,20 +7065,6 @@
     <Content Include="Images\op\trash.gif" />
     <Content Include="Images\op\view.gif" />
     <Content Include="Images\op\viewpic.gif" />
-    <Content Include="Images\pager_bg.gif" />
-    <Content Include="Images\process\loading.gif" />
-    <Content Include="Images\process\process_bar.gif" />
-    <Content Include="Images\process\process_bar1.gif" />
-    <Content Include="Images\search_inputbackground.gif" />
-    <Content Include="Images\search_inputbackgroundfocus.gif" />
-    <Content Include="Images\sidebar_bg.gif" />
-    <Content Include="Images\switch_down.gif" />
-    <Content Include="Images\switch_up.gif" />
-    <Content Include="Images\LOGO.jpg" />
-    <Content Include="Images\tit_bg2.gif" />
-    <Content Include="Images\up.gif" />
-    <Content Include="Images\warnning.ico" />
-    <Content Include="Images\warnning.png" />
     <Content Include="JScript\ajax.js" />
     <Content Include="JScript\ajax_validate.js" />
     <Content Include="JScript\Calendar.js" />

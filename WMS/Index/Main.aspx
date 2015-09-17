@@ -8,25 +8,6 @@
 </style>
     <title>主页</title>
     <link href="../Css/css.css" type="text/css" rel="stylesheet" />
-    <style type="text/css">
-      .ButtonMessage
-      {
-        font-family: "Tahoma", "宋体"; 
-        font-size:9pt;  
-    /*  border: 0px #ff0000 solid; 
-        background-color:Transparent;
-         BORDER-BOTTOM: #ffffff 0px solid;  
-        BORDER-LEFT: #93bee2 0px solid;  
-        BORDER-RIGHT: #93bee2 0px solid;  
-        BORDER-TOP: #93bee2 0px solid; */
-        background-image:url(images/op/light.gif); 
-        background-repeat:no-repeat;
-        CURSOR: hand; 
-        padding-left:13px;
-        font-style: normal ; 
-        height:24px;
-      }
-    </style>
        <script type="text/javascript" src='<%=ResolveClientUrl("~/JScript/Common.js") %>'></script>
 <script type="text/javascript" language="javascript">
     function SetNewColor(source) {

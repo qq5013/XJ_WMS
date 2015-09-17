@@ -47,12 +47,6 @@
   	 padding-left: 35px;
 	 
 }
-.vid{
-     background:url(images/login/ico-valid.png) no-repeat;
-  	 background-position: left;
-  	 padding-left: 35px;
-	 width:200px;
-}
 input{
 	width:300px;
 	height:43px;

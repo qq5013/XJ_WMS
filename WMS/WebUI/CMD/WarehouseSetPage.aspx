@@ -184,7 +184,7 @@
           
                <td style="vertical-align:top; padding-left:10px;"> <!--编辑区-->
                 <div id="toptable" style="height:24px;vertical-align:middle; width:100% ">
-                   <img alt="仓库" src="../../images/ico_home.gif" border="0"  />当前选中的节点：
+                   <img alt="仓库" src="../../images/home.png" border="0"  />当前选中的节点：
                    <asp:Label ID="lblCurrentNode" runat="server" ForeColor="#404040"></asp:Label> 
                 </div>
                 <div style="width:100%; height:473px; overflow:hidden;">
