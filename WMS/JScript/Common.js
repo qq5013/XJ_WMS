@@ -71,7 +71,7 @@ function Refresh() {
 function Exit() {
     var message = "您确定要离开吗？";
     if (confirm(message))
-        window.parent.delTab();
+        window.parent.removetab();
     return false;
 }
  

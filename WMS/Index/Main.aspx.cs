@@ -169,7 +169,7 @@ namespace WMS.Index
             string strScript = "<script> ";
             //strScript += "var nav=window.parent.document.getElementById(\'labNavigation\');";
             //strScript += " nav.innerText=\'" + GlobalMenuParent[ImageButtonID.ID].ToString() + ">>" + GlobalMenuTitle[ImageButtonID.ID].ToString() + "\';";
-            strScript += string.Format("window.parent.addtab(\"{0}\",\"{1}\",\"tab_{2}\");",GlobalModuleID[ImageButtonID.ID].ToString(), GlobalMenuLink[ImageButtonID.ID].ToString(), GlobalMenuTitle[ImageButtonID.ID].ToString());
+            strScript += string.Format("window.parent.addTab(\"{0}\",\"{1}\",\"{2}\");",GlobalModuleID[ImageButtonID.ID].ToString(), GlobalMenuLink[ImageButtonID.ID].ToString(), GlobalMenuTitle[ImageButtonID.ID].ToString());
             //strScript += "window.open(\'" + GlobalMenuLink[ImageButtonID.ID].ToString() + "\',\'_self\')";
             strScript += "</script>";
             this.ClientScript.RegisterClientScriptBlock(this.GetType(), DateTime.Now.ToLongTimeString(), strScript);
