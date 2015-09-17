@@ -32,18 +32,14 @@
     function SetNewColor(source) {
         _oldColor = source.style.backgroundColor;
         source.style.backgroundColor = '#C0E4EE';
+        source.style.cursor = "pointer";
 
     }
     function SetOldColor(source) {
         source.style.backgroundColor = _oldColor;
+        source.style.cursor = "default";
     }
-    function ShowMsgForm() {
-        window.open('ShowMsg.aspx', 'newwindow', 'DialogHeight:450px;DialogWidth:820px;help:no;scroll:auto;Resizable:yes');
-    }
-    function ShowFormMsg(obj) {
-        var msg = document.getElementById(obj).value;
-        alert(msg);
-    }
+   
 </script>
 </head>
 <body bgcolor="#F8FCFF" style="margin-top:30px;">

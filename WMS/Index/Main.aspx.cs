@@ -46,41 +46,35 @@ namespace WMS.Index
                 Response.ExpiresAbsolute = DateTime.Now;
                 try
                 {
-                    string str = "<script> " +
-                                 "try " +
-                                 "{ " +
-                                 " var nav=window.parent.frames.Navigation.document.getElementById('labNavigation');" +
-                                 " nav.innerText='快速通道';" +
-                                 "} " +
-                                 "catch(e) " +
-                                 "{ " +
-                                 "} " +
-                                 "</script>";
-                    this.ClientScript.RegisterClientScriptBlock(this.GetType(), DateTime.Now.ToLongTimeString(), str);
+                    //string str = "<script> " +
+                    //             "try " +
+                    //             "{ " +
+                    //             " var nav=window.parent.frames.Navigation.document.getElementById('labNavigation');" +
+                    //             " nav.innerText='快速通道';" +
+                    //             "} " +
+                    //             "catch(e) " +
+                    //             "{ " +
+                    //             "} " +
+                    //             "</script>";
+                    //this.ClientScript.RegisterClientScriptBlock(this.GetType(), DateTime.Now.ToLongTimeString(), str);
+
+                    if (Session["UserID"] != null)
+                    {
+                        GetDestopItemByUserID(Session["UserID"].ToString());
+                    }
+                    else
+                    {
+                        Response.Write("<script language=javascript>parent.parent.parent.location.href='../../WebUI/Start/SessionTimeOut.aspx';</script>");
+                        Response.End();
+                        return;
+
+                        //Response.Redirect("../../WebUI/Start/SessionTimeOut.aspx");
+                    }
+                    CreatePage();
 
 
                     #region 提醒
-                    //bool show = false;
-                    //Alarm objAlarm = new Alarm();
-                    //DataSet dsRemind = objAlarm.GetRemindList();
-                    //if (dsRemind.Tables[0].Rows.Count > 0)
-                    //{
-                    //    show = true;
-                    //    TableRow tr = new TableRow();
-                    //    TableCell tc = new TableCell();
-                    //    tc.Text = string.Format("<a href='code/StorageManagement/StorageRemindPage.aspx'>有:<font color='red'>{0}条</font>库存预警信息</a>", dsRemind.Tables[0].Rows.Count);
-                    //    tr.Controls.Add(tc);
-                    //    this.tblRemind.Controls.Add(tr);
-                    //}
-
-                    //if (show)
-                    //{
-                    //    this.pnlRemind.Visible = true;
-                    //}
-                    //else
-                    //{
-                    //    this.pnlRemind.Visible = false;
-                    //}
+                     
                     #endregion
                 }
                 catch (Exception ex)
@@ -93,27 +87,6 @@ namespace WMS.Index
                 }
                 
             }
-           
-            if (Session["UserID"] != null)
-            {
-                GetDestopItemByUserID(Session["UserID"].ToString());
-            }
-            else
-            {
-                Response.Write("<script language=javascript>parent.parent.parent.location.href='../../WebUI/Start/SessionTimeOut.aspx';</script>");
-                Response.End();
-                return;
-
-                //Response.Redirect("../../WebUI/Start/SessionTimeOut.aspx");
-            }
-            CreatePage();
-            //判断消息提醒
-          
-            //}
-            //else
-            //{
-            //    Response.Redirect("~/SessionTimeOut.aspx");
-            //}
         }
         #endregion
         #region 创建页面
@@ -143,11 +116,12 @@ namespace WMS.Index
                     ImageButton im = new ImageButton();
                     im.ID = "im" + i.ToString() + i.ToString() + j.ToString();
                     im.ImageUrl = "../images/" + dr["DestopImage"].ToString();
-                    im.Click += new ImageClickEventHandler(im_Click);
+                    //im.Click += new ImageClickEventHandler(im_Click);
                     GlobalMenuTitle.Add(im.ID, dr["MenuTitle"].ToString());
                     GlobalMenuLink.Add(im.ID, dr["MenuUrl"].ToString() + "?FormID=" + dr["FormID"].ToString() + "&SubModuleCode=" + dr["MenuCode"].ToString() + "&SqlCmd=" + dr["SqlCmdFlag"].ToString());  
                     GlobalMenuParent.Add(im.ID, dr["MenuParent"].ToString());
                     GlobalModuleID.Add(im.ID, dr["ModuleID"].ToString());
+                    tb.Rows[i].Cells[j].Attributes.Add("onClick", "window.parent.addTab(\"" + GlobalMenuLink["im" + i.ToString() + i.ToString() + j.ToString()].ToString() + "\",\"" + GlobalMenuLink["im" + i.ToString() + i.ToString() + j.ToString()].ToString() + "\",\"" + GlobalMenuTitle["im" + i.ToString() + i.ToString() + j.ToString()].ToString() + "\");return false;"); 
                     tb.Rows[i].Cells[j].Controls.Add(im);
                     tb.Rows[i].Cells[j].Controls.Add(new LiteralControl("<br>" + dr["MenuTitle"].ToString()));
                     j++;
