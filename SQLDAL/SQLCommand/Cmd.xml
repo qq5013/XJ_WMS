@@ -70,8 +70,13 @@
       update CMD_Shelf set  ShelfName=@ShelfName,Rows=@Rows,Columns=@Columns,WarehouseCode=@WarehouseCode,AreaCode=@AreaCode,IsActive=@IsActive,Memo=@Memo where ShelfCode='{0}'
     </CommandString>
   </Command>
-  
 
+  <!--货架列信息-->
+  <Command ID="SelectColumn">
+    <CommandString>
+      select distinct CellColumn from CMD_Cell WHERE {0} ORDER BY CellColumn
+    </CommandString>
+  </Command>
  <!--货位信息-->
   <Command ID="SelectCell">
     <CommandString>
@@ -140,7 +145,12 @@
     </CommandString>
   </Command>
 
-
+  <!--小车信息-->
+  <Command ID="SelectCar">
+    <CommandString>
+      Select * from CMD_Car where {0} order by CarNo
+    </CommandString>
+  </Command>
 
   <!--卷烟信息-->
   <Command ID="SelectCigarette">
