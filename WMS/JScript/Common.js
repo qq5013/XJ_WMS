@@ -144,18 +144,11 @@ function HandleMouseEvent(evt) {
 
 var ClickCount = 1;
 function mykeyDown() {
-    var browser = getBrowserInfo();
-    //alert(browser); 
-    var verinfo = (browser + "").replace(/[^0-9.]/ig, "");
-
     var isie = false;
      if (!!window.ActiveXObject || "ActiveXObject" in window)  
         isie= true;  
     else  
         isie= false;  
-
-
-    
     var key;
     var srcobj;
     // if the agent is an IE browser, it's easy to do this.
@@ -167,68 +160,48 @@ function mykeyDown() {
         key = event.which;
         srcobj = event.target;
     }
-    if (key == 13 && srcobj.type != 'button' && srcobj.type != 'submit' && srcobj.type != 'reset' && srcobj.type != 'textarea' && srcobj.type != '') {
-        //event.preventDefault();
-        if (isie) {
-            var e = document.activeElement;
-            if (e.id == "txtSearch") {
-                $('#btnSearch')[0].click();
-                event.returnValue = false;
-                return false;
-            }
-            if (e.id == "txtPageNo") {
-                $('#btnToPage')[0].click();
-                event.returnValue = false;
-                return false;
-            }
-            if (e.id == "txtPageNoSub1") {
-                $('#btnToPageSub1')[0].click();
-                event.returnValue = false;
-                return false;
-            }
-
-            event.keyCode = 9;
-        }
-        else {
-            var el = getNextElement(srcobj);
-            if (!el)
-                return false;
-            if (el.type != 'hidden' && el.className != 'TextRead' && el.tagName != "SELECT" && el.className != 'detailtextReadOnly')
-                ;   //nothing to do here.
-            else
-                while (el.type == 'hidden')
-                    el = getNextElement(el);
-            if (el.id == "btnSearch") {
-                el.focus();
-                ClickCount = 0;
-                $('#btnSearch')[0].click();
-                event.returnValue = false;
-                return false;
-            }
-            else {
-                if (el.id == "btnToPage" || el.id == "btnToPageSub1" || el.id == "btnToPageSub2") {
-                    el.focus();
-                    ClickCount = 0;
-                    $('#' + el.id)[0].click();
-                    event.returnValue = false;
-                    return false;
-                } else
-                    el.focus();
-            }
-
-            //把提交按钮retrun 为false
+    if (key == 13 && srcobj.type != 'button' && srcobj.type != 'submit'
+        && srcobj.type != 'reset' && srcobj.type != 'textarea' && srcobj.type != '') {
+        var el = getNextElement(srcobj);
+        if (!el)
+            return false;
+        if (el.type != 'hidden' && el.className != 'TextRead' && el.tagName != "SELECT")
+            ;
+        else
+            while (el.type == 'hidden')
+                el = getNextElement(el);
+        if (el.id == "btnSearch") {
+            el.focus();
+            ClickCount = 0;
+            $('#btnSearch')[0].click();
+            event.returnValue = false;
             return false;
         }
+
+        if (el.id == "btnToPage" || el.id == "btnToPageSub1" || el.id == "btnToPageSub2") {
+            el.focus();
+            ClickCount = 0;
+            $('#' + el.id)[0].click();
+            event.returnValue = false;
+            return false;
+        }
+
+        el.focus();
+        return false;
+
     }
-    else if (event.keyCode == 40) {
+     if (event.keyCode == 40) {
         var e = document.activeElement;
-        getNextElementByName(e.id)
+        getNextElementByName(e.id);
+        return false;
     }
-    else if (event.keyCode == 38) {
+     if (event.keyCode == 38) {
         var e = document.activeElement;
         getPreElementByName(e.id)
+        return false;
     }
-    else if (event.keyCode == 8) {
+    //删除按钮
+    if (event.keyCode == 8) {
         if (((document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") &&
              document.activeElement.readOnly) || document.activeElement.tagName == "SELECT" || document.activeElement.type == "submit") {
             event.returnValue = false;
