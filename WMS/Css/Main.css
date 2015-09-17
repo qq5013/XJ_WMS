@@ -94,12 +94,12 @@ body
 
 .TextBox
 {
-	border: 1px solid blue;
+	border: 1px solid #5384bb;
 	height:18px;
 }
 .TextRead
 {
-	border: 1px solid blue;
+	border: 1px solid #5384bb;
 	background-color:Gainsboro;	
 }
 
