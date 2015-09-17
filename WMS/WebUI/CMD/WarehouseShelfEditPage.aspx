@@ -88,10 +88,10 @@
             </tr>
             <tr>
                 <td align="center" class="smalltitle" style="width:15%;">货架层数</td> 
-                <td><asp:TextBox ID="txtCellRows" runat="server"  CssClass="TextBox" Width="80%" onblur="IsNumber(this,'货架行数')">1</asp:TextBox>
+                <td><asp:TextBox ID="txtCellRows" runat="server"  CssClass="TextBox" Width="80%" >1</asp:TextBox>
                 </td>
                 <td align="center" class="smalltitle" style="width:15%;">货架列数</td> 
-                <td><asp:TextBox ID="txtCellCols" runat="server"  CssClass="TextBox" Width="80%" onblur="IsNumber(this,'货架列数')">1</asp:TextBox>
+                <td><asp:TextBox ID="txtCellCols" runat="server"  CssClass="TextBox" Width="80%" >1</asp:TextBox>
                 </td>
             </tr>  
                       

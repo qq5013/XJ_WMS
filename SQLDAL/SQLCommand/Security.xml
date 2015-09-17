@@ -35,9 +35,9 @@
   <!--获取用户的快捷桌面-->
   <Command ID="SelectUserQuickDesktop">
     <CommandString>
-      SELECT m.MenuParent, m.MenuTitle, q.ModuleID, m.MenuImage, m.DestopImage, m.MenuUrl
+      SELECT m.MenuParent,  m.MenuTitle, q.ModuleID, m.MenuImage, m.DestopImage, m.MenuUrl,m.SqlCmdFlag,m.FormID,m.MenuCode
       FROM dbo.sys_QuickDestop AS q LEFT OUTER JOIN  dbo.sys_Menu AS m ON q.ModuleID = m.ID
-      WHERE     (q.UserID =@UserID) AND (q.ModuleID IN
+      WHERE     (q.UserID =@UserID) and m.IsHide=0 AND (q.ModuleID IN
       (SELECT DISTINCT n.ID
       FROM dbo.sys_GroupOperationList AS o LEFT OUTER JOIN
       dbo.sys_ModuleList AS m ON m.ModuleID = o.ModuleID LEFT OUTER JOIN

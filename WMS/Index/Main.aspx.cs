@@ -145,7 +145,7 @@ namespace WMS.Index
                     im.ImageUrl = "../images/" + dr["DestopImage"].ToString();
                     im.Click += new ImageClickEventHandler(im_Click);
                     GlobalMenuTitle.Add(im.ID, dr["MenuTitle"].ToString());
-                    GlobalMenuLink.Add(im.ID, dr["MenuUrl"].ToString());
+                    GlobalMenuLink.Add(im.ID, dr["MenuUrl"].ToString() + "?FormID=" + dr["FormID"].ToString() + "&SubModuleCode=" + dr["MenuCode"].ToString() + "&SqlCmd=" + dr["SqlCmdFlag"].ToString());  
                     GlobalMenuParent.Add(im.ID, dr["MenuParent"].ToString());
                     GlobalModuleID.Add(im.ID, dr["ModuleID"].ToString());
                     tb.Rows[i].Cells[j].Controls.Add(im);
@@ -164,11 +164,12 @@ namespace WMS.Index
         #region 链接事件
         protected void im_Click(object sender, ImageClickEventArgs e)
         {
+            //id, link, name
             ImageButton ImageButtonID = (ImageButton)sender;
             string strScript = "<script> ";
             //strScript += "var nav=window.parent.document.getElementById(\'labNavigation\');";
             //strScript += " nav.innerText=\'" + GlobalMenuParent[ImageButtonID.ID].ToString() + ">>" + GlobalMenuTitle[ImageButtonID.ID].ToString() + "\';";
-            strScript += string.Format("window.parent.addTab(\"{0}&tabId=tab_{2}\",\"{1}\",\"tab_{2}\");", GlobalMenuLink[ImageButtonID.ID].ToString(), GlobalMenuTitle[ImageButtonID.ID].ToString(), GlobalModuleID[ImageButtonID.ID].ToString());
+            strScript += string.Format("window.parent.addtab(\"{0}\",\"{1}\",\"tab_{2}\");",GlobalModuleID[ImageButtonID.ID].ToString(), GlobalMenuLink[ImageButtonID.ID].ToString(), GlobalMenuTitle[ImageButtonID.ID].ToString());
             //strScript += "window.open(\'" + GlobalMenuLink[ImageButtonID.ID].ToString() + "\',\'_self\')";
             strScript += "</script>";
             this.ClientScript.RegisterClientScriptBlock(this.GetType(), DateTime.Now.ToLongTimeString(), strScript);

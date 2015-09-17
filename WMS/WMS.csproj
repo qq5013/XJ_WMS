@@ -571,6 +571,34 @@
     <Compile Include="WebUI\Start\Start.aspx.designer.cs">
       <DependentUpon>Start.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WebUI\Stock\MoveEdit.aspx.cs">
+      <DependentUpon>MoveEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\Stock\MoveEdit.aspx.designer.cs">
+      <DependentUpon>MoveEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\Stock\Moves.aspx.cs">
+      <DependentUpon>Moves.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\Stock\Moves.aspx.designer.cs">
+      <DependentUpon>Moves.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\Stock\MoveTasks.aspx.cs">
+      <DependentUpon>MoveTasks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\Stock\MoveTasks.aspx.designer.cs">
+      <DependentUpon>MoveTasks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\Stock\MoveView.aspx.cs">
+      <DependentUpon>MoveView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\Stock\MoveView.aspx.designer.cs">
+      <DependentUpon>MoveView.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebUI\SysInfo\AboutProduct\AboutProduct.aspx.cs">
       <DependentUpon>AboutProduct.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5462,6 +5490,10 @@
     <Content Include="WebUI\Query\CellQuery.aspx" />
     <Content Include="WebUI\Query\OtherProductQuery.aspx" />
     <Content Include="WebUI\Query\OutStockDeliverQuery.aspx" />
+    <Content Include="WebUI\Stock\MoveEdit.aspx" />
+    <Content Include="WebUI\Stock\Moves.aspx" />
+    <Content Include="WebUI\Stock\MoveTasks.aspx" />
+    <Content Include="WebUI\Stock\MoveView.aspx" />
     <Content Include="Web\Base\InBillType.aspx" />
     <Content Include="Web\Base\Cigarette.aspx" />
     <Content Include="Web\Base\CigaretteEdit.aspx" />
@@ -7131,7 +7163,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="RptFiles\" />
-    <Folder Include="WebUI\Stock\" />
     <Folder Include="Web\Account\" />
     <Folder Include="Web\MoveStock\" />
     <Folder Include="Web\OutStock\" />
