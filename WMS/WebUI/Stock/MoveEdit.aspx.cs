@@ -32,9 +32,9 @@ namespace WMS.WebUI.Stock
                 {
                     BindDataSub();
 
-                    txtBillDate.changed = "$('#txtID').val(autoCodeByTableName('IS', '1=1','WMS_BillMaster', 'txtBillDate'));";
+                    txtBillDate.changed = "$('#txtID').val(autoCodeByTableName('MS', '1=1','WMS_BillMaster', 'txtBillDate'));";
                     this.txtBillDate.DateValue = DateTime.Now;
-                    this.txtID.Text = bll.GetAutoCodeByTableName("IS", "WMS_BillMaster", DateTime.Now, "1=1");
+                    this.txtID.Text = bll.GetAutoCodeByTableName("MS", "WMS_BillMaster", DateTime.Now, "1=1");
 
                     this.txtCreator.Text = Session["EmployeeCode"].ToString();
                     this.txtUpdater.Text = Session["EmployeeCode"].ToString();
@@ -57,17 +57,7 @@ namespace WMS.WebUI.Stock
             this.ddlAreaCode.DataSource = dtArea;
             this.ddlAreaCode.DataBind();
 
-            DataTable dtFactory = bll.FillDataTable("Cmd.SelectFactory");
-            this.ddlFactoryID.DataValueField = "FactoryID";
-            this.ddlFactoryID.DataTextField = "FactoryName";
-            this.ddlFactoryID.DataSource = dtFactory;
-            this.ddlFactoryID.DataBind();
-
-            DataTable dtBillType = bll.FillDataTable("Cmd.SelectBillType",new DataParameter[]{new DataParameter("{0}","Flag=1")});
-            this.ddlBillTypeCode.DataValueField = "BillTypeCode";
-            this.ddlBillTypeCode.DataTextField = "BillTypeName";
-            this.ddlBillTypeCode.DataSource = dtBillType;
-            this.ddlBillTypeCode.DataBind();
+          
 
         }
 
@@ -79,8 +69,7 @@ namespace WMS.WebUI.Stock
                 this.txtID.Text = dt.Rows[0]["BillID"].ToString();
                 this.txtBillDate.DateValue = dt.Rows[0]["BillDate"];
                 this.ddlAreaCode.SelectedValue = dt.Rows[0]["AreaCode"].ToString();
-                this.ddlBillTypeCode.SelectedValue = dt.Rows[0]["BillTypeCode"].ToString();
-                this.ddlFactoryID.SelectedValue = dt.Rows[0]["FactoryID"].ToString();
+              
                 this.txtMemo.Text = dt.Rows[0]["Memo"].ToString();
                 this.txtCreator.Text = dt.Rows[0]["Creator"].ToString();
                 this.txtCreatDate.Text = ToYMD(dt.Rows[0]["CreateDate"]);
@@ -105,69 +94,15 @@ namespace WMS.WebUI.Stock
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 DataRowView drv = e.Row.DataItem as DataRowView;
-                SetTextReadOnly((TextBox)e.Row.FindControl("ProductName"));
+                SetTextReadOnly((TextBox)e.Row.FindControl("NewCellCode"));
                 ((Label)e.Row.FindControl("RowID")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("RowID")].ToString();
-                ((TextBox)e.Row.FindControl("ProductCode")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("ProductCode")].ToString();
-                ((TextBox)e.Row.FindControl("ProductName")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("ProductName")].ToString();
-                ((TextBox)e.Row.FindControl("Quantity")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("Quantity")].ToString();
+
+                ((TextBox)e.Row.FindControl("NewCellCode")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("NewCellCode")].ToString();
                 ((TextBox)e.Row.FindControl("SubMemo")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("Memo")].ToString();
             }
         }
 
         protected void btnAddDetail_Click(object sender, EventArgs e)
-        {
-            UpdateTempSub(this.dgViewSub1);
-            int pagecount = this.dgViewSub1.PageCount;
-
-            DataTable dt = (DataTable)Session[FormID + "_Edit_dgViewSub1"];
-            if (dt.Rows.Count > 0)
-            {
-                if (dt.Rows[dt.Rows.Count - 1]["ProductCode"].ToString() == "")
-                {
-                    return;
-                }
-            }
-            DataRow dr;
-            dr = dt.NewRow();
-            dr["RowID"] = dt.Rows.Count + 1;
-            dr["Quantity"] = 1;
-
-            dt.Rows.Add(dr);
-            this.dgViewSub1.DataSource = dt;
-            this.dgViewSub1.DataBind();
-            Session[FormID + "_Edit_dgViewSub1"] = dt;
-            MovePage("Edit", this.dgViewSub1, this.dgViewSub1.PageCount, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
-        }
-        protected void btnDelDetail_Click(object sender, EventArgs e)
-        {
-            UpdateTempSub(this.dgViewSub1);
-            DataTable dt = (DataTable)Session[FormID + "_Edit_" + dgViewSub1.ID];
-            int RowID = 0;
-            for (int i = 0; i < this.dgViewSub1.Rows.Count; i++)
-            {
-                CheckBox cb = (CheckBox)(this.dgViewSub1.Rows[i].FindControl("cbSelect"));
-                if (cb != null && cb.Checked && cb.Enabled)
-                {
-                    Label hk = (Label)(this.dgViewSub1.Rows[i].Cells[1].FindControl("RowID"));
-                    RowID = int.Parse(hk.Text);
-                    DataRow[] drs = dt.Select(string.Format("RowID ={0}", hk.Text));
-                    for (int j = 0; j < drs.Length; j++)
-                        dt.Rows.Remove(drs[j]);
-
-                }
-            }
-            this.dgViewSub1.DataSource = dt;
-            this.dgViewSub1.DataBind();
-            Session[FormID + "_Edit_" + dgViewSub1.ID] = dt;
-            MovePage("Edit", this.dgViewSub1, this.dgViewSub1.PageIndex, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
-
-        }
-
-       
-        
-       
-
-        protected void btnProduct_Click(object sender, EventArgs e)
         {
             UpdateTempSub(this.dgViewSub1);
             DataTable dt = (DataTable)Session[FormID + "_Edit_dgViewSub1"];
@@ -198,21 +133,56 @@ namespace WMS.WebUI.Stock
                 {
                     dr = dt.NewRow();
                     dt.Rows.InsertAt(dr, cur + i);
-                   
+
                 }
                 dr["RowID"] = i + cur + 1;
-               
+
                 dr["BillID"] = this.txtID.Text.Trim();
                 dr["ProductCode"] = dt1.Rows[i]["ProductCode"];
                 dr["ProductName"] = dt1.Rows[i]["ProductName"];
+                dr["CellCode"] = dt1.Rows[i]["CellCode"];
                 dr["Quantity"] = 1;
-                 
+
             }
-           
+
             this.dgViewSub1.DataSource = dt;
             this.dgViewSub1.DataBind();
             Session[FormID + "_Edit_dgViewSub1"] = dt;
             MovePage("Edit", this.dgViewSub1, this.dgViewSub1.PageIndex, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
+        }
+        protected void btnDelDetail_Click(object sender, EventArgs e)
+        {
+            UpdateTempSub(this.dgViewSub1);
+            DataTable dt = (DataTable)Session[FormID + "_Edit_" + dgViewSub1.ID];
+            int RowID = 0;
+            for (int i = 0; i < this.dgViewSub1.Rows.Count; i++)
+            {
+                CheckBox cb = (CheckBox)(this.dgViewSub1.Rows[i].FindControl("cbSelect"));
+                if (cb != null && cb.Checked && cb.Enabled)
+                {
+                    Label hk = (Label)(this.dgViewSub1.Rows[i].Cells[1].FindControl("RowID"));
+                    RowID = int.Parse(hk.Text);
+                    DataRow[] drs = dt.Select(string.Format("RowID ={0}", hk.Text));
+                    for (int j = 0; j < drs.Length; j++)
+                        dt.Rows.Remove(drs[j]);
+
+                }
+            }
+            this.dgViewSub1.DataSource = dt;
+            this.dgViewSub1.DataBind();
+            Session[FormID + "_Edit_" + dgViewSub1.ID] = dt;
+            MovePage("Edit", this.dgViewSub1, this.dgViewSub1.PageIndex, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
+
+        }
+
+
+
+
+
+        protected void btnCellCode_Click(object sender, EventArgs e)
+        {
+            UpdateTempSub(this.dgViewSub1);
+            
         }
 
 
@@ -266,9 +236,9 @@ namespace WMS.WebUI.Stock
                 para = new DataParameter[] { 
                                              new DataParameter("@BillID", this.txtID.Text.Trim()),
                                              new DataParameter("@BillDate", this.txtBillDate.DateValue),
-                                             new DataParameter("@BillTypeCode",this.ddlBillTypeCode.SelectedValue),
+                                           
                                              new DataParameter("@AreaCode",this.ddlAreaCode.SelectedValue),
-                                             new DataParameter("@FactoryID",this.ddlFactoryID.SelectedValue),
+                                              
                                              new DataParameter("@Memo", this.txtMemo.Text.Trim()),
                                              new DataParameter("@Creator", Session["EmployeeCode"].ToString()),
                                              new DataParameter("@Updater", Session["EmployeeCode"].ToString())
@@ -281,9 +251,9 @@ namespace WMS.WebUI.Stock
             {
                 para = new DataParameter[] { 
                                              new DataParameter("@BillDate", this.txtBillDate.DateValue),
-                                             new DataParameter("@BillTypeCode",this.ddlBillTypeCode.SelectedValue),
+                                          
                                              new DataParameter("@AreaCode",this.ddlAreaCode.SelectedValue),
-                                             new DataParameter("@FactoryID",this.ddlFactoryID.SelectedValue),
+                                             
                                              new DataParameter("@Memo", this.txtMemo.Text.Trim()),
                                              new DataParameter("@Updater", Session["EmployeeCode"].ToString()),
                                              new DataParameter("{0}",string.Format("BillID='{0}'", this.txtID.Text.Trim())) };

@@ -18,27 +18,26 @@
                 });
             });
             function resize() {
-                var h = document.documentElement.clientHeight - 230;
+                var h = document.documentElement.clientHeight - 200;
                 $("#Sub-container").css("height", h);
             }
+            
             function BindEvent() {
-                $("[ID$='btnProduct']").bind("click", function () {
+                $("[ID$='btnCellCode']").bind("click", function () {
                     var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and ProductCode not in ('0001','0002') ";
                     return GetMulSelectValue('CMD_Product', 'hdnMulSelect', where);
                 });
-                $("[ID$='ProductCode']").bind("change", function () {
-                    var txtID = this.id;
-                    var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and ProductCode='" + $('#' + txtID).val() + "' and ProductCode not in ('0001','0002')";
-
-                    getWhereBaseData('CMD_Product', txtID + "," + txtID.replace("ProductCode", "ProductName"), 'ProductCode,ProductName', where);
-                });
-                $("[ID$='ProductCode']").bind("dblclick", function () {
+                $("[ID$='NewCellCode']").bind("dblclick", function () {
                     var txtID = this.id;
                     $('#' + txtID.replace("ProductCode", "btnProduct"))[0].click();
 
                 });
             }
 
+            function AddDetail() {
+                var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and ProductCode not in ('0001','0002') ";
+                return GetMulSelectValue('CMD_Product', 'hdnMulSelect', where);
+            }
 
             function Save() {
 
@@ -80,7 +79,7 @@
                         <td align="right">
                             <asp:Button ID="btnCancel" runat="server" Text="放弃" 
                                 OnClientClick="return Cancel();" CssClass="ButtonCancel" />
-                            <asp:Button ID="btnSave" runat="server" Text="保存" OnClientClick="return Save()" 
+                            <asp:Button ID="btnSave" runat="server" Text="保存" OnClientClick="return Save();" 
                                 CssClass="ButtonSave" onclick="btnSave_Click" Height="16px" />
                             <asp:Button ID="btnExit" runat="server" Text="离开" OnClientClick="return Exit();" 
                                 CssClass="ButtonExit" />
@@ -91,46 +90,26 @@
 				         runat="server">			
 				    <tr>
                         <td align="center" class="musttitle" style="width:8%;"  >
-                                入库日期
+                                移库日期
                         </td>
                         <td  width="25%">
                                 &nbsp;<uc1:Calendar ID="txtBillDate" runat="server"  /></td>
                         <td align="center" class="musttitle" style="width:8%;"  >
-                                入库单号
+                                移库单号
                         </td>
                         <td width="25%">
                                 &nbsp;<asp:TextBox ID="txtID" 
                                     runat="server"  CssClass="TextBox" Width="90%" 
                                     MaxLength="20" ></asp:TextBox> 
                         </td>
-                            <td align="center" class="musttitle" style="width:8%;">
-                                入库类型</td>
-                        <td width="26%">
-                            &nbsp;<asp:DropDownList ID="ddlBillTypeCode" runat="server" Width="90%">
-                            </asp:DropDownList>
-                    
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="center" class="musttitle" style="width:8%;"  >
+                            <td align="center" class="musttitle" style="width:8%;"  >
                                 库区</td>
                         <td  width="25%">
                                 &nbsp;<asp:DropDownList ID="ddlAreaCode" runat="server" Width="90%">
                             </asp:DropDownList>
                         </td>
-                        <td align="center" class="musttitle" style="width:8%;"  >
-                                工厂
-                        </td>
-                        <td width="25%">
-                                &nbsp;<asp:DropDownList ID="ddlFactoryID" runat="server" Width="90%">
-                                </asp:DropDownList>
-                        </td>
-                        <td align="center"   style="width:8%;">
-                        </td>
-                        <td width="26%">
-                        &nbsp;
-                        </td>
                     </tr>
+                   
               
                     <tr style="height:50px">
                         <td align="center" class="smalltitle"  >
@@ -145,8 +124,8 @@
                 <table style="width:100%; height:25px">
                     <tr>
                         <td class="table_titlebgcolor" height="25px">
-                            <asp:Button  id="btnAddDetail" CssClass=" ButtonCreate" runat="server" 
-                                Text="新增明细" onclick="btnAddDetail_Click"  Width="75px" Height="16px"  />  
+                            <asp:Button  id="btnAddDetail" CssClass="ButtonCreate" runat="server" 
+                                Text="新增明细" OnClientClick="return AddDetail();" onclick="btnAddDetail_Click"  Width="75px" Height="16px"  />  
                                 &nbsp;&nbsp;
                                 <asp:Button  id="btnDelDetail" CssClass=" ButtonDel" 
                                 runat="server" Text="删除明细" onclick="btnDelDetail_Click" 
@@ -176,30 +155,29 @@
                                 <ItemStyle HorizontalAlign="Center" />
                                 <HeaderStyle Width="4%"  />
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="产品编码">
-                                    <ItemTemplate>
-                                    <asp:TextBox ID="ProductCode" runat="server"  Width="80%" CssClass="TextBox"></asp:TextBox><asp:Button
-                                        ID="btnProduct"  CssClass="ButtonOption" Width="20px" runat="server"  Text="..." OnClick="btnProduct_Click" />
+                             <asp:BoundField DataField="ProductCode" HeaderText="产品编码" SortExpression="ProductCode">
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="ProductName" HeaderText="产品名称" SortExpression="ProductName">
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="Quantity" HeaderText="数量" SortExpression="Quantity">
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="CellCode" HeaderText="货位" SortExpression="CellCode">
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:TemplateField HeaderText="新货位">
+                               <ItemTemplate>
+                                    <asp:TextBox ID="NewCellCode" runat="server"  Width="80%" CssClass="TextBox"></asp:TextBox><asp:Button
+                                        ID="btnCellCode"  CssClass="ButtonOption" Width="20px" runat="server"  Text="..." OnClick="btnCellCode_Click" />
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Left" />
-                                <HeaderStyle Width="20%"  />
-                            </asp:TemplateField>
-                                
-                                <asp:TemplateField HeaderText="产品名称">
-                                <ItemTemplate>
-                                    <asp:TextBox ID="ProductName" runat="server" Width="98%"  CssClass="TextRead" ></asp:TextBox> 
-                                </ItemTemplate>
-                                <ItemStyle HorizontalAlign="Left" />
-                                <HeaderStyle  Width="25%" />
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="数量">
-                                <ItemTemplate>
-                                    <asp:TextBox ID="Quantity" runat="server" Width="100%" CssClass="TextBox" style="text-align:right;" 
-                                    onkeypress="return regInput(this,/^\d+$/,String.fromCharCode(event.keyCode))" 	onpaste="return regInput(this,/^\d+$/,window.clipboardData.getData('Text'))" 
-                                    ondrop="return regInput(this,/^\d+$/,event.dataTransfer.getData('Text'))" onfocus="TextFocus(this);"></asp:TextBox> 
-                                </ItemTemplate>
-                                <ItemStyle HorizontalAlign="Left" />
-                                <HeaderStyle Width="10%" />
+                                <HeaderStyle Width="15%"  />
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="备注">
                                 <ItemTemplate>

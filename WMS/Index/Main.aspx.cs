@@ -123,7 +123,7 @@ namespace WMS.Index
                     GlobalModuleID.Add(im.ID, dr["ModuleID"].ToString());
                     tb.Rows[i].Cells[j].Attributes.Add("onClick", "window.parent.addTab(\"" + GlobalMenuLink["im" + i.ToString() + i.ToString() + j.ToString()].ToString() + "\",\"" + GlobalMenuLink["im" + i.ToString() + i.ToString() + j.ToString()].ToString() + "\",\"" + GlobalMenuTitle["im" + i.ToString() + i.ToString() + j.ToString()].ToString() + "\");return false;"); 
                     tb.Rows[i].Cells[j].Controls.Add(im);
-                    tb.Rows[i].Cells[j].Controls.Add(new LiteralControl("<br>" + dr["MenuTitle"].ToString()));
+                    tb.Rows[i].Cells[j].Controls.Add(new LiteralControl("<br/><font style=\"font-size: 13px;font-family:微软雅黑;\">" + dr["MenuTitle"].ToString() + "</font>"));
                     j++;
                     if (j > 4)
                     {
