@@ -28,6 +28,7 @@ A:LINK
 	color: #003399;*/
 	text-decoration: none
 }
+  
 body
 {		
     margin:0px;    
@@ -185,7 +186,7 @@ body
   padding: 5px 10px;
   text-align: center;
   border-right: 1px solid #cbcbcb;
-   background-image: url(../Images/main/title.jpg);  
+   background-image: url(../Images/title.jpg);  
    font-size:9pt;
    font-weight: bold;
    color: #003399;

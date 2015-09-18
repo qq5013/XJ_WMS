@@ -157,7 +157,7 @@
                 deferredRender: false,
                 activeTab: 0,
                 items: [{
-                    title: 'index',
+                    title: '首页',
                     html: '<iframe id="frmMain" scrolling="auto" frameborder="1" width="100%" height="100%" src="Index/Main.aspx"> </iframe>'
                 }]
             });
