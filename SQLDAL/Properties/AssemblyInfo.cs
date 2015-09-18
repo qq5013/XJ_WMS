@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("SQLDAL")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("盛世雄风技术论坛")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("SQLDAL")]
-[assembly: AssemblyCopyright("Copyright © 盛世雄风技术论坛 2013")]
+[assembly: AssemblyCopyright("Copyright 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
