@@ -7,12 +7,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title></title>
     <link rel="stylesheet" type="text/css" href="../../Css/op.css" />  
+
     <link rel="stylesheet" type="text/css" href="../../Css/main.css" />  
     <link rel="stylesheet" type="text/css" href="../../ext/packages/ext-theme-crisp/build/resources/ext-theme-crisp-all.css" /> 
     <script type="text/javascript" src="../../JQuery/jquery-2.1.3.min.js"></script>  
     <script type="text/javascript" src= "../../JScript/Common.js"></script>
     <script type="text/javascript" src="../../Ext/ext-all.js"></script>  
     <script type="text/javascript" src="../../Ext/packages/ext-theme-crisp/build/ext-theme-crisp.js"></script>
+    <style type="text/css">
+        .x-panel-header-title-default
+        {
+            font-family:微软雅黑;
+            font-size:14px;
+            font-weight:300;
+            line-height:16px;
+             
+        }
+    </style>
     <script language="javascript" type="text/javascript">
 
         Ext.onReady(function () {
@@ -55,9 +66,10 @@
             var buildTree = function (json) {
                 return Ext.create('Ext.tree.Panel', {
                     rootVisible: false,
+                    
                     title: '仓库资料',
                     border: true,
-                    bodyStyle: 'background:#bad5eb;',
+                    bodyStyle: 'background:white;',
                     store: Ext.create('Ext.data.TreeStore', {
                         root: {
                             expanded: true,
@@ -106,6 +118,7 @@
                     });
 
                     if (!blnReload) {
+                        debugger
                         var root = tree.getRootNode().firstChild;
                         centerPanel.setTitle("当前选中的节点：" + root.data.text);                        
                         $("#frmMain_warehouse").attr("src", "WarehouseEditPage.aspx?WAREHOUSE_CODE=" + root.id);                        

@@ -242,13 +242,6 @@
       <DependentUpon>BaseService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="WebUI\CMD\WarehouseSetPage2.aspx.cs">
-      <DependentUpon>WarehouseSetPage2.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\CMD\WarehouseSetPage2.aspx.designer.cs">
-      <DependentUpon>WarehouseSetPage2.aspx</DependentUpon>
-    </Compile>
     <Compile Include="WebUI\CMD\FactoryEdit.aspx.cs">
       <DependentUpon>FactoryEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -367,6 +360,13 @@
     </Compile>
     <Compile Include="WebUI\CMD\WarehouseSetPage1.aspx.designer.cs">
       <DependentUpon>WarehouseSetPage1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\CMD\WarehouseSetPage2.aspx.cs">
+      <DependentUpon>WarehouseSetPage2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\CMD\WarehouseSetPage2.aspx.designer.cs">
+      <DependentUpon>WarehouseSetPage2.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebUI\CMD\WarehouseShelfEditPage.aspx.cs">
       <DependentUpon>WarehouseShelfEditPage.aspx</DependentUpon>
@@ -5459,7 +5459,6 @@
     <Content Include="JQuery\jquery.ztree.core-3.5.js" />
     <Content Include="JScript\JsDDL.js" />
     <Content Include="UserControl\Calendar.ascx" />
-    <Content Include="WebUI\CMD\WarehouseSetPage2.aspx" />
     <Content Include="WebUI\CMD\ProductTypeEdit.aspx" />
     <Content Include="WebUI\CMD\ProductTypes.aspx" />
     <Content Include="WebUI\CMD\ProductTypeView.aspx" />
@@ -5467,6 +5466,7 @@
     <Content Include="WebUI\CMD\TrainTypes.aspx" />
     <Content Include="WebUI\CMD\TrainTypeView.aspx" />
     <Content Include="WebUI\CMD\WarehouseSetPage1.aspx" />
+    <Content Include="WebUI\CMD\WarehouseSetPage2.aspx" />
     <Content Include="WebUI\InStock\InStockEdit.aspx" />
     <Content Include="WebUI\InStock\InStocks.aspx" />
     <Content Include="WebUI\InStock\InStockTasks.aspx" />
@@ -5489,6 +5489,7 @@
     <Content Include="WebUI\Stock\Moves.aspx" />
     <Content Include="WebUI\Stock\MoveTasks.aspx" />
     <Content Include="WebUI\Stock\MoveView.aspx" />
+    <Content Include="WebUI\TableXML\CMD_Cell.xml" />
     <Content Include="Web\Base\InBillType.aspx" />
     <Content Include="Web\Base\Cigarette.aspx" />
     <Content Include="Web\Base\CigaretteEdit.aspx" />
