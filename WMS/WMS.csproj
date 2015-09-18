@@ -242,6 +242,13 @@
       <DependentUpon>BaseService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="WebUI\CMD\WarehouseSetPage2.aspx.cs">
+      <DependentUpon>WarehouseSetPage2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\CMD\WarehouseSetPage2.aspx.designer.cs">
+      <DependentUpon>WarehouseSetPage2.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebUI\CMD\FactoryEdit.aspx.cs">
       <DependentUpon>FactoryEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5452,6 +5459,7 @@
     <Content Include="JQuery\jquery.ztree.core-3.5.js" />
     <Content Include="JScript\JsDDL.js" />
     <Content Include="UserControl\Calendar.ascx" />
+    <Content Include="WebUI\CMD\WarehouseSetPage2.aspx" />
     <Content Include="WebUI\CMD\ProductTypeEdit.aspx" />
     <Content Include="WebUI\CMD\ProductTypes.aspx" />
     <Content Include="WebUI\CMD\ProductTypeView.aspx" />
