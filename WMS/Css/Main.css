@@ -97,11 +97,13 @@ body
 {
 	border: 1px solid #5384bb;
 	height:18px;
+	font-family:微软雅黑;
 }
 .TextRead
 {
 	border: 1px solid #5384bb;
-	background-color:Gainsboro;	
+	background-color:Gainsboro;
+	font-family:微软雅黑;
 }
 
 .ButtonCss {
