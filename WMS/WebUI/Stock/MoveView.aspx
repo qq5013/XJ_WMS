@@ -17,7 +17,7 @@
             });
         });
         function resize() {
-            var h = document.documentElement.clientHeight - 200;
+            var h = document.documentElement.clientHeight - 170;
             $("#Sub-container").css("height", h);
         }
      </script>
@@ -29,7 +29,7 @@
             <ProgressTemplate>            
                 <div id="progressBackgroundFilter" style="display:none"></div>
                 <div id="processMessage"> Loading...<br /><br />
-                     <img alt="Loading" src="../../images/main/loading.gif" />
+                     <img alt="Loading" src="../../images/loading.gif" />
                 </div>            
              </ProgressTemplate>
         </asp:UpdateProgress>  
@@ -83,38 +83,16 @@
                                     MaxLength="20" ReadOnly="True" ></asp:TextBox> 
                         </td>
                             <td align="center" class="musttitle" style="width:8%;">
-                                入库类型</td>
+                                库区</td>
                         <td width="26%">
-                            &nbsp;<asp:DropDownList ID="ddlBillTypeCode" runat="server" Width="90%" 
-                                Enabled="False">
+                            &nbsp;<asp:DropDownList ID="ddlAreaCode" runat="server" Width="90%" 
+                                    Enabled="False">
                             </asp:DropDownList>
                     
                         </td>
                     </tr>
-                    <tr>
-                        <td align="center" class="musttitle" style="width:8%;"  >
-                                库区</td>
-                        <td  width="25%">
-                                &nbsp;<asp:DropDownList ID="ddlAreaCode" runat="server" Width="90%" 
-                                    Enabled="False">
-                            </asp:DropDownList>
-                        </td>
-                        <td align="center" class="musttitle" style="width:8%;"  >
-                                工厂
-                        </td>
-                        <td width="25%">
-                                &nbsp;<asp:DropDownList ID="ddlFactoryID" runat="server" Width="90%" 
-                                    Enabled="False">
-                                </asp:DropDownList>
-                        </td>
-                        <td align="center" class="smalltitle"  style="width:8%;">
-                            审核日期
-                        </td>
-                        <td width="26%">
-                        &nbsp;<asp:TextBox ID="txtCheckDate" runat="server" CssClass="TextRead" Width="90%" 
-                                ReadOnly="True"></asp:TextBox> 
-                        </td>
-                    </tr>
+                  
+                   
               
                     <tr style="height:50px">
                         <td align="center" class="smalltitle"  >
@@ -148,6 +126,14 @@
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
+                            <asp:BoundField DataField="CellCode" HeaderText="货位" SortExpression="CellCode">
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="NewCellCode" HeaderText="数量" SortExpression="NewCellCode">
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
                             <asp:BoundField DataField="Memo" HeaderText="备注" SortExpression="Memo">
                                 <ItemStyle HorizontalAlign="Left" Width="38%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
@@ -158,15 +144,9 @@
                 </div>
                 <table  class=" maintable" style="width:100%; height:25px" > 
                     <tr>
-                         <td align="center"  style="width:8%;" class="smalltitle">
-                            审核人员
-                        </td>
-                        <td style="width:17%">
-                            &nbsp;<asp:TextBox ID="txtChecker" runat="server" CssClass="TextRead" ReadOnly="True" Width="90%"></asp:TextBox>
-                        </td> 
+                         
 
-
-                        <td align="center"  style="width:8%;" class="smalltitle">
+                        <td align="center"  style="width:7%;" class="smalltitle">
                             数量统计
                         </td>
                         <td style="width:17%">
@@ -196,31 +176,44 @@
                 </table>
                 <table  class="maintable"   style=" width:100%; height:25px" align="center" cellspacing="0" cellpadding="0" border="1">
                     <tr>
-                        <td align="center"  class="smalltitle" style="width:8%;">
+                        <td align="center"  style="width:7%;" class="smalltitle">
+                            审核人员
+                        </td>
+                        <td style="width:9%">
+                            &nbsp;<asp:TextBox ID="txtChecker" runat="server" CssClass="TextRead" ReadOnly="True" Width="90%"></asp:TextBox>
+                        </td> 
+
+                         <td align="center"  style="width:7%;" class="smalltitle">
+                            审核日期
+                        </td>
+                        <td style="width:9%">
+                            &nbsp;<asp:TextBox ID="txtCheckDate" runat="server" CssClass="TextRead" ReadOnly="True" Width="90%" ></asp:TextBox>
+                        </td> 
+                        <td align="center"  class="smalltitle" style="width:7%;">
                             建单人员
                         </td> 
-                        <td style="width:17%">
+                        <td style="width:9%">
                         &nbsp;<asp:TextBox ID="txtCreator" runat="server"  CssClass="TextRead" Width="90%" 
                                 ReadOnly="True"  ></asp:TextBox> 
                         </td>
-                        <td align="center" class="smalltitle" style="width:8%;">
+                        <td align="center" class="smalltitle" style="width:7%;">
                             建单日期
                         </td> 
-                        <td style="width:17%">
+                        <td style="width:9%">
                         &nbsp;<asp:TextBox ID="txtCreatDate" runat="server"  CssClass="TextRead" 
                                 Width="90%" ReadOnly="True"  ></asp:TextBox> 
                         </td>
-                        <td align="center"  class="smalltitle" style="width:8%;">
+                        <td align="center"  class="smalltitle" style="width:7%;">
                             修改人员
                         </td> 
-                        <td style="width:17%">
+                        <td style="width:9%">
                             &nbsp;<asp:TextBox ID="txtUpdater" runat="server"  CssClass="TextRead" 
                                 Width="90%" ReadOnly="True"  ></asp:TextBox> 
                         </td>
-                        <td align="center"  class="smalltitle" style="width:8%;">
+                        <td align="center"  class="smalltitle" style="width:7%;">
                             修改日期
                         </td> 
-                        <td style="width:17%">
+                        <td style="width:13%">
                         &nbsp;<asp:TextBox ID="txtUpdateDate" runat="server" CssClass="TextRead" 
                                 Width="90%" ReadOnly="True"  ></asp:TextBox> 
                         </td>

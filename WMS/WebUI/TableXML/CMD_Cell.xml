@@ -1,43 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TABLE name="CMD_Cell" ChineseName="货位信息" PrimaryKey="CellCode" OrderBy="CellCode" ViewName="VCMD_Cell">
-  <FIELD ShowInFieldQuery="1" ShowQueryIndex="5">
-    <FieldName>ProductCode</FieldName>
-    <FieldTitle>产品编码</FieldTitle>
-    <DataType>double</DataType>
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="1">
+    <FieldName>ShelfName</FieldName>
+    <FieldTitle>货架</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="2">
+    <FieldName>CellCode</FieldName>
+    <FieldTitle>货位</FieldTitle>
+    <DataType>string</DataType>
   </FIELD>
   <FIELD ShowInFieldQuery="1" ShowQueryIndex="3">
+    <FieldName>ProductCode</FieldName>
+    <FieldTitle>产品编码</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="4">
     <FieldName>ProductName</FieldName>
     <FieldTitle>产品名称</FieldTitle>
     <DataType>string</DataType>
   </FIELD>
-  <FIELD ShowInFieldQuery="1" ShowQueryIndex="4">
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="5">
     <FieldName>ProductTypeName</FieldName>
-    <FieldTitle>产品类型</FieldTitle>
+    <FieldTitle>产品类别</FieldTitle>
     <DataType>string</DataType>
   </FIELD>
-  <FIELD ShowInFieldQuery="1" ShowQueryIndex="1">
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="6">
     <FieldName>TrainTypeName</FieldName>
     <FieldTitle>车型</FieldTitle>
     <DataType>string</DataType>
   </FIELD>
-  <FIELD ShowInFieldQuery="1" ShowQueryIndex="2">
-    <FieldName>AxieNo</FieldName>
-    <FieldTitle>车轴编号</FieldTitle>
-    <DataType>string</DataType>
-  </FIELD>
-  <FIELD ShowInFieldQuery="0" ShowQueryIndex="3">
-    <FieldName>WheelDiameter</FieldName>
-    <FieldTitle>轴径</FieldTitle>
-    <DataType>string</DataType>
-  </FIELD>
-  <FIELD ShowInFieldQuery="0" ShowQueryIndex="0">
-    <FieldName>LDXC</FieldName>
-    <FieldTitle>轮对修程</FieldTitle>
-    <DataType>string</DataType>
-  </FIELD>
-  <FIELD ShowInFieldQuery="0" ShowQueryIndex="0">
-    <FieldName>CXFactoryName</FieldName>
-    <FieldTitle>产品类别</FieldTitle>
+  <FIELD ShowInFieldQuery="0" ShowQueryIndex="7">
+    <FieldName>Quantity</FieldName>
+    <FieldTitle>数量</FieldTitle>
     <DataType>string</DataType>
   </FIELD>
 </TABLE>

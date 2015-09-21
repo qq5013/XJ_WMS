@@ -115,7 +115,50 @@
       where ProductCode=@ProductCode
     </CommandString>
   </Command>
+  
+  <!--移库单-->
 
+  <Command ID="InsertMoveStockBill">
+    <CommandString>
+      insert into WMS_BillMaster(BillID,BillDate,AreaCode,Memo,Creator,CreateDate,Updater,UpdateDate)
+      values(@BillID,@BillDate,@AreaCode,@Memo,@Creator,getdate(),@Updater,getdate())
+    </CommandString>
+  </Command>
+  <Command ID="UpdateMoveStock">
+    <CommandString>
+      update WMS_BillMaster set BillDate=@BillDate, AreaCode=@AreaCode,Memo=@Memo,Updater=@Updater,UpdateDate=getdate() where {0}
+    </CommandString>
+  </Command>
+  <Command ID="InsertMoveStockDetail">
+    <CommandString>
+      insert into WMS_BillDetail(BillID,RowID,ProductCode,Quantity,CellCode,NewCellCode,Memo)
+      values(@BillID,@RowID,@ProductCode,@Quantity,@CellCode,@NewCellCode,@Memo)
+    </CommandString>
+  </Command>
+  <Command ID="SpMoveStockTask">
+    <CommandString>
+      Sp_OutstockTask
+    </CommandString>
+  </Command>
+  <Command ID="SpCancelMoveStockTask">
+    <CommandString>
+      Sp_OutstockCancelTask
+    </CommandString>
+  </Command>
+
+  <Command ID="UpdateMoveCellLock">
+    <CommandString>
+      update CMD_Cell set IsLock=@Lock from CMD_Cell cell inner join WMS_BillDetail sub on cell.CellCode=sub.NewCellCode
+      where sub.BillID=@BillID
+    </CommandString>
+  </Command>
+
+  <Command ID="UpdateCellLock">
+    <CommandString>
+      update CMD_Cell set IsLock=@Lock from CMD_Cell cell inner join WMS_BillDetail sub on cell.CellCode=sub.CellCode
+      where sub.BillID=@BillID
+    </CommandString>
+  </Command>
   
 
 

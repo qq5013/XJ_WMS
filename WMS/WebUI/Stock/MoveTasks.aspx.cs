@@ -17,7 +17,7 @@ namespace WMS.WebUI.Stock
         {
             if (!IsPostBack)
             {
-                ViewState["filter"] = "Main.BillID like 'IS%' and Main.State in (1,2,3) ";
+                ViewState["filter"] = "Main.BillID like 'MS%' and Main.State in (1,2,3) ";
                 ViewState["CurrentPage"] = 1;
 
                 try
@@ -55,7 +55,7 @@ namespace WMS.WebUI.Stock
 
             try
             {
-                ViewState["filter"] = " main.BillID like 'IS%' and Main.State in (1,2,3)  " + " and " + string.Format("{0} like '%{1}%'", this.ddlField.SelectedValue, this.txtSearch.Text.Trim().Replace("'", ""));
+                ViewState["filter"] = " main.BillID like 'MS%' and Main.State in (1,2,3)  " + " and " + string.Format("{0} like '%{1}%'", this.ddlField.SelectedValue, this.txtSearch.Text.Trim().Replace("'", ""));
                 ViewState["CurrentPage"] = 1;
                 SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
 
@@ -166,13 +166,13 @@ namespace WMS.WebUI.Stock
                     int State = int.Parse(bll.GetFieldValue("WMS_BillMaster", "State", string.Format("BillID='{0}'", hk)));
                     if (State == 0)
                     {
-                        WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, GridView1.Rows[i].Cells[2].Text + "单号还未审核不能作业，请审核后，再进行入库作业。");
+                        WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, GridView1.Rows[i].Cells[2].Text + "单号还未审核不能作业，请审核后，再进行移库作业。");
                         BindDataSub(this.hdnRowValue.Value);
                         return;
                     }
                     if (State > 1)
                     {
-                        WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, GridView1.Rows[i].Cells[2].Text + "单号已经作业，不能再进行入库作业。");
+                        WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, GridView1.Rows[i].Cells[2].Text + "单号已经作业，不能再进行移库作业。");
                         BindDataSub(this.hdnRowValue.Value);
                         return;
                     }
@@ -193,7 +193,7 @@ namespace WMS.WebUI.Stock
 
                 bll.ExecNonQueryTran("WMS.SpInstockTask", new DataParameter[] { new DataParameter("@strWhere", strColorCode), new DataParameter("@UserName", Session["EmployeeCode"].ToString()) });
 
-                AddOperateLog("入库单", "入库作业单号：" + strColorCode.Replace("'-1',", "").Replace(",'-1'", ""));
+                AddOperateLog("移库单", "移库作业单号：" + strColorCode.Replace("'-1',", "").Replace(",'-1'", ""));
                 DataTable dt = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
                 SetBindDataSub(dt);
             }
@@ -242,7 +242,7 @@ namespace WMS.WebUI.Stock
 
             bll.ExecNonQueryTran("WMS.SpCancelInstockTask", new DataParameter[] { new DataParameter("@strWhere", strColorCode), new DataParameter("@UserName", Session["EmployeeCode"].ToString()) });
 
-            AddOperateLog("入库单", "入库取消作业单号：" + strColorCode.Replace("'-1',", "").Replace(",'-1'", ""));
+            AddOperateLog("移库单", "移库取消作业单号：" + strColorCode.Replace("'-1',", "").Replace(",'-1'", ""));
             DataTable dt = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
             SetBindDataSub(dt);
         }

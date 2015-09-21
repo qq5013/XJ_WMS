@@ -24,38 +24,63 @@
             
             function BindEvent() {
                 $("[ID$='btnCellCode']").bind("click", function () {
-                    var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and ProductCode not in ('0001','0002') ";
-                    return GetMulSelectValue('CMD_Product', 'hdnMulSelect', where);
-                });
-                $("[ID$='NewCellCode']").bind("dblclick", function () {
                     var txtID = this.id;
-                    $('#' + txtID.replace("ProductCode", "btnProduct"))[0].click();
+                    var strCellCode = "'-1',";
+
+                    var ctls = $("[id$='dgViewSub1']").find("[id$='NewCellCode']");
+                    ctls.each(function () {
+                        if ($(this).val() != "") {
+                            strCellCode += "'" + $(this).val() + "',";
+                        }
+                    });
+                    strCellCode += "'-1'";
+
+                    var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and IsLock=0 and ProductCode='' and CellCode not in (" + strCellCode + ") ";
+                    GetOtherValue('CMD_Cell', txtID.replace("btnCellCode", "NewCellCode"), 'CellCode', where);
+
+
+                });
+                $("[ID$='NewCellCode']").bind("dbclick", function () {
+                    var txtID = this.id;
+                    $('#' + txtID.replace("NewCellCode", "btnCellCode"))[0].click();
 
                 });
             }
 
             function AddDetail() {
-                var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and ProductCode not in ('0001','0002') ";
-                return GetMulSelectValue('CMD_Product', 'hdnMulSelect', where);
+                var strCellCode = "'-1',";
+
+                var ctls = $("[id$='dgViewSub1']").find("[id$='OldCellCode']");
+                ctls.each(function () {
+                    if ($(this)[0].innerText != "") {
+                        strCellCode += "'" + $(this)[0].innerText + "',";
+                    }
+                });
+                strCellCode += "'-1'";
+                var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and IsLock=0 and ProductCode !='' and CellCode not in (" + strCellCode + ") ";
+
+                return GetMulSelectValue('CMD_Cell', 'hdnMulSelect', where);
             }
 
             function Save() {
-
+                if ($("#txtBillDate_txtDate").val() == "") {
+                    alert("日期不能为空，请输入！");
+                    $("#txtBillDate_txtDate").focus();
+                    return false;
+                }
                 if (trim($("#txtID").val()) == "") {
-                    alert("类型编码不能为空!");
+                    alert("移库单号不能为空!");
                     $("#txtID").focus();
                     return false;
                 }
-
-                if (trim($("#txtBillTypeName").val()) == "") {
-                    alert("类型名称不能为空!");
-                    $("#txtTypeName").focus();
+                if (trim($("#ddlAreaCode").val()) == "") {
+                    alert("库区不能为空!");
+                    $("#ddlAreaCode").focus();
                     return false;
                 }
-                if (!ChkDelMustValue("dgViewSub1", "ProductCode", "产品型号"))
+                if (!ChkDelMustValue("dgViewSub1", "NewCellCode", "新货位"))
                     return false;
-                if (!ChkDelMustNumericValue("dgViewSub1", "Quantity", "计划数量"))
-                    return false;
+                
                 return true;
             }
            
@@ -68,7 +93,7 @@
             <ProgressTemplate>            
                 <div id="progressBackgroundFilter" style="display:none"></div>
                 <div id="processMessage"> Loading...<br /><br />
-                        <img alt="Loading" src="../../images/main/loading.gif" />
+                        <img alt="Loading" src="../../images/loading.gif" />
                 </div>            
                 </ProgressTemplate>
         </asp:UpdateProgress>  
@@ -167,14 +192,20 @@
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="CellCode" HeaderText="货位" SortExpression="CellCode">
-                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
-                                <HeaderStyle Wrap="False" />
-                            </asp:BoundField>
+
+                             <asp:TemplateField HeaderText="货位">
+                                <ItemTemplate>
+                                    <asp:Label ID="OldCellCode" runat="server" Text=""></asp:Label>
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Center" />
+                                <HeaderStyle Width="4%"  />
+                            </asp:TemplateField>
+
+                           
                             <asp:TemplateField HeaderText="新货位">
                                <ItemTemplate>
                                     <asp:TextBox ID="NewCellCode" runat="server"  Width="80%" CssClass="TextBox"></asp:TextBox><asp:Button
-                                        ID="btnCellCode"  CssClass="ButtonOption" Width="20px" runat="server"  Text="..." OnClick="btnCellCode_Click" />
+                                        ID="btnCellCode"  CssClass="ButtonOption" Width="20px" runat="server"  Text="..."  />
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Left" />
                                 <HeaderStyle Width="15%"  />

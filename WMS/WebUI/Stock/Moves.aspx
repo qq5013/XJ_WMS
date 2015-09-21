@@ -41,10 +41,8 @@
                                 <asp:Literal ID="Literal1" Text="查询栏位" runat="server"  ></asp:Literal>
                              </td>
 						    <td  width="15%" height="20">&nbsp;<asp:dropdownlist id="ddlField" runat="server" Width="85%" >
-                                    <asp:ListItem Selected="True" Value="BillTypeName">入库类型</asp:ListItem>
-                                    <asp:ListItem Value="AreaName">库区</asp:ListItem>
-                                    <asp:ListItem Value="FactoryName">工厂</asp:ListItem>
-                                    <asp:ListItem Value="BillID">入库单号</asp:ListItem>
+                                    <asp:ListItem Selected="True" Value="AreaName">库区</asp:ListItem>
+                                    <asp:ListItem Value="BillID">移库单号</asp:ListItem>
                                     <asp:ListItem Value="Memo">备注</asp:ListItem>
                                  </asp:dropdownlist>
                             </td>
@@ -91,7 +89,7 @@
                               <HeaderStyle Width="60px"></HeaderStyle>
                              <ItemStyle Width="60px" HorizontalAlign="Center"></ItemStyle>
                            </asp:TemplateField>
-                           <asp:TemplateField HeaderText="入库单号" SortExpression="BillID">
+                           <asp:TemplateField HeaderText="移库单号" SortExpression="BillID">
                                 <ItemTemplate>
                                     <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# FormID+"View.aspx?SubModuleCode=" + SubModuleCode+"&FormID=" + FormID +"&SqlCmd="+SqlCmd+ "&ID="+DataBinder.Eval(Container.DataItem, "BillID") %>'
                                         Text='<%# DataBinder.Eval(Container.DataItem, "BillID")%>'></asp:HyperLink>
@@ -99,7 +97,7 @@
                                 <ItemStyle Width="12%" Wrap="False" />
                                 <HeaderStyle Width="12%" Wrap="False" />
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="入库日期" SortExpression="BillDate">
+                            <asp:TemplateField HeaderText="移库日期" SortExpression="BillDate">
                                 <ItemTemplate>
                                     <%# ToYMD(DataBinder.Eval(Container.DataItem, "BillDate"))%>
                                 </ItemTemplate>
@@ -110,20 +108,11 @@
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="BillTypeName" HeaderText="入库类型" SortExpression="BillTypeName">
-                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
-                                <HeaderStyle Wrap="False" />
-                            </asp:BoundField>
+                            
                             <asp:BoundField DataField="AreaName" HeaderText="库区" SortExpression="AreaName">
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-
-                            <asp:BoundField DataField="FactoryName" HeaderText="工厂" SortExpression="FactoryName">
-                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
-                                <HeaderStyle Wrap="False" />
-                            </asp:BoundField>
-
                             <asp:BoundField DataField="Memo" HeaderText="备注" 
                                 SortExpression="Memo" >
                                 <ItemStyle HorizontalAlign="Left" Width="15%" Wrap="False" />
@@ -186,7 +175,7 @@
                  <table class="maintable" cellpadding="0" cellspacing="0" style="width: 100%; height:24px">
                     <tr>
                         <td valign="middle" align="left" height="22px">
-                            <b>入库单明细</b> 
+                            <b>移库单明细</b> 
                         </td>
                     </tr>
                 </table>
@@ -207,6 +196,14 @@
                             </asp:BoundField>
                            
                             <asp:BoundField DataField="Quantity" HeaderText="数量" SortExpression="Quantity">
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="CellCode" HeaderText="货位" SortExpression="CellCode">
+                                <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                                <HeaderStyle Wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="NewCellCode" HeaderText="新货位" SortExpression="NewCellCode">
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>

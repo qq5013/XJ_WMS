@@ -17,7 +17,7 @@
             <ProgressTemplate>            
                 <div id="progressBackgroundFilter" style="display:none"></div>
                 <div id="processMessage"> Loading...<br /><br />
-                     <img alt="Loading" src="../../images/main/loading.gif" />
+                     <img alt="Loading" src="../../images/loading.gif" />
                 </div>            
              </ProgressTemplate>
         </asp:UpdateProgress>  

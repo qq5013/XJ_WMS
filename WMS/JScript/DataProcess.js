@@ -57,7 +57,8 @@ function showdialog(XmlTableName, strWhere, Option) {
     if (strWhere == null)
         Where = '';
     else
-        Where = strWhere;
+        Where = escape(strWhere);
+    
     returnvalue = window.showModalDialog('../../Common/Select.aspx?TableName=' + XmlTableName + '&Option=' + Option + '&Where=' + Where, window, 'DialogHeight:400px;DialogWidth:900px;help:no;scroll:no;location:no;Resizable:yes;');
     //alert(returnvalue);
     if (returnvalue != "undefined" && returnvalue != null) {

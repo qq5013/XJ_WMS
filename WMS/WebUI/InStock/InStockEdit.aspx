@@ -41,18 +41,28 @@
 
 
             function Save() {
-
+                if ($("#txtBillDate_txtDate").val() == "") {
+                    alert("日期不能为空，请输入！");
+                    $("#txtBillDate_txtDate").focus();
+                    return false;
+                }
                 if (trim($("#txtID").val()) == "") {
-                    alert("类型编码不能为空!");
+                    alert("入库单号不能为空!");
                     $("#txtID").focus();
                     return false;
                 }
-
-                if (trim($("#txtBillTypeName").val()) == "") {
-                    alert("类型名称不能为空!");
-                    $("#txtTypeName").focus();
+                if (trim($("#ddlBillTypeCode").val()) == "") {
+                    alert("入库类型不能为空!");
+                    $("#ddlBillTypeCode").focus();
                     return false;
                 }
+                if (trim($("#ddlAreaCode").val()) == "") {
+                    alert("库区不能为空!");
+                    $("#ddlAreaCode").focus();
+                    return false;
+                }
+
+
                 if (!ChkDelMustValue("dgViewSub1", "ProductCode", "产品型号"))
                     return false;
                 if (!ChkDelMustNumericValue("dgViewSub1", "Quantity", "计划数量"))
@@ -69,7 +79,7 @@
             <ProgressTemplate>            
                 <div id="progressBackgroundFilter" style="display:none"></div>
                 <div id="processMessage"> Loading...<br /><br />
-                        <img alt="Loading" src="../../images/main/loading.gif" />
+                        <img alt="Loading" src="../../images/loading.gif" />
                 </div>            
                 </ProgressTemplate>
         </asp:UpdateProgress>  

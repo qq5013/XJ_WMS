@@ -17,7 +17,7 @@ namespace WMS.WebUI.Stock
         {
             if (!IsPostBack)
             {
-                ViewState["filter"] = "BillID like 'IS%'";
+                ViewState["filter"] = "BillID like 'MS%'";
                 ViewState["CurrentPage"] = 1;
 
                 try
@@ -59,7 +59,7 @@ namespace WMS.WebUI.Stock
 
             try
             {
-                ViewState["filter"] = " BillID like 'IS%' " + " and " + string.Format("{0} like '%{1}%'", this.ddlField.SelectedValue, this.txtSearch.Text.Trim().Replace("'", ""));
+                ViewState["filter"] = " BillID like 'MS%' " + " and " + string.Format("{0} like '%{1}%'", this.ddlField.SelectedValue, this.txtSearch.Text.Trim().Replace("'", ""));
                 ViewState["CurrentPage"] = 1;
                 SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
 
@@ -84,7 +84,7 @@ namespace WMS.WebUI.Stock
                     int Count = bll.GetRowCount("VUsed_WMS_BillMaster", string.Format("BillID='{0}'", hk.Text));
                     if (Count > 0)
                     {
-                        WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, hk.Text + "入库单号被其它单据使用，请调整后再删除！");
+                        WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, hk.Text + "移库单号被其它单据使用，请调整后再删除！");
                         return;
                     }
 
@@ -102,7 +102,7 @@ namespace WMS.WebUI.Stock
             paras.Add(new DataParameter[] { new DataParameter("{0}", string.Format("BillID in ({0})", strColorCode)) });
             bll.ExecTran(comds, paras);
  
-            AddOperateLog("入库单", "删除单号：" + strColorCode.Replace("'-1',", "").Replace(",'-1'", ""));
+            AddOperateLog("移库单", "删除单号：" + strColorCode.Replace("'-1',", "").Replace(",'-1'", ""));
             DataTable dt = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
             SetBindDataSub(dt);
         }
