@@ -16,6 +16,31 @@
 <%--    <link rel="stylesheet" type="text/css" href="ext/packages/ext-theme-classic/build/resources/ext-theme-classic-all.css" />  
     <script type="text/javascript" src="Ext/ext-all.js"></script>  
     <script type="text/javascript" src="Ext/packages/ext-theme-classic/build/ext-theme-classic.js"></script>--%>
+    <style type="text/css">
+        .x-panel-header-title
+        {
+            font-family:微软雅黑;
+            font-size:14px;
+            font-weight:300;
+            line-height:16px;
+        }
+       .x-accordion-hd .x-panel-header-title
+        {
+            font-family:微软雅黑;
+            font-size:14px;
+            font-weight:300;
+            line-height:16px;
+        }
+        .x-grid-item
+        {
+             font-family:微软雅黑;
+        }
+         .x-tab-inner-default
+        { 
+            font-family:微软雅黑;
+            font-size:14px;
+        }
+    </style>
 
     <script language="javascript" type="text/javascript">
         var tabPanel;
