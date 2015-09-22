@@ -100,15 +100,18 @@ namespace WMS.Index
             tb = new Table();
             //Session["IsFirstLogin"] = "2";
             tb = CreateTable(iTableCount);
+            tb.Attributes.Add("Width", "100%");
             tb.Attributes.Add("border", "0");
             tb.Attributes.Add("bordercolor", "#ffffff");
             tb.Attributes.Add("frame", "void");
             tb.Attributes.Add("cellpadding", "0");
             tb.Attributes.Add("cellspacing", "0");
             tb.Attributes.Add("align", "center");
+           // tb.Attributes.Add("style", "margin-right:10px;");
             pl = new Panel();
+            pl.Attributes.Add("Width", "100%");
 
-            int i = 0, j = 0;
+            int i = 0, j = 1;
             if (dtDestopItem.Rows.Count > 0)
             {
                 foreach (DataRow dr in dtDestopItem.Rows)
@@ -124,10 +127,10 @@ namespace WMS.Index
                     tb.Rows[i].Cells[j].Attributes.Add("onClick", "window.parent.addTab(\"" + GlobalMenuLink["im" + i.ToString() + i.ToString() + j.ToString()].ToString() + "\",\"" + GlobalMenuLink["im" + i.ToString() + i.ToString() + j.ToString()].ToString() + "\",\"" + GlobalMenuTitle["im" + i.ToString() + i.ToString() + j.ToString()].ToString() + "\");return false;"); 
                     tb.Rows[i].Cells[j].Controls.Add(im);
                     tb.Rows[i].Cells[j].Controls.Add(new LiteralControl("<br/><font style=\"font-size: 13px;font-family:微软雅黑;\">" + dr["MenuTitle"].ToString() + "</font>"));
-                    j++;
-                    if (j > 4)
+                    j = j + 2;
+                    if (j > 11)
                     {
-                        j = 0; i++;
+                        j = 1; i++;
                     }
                 }
             }
@@ -163,13 +166,19 @@ namespace WMS.Index
         /// <returns></returns>
         private Table CreateTable(int iTableCount)
         {
-            for (int i = 0; i < iTableCount / 5 + 1; i++)
+            for (int i = 0; i < iTableCount / 6 + 1; i++)
             {
                 TableRow row = CreateTableRow();
                 row.Attributes.Add("align", "center");
-                for (int j = 0; j < 5; j++)
+                for (int j = 0; j < 6; j++)
                 {
+
+                    row.Cells.Add(new TableCell());
                     row.Cells.Add(CreateTableCell(i, j));
+                    if (j == 5)
+                    {
+                        row.Cells.Add(new TableCell());
+                    }
                 }
                 tb.Rows.Add(row);
             }
@@ -196,30 +205,12 @@ namespace WMS.Index
         private TableCell CreateTableCell(int i, int j)
         {
             TableCell CreateTableCell = new TableCell();
-            CreateTableCell.Attributes.Add("style", "height:120px;width:150px");
+            CreateTableCell.Attributes.Add("style", "height:100px;width:100px;border:1px solid #EAF2F4");
             CreateTableCell.ID = i.ToString() + j.ToString();
             int iID = Convert.ToInt32(CreateTableCell.ID);
+         
             if (iCount < iTableCount)
-            {
-                //switch (iCountColor)
-                //{
-                //    case 0:
-                //        CreateTableCell.Attributes.Add("bgcolor ", "");
-                //        break;
-                //    case 1:
-                //        CreateTableCell.Attributes.Add("bgcolor ", "");
-                //        break;
-                //    case 2:
-                //        CreateTableCell.Attributes.Add("bgcolor ", "");
-                //        break;
-                //    case 3:
-                //        CreateTableCell.Attributes.Add("bgcolor ", "");
-                //        break;
-                //    default:
-                //        CreateTableCell.Attributes.Add("bgcolor ", "");
-                //        iCountColor = 0;
-                //        break;
-                //}
+            { 
                 CreateTableCell.Attributes.Add("onMouseOver", "SetNewColor(this);");
                 CreateTableCell.Attributes.Add("onMouseOut", "SetOldColor(this);");
                 iCountColor++;

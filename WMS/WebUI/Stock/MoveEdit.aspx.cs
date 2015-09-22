@@ -96,7 +96,7 @@ namespace WMS.WebUI.Stock
                 DataRowView drv = e.Row.DataItem as DataRowView;
                 SetTextReadOnly((TextBox)e.Row.FindControl("NewCellCode"));
                 ((Label)e.Row.FindControl("RowID")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("RowID")].ToString();
-
+                ((Label)e.Row.FindControl("OldCellCode")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("CellCode")].ToString();
                 ((TextBox)e.Row.FindControl("NewCellCode")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("NewCellCode")].ToString();
                 ((TextBox)e.Row.FindControl("SubMemo")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("Memo")].ToString();
             }
@@ -107,41 +107,19 @@ namespace WMS.WebUI.Stock
             UpdateTempSub(this.dgViewSub1);
             DataTable dt = (DataTable)Session[FormID + "_Edit_dgViewSub1"];
             DataTable dt1 = Util.JsonHelper.Json2Dtb(hdnMulSelect.Value);
-            int cur = int.Parse(((Button)sender).ClientID.Split('_')[1].Replace("ctl", "")) - 2 + this.dgViewSub1.PageSize * dgViewSub1.PageIndex;
-            if (dt1.Rows.Count > 0)
-            {
-                DataRow[] drs = dt.Select("RowID>" + (cur + 1));
-                for (int j = 0; j < drs.Length; j++)
-                {
-                    drs[j].BeginEdit();
-                    drs[j]["RowID"] = cur + j + 1 + dt1.Rows.Count;
-                    drs[j].EndEdit();
-                }
-            }
-            DataView dv = dt.DefaultView;
-            dv.Sort = "RowID";
-            dt = dv.ToTable();
-
-            DataRow dr;
+            int RowIndex = dt.Rows.Count;
             for (int i = 0; i < dt1.Rows.Count; i++)
             {
-                if (i == 0)
-                {
-                    dr = dt.Rows[cur];
-                }
-                else
-                {
-                    dr = dt.NewRow();
-                    dt.Rows.InsertAt(dr, cur + i);
-
-                }
-                dr["RowID"] = i + cur + 1;
+                DataRow dr = dt.NewRow();
+                dr["RowID"] = RowIndex + i + 1;
 
                 dr["BillID"] = this.txtID.Text.Trim();
                 dr["ProductCode"] = dt1.Rows[i]["ProductCode"];
                 dr["ProductName"] = dt1.Rows[i]["ProductName"];
                 dr["CellCode"] = dt1.Rows[i]["CellCode"];
-                dr["Quantity"] = 1;
+                dr["Quantity"] = dt1.Rows[i]["Quantity"];
+
+                dt.Rows.Add(dr);
 
             }
 
@@ -179,11 +157,7 @@ namespace WMS.WebUI.Stock
 
 
 
-        protected void btnCellCode_Click(object sender, EventArgs e)
-        {
-            UpdateTempSub(this.dgViewSub1);
-            
-        }
+         
 
 
 
@@ -203,9 +177,8 @@ namespace WMS.WebUI.Stock
                 
                 dr["BillID"] = this.txtID.Text.Trim();
                 dr["RowID"] = ((Label)dgv.Rows[i].FindControl("RowID")).Text;
-                dr["ProductCode"] = ((TextBox)dgv.Rows[i].FindControl("ProductCode")).Text;
-                dr["ProductName"] = ((TextBox)dgv.Rows[i].FindControl("ProductName")).Text;
-                dr["Quantity"] = ((TextBox)dgv.Rows[i].FindControl("Quantity")).Text;
+                dr["NewCellCode"] = ((TextBox)dgv.Rows[i].FindControl("NewCellCode")).Text;
+                dr["CellCode"] = ((Label)dgv.Rows[i].FindControl("OldCellCode")).Text;
                 dr["Memo"] = ((TextBox)dgv.Rows[i].FindControl("SubMemo")).Text;
                 dr.EndEdit();
             }
@@ -224,47 +197,62 @@ namespace WMS.WebUI.Stock
             UpdateTempSub(this.dgViewSub1);
             string[] Commands = new string[3];
             DataParameter[] para;
-
             if (strID == "") //新增
             {
                 int Count = bll.GetRowCount("WMS_BillMaster", string.Format("BillID='{0}'", this.txtID.Text.Trim()));
                 if (Count > 0)
                 {
-                    WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel1, "该入库单已经存在！");
+                    WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel1, "该移库库单已经存在！");
                     return;
                 }
                 para = new DataParameter[] { 
                                              new DataParameter("@BillID", this.txtID.Text.Trim()),
                                              new DataParameter("@BillDate", this.txtBillDate.DateValue),
-                                           
+                                             new DataParameter("@BillTypeCode","030"),
                                              new DataParameter("@AreaCode",this.ddlAreaCode.SelectedValue),
-                                              
                                              new DataParameter("@Memo", this.txtMemo.Text.Trim()),
                                              new DataParameter("@Creator", Session["EmployeeCode"].ToString()),
                                              new DataParameter("@Updater", Session["EmployeeCode"].ToString())
                                              
                                               };
-                Commands[0] = "WMS.InsertInStockBill";
+                Commands[0] = "WMS.InsertMoveStockBill";
 
             }
             else //修改
             {
                 para = new DataParameter[] { 
                                              new DataParameter("@BillDate", this.txtBillDate.DateValue),
-                                          
                                              new DataParameter("@AreaCode",this.ddlAreaCode.SelectedValue),
-                                             
                                              new DataParameter("@Memo", this.txtMemo.Text.Trim()),
                                              new DataParameter("@Updater", Session["EmployeeCode"].ToString()),
                                              new DataParameter("{0}",string.Format("BillID='{0}'", this.txtID.Text.Trim())) };
-                Commands[0] = "WMS.UpdateInStock";
+                Commands[0] = "WMS.UpdateMoveStock";
+            }
+            DataTable dt = (DataTable)Session[FormID + "_Edit_dgViewSub1"];
+            //判断货位是否被其他单据锁定
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                int count = 0;
+                count = bll.GetRowCount("Cmd_Cell", string.Format("CellCode='{0}' and IsLock=1", dt.Rows[i]["CellCode"]));
+                if (count > 0)
+                {
+                    WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel1, "货位 " + dt.Rows[i]["CellCode"].ToString() + "已经被其它单据锁定，不能移库！");
+                    return;
+                }
+                count = bll.GetRowCount("Cmd_Cell", string.Format("CellCode='{0}' and IsLock=1", dt.Rows[i]["NewCellCode"]));
+                if (count > 0)
+                {
+                    WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel1, "货位 " + dt.Rows[i]["NewCellCode"].ToString() + "已经被其它单据锁定，不能移库！");
+                    return;
+                }
             }
             try
             {
-                DataTable dt = (DataTable)Session[FormID + "_Edit_dgViewSub1"];
+              
                 Commands[1] = "WMS.DeleteBillDetail";
-                Commands[2] = "WMS.InsertInStockDetail";
-                bll.ExecTran(Commands, para, "BillID", new DataTable[] { dt });
+                Commands[2] = "WMS.InsertMoveStockDetail";
+                bll.ExecTran(Commands, para, "BillID", new DataTable[] { dt }); 
+               
             }
             catch (Exception ex)
             {
@@ -305,6 +293,8 @@ namespace WMS.WebUI.Stock
       
        
         #endregion
+
+        
 
     }
 }

@@ -166,15 +166,6 @@ namespace WMS.WebUI.Stock {
         protected global::System.Web.UI.WebControls.TextBox txtID;
         
         /// <summary>
-        /// ddlBillTypeCode 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlBillTypeCode;
-        
-        /// <summary>
         /// ddlAreaCode 控件。
         /// </summary>
         /// <remarks>
@@ -182,24 +173,6 @@ namespace WMS.WebUI.Stock {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlAreaCode;
-        
-        /// <summary>
-        /// ddlFactoryID 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlFactoryID;
-        
-        /// <summary>
-        /// txtCheckDate 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCheckDate;
         
         /// <summary>
         /// txtMemo 控件。
@@ -218,15 +191,6 @@ namespace WMS.WebUI.Stock {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView dgViewSub1;
-        
-        /// <summary>
-        /// txtChecker 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtChecker;
         
         /// <summary>
         /// txtTotalQty 控件。
@@ -299,6 +263,24 @@ namespace WMS.WebUI.Stock {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblCurrentPageSub1;
+        
+        /// <summary>
+        /// txtChecker 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtChecker;
+        
+        /// <summary>
+        /// txtCheckDate 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCheckDate;
         
         /// <summary>
         /// txtCreator 控件。

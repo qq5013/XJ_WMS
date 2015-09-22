@@ -208,19 +208,19 @@ namespace WMS.WebUI.OutStock
         #region 上下笔事件
         protected void btnFirst_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("F", TableName, "BillID like 'IS%'", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("F", TableName, "BillID like 'OS%'", PrimaryKey, this.txtID.Text));
         }
         protected void btnPre_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("P", TableName, "BillID like 'IS%'", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("P", TableName, "BillID like 'OS%'", PrimaryKey, this.txtID.Text));
         }
         protected void btnNext_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("N", TableName, "BillID like 'IS%'", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("N", TableName, "BillID like 'OS%'", PrimaryKey, this.txtID.Text));
         }
         protected void btnLast_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("L", TableName, "BillID like 'IS%'", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("L", TableName, "BillID like 'OS%'", PrimaryKey, this.txtID.Text));
         }
         #endregion
 

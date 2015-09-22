@@ -14,11 +14,13 @@
                 _oldColor = source.style.backgroundColor;
                 source.style.backgroundColor = '#C0E4EE';
                 source.style.cursor = "pointer";
-
+                source.style.border = "1px solid #5384bb";
             }
             function SetOldColor(source) {
                 source.style.backgroundColor = _oldColor;
                 source.style.cursor = "default";
+                source.style.border = "1px solid #EAF2F4";
+
             }
    
         </script>
