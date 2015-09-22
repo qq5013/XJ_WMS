@@ -191,7 +191,7 @@ namespace WMS.WebUI.Stock
             try
             {
 
-                bll.ExecNonQueryTran("WMS.SpInstockTask", new DataParameter[] { new DataParameter("@strWhere", strColorCode), new DataParameter("@UserName", Session["EmployeeCode"].ToString()) });
+                bll.ExecNonQueryTran("WMS.SpMovestockTask", new DataParameter[] { new DataParameter("@strWhere", strColorCode), new DataParameter("@UserName", Session["EmployeeCode"].ToString()) });
 
                 AddOperateLog("移库单", "移库作业单号：" + strColorCode.Replace("'-1',", "").Replace(",'-1'", ""));
                 DataTable dt = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
@@ -240,7 +240,7 @@ namespace WMS.WebUI.Stock
                 return;
             }
 
-            bll.ExecNonQueryTran("WMS.SpCancelInstockTask", new DataParameter[] { new DataParameter("@strWhere", strColorCode), new DataParameter("@UserName", Session["EmployeeCode"].ToString()) });
+            bll.ExecNonQueryTran("WMS.SpCancelMovestockTask", new DataParameter[] { new DataParameter("@strWhere", strColorCode), new DataParameter("@UserName", Session["EmployeeCode"].ToString()) });
 
             AddOperateLog("移库单", "移库取消作业单号：" + strColorCode.Replace("'-1',", "").Replace(",'-1'", ""));
             DataTable dt = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);

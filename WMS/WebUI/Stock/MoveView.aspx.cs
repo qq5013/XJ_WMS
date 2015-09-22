@@ -186,19 +186,19 @@ namespace WMS.WebUI.Stock
         #region 上下笔事件
         protected void btnFirst_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("F", TableName, "BillID like 'IS%'", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("F", TableName, "BillID like 'MS%'", PrimaryKey, this.txtID.Text));
         }
         protected void btnPre_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("P", TableName, "BillID like 'IS%'", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("P", TableName, "BillID like 'MS%'", PrimaryKey, this.txtID.Text));
         }
         protected void btnNext_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("N", TableName, "BillID like 'IS%'", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("N", TableName, "BillID like 'MS%'", PrimaryKey, this.txtID.Text));
         }
         protected void btnLast_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("L", TableName, "BillID like 'IS%'", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("L", TableName, "BillID like 'MS%'", PrimaryKey, this.txtID.Text));
         }
         #endregion
 
@@ -235,23 +235,52 @@ namespace WMS.WebUI.Stock
 
         protected void btnCheck_Click(object sender, EventArgs e)
         {
-            DataParameter[] paras = new DataParameter[4];
+
+            List<string> Comd = new List<string>();
+            Comd.Insert(0, "WMS.UpdateMoveCellLock");
+            Comd.Insert(1, "WMS.UpdateCellLock");
+            Comd.Insert(2, "WMS.UpdateCheckBillMaster");
+            List<DataParameter[]> paras = new List<DataParameter[]>();
             if (this.btnCheck.Text == "审核")
             {
-                paras[0] = new DataParameter("@Checker", Session["EmployeeCode"].ToString());
-                paras[1] = new DataParameter("{0}", "getdate()");
-                paras[2] = new DataParameter("@State", 1);
+                DataTable dtSub = (DataTable)Session[FormID + "_View_dgViewSub1"];
+                for (int i = 0; i < dtSub.Rows.Count; i++)
+                {
+                    int count = 0;
+                    count = bll.GetRowCount("Cmd_Cell", string.Format("CellCode='{0}' and IsLock=1", dtSub.Rows[i]["CellCode"]));
+                    if (count > 0)
+                    {
+                        WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel, "货位 " + dtSub.Rows[i]["CellCode"].ToString() + "已经被其它单据锁定，不能移库！");
+                        return;
+                    }
+                    count = bll.GetRowCount("Cmd_Cell", string.Format("CellCode='{0}' and IsLock=1", dtSub.Rows[i]["NewCellCode"]));
+                    if (count > 0)
+                    {
+                        WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel, "货位 " + dtSub.Rows[i]["NewCellCode"].ToString() + "已经被其它单据锁定，不能移库！");
+                        return;
+                    }
+                }
+
+
+               
+                paras.Insert(0, new DataParameter[] { new DataParameter("@Lock", 1), new DataParameter("{0}", string.Format("BillID='{0}'", this.txtID.Text.Trim())) });
+                paras.Insert(1, new DataParameter[] { new DataParameter("@Lock", 1), new DataParameter("{0}", string.Format("BillID='{0}'", this.txtID.Text.Trim())) });
+
+                paras.Insert(2, new DataParameter[]{ new DataParameter("@Checker", Session["EmployeeCode"].ToString()), new DataParameter("{0}", "getdate()"),
+                 new DataParameter("@State", 1), new DataParameter("@BillID", this.txtID.Text)});
             }
             else
             {
-                paras[0] = new DataParameter("@Checker", "");
-                paras[1] = new DataParameter("{0}", "null");
-                paras[2] = new DataParameter("@State", 0);
+              
+                paras.Insert(0, new DataParameter[] { new DataParameter("@Lock", 0), new DataParameter("{0}", string.Format("BillID='{0}'", this.txtID.Text.Trim())) });
+                paras.Insert(1, new DataParameter[] { new DataParameter("@Lock", 0), new DataParameter("{0}", string.Format("BillID='{0}'", this.txtID.Text.Trim())) });
+                paras.Insert(2, new DataParameter[]{ new DataParameter("@Checker", ""), new DataParameter("{0}", "null"),
+                 new DataParameter("@State", 0), new DataParameter("@BillID", this.txtID.Text)});
             }
-            paras[3] = new DataParameter("@BillID", this.txtID.Text);
 
 
-            bll.ExecNonQuery("WMS.UpdateCheckBillMaster", paras);
+            bll.ExecTran(Comd.ToArray(), paras);
+           
             AddOperateLog("移库单 ", btnCheck.Text + " " + txtID.Text);
 
             DataTable dt = bll.FillDataTable("WMS.SelectBillMaster", new DataParameter[] { new DataParameter("{0}", string.Format("BillID='{0}'", strID)) });

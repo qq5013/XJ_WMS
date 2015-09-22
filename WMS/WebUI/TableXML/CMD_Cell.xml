@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<TABLE name="CMD_Cell" ChineseName="货位信息" PrimaryKey="CellCode" OrderBy="CellCode" ViewName="VCMD_Cell">
+<TABLE name="CMD_Cell" ChineseName="货位信息" PrimaryKey="CellCode" OrderBy="CellCode" ViewName="VMoveCMD_Cell">
   <FIELD ShowInFieldQuery="1" ShowQueryIndex="1">
     <FieldName>ShelfName</FieldName>
     <FieldTitle>货架</FieldTitle>

@@ -21,6 +21,8 @@
                 var h = document.documentElement.clientHeight - 200;
                 $("#Sub-container").css("height", h);
             }
+
+           
             
             function BindEvent() {
                 $("[ID$='btnCellCode']").bind("click", function () {
@@ -88,7 +90,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <asp:ScriptManager ID="ScriptManager2" runat="server" />  
+        <asp:ScriptManager ID="ScriptManager2" runat="server"  />  
         <asp:UpdateProgress ID="updateprogress1" runat="server" AssociatedUpdatePanelID="updatePanel1">
             <ProgressTemplate>            
                 <div id="progressBackgroundFilter" style="display:none"></div>
@@ -102,12 +104,10 @@
                 <table style="width: 100%; height: 25px;" class="OperationBar">
                     <tr>
                         <td align="right">
-                            <asp:Button ID="btnCancel" runat="server" Text="放弃" 
-                                OnClientClick="return Cancel();" CssClass="ButtonCancel" />
+                            <asp:Button ID="btnCancel" runat="server" Text="放弃" OnClientClick="return Cancel();" CssClass="ButtonCancel"     />   
                             <asp:Button ID="btnSave" runat="server" Text="保存" OnClientClick="return Save();" 
                                 CssClass="ButtonSave" onclick="btnSave_Click" Height="16px" />
-                            <asp:Button ID="btnExit" runat="server" Text="离开" OnClientClick="return Exit();" 
-                                CssClass="ButtonExit" />
+                            <asp:Button ID="btnExit" runat="server" Text="离开" OnClientClick="return Exit();" CssClass="ButtonExit"/>
                         </td>
                     </tr>
                 </table>
@@ -281,6 +281,7 @@
 		    </table>
 
             <input type="hidden" runat="server" id="hdnMulSelect" /> 
+              
             </ContentTemplate>
         </asp:UpdatePanel>
     </form>

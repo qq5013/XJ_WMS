@@ -120,8 +120,8 @@
 
   <Command ID="InsertMoveStockBill">
     <CommandString>
-      insert into WMS_BillMaster(BillID,BillDate,AreaCode,Memo,Creator,CreateDate,Updater,UpdateDate)
-      values(@BillID,@BillDate,@AreaCode,@Memo,@Creator,getdate(),@Updater,getdate())
+      insert into WMS_BillMaster(BillID,BillDate,AreaCode,BillTypeCode,Memo,Creator,CreateDate,Updater,UpdateDate)
+      values(@BillID,@BillDate,@AreaCode,@BillTypeCode,@Memo,@Creator,getdate(),@Updater,getdate())
     </CommandString>
   </Command>
   <Command ID="UpdateMoveStock">
@@ -137,26 +137,26 @@
   </Command>
   <Command ID="SpMoveStockTask">
     <CommandString>
-      Sp_OutstockTask
+      Sp_MovestockTask
     </CommandString>
   </Command>
   <Command ID="SpCancelMoveStockTask">
     <CommandString>
-      Sp_OutstockCancelTask
+      Sp_MovestockCancelTask
     </CommandString>
   </Command>
 
   <Command ID="UpdateMoveCellLock">
     <CommandString>
       update CMD_Cell set IsLock=@Lock from CMD_Cell cell inner join WMS_BillDetail sub on cell.CellCode=sub.NewCellCode
-      where sub.BillID=@BillID
+      where {0}
     </CommandString>
   </Command>
 
   <Command ID="UpdateCellLock">
     <CommandString>
       update CMD_Cell set IsLock=@Lock from CMD_Cell cell inner join WMS_BillDetail sub on cell.CellCode=sub.CellCode
-      where sub.BillID=@BillID
+      where {0}
     </CommandString>
   </Command>
   

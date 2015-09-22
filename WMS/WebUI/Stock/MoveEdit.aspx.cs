@@ -26,19 +26,6 @@ namespace WMS.WebUI.Stock
                     DataTable dt = bll.FillDataTable("WMS.SelectBillMaster", new DataParameter[] { new DataParameter("{0}", string.Format("BillID='{0}'", strID)) });
                     BindData(dt);
 
-
-                    //修改时，货位解锁。
-                    List<string> Comd = new List<string>();
-                    Comd.Insert(0, "WMS.UpdateMoveCellLock");
-                    Comd.Insert(1, "WMS.UpdateCellLock");
-                    List<DataParameter[]> paras = new List<DataParameter[]>();
-                    paras.Insert(0, new DataParameter[] { new DataParameter("@Lock", 0), new DataParameter("@BillID", this.txtID.Text) });
-                    paras.Insert(1, new DataParameter[] { new DataParameter("@Lock", 0), new DataParameter("@BillID", this.txtID.Text) });
-
-                    bll.ExecTran(Comd.ToArray(), paras);
-
-
-
                     SetTextReadOnly(this.txtID);
                 }
                 else
@@ -221,6 +208,7 @@ namespace WMS.WebUI.Stock
                 para = new DataParameter[] { 
                                              new DataParameter("@BillID", this.txtID.Text.Trim()),
                                              new DataParameter("@BillDate", this.txtBillDate.DateValue),
+                                             new DataParameter("@BillTypeCode","030"),
                                              new DataParameter("@AreaCode",this.ddlAreaCode.SelectedValue),
                                              new DataParameter("@Memo", this.txtMemo.Text.Trim()),
                                              new DataParameter("@Creator", Session["EmployeeCode"].ToString()),
@@ -240,21 +228,31 @@ namespace WMS.WebUI.Stock
                                              new DataParameter("{0}",string.Format("BillID='{0}'", this.txtID.Text.Trim())) };
                 Commands[0] = "WMS.UpdateMoveStock";
             }
+            DataTable dt = (DataTable)Session[FormID + "_Edit_dgViewSub1"];
+            //判断货位是否被其他单据锁定
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                int count = 0;
+                count = bll.GetRowCount("Cmd_Cell", string.Format("CellCode='{0}' and IsLock=1", dt.Rows[i]["CellCode"]));
+                if (count > 0)
+                {
+                    WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel1, "货位 " + dt.Rows[i]["CellCode"].ToString() + "已经被其它单据锁定，不能移库！");
+                    return;
+                }
+                count = bll.GetRowCount("Cmd_Cell", string.Format("CellCode='{0}' and IsLock=1", dt.Rows[i]["NewCellCode"]));
+                if (count > 0)
+                {
+                    WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel1, "货位 " + dt.Rows[i]["NewCellCode"].ToString() + "已经被其它单据锁定，不能移库！");
+                    return;
+                }
+            }
             try
             {
-                DataTable dt = (DataTable)Session[FormID + "_Edit_dgViewSub1"];
+              
                 Commands[1] = "WMS.DeleteBillDetail";
                 Commands[2] = "WMS.InsertMoveStockDetail";
-                bll.ExecTran(Commands, para, "BillID", new DataTable[] { dt });
-                 
-                List<string> Comd = new List<string>();
-                Comd.Insert(0, "WMS.UpdateMoveCellLock");
-                Comd.Insert(1, "WMS.UpdateCellLock");
-                List<DataParameter[]> paras = new List<DataParameter[]>();
-                paras.Insert(0, new DataParameter[] { new DataParameter("@Lock", 1), new DataParameter("@BillID", this.txtID.Text) });
-                paras.Insert(1, new DataParameter[] { new DataParameter("@Lock", 1), new DataParameter("@BillID", this.txtID.Text) });
-
-                bll.ExecTran(Comd.ToArray(), paras);
+                bll.ExecTran(Commands, para, "BillID", new DataTable[] { dt }); 
+               
             }
             catch (Exception ex)
             {
@@ -295,6 +293,8 @@ namespace WMS.WebUI.Stock
       
        
         #endregion
+
+        
 
     }
 }
