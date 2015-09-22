@@ -162,14 +162,33 @@ function mykeyDown() {
     }
     if (key == 13 && srcobj.type != 'button' && srcobj.type != 'submit'
         && srcobj.type != 'reset' && srcobj.type != 'textarea' && srcobj.type != '') {
+        if (srcobj.id == "txtPageNo") {
+            document.getElementById("btnToPage").click();
+            document.getElementById(srcobj.id).focus();
+            event.returnValue = false;
+            return false;
+
+        }
+        if (srcobj.id == "txtPageNoSub1") {
+            document.getElementById("btnToPageSub1").click();
+            document.getElementById(srcobj.id).focus();
+            event.returnValue = false;
+            return false;
+        }
+
+
+
+
         var el = getNextElement(srcobj);
         if (!el)
             return false;
-        if (el.type != 'hidden' && el.className != 'TextRead' && el.tagName != "SELECT")
+        if (el.type != 'hidden' && el.className != 'TextRead' && el.tagName != "SELECT" && el.className != "HiddenControl") {
             ;
-        else
-            while (el.type == 'hidden')
+        }
+        else {
+            while (el.type == 'hidden' || el.className == "HiddenControl")
                 el = getNextElement(el);
+        }
         if (el.id == "btnSearch") {
             el.focus();
             ClickCount = 0;

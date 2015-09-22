@@ -19,6 +19,7 @@ namespace WMS.WebUI.Stock
         protected void Page_Load(object sender, EventArgs e)
         {
             strID = Request.QueryString["ID"] + "";
+            this.dgViewSub1.PageSize = pageSubSize;
             if (!IsPostBack)
             {
                 BindDropDownList();
@@ -26,6 +27,7 @@ namespace WMS.WebUI.Stock
                 BindData(dt);
               
             }
+           
             ScriptManager.RegisterStartupScript(this.updatePanel, this.updatePanel.GetType(), "Resize", "resize();", true);
             writeJsvar(FormID, SqlCmd, strID);
         }

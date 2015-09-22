@@ -69,7 +69,7 @@
                             存放库区 
                     </td>
                     <td>
-                        &nbsp;<asp:DropDownList ID="ddlAreaCode" runat="server" Width="42%"  >
+                        &nbsp;<asp:DropDownList ID="ddlAreaCode" runat="server" Width="43%"  >
                         </asp:DropDownList>
                         
                     </td>

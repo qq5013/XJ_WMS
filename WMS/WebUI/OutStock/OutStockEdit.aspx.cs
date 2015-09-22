@@ -17,7 +17,7 @@ namespace WMS.WebUI.OutStock
         protected void Page_Load(object sender, EventArgs e)
         {
             strID = Request.QueryString["ID"] + "";
-
+            this.dgViewSub1.PageSize = pageSubSize;
             if (!IsPostBack)
             {
                 BindDropDownList();
@@ -42,6 +42,7 @@ namespace WMS.WebUI.OutStock
                     this.txtUpdateDate.Text = ToYMD(DateTime.Now);
                 }
             }
+          
             ScriptManager.RegisterStartupScript(this.updatePanel1, this.updatePanel1.GetType(), "Resize", "resize();BindEvent();", true);
             writeJsvar(FormID, SqlCmd, strID);
             SetTextReadOnly(this.txtCreator, this.txtCreatDate, this.txtUpdater, this.txtUpdateDate);

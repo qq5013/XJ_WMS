@@ -66,7 +66,7 @@
                             厂家类别  
                         </td>
                         <td  style="width:30%;">
-                            &nbsp;<asp:DropDownList ID="ddlFlag" runat="server" Width="41%" >
+                            &nbsp;<asp:DropDownList ID="ddlFlag" runat="server" Width="43%" >
                                 <asp:ListItem Value="1">齿侧轮芯厂家</asp:ListItem>
                                 <asp:ListItem Value="2">非齿侧轮芯厂家</asp:ListItem>
                                 <asp:ListItem Value="3">承修厂家</asp:ListItem>

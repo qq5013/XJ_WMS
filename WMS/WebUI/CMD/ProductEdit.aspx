@@ -89,7 +89,7 @@
                         产品类别</td>
                     <td width="21%">
                         &nbsp;<asp:DropDownList 
-                            ID="ddlProductTypeCode" runat="server" Width="89%">
+                            ID="ddlProductTypeCode" runat="server" Width="91%">
                         </asp:DropDownList>
                     </td>
                 </tr>
@@ -98,7 +98,7 @@
                             车型
                     </td>
                     <td  width="21%">
-                         &nbsp;<asp:DropDownList ID="ddlTrainTypeCode" runat="server" Width="89%">
+                         &nbsp;<asp:DropDownList ID="ddlTrainTypeCode" runat="server" Width="91%">
                         </asp:DropDownList>
                     </td>
                     <td align="center" class="musttitle" style="width:12%;"  >
@@ -222,7 +222,7 @@
                         齿侧轮芯生产厂家</td>
                     <td width="21%">
                         &nbsp;<asp:DropDownList 
-                            ID="ddlCCLX_Factory" runat="server" Width="89%">
+                            ID="ddlCCLX_Factory" runat="server" Width="91%">
                         </asp:DropDownList>
 
                     </td>
@@ -233,7 +233,7 @@
                     </td>
                     <td  width="21%">
                         &nbsp;<asp:DropDownList 
-                            ID="ddlFCCLX_Factory" runat="server" Width="89%">
+                            ID="ddlFCCLX_Factory" runat="server" Width="91%">
                         </asp:DropDownList>
 
                     </td>
@@ -273,7 +273,7 @@
                     <td align="center" class="smalltitle" style="width:12%;">
                         承修厂家</td>
                     <td width="21%">
-                        &nbsp;<asp:DropDownList ID="ddlCX_Factory" runat="server" Width="89%">
+                        &nbsp;<asp:DropDownList ID="ddlCX_Factory" runat="server" Width="91%">
                         </asp:DropDownList>
 
                     </td>
@@ -284,7 +284,7 @@
                        存放库区</td>
                   <td width="21%">
                       &nbsp;<asp:DropDownList 
-                            ID="ddlAreaCode" runat="server" Width="89%">
+                            ID="ddlAreaCode" runat="server" Width="91%">
                         </asp:DropDownList>
 
                   </td>

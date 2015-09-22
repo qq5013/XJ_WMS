@@ -18,7 +18,7 @@ namespace WMS.App_Code
         protected string FormID;
         protected string SqlCmd;
         protected int pageSize = 15;
-        protected int pageSubSize = 20;
+        protected int pageSubSize = 10;
         protected void Page_PreInit(object sender, EventArgs e)
         {
             try

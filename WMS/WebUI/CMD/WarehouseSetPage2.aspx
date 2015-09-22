@@ -40,7 +40,7 @@
                 //bodyStyle: 'border:true;border-width:1px 0 1px 0;background:gray',
                 collapsible: false,
 
-                html: '<table style="width: 100%; height: 28px;" cellpadding="0" cellspacing="0"><tr class="maintable"><td style="height:28px" colspan="2" align="right"><input type="button" id="btnNewWarehouse" value="增加仓库" class="ButtonCreate" onclick="OpenEditWarehouse()" /><input type="button" id="btnNewArea" value="增加库区" class="ButtonCreate" onclick="OpenEditArea()" /><input type="button" id="btnNewShelf" value="增加货架" class="ButtonCreate" onclick="OpenEditShelf()" /><input type="button" id="btnNewCell" value="增加货位" class="ButtonCreate" onclick="OpenEditCell()" /><input type="button" id="btnExit" value="退出" class="ButtonExit" onclick="Exit()" /></td></tr></table>'
+                html: '<table style="width: 100%; height: 28px;" cellpadding="0" cellspacing="0"><tr class="maintable"><td style="height:28px" colspan="2" align="right"><input type="button" id="btnNewWarehouse" value="增加仓库" class="HiddenControl" onclick="OpenEditWarehouse()"  /><input type="button" id="btnNewArea" value="增加库区" class="HiddenControl" onclick="OpenEditArea()" /><input type="button" id="btnNewShelf" value="增加货架" class="HiddenControl" onclick="OpenEditShelf()" /><input type="button" id="btnNewCell" value="增加货位" class="HiddenControl" onclick="OpenEditCell()" /><input type="button" id="btnExit" value="退出" class="ButtonExit" onclick="Exit()" /></td></tr></table>'
             };
             var leftPanel = Ext.create('Ext.panel.Panel', {
                 region: 'west',
@@ -154,6 +154,7 @@
 <body>
     <form id="form1" runat="server">
      <div>
+     
      </div>
     </form>
 </body>

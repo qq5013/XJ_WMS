@@ -15,6 +15,7 @@ namespace WMS.WebUI.OutStock
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.GridView2.PageSize = pageSubSize;
             if (!IsPostBack)
             {
                 ViewState["filter"] = "Main.BillID like 'OS%' and Main.State in (1,2,3) ";
@@ -29,7 +30,6 @@ namespace WMS.WebUI.OutStock
                 {
                     WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, exp.Message);
                 }
-
                
             }
             writeJsvar(FormID, SqlCmd, "");
@@ -116,12 +116,7 @@ namespace WMS.WebUI.OutStock
             {
                 BillID = dt.Rows[0]["BillID"].ToString(); 
             }
-            BLL.BLLBase bll = new BLL.BLLBase();
-            DataTable dtSub = bll.FillDataTable("WMS.SelectBillTask", new DataParameter[] { new DataParameter("{0}", string.Format("BillID='{0}'", BillID)) });
-            Session[FormID + "_S_GridView2"] = dtSub;
-            this.GridView2.DataSource = dtSub;
-            this.GridView2.DataBind();
-            MovePage("S", this.GridView2, 0, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblPageSub1);
+            BindDataSub(BillID);
         }
         private void BindDataSub(string BillID)
         {
@@ -130,7 +125,7 @@ namespace WMS.WebUI.OutStock
             Session[FormID + "_S_GridView2"] = dtSub;
             this.GridView2.DataSource = dtSub;
             this.GridView2.DataBind();
-            MovePage("S", this.GridView2, 0, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblPageSub1);
+            MovePage("S", this.GridView2, 0, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
         }
        
      
@@ -152,6 +147,38 @@ namespace WMS.WebUI.OutStock
          
         }
         #endregion
+
+        #region 子表绑定
+
+        protected void btnFirstSub1_Click(object sender, EventArgs e)
+        {
+            MovePage("S", this.GridView2, 0, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
+        }
+
+        protected void btnPreSub1_Click(object sender, EventArgs e)
+        {
+            MovePage("S", this.GridView2, this.GridView2.PageIndex - 1, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
+        }
+
+        protected void btnNextSub1_Click(object sender, EventArgs e)
+        {
+            MovePage("S", this.GridView2, this.GridView2.PageIndex + 1, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
+        }
+
+        protected void btnLastSub1_Click(object sender, EventArgs e)
+        {
+            MovePage("S", this.GridView2, this.GridView2.PageCount - 1, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
+        }
+
+        protected void btnToPageSub1_Click(object sender, EventArgs e)
+        {
+            MovePage("S", this.GridView2, int.Parse(this.txtPageNoSub1.Text) - 1, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
+        }
+
+
+
+        #endregion
+
         protected void btnAdd_Click(object sender, EventArgs e)
         {
             string strColorCode = "'-1',";

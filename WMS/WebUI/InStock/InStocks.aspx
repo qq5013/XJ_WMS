@@ -191,7 +191,7 @@
                     </tr>
                 </table>
                  <div id="divSub" style="overflow: auto; WIDTH: 100%; HEIGHT: 155px">
-                    <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" SkinID="GridViewSkin" Width="100%">
+                    <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" AllowPaging="True" PageSize="10" SkinID="GridViewSkin" Width="100%">
                         <Columns>
                             <asp:BoundField DataField="RowID" HeaderText="序号" SortExpression="RowID">
                                 <ItemStyle HorizontalAlign="Left" Width="7%" Wrap="False" />
@@ -220,16 +220,21 @@
                     </asp:GridView>
                 </div>
                 <div style="height:23px;">
-                    &nbsp;&nbsp;<asp:LinkButton ID="btnFirstSub1" runat="server" OnClick="btnFirst_Click" Text="首页"></asp:LinkButton> 
-                    &nbsp;<asp:LinkButton ID="btnPreSub1" runat="server" OnClick="btnPre_Click" Text="上一页"></asp:LinkButton> 
-                    &nbsp;<asp:LinkButton ID="btnNextSub1" runat="server" OnClick="btnNext_Click" Text="下一页"></asp:LinkButton> 
-                    &nbsp;<asp:LinkButton ID="btnLastSub1" runat="server" OnClick="btnLast_Click" Text="尾页"></asp:LinkButton> 
+                    &nbsp;&nbsp;<asp:LinkButton ID="btnFirstSub1" runat="server" 
+                        OnClick="btnFirstSub1_Click" Text="首页"></asp:LinkButton> 
+                    &nbsp;<asp:LinkButton ID="btnPreSub1" runat="server" OnClick="btnPreSub1_Click" 
+                        Text="上一页"></asp:LinkButton> 
+                    &nbsp;<asp:LinkButton ID="btnNextSub1" runat="server" 
+                        OnClick="btnNextSub1_Click" Text="下一页"></asp:LinkButton> 
+                    &nbsp;<asp:LinkButton ID="btnLastSub1" runat="server" 
+                        OnClick="btnLastSub1_Click" Text="尾页"></asp:LinkButton> 
                     &nbsp;<asp:textbox id="txtPageNoSub1" onkeypress="return regInput(this,/^\d+$/,String.fromCharCode(event.keyCode))"
 					        onpaste="return regInput(this,/^\d+$/,window.clipboardData.getData('Text'))" ondrop="return regInput(this,/^\d+$/,event.dataTransfer.getData('Text'))"
 					        runat="server" Width="56px" CssClass="TextBox" ></asp:textbox>
-                    &nbsp;<asp:linkbutton id="btnToPageSub1" runat="server" onclick="btnToPage_Click" Text="跳转"></asp:linkbutton>
+                    &nbsp;<asp:linkbutton id="btnToPageSub1" runat="server" 
+                        onclick="btnToPageSub1_Click" Text="跳转"></asp:linkbutton>
                     &nbsp;<asp:DropDownList ID="ddlPageSizeSub" runat="server" AutoPostBack="True" Visible="false"></asp:DropDownList>
-                    &nbsp;<asp:Label ID="lblPageSub1" runat="server" ></asp:Label>
+                    &nbsp;<asp:Label ID="lblCurrentPageSub1" runat="server" ></asp:Label>
                 </div>
                 <div>
                     <asp:Button ID="btnReload" runat="server" Text="" OnClick="btnReload_Click"  CssClass="HiddenControl" />
