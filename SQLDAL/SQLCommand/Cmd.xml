@@ -123,7 +123,7 @@
       select cmd.*, house.WarehouseName,area.AreaName from CMD_ProductType cmd
       inner join CMD_Area area on cmd.AreaCode=area.AreaCode
       inner join CMD_Warehouse house on area.WarehouseCode=house.WarehouseCode
-      where {0} order by ProductTypeCode
+      where  ProductTypeCode!='0001' and {0} order by ProductTypeCode
     </CommandString>
   </Command>
 
