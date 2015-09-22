@@ -10,7 +10,7 @@
       CMD_Car ON WCS_TASK.CarNo = CMD_Car.CarNo
       Left join CMD_Product ON WCS_TASK.ProductCode=CMD_Product.ProductCode
       Left join WMS_BillMaster On WCS_TASK.BillID=WMS_BillMaster.BillID
-      left join CMD_BillType On WMS_BillMaster.BillTypeCode=CMD_BillType.BillTypeCode
+      left join CMD_BillType On CMD_BillType.BillTypeCode=WCS_TASK.BillTypeCode
       LEFT JOIN  Sys_TableState on Sys_TableState.TableName='WCS_TASK' and Sys_TableState.FieldName='State' and WCS_TASK.State=Sys_TableState.State
       Where {0}
       ORDER BY WCS_TASK.TaskLevel DESC, WCS_TASK.StartDate
@@ -31,9 +31,19 @@
       sp_GetCell
     </CommandString>
   </Command>
+  <Command ID="sp_GetEmptyCell">
+    <CommandString>
+      sp_GetEmptyCell
+    </CommandString>
+  </Command>
 <Command ID="Sp_CreatePalletOutTask">
     <CommandString>
       Sp_CreatePalletOutTask
+    </CommandString>
+  </Command>
+  <Command ID="Sp_CreatePalletInTask">
+    <CommandString>
+      Sp_CreatePalletInTask
     </CommandString>
   </Command>
   <Command ID="UpdateCell">

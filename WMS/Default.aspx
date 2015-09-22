@@ -16,6 +16,9 @@
 <%--    <link rel="stylesheet" type="text/css" href="ext/packages/ext-theme-classic/build/resources/ext-theme-classic-all.css" />  
     <script type="text/javascript" src="Ext/ext-all.js"></script>  
     <script type="text/javascript" src="Ext/packages/ext-theme-classic/build/ext-theme-classic.js"></script>--%>
+<%--    <link rel="stylesheet" type="text/css" href="ext/packages/ext-theme-gray/build/resources/ext-theme-gray-all.css" />  
+    <script type="text/javascript" src="Ext/ext-all.js"></script>  
+    <script type="text/javascript" src="Ext/packages/ext-theme-gray/build/ext-theme-gray.js"></script>--%>
     <style type="text/css">
         .x-panel-header-title
         {
@@ -39,6 +42,14 @@
         { 
             font-family:微软雅黑;
             font-size:14px;
+        }
+        .x-accordion-item .x-accordion-hd
+        {
+        	 background:#EAF2F4;
+        	 border-width:0 0 1px;
+        	 border-color:White #cecece #cecece;
+        	 padding:8px 10px;
+        	 color:Red;
         }
     </style>
 

@@ -145,6 +145,12 @@
     </CommandString>
   </Command>
 
+  <!--堆垛机信息-->
+  <Command ID="SelectCrane">
+    <CommandString>
+      Select * from CMD_Crane where {0} order by CraneNo
+    </CommandString>
+  </Command>
   <!--小车信息-->
   <Command ID="SelectCar">
     <CommandString>
