@@ -19,7 +19,7 @@
         function resize() {
             var h = document.documentElement.clientHeight - 5;
             $("#table-container").css("height", h);
-            $("#dvGroupUser").css("height", h - 285);
+            $("#dvGroupUser").css("height", h - 315);
             $('#fieldset').css("height", h);
             $('#iframeRoleSet').css("height", h);
         }
@@ -32,10 +32,14 @@
             iframeRoleSet.src = "RoleSet.aspx?GroupID=" + GroupID + "&GroupName=" + encodeURI(GroupName) + "&time=" + t;
         }
 
-        function UserSet(GroupID, GroupName) {
-            var now = new Date();
-            var temp = now.getMilliseconds();
-            window.showModalDialog('GroupUserManage.aspx?GroupID=' + GroupID + '&GroupName=' + encodeURI(GroupName) + '&temp=' + temp, temp, 'top=0;left=0;toolbar=no;menubar=yes;scrollbars=no;resizable=yes;location=no;status=no;dialogWidth=450px;dialogHeight=500px');
+        function UserSet() {
+            var GroupID = $('#hdnRowValue').val(); 
+            var GroupName =$('#hdnRowGroupName').val();
+            var returnvalue = window.showModalDialog('GroupUserManage.aspx?GroupID=' + GroupID + '&GroupName=' + encodeURI(GroupName), window, 'top=0;left=0;toolbar=no;menubar=yes;scrollbars=no;resizable=yes;location=no;status=no;dialogWidth=450px;dialogHeight=500px');
+            if (returnvalue == "1")
+                return true;
+            else
+                return false;
         }
 
         function ShowGroupUserList(GroupID, GroupName) {
@@ -62,7 +66,16 @@
               <table id="table-container" cellpadding="0" cellspacing="0" >
                 <tr>
                   <td style=" vertical-align:top; width: 300px;"><!--GroupList-->
-              
+                        
+                        <table class="maintable" style="width:298px; height:30px;">
+                            <tr>
+                                <td align="right" style="height:30px;">
+                                   <asp:Button ID="btnAddUser" CssClass="ButtonCreate"  runat="server"  Text="添加用户"  OnClientClick="return UserSet();" OnClick="btnAddUser_Click"/> &nbsp;&nbsp;
+                                </td>
+                            </tr>
+                        </table> 
+                             
+                        
                         <div style="overflow: auto; WIDTH: 100%; height:200px">
                             <asp:GridView ID="gvGroupList" runat="server" SkinID="GridViewSkin" AllowPaging="false" Width="100%"
                              AutoGenerateColumns="False" OnRowDataBound="gvGroupList_RowDataBound"  >
@@ -73,13 +86,7 @@
                                     <asp:BoundField DataField="GroupName" HeaderText="用户组名称">
                                         <ItemStyle Width="85px" />
                                     </asp:BoundField>
-                                     <asp:TemplateField HeaderText="操作" >
-                                        <ItemTemplate>
-                                          <asp:Button ID="btnAddUser"  CssClass="ButtonCreate"  runat="server"  Text="添加用户" OnClick="btnAddUser_Click"/>   
-                                        </ItemTemplate>
-                                        <ItemStyle Width="85px" Wrap="False" />
-                                        <HeaderStyle Width="85px" Wrap="False" />
-                                    </asp:TemplateField>
+                                      
                                 </Columns>
                                  <PagerSettings Visible="False" />
                             </asp:GridView>

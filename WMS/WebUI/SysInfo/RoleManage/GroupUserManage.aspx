@@ -27,6 +27,11 @@
             //         parent.frames['mainFrame'].location=url;
             //      else location.href=url;
         }
+
+        function Close(obj) {
+            window.returnValue = obj;
+            window.close();
+        }
     </script>
      
 </head>
@@ -46,13 +51,14 @@
                 <table  class="maintable" cellspacing="0" cellpadding="0" bordercolor="#ffffff" width="100%" height="35px"
                     border="1" runat="server">
                     <tr>
-                        <td style="width:30%; height:30px">
+                        <td style="width:50%; height:30px">
                            &nbsp;&nbsp;<asp:Label ID="Label1" runat="server" Font-Bold="True" Height="24px" Text="Label"
                                 Width="161px" Font-Size="10pt"></asp:Label>
                    
                         </td>
-                       <td style="width:70%" align="right" >
-                         <asp:Button ID="btnSave" runat="server" CssClass="ButtonSave" OnClick="btnSave_Click" Text="保 存" />&nbsp;&nbsp;
+                       <td style="width:50%" align="right" >
+                         <asp:Button ID="btnSave" runat="server" CssClass="ButtonSave" OnClick="btnSave_Click" Text="保存" />&nbsp;&nbsp;
+                         <asp:Button ID="btnClose" runat="server" Text="关闭" Width="60px" CssClass="ButtonExit" OnClientClick="return Close('0');" />&nbsp;&nbsp;&nbsp;&nbsp;
                         </td>
                     </tr>
                 </table>

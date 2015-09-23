@@ -26,7 +26,7 @@ namespace WMS.WebUI.SysInfo.RoleManage
             {
 
                 GroupID = Request.QueryString["GroupID"].ToString();
-                GroupName = Request.QueryString["GroupName"].ToString();
+                GroupName = Server.UrlDecode(Request.QueryString["GroupName"].ToString());
                 if (!IsPostBack)
                 {
                     ViewState["hdnRowValue"] = "";
@@ -43,9 +43,9 @@ namespace WMS.WebUI.SysInfo.RoleManage
                     }
 
 
-                    this.Label1.Text = "用户组" + GroupName + "成员设置";
+                    this.Label1.Text =   GroupName + "  成员设置";
                     
-                    this.Title = "用户组" + GroupName + "成员设置";
+                    this.Title =   GroupName + "  成员设置";
                 }
             }
 
@@ -105,8 +105,8 @@ namespace WMS.WebUI.SysInfo.RoleManage
                 BLL.BLLBase bll = new BLL.BLLBase();
                 bll.ExecNonQuery("Security.UpdateUserGroup", new DataParameter[] { new DataParameter("@GroupID", GroupID), new DataParameter("{0}", users) });
 
-
-                WMS.App_Code.JScript.Instance.ShowMessage(this, "添加成功！");
+                ScriptManager.RegisterClientScriptBlock(this.UpdatePanel1, this.UpdatePanel1.GetType(), "Resize", "Close('1');", true);
+                
             }
             catch(Exception ex)
             {

@@ -65,17 +65,8 @@ namespace WMS.WebUI.SysInfo.RoleManage
                 }
                 e.Row.Attributes.Add("onclick", string.Format(" $('#hdnRowGroupName').val('{2}');$('#hdnRowValue').val('{1}');selectRow({0});", e.Row.RowIndex, e.Row.Cells[0].Text, e.Row.Cells[1].Text));
                 e.Row.Attributes.Add("style", "cursor:pointer;");
-
-                e.Row.Cells[0].Visible = false;
-
-                Button btn = (Button)e.Row.Cells[2].FindControl("btnAddUser");
-                btn.Attributes.Add("onclick", string.Format("UserSet('{0}','{1}');", e.Row.Cells[0].Text, e.Row.Cells[1].Text));
-
             }
-            else if (e.Row.RowType == DataControlRowType.Header)
-            {
-                e.Row.Cells[0].Visible = false;
-            }
+            
         }
 
         /// <summary>
