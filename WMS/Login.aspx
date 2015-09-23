@@ -64,7 +64,7 @@ input{
 	background:#149CDF;
 	font-size:18px;
 	font-weight:bold;
-	font-family:"Î¢ÈíÑÅºÚ Light";	
+	font-family:"Î¢ÈíÑÅºÚ";	
 	margin-left:18px;
 	border:0px;
 	color:#fff;	
