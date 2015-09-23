@@ -15,6 +15,7 @@ namespace WMS.WebUI.OutStock
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.GridView2.PageSize = pageSubSize;
             if (!IsPostBack)
             {
                 ViewState["filter"] = "BillID like 'OS%'";
@@ -32,6 +33,7 @@ namespace WMS.WebUI.OutStock
 
                
             }
+           
             writeJsvar(FormID, SqlCmd, "");
             ScriptManager.RegisterStartupScript(this.UpdatePanel1, this.UpdatePanel1.GetType(), "Resize", "resize();", true);
 
@@ -61,8 +63,8 @@ namespace WMS.WebUI.OutStock
             {
                 ViewState["filter"] = " BillID like 'OS%' " + " and " + string.Format("{0} like '%{1}%'", this.ddlField.SelectedValue, this.txtSearch.Text.Trim().Replace("'", ""));
                 ViewState["CurrentPage"] = 1;
-                SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
-
+                DataTable dt = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+                SetBindDataSub(dt);
             }
             catch (Exception exp)
             {
@@ -110,6 +112,7 @@ namespace WMS.WebUI.OutStock
         protected void btnFirst_Click(object sender, EventArgs e)
         {
             ViewState["CurrentPage"] = 1;
+            this.hdnRowIndex.Value = "0";
            DataTable dt= SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
            SetBindDataSub(dt);
         }
@@ -118,6 +121,7 @@ namespace WMS.WebUI.OutStock
         protected void btnPre_Click(object sender, EventArgs e)
         {
             ViewState["CurrentPage"] = int.Parse(ViewState["CurrentPage"].ToString()) - 1;
+            this.hdnRowIndex.Value = "0";
            DataTable dt= SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
            SetBindDataSub(dt);
         }
@@ -125,6 +129,7 @@ namespace WMS.WebUI.OutStock
         protected void btnNext_Click(object sender, EventArgs e)
         {
             ViewState["CurrentPage"] = int.Parse(ViewState["CurrentPage"].ToString()) + 1;
+            this.hdnRowIndex.Value = "0";
            DataTable dt= SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
            SetBindDataSub(dt);
         }
@@ -132,6 +137,7 @@ namespace WMS.WebUI.OutStock
         protected void btnLast_Click(object sender, EventArgs e)
         {
             ViewState["CurrentPage"] = 0;
+            this.hdnRowIndex.Value = "0";
             DataTable dt= SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
             SetBindDataSub(dt);
         }
@@ -144,6 +150,7 @@ namespace WMS.WebUI.OutStock
                 PageIndex = 1;
 
             ViewState["CurrentPage"] = PageIndex;
+            this.hdnRowIndex.Value = "0";
             DataTable dt = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
             SetBindDataSub(dt);
         }
@@ -155,12 +162,7 @@ namespace WMS.WebUI.OutStock
             {
                 BillID = dt.Rows[0]["BillID"].ToString(); 
             }
-            BLL.BLLBase bll = new BLL.BLLBase();
-            DataTable dtSub = bll.FillDataTable("WMS.SelectBillDetail", new DataParameter[] { new DataParameter("{0}", string.Format("BillID='{0}'", BillID)) });
-            Session[FormID + "_S_GridView2"] = dtSub;
-            this.GridView2.DataSource = dtSub;
-            this.GridView2.DataBind();
-            MovePage("S", this.GridView2, 0, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblPageSub1);
+            BindDataSub(BillID);
         }
         private void BindDataSub(string BillID)
         {
@@ -169,9 +171,40 @@ namespace WMS.WebUI.OutStock
             Session[FormID + "_S_GridView2"] = dtSub;
             this.GridView2.DataSource = dtSub;
             this.GridView2.DataBind();
-            MovePage("S", this.GridView2, 0, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblPageSub1);
+            MovePage("S", this.GridView2, 0, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
         }
        
+        #endregion
+
+        #region 子表绑定
+
+        protected void btnFirstSub1_Click(object sender, EventArgs e)
+        {
+            MovePage("S", this.GridView2, 0, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
+        }
+
+        protected void btnPreSub1_Click(object sender, EventArgs e)
+        {
+            MovePage("S", this.GridView2, this.GridView2.PageIndex - 1, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
+        }
+
+        protected void btnNextSub1_Click(object sender, EventArgs e)
+        {
+            MovePage("S", this.GridView2, this.GridView2.PageIndex + 1, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
+        }
+
+        protected void btnLastSub1_Click(object sender, EventArgs e)
+        {
+            MovePage("S", this.GridView2, this.GridView2.PageCount - 1, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
+        }
+
+        protected void btnToPageSub1_Click(object sender, EventArgs e)
+        {
+            MovePage("S", this.GridView2, int.Parse(this.txtPageNoSub1.Text) - 1, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
+        }
+
+
+
         #endregion
 
 

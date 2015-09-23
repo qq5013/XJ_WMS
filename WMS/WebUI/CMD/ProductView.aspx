@@ -72,7 +72,7 @@
                         产品类别
                     </td>
                     <td width="21%">
-                        &nbsp;<asp:DropDownList ID="ddlProductTypeCode" Enabled="false" runat="server" Width="89%"></asp:DropDownList>
+                        &nbsp;<asp:DropDownList ID="ddlProductTypeCode" Enabled="false" runat="server" Width="91%"></asp:DropDownList>
                     </td>
                 </tr>
                 <tr>
@@ -80,7 +80,7 @@
                             车型
                     </td>
                     <td  width="21%">
-                         &nbsp;<asp:DropDownList ID="ddlTrainTypeCode" Enabled="false" runat="server" Width="89%"></asp:DropDownList>
+                         &nbsp;<asp:DropDownList ID="ddlTrainTypeCode" Enabled="false" runat="server" Width="91%"></asp:DropDownList>
                     </td>
                     <td align="center" class="musttitle" style="width:12%;"  >
                            车轴编号 
@@ -177,7 +177,7 @@
                     <td align="center" class="smalltitle" style="width:12%;">
                         齿侧轮芯生产厂家</td>
                     <td width="21%">
-                        &nbsp;<asp:DropDownList ID="ddlCCLX_Factory" runat="server" Enabled="false" Width="89%"></asp:DropDownList>
+                        &nbsp;<asp:DropDownList ID="ddlCCLX_Factory" runat="server" Enabled="false" Width="91%"></asp:DropDownList>
 
                     </td>
                 </tr>
@@ -186,7 +186,7 @@
                             非齿侧轮芯生产厂家
                     </td>
                     <td  width="21%">
-                        &nbsp;<asp:DropDownList ID="ddlFCCLX_Factory" runat="server" Enabled="false" Width="89%"></asp:DropDownList>
+                        &nbsp;<asp:DropDownList ID="ddlFCCLX_Factory" runat="server" Enabled="false" Width="91%"></asp:DropDownList>
 
                     </td>
                     <td align="center" class="smalltitle" style="width:12%;"  >
@@ -219,7 +219,7 @@
                     <td align="center" class="smalltitle" style="width:12%;">
                         承修厂家</td>
                     <td width="21%">
-                        &nbsp;<asp:DropDownList ID="ddlCX_Factory" runat="server" Enabled="false" Width="89%"></asp:DropDownList>
+                        &nbsp;<asp:DropDownList ID="ddlCX_Factory" runat="server" Enabled="false" Width="91%"></asp:DropDownList>
 
                     </td>
                 </tr>
@@ -228,7 +228,7 @@
                    <td align="center"  class="smalltitle" style="width:12%;">
                        存放库区</td>
                   <td width="21%">
-                      &nbsp;<asp:DropDownList ID="ddlAreaCode" runat="server" Enabled="false" Width="89%"></asp:DropDownList>
+                      &nbsp;<asp:DropDownList ID="ddlAreaCode" runat="server" Enabled="false" Width="91%"></asp:DropDownList>
 
                   </td>
                  
@@ -270,7 +270,8 @@
                         备注
                     </td>
                     <td colspan="5">
-                        &nbsp;<asp:TextBox ID="txtMemo" runat="server" CssClass="TextRead" TextMode="MultiLine" Height="72px" Width="97%" ReadOnly="True"></asp:TextBox>
+                        &nbsp;<asp:TextBox ID="txtMemo" runat="server" CssClass="TextRead" 
+                            TextMode="MultiLine" Height="72px" Width="97%" ReadOnly="True"></asp:TextBox>
                     </td>
                 </tr>
                 	

@@ -252,7 +252,7 @@ namespace WMS.Common
         protected void btnToPage_Click(object sender, System.EventArgs e)
         {
             int PageIndex = 0;
-            int.TryParse(this.txtPage.Text, out PageIndex);
+            int.TryParse(this.txtPageNo.Text, out PageIndex);
             if (PageIndex == 0)
                 PageIndex = 1;
 

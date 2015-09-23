@@ -31,36 +31,28 @@ namespace WMS.WebUI.SysInfo.UserGroupManage
         #region 窗体加载
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
+            if (!IsPostBack)
             {
+                ViewState["filter"] = "1=1";
+                ViewState["CurrentPage"] = 1;
 
-                pager.PageSize = pageSize;
-                
-
-                if (!IsPostBack)
+                try
                 {
-                    totalCount = bll.GetRowCount(TableName, filter);
-                    pager.RecordCount = totalCount;
-                    GridDataBind();
+                    SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, gvMain, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
                 }
-                else
+                catch (Exception exp)
                 {
-                    pageCount = Convert.ToInt32(ViewState["pageCount"]);
-                    pageIndex = Convert.ToInt32(ViewState["pageIndex"]);
-                    totalCount = Convert.ToInt32(ViewState["totalCount"]);
-                    filter = ViewState["filter"].ToString();
-                    OrderByFields = ViewState["OrderByFields"].ToString();
-
-                    totalCount = bll.GetRowCount(TableName, filter);
-                    GridDataBind();
+                    WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, exp.Message);
                 }
-                ScriptManager.RegisterStartupScript(this.UpdatePanel1, this.UpdatePanel1.GetType(), "Resize", "resize();", true);
 
+                writeJsvar(FormID, SqlCmd, "");
             }
-            catch (Exception exp)
+            else
             {
-                WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, exp.Message);
+                dtGroup = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, gvMain, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
             }
+
+            ScriptManager.RegisterStartupScript(this.UpdatePanel1, this.UpdatePanel1.GetType(), "Resize", "resize();", true);
         }
         #endregion
 
@@ -100,13 +92,13 @@ namespace WMS.WebUI.SysInfo.UserGroupManage
         {
             if (index == 0)
             {
-                this.pnlList.Visible = true;
-                this.pnlEdit.Visible = false;
+                this.dvList.Visible = true;
+                this.dvEdit.Visible = false;
             }
             else
             {
-                this.pnlList.Visible = false;
-                this.pnlEdit.Visible = true;
+                this.dvList.Visible = false;
+                this.dvEdit.Visible = true;
             }
         }
         #endregion
@@ -166,13 +158,11 @@ namespace WMS.WebUI.SysInfo.UserGroupManage
             {
                 filter = string.Format("{0} like '%{1}%'", this.ddl_Field.SelectedValue, this.txtKeyWords.Text.Trim().Replace("'", ""));
                 ViewState["filter"] = filter;
-               
 
-                totalCount = bll.GetRowCount(TableName, filter);
-                pageIndex = 1;
-                pager.CurrentPageIndex = 1;
-                pager.RecordCount = totalCount;
-                GridDataBind();
+
+                ViewState["filter"] = filter;
+
+                SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, gvMain, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
             }
             catch (Exception exp)
             {
@@ -217,15 +207,8 @@ namespace WMS.WebUI.SysInfo.UserGroupManage
 
 
                 bll.ExecNonQuery("Security.DeleteGroup", new DataParameter[] { new DataParameter("{0}", strGroupID) });
-                
-             
-                totalCount = bll.GetRowCount(TableName, filter);
-                pager.RecordCount = totalCount;
-                if (pageIndex > pager.PageCount)
-                {
-                    pageIndex = pager.PageCount;
-                }
-                GridDataBind();
+                AddOperateLog("用户管理", "删除用户信息");
+                SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, gvMain, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
             }
             catch (Exception exp)
             {
@@ -235,13 +218,40 @@ namespace WMS.WebUI.SysInfo.UserGroupManage
         #endregion
 
         # region 分页控件 页码changing事件
-        protected void pager_PageChanging(object src, PageChangingEventArgs e)
+        protected void btnFirst_Click(object sender, EventArgs e)
         {
-            pager.CurrentPageIndex = e.NewPageIndex;
-            pager.RecordCount = totalCount;
-            pageIndex = pager.CurrentPageIndex;
-            ViewState["pageIndex"] = pageIndex;
-            GridDataBind();
+            ViewState["CurrentPage"] = 1;
+            SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, gvMain, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+
+        }
+
+        protected void btnPre_Click(object sender, EventArgs e)
+        {
+            ViewState["CurrentPage"] = int.Parse(ViewState["CurrentPage"].ToString()) - 1;
+            SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, gvMain, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+        }
+
+        protected void btnNext_Click(object sender, EventArgs e)
+        {
+            ViewState["CurrentPage"] = int.Parse(ViewState["CurrentPage"].ToString()) + 1;
+            SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, gvMain, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+        }
+
+        protected void btnLast_Click(object sender, EventArgs e)
+        {
+            ViewState["CurrentPage"] = 0;
+            SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, gvMain, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+        }
+
+        protected void btnToPage_Click(object sender, EventArgs e)
+        {
+            int PageIndex = 0;
+            int.TryParse(this.txtPageNo.Text, out PageIndex);
+            if (PageIndex == 0)
+                PageIndex = 1;
+
+            ViewState["CurrentPage"] = PageIndex;
+            SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, gvMain, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
         }
         #endregion
 
@@ -262,11 +272,11 @@ namespace WMS.WebUI.SysInfo.UserGroupManage
                     bll.ExecNonQuery("Security.InsertGroup", new DataParameter[] { new DataParameter("@GroupName", this.txtGroupName.Text.Trim()), new DataParameter("@Memo", this.txtMemo.Text.Trim()), new DataParameter("@State", 1) });
 
 
-                    totalCount = bll.GetRowCount(TableName, filter);
-                    pager.RecordCount = totalCount;
-                    GridDataBind();
+
+                    SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, gvMain, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
                     SwitchView(0);
                     WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, "数据添加成功！");
+                    AddOperateLog("用户管理", "添加用户信息");
                 }
                 else//修改
                 {
@@ -286,10 +296,10 @@ namespace WMS.WebUI.SysInfo.UserGroupManage
                         }
                     }
                     this.gvMain.EditIndex = -1;
-                    pager.RecordCount = totalCount;
-                    GridDataBind();
+                    SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, gvMain, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
                     WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, "数据修改成功！");
                     SwitchView(0);
+                    AddOperateLog("用户管理", "修改用户信息");
                 }
             }
             catch (Exception exp)

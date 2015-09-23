@@ -17,7 +17,7 @@ namespace WMS.WebUI.Stock
         protected void Page_Load(object sender, EventArgs e)
         {
             strID = Request.QueryString["ID"] + "";
-
+            this.dgViewSub1.PageSize = pageSubSize;
             if (!IsPostBack)
             {
                 BindDropDownList();
@@ -42,6 +42,7 @@ namespace WMS.WebUI.Stock
                     this.txtUpdateDate.Text = ToYMD(DateTime.Now);
                 }
             }
+          
             ScriptManager.RegisterStartupScript(this.updatePanel1, this.updatePanel1.GetType(), "Resize", "resize();BindEvent();", true);
             writeJsvar(FormID, SqlCmd, strID);
             SetTextReadOnly(this.txtCreator, this.txtCreatDate, this.txtUpdater, this.txtUpdateDate);
@@ -126,7 +127,8 @@ namespace WMS.WebUI.Stock
             this.dgViewSub1.DataSource = dt;
             this.dgViewSub1.DataBind();
             Session[FormID + "_Edit_dgViewSub1"] = dt;
-            MovePage("Edit", this.dgViewSub1, this.dgViewSub1.PageIndex, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
+
+            MovePage("Edit", this.dgViewSub1, this.dgViewSub1.PageCount, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
         }
         protected void btnDelDetail_Click(object sender, EventArgs e)
         {
@@ -170,6 +172,8 @@ namespace WMS.WebUI.Stock
                 return;
             }
             DataRow dr;
+            string strOldCellCode = "";
+            string strNewCellCode = "";
             for (int i = 0; i < dgv.Rows.Count; i++)
             {
                 dr = dt1.Rows[i + dgv.PageSize * dgv.PageIndex];
@@ -181,7 +185,11 @@ namespace WMS.WebUI.Stock
                 dr["CellCode"] = ((Label)dgv.Rows[i].FindControl("OldCellCode")).Text;
                 dr["Memo"] = ((TextBox)dgv.Rows[i].FindControl("SubMemo")).Text;
                 dr.EndEdit();
+                strOldCellCode += "'" + dr["CellCode"].ToString() + "',";
+                strNewCellCode += "'" + dr["NewCellCode"].ToString() + "',";
             }
+            hdnOldCellCode.Value += strOldCellCode;
+            hdnNewCellCode.Value += strNewCellCode;
             dt1.AcceptChanges();
             if (dt1.Rows.Count > 0)
                 this.ddlAreaCode.Enabled = false;

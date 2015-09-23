@@ -62,9 +62,9 @@
                     $("#ddlAreaCode").focus();
                     return false;
                 }
-                if (!ChkDelMustValue("dgViewSub1", "ProductCode", "产品型号"))
+                if (!ChkDelMustValue("dgViewSub1", "ProductCode", "产品编码"))
                     return false;
-                if (!ChkDelMustNumericValue("dgViewSub1", "Quantity", "计划数量"))
+                if (!ChkDelMustNumericValue("dgViewSub1", "Quantity", "数量"))
                     return false;
                 return true;
             }

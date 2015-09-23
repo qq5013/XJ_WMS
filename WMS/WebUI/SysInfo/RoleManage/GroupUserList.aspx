@@ -14,14 +14,10 @@
    
  
     <style type="text/css">
-        .style1
+        table, tr, td
         {
-            height: 13px;
-            width: 336px;
-        }
-        .style2
-        {
-            width: 336px;
+           font-size:9pt;
+           font-family:@微软雅黑;
         }
     </style>
    

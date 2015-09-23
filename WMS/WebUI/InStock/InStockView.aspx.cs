@@ -19,6 +19,7 @@ namespace WMS.WebUI.InStock
         protected void Page_Load(object sender, EventArgs e)
         {
             strID = Request.QueryString["ID"] + "";
+            this.dgViewSub1.PageSize = pageSubSize;
             if (!IsPostBack)
             {
                 BindDropDownList();

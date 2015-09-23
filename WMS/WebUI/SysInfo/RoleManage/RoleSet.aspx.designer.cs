@@ -58,13 +58,22 @@ namespace WMS.WebUI.SysInfo.RoleManage {
         protected global::System.Web.UI.WebControls.LinkButton lnkBtnCollapse;
         
         /// <summary>
-        /// plTree 控件。
+        /// lnkBtnSave 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel plTree;
+        protected global::System.Web.UI.WebControls.Button lnkBtnSave;
+        
+        /// <summary>
+        /// lnkBtnCancle 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button lnkBtnCancle;
         
         /// <summary>
         /// sTreeModule 控件。
@@ -74,23 +83,5 @@ namespace WMS.WebUI.SysInfo.RoleManage {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::YYControls.SmartTreeView sTreeModule;
-        
-        /// <summary>
-        /// lnkBtnSave 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkBtnSave;
-        
-        /// <summary>
-        /// lnkBtnCancle 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkBtnCancle;
     }
 }
