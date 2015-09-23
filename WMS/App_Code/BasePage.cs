@@ -647,7 +647,7 @@ namespace WMS.App_Code
                 dgv.Rows[0].Cells.Clear();
                 dgv.Rows[0].Cells.Add(new TableCell());
                 dgv.Rows[0].Cells[0].ColumnSpan = columnCount;
-                dgv.Rows[0].Cells[0].Text = "没有明细资料，请新增";
+                dgv.Rows[0].Cells[0].Text = "没有明细资料";
                 dgv.Rows[0].Visible = true;
 
                 btnFirst.Enabled = false;

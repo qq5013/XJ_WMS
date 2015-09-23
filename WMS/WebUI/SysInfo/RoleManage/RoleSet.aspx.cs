@@ -24,7 +24,7 @@ namespace WMS.WebUI.SysInfo.RoleManage
                 if (Request.QueryString["GroupID"] != null)
                 {
                     ViewState["GroupID"] = Request.QueryString["GroupID"].ToString();
-                    string GroupName = Request.QueryString["GroupName"].ToString();
+                    string GroupName = Server.UrlDecode(Request.QueryString["GroupName"].ToString());
                     this.lbTitle.Text = "用户组<font color='Gray'>" + GroupName + "</font>权限设置";
                     GroupOperationBind();
                     if (GroupName == "admin")

@@ -74,7 +74,7 @@
                         <td class="smalltitle" align="center" width="5%" >
                             查询栏位
                         </td>
-                        <td  width="10%"> 
+                        <td  width="8%"> 
                             &nbsp;<asp:DropDownList ID="ddl_Field" runat="server"  Width="89%">
                                     <asp:ListItem Selected="True" Value="LoginUser">操作用户</asp:ListItem>
                                     <asp:ListItem Value="LoginModule">操作模块</asp:ListItem>
@@ -87,15 +87,15 @@
                                 &nbsp;<asp:TextBox ID="txtKeyWords" runat="server" CssClass="TextBox" Width="85%"></asp:TextBox>
                         </td>
                         <td align="center" class="smalltitle" width="4%">
-                            时间从
+                            日期从
                         </td>
-                        <td width="10%">
+                        <td width="12%">
                             &nbsp;<uc1:Calendar ID="txtStartDate" runat="server" />
                         </td>
                         <td align="center" class="smalltitle" width="1%">
                             至
                         </td>
-                        <td  width="10%">
+                        <td  width="12%">
                              &nbsp;<uc1:Calendar ID="txtEndDate" runat="server" />
                         </td>
                         <td  width="15%">
