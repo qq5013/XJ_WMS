@@ -18,8 +18,8 @@
             });
         });
         function resize() {
-            var h = document.documentElement.clientHeight - 60;
-            $("#pnlMain").css("height", h);
+            var h = document.documentElement.clientHeight - 55;
+            $("#table-container").css("height", h);
         }
         //删除确认
         function DelConfirm(btnID) {
@@ -107,7 +107,7 @@
     <asp:UpdatePanel ID="UpdatePanel1" runat="server" Visible="true">
         <ContentTemplate>
             <!--数据显示-->
-            <asp:Panel ID="pnlList" runat="server" Height="480px" Width="100%">
+               <div id="dvList" runat="server">
                 <!--工具栏-->
                 
                <table class="maintable"  width="100%" align="center" cellspacing="0" cellpadding="0">
@@ -135,9 +135,10 @@
                         </td>
                            
                         <td align="right" style="width:15%;">
-                            
+                              <asp:Button ID="btnAdd" runat="server" Text="新增" CssClass="ButtonCreate" OnClick="btnCreate_Click"
+                                    />
                             <asp:Button ID="btnDelete" runat="server" Text="删除" CssClass="ButtonDel" OnClick="btnDelete_Click"
-                                OnClientClick="return DelConfirm('btnDelete')" Enabled="False" />
+                                OnClientClick="return DelConfirm('btnDelete')" />
                             
                             <asp:Button ID="btnExit" runat="server" Text="退出" OnClientClick="return Exit();" CssClass="ButtonExit" />
                         </td>
@@ -148,7 +149,7 @@
                    
                 
                 <!--数据-->
-                <asp:Panel ID="pnlMain" runat="server" Height="480px" Style="overflow: auto;" Width="100%">
+               <div id="table-container" style="overflow: auto; WIDTH: 100%; HEIGHT: 470px">
                     <asp:GridView ID="gvMain" runat="server"  Width="900px" OnRowEditing="gvMain_RowEditing" OnRowDataBound="gvMain_RowDataBound"
                           SkinID="GridViewSkin"  AutoGenerateColumns="False">
                         <RowStyle BackColor="WhiteSmoke" Height="28px" />
@@ -164,22 +165,23 @@
                             <asp:BoundField DataField="Memo" HeaderText="备注"></asp:BoundField>
                         </Columns>
                     </asp:GridView>
-                </asp:Panel>
+               </div>
                 <!--分页导航-->
-                <asp:Panel ID="pnlNavigator" runat="server" Height="30px"  Width="100%">
-                    <table id="paging" cellpadding="0" cellspacing="0" style="width: 500px;">
-                        <tr>
-                            <td>
-                                <NetPager:AspNetPager ID="pager" runat="server" OnPageChanging="pager_PageChanging"
-                                    ShowPageIndex="false" ShowInputBox="Always" AlwaysShow="true">
-                                </NetPager:AspNetPager>
-                            </td>
-                        </tr>
-                    </table>
-                </asp:Panel>
-            </asp:Panel>
+                  <div>
+                     &nbsp;&nbsp;<asp:LinkButton ID="btnFirst" runat="server" OnClick="btnFirst_Click" Text="首页"></asp:LinkButton> 
+                    &nbsp;<asp:LinkButton ID="btnPre" runat="server" OnClick="btnPre_Click" Text="上一页"></asp:LinkButton> 
+                    &nbsp;<asp:LinkButton ID="btnNext" runat="server" OnClick="btnNext_Click" Text="下一页"></asp:LinkButton> 
+                    &nbsp;<asp:LinkButton ID="btnLast" runat="server" OnClick="btnLast_Click" Text="尾页"></asp:LinkButton> 
+                    &nbsp;<asp:textbox id="txtPageNo" onkeypress="return regInput(this,/^\d+$/,String.fromCharCode(event.keyCode))"
+					        onpaste="return regInput(this,/^\d+$/,window.clipboardData.getData('Text'))" ondrop="return regInput(this,/^\d+$/,event.dataTransfer.getData('Text'))"
+					        runat="server" Width="56px" CssClass="TextBox" ></asp:textbox>
+                    &nbsp;<asp:linkbutton id="btnToPage" runat="server" onclick="btnToPage_Click" Text="跳转"></asp:linkbutton>
+                    &nbsp;<asp:DropDownList ID="ddlPageSize" runat="server" AutoPostBack="True" Visible="false"></asp:DropDownList>
+                    &nbsp;<asp:Label ID="lblCurrentPage" runat="server" ></asp:Label>
+                </div>
+            </div>
             <!--编辑-->
-            <asp:Panel ID="pnlEdit" runat="server" Height="400px" Width="100%" Visible="false">
+           <div id="dvEdit"   runat="server"  height="400px" width="100%" Visible="false">
                   <table class="maintable" width="100%" align="center" cellspacing="0" cellpadding="0" >
                     <tr>
                         <td colspan="2" style="height:30px">
@@ -208,7 +210,7 @@
                         </td>
                     </tr>
                 </table>
-            </asp:Panel>
+            </div>
         </ContentTemplate>
     </asp:UpdatePanel>
     <!--隐藏数据-->

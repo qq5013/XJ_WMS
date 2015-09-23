@@ -8,6 +8,7 @@
     <link href="../../../css/op.css" rel="Stylesheet" type="text/css" />
   
     <script type="text/javascript" src="../../../JQuery/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="../../../JScript/Common.js"></script>
     <script type="text/javascript" language="javascript">
         $(document).ready(function () {
             $(window).resize(function () {
@@ -15,16 +16,16 @@
             });
         });
         function resize() {
-            var h = document.documentElement.clientHeight - 30;
+            var h = document.documentElement.clientHeight - 40;
             $("#dvTree").css("height", h);
         }
     </script>
 </head>
 <body>
     <form id="form1" runat="server">
-    <table  style="width:100%">
+    <table   style="width:100%; height:35px;" >
       <tr>
-        <td class="maintable">
+        <td class="maintable" height="30px" >
             &nbsp;
             <asp:Button ID="btnSave" runat="server" CssClass="ButtonSave" Text="保存" OnClick="btnSave_Click" />
             <asp:Button ID="btnExit" runat="server" CssClass="ButtonExit" Text="退出" OnClientClick="return Exit();" />
@@ -33,7 +34,7 @@
       </tr>
       <tr>
         <td  valign="top">
-          <div id="dvTree" style="width:100%; height:450px; overflow-x:hidden; overflow-y:auto;">
+          <div id="dvTree" style="width:100%; height:450px; overflow:auto;">
            <yyc:SmartTreeView ID="sTreeModule" runat="server" ShowLines="True" AllowCascadeCheckbox="True"></yyc:SmartTreeView>
           </div>
        </td>

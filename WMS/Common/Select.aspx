@@ -95,7 +95,7 @@
         <ProgressTemplate>            
             <div id="progressBackgroundFilter" style="display:none"></div>
             <div id="processMessage"> Loading...<br /><br />
-                 <img alt="Loading" src="../../images/process/loading.gif" />
+                 <img alt="Loading" src="../images/loading.gif" />
             </div>            
             </ProgressTemplate>
         </asp:UpdateProgress>  
@@ -161,9 +161,10 @@
                         <asp:LinkButton ID="btnPre" runat="server"   OnClick="btnPre_Click" >上一页</asp:LinkButton>&nbsp;
                         <asp:LinkButton ID="btnNext" runat="server"  OnClick="btnNext_Click" >下一页</asp:LinkButton>&nbsp;
                         <asp:LinkButton ID="btnLast" runat="server"  OnClick="btnLast_Click" >尾页</asp:LinkButton>&nbsp;&nbsp;
-                        <asp:TextBox ID="txtPage" runat="server" Width="34px" CssClass="pagetext" onkeypress="return regInput(this,/^\d+$/,String.fromCharCode(event.keyCode)) ;"
+                        <asp:TextBox ID="txtPageNo" runat="server" Width="34px" CssClass="pagetext" onkeypress="return regInput(this,/^\d+$/,String.fromCharCode(event.keyCode)) ;"
                          ondrop="return regInput(this,/^\d+$/,event.dataTransfer.getData('Text'));" onpaste="return regInput(this,/^\d+$/,window.clipboardData.getData('Text'));"
-                         onkeydown="if(event.keyCode==13){event.keyCode=9;document.getElementById('btnToPage').click();return false;}" ></asp:TextBox>
+                         
+                            onkeydown="if(event.keyCode==13){event.keyCode=9;document.getElementById('btnToPage').click();return false;}" ></asp:TextBox>
                          <asp:LinkButton ID="btnToPage" runat="server"  Width="40px" OnClick="btnToPage_Click" >跳转</asp:LinkButton>&nbsp;&nbsp;  
                         <asp:Label ID="lblPage" runat="server" Text=""></asp:Label>&nbsp;     
                     </td>

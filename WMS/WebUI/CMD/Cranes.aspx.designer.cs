@@ -7,19 +7,10 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace WMS.WebUI.SysInfo.RoleManage {
+namespace WMS.WebUI.CMD {
     
     
-    public partial class RoleManage {
-        
-        /// <summary>
-        /// Head1 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlHead Head1;
+    public partial class Cranes {
         
         /// <summary>
         /// form1 控件。
@@ -58,13 +49,85 @@ namespace WMS.WebUI.SysInfo.RoleManage {
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
         
         /// <summary>
-        /// gvGroupList 控件。
+        /// Literal1 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvGroupList;
+        protected global::System.Web.UI.WebControls.Literal Literal1;
+        
+        /// <summary>
+        /// ddlField 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlField;
+        
+        /// <summary>
+        /// Literal2 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal Literal2;
+        
+        /// <summary>
+        /// txtSearch 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSearch;
+        
+        /// <summary>
+        /// btnSearch 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSearch;
+        
+        /// <summary>
+        /// btnRefresh 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRefresh;
+        
+        /// <summary>
+        /// btnPrint 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPrint;
+        
+        /// <summary>
+        /// btnExit 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnExit;
+        
+        /// <summary>
+        /// GridView1 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridView1;
         
         /// <summary>
         /// btnFirst 控件。
@@ -121,6 +184,15 @@ namespace WMS.WebUI.SysInfo.RoleManage {
         protected global::System.Web.UI.WebControls.LinkButton btnToPage;
         
         /// <summary>
+        /// ddlPageSize 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPageSize;
+        
+        /// <summary>
         /// lblCurrentPage 控件。
         /// </summary>
         /// <remarks>
@@ -128,113 +200,5 @@ namespace WMS.WebUI.SysInfo.RoleManage {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblCurrentPage;
-        
-        /// <summary>
-        /// gvGroupListUser 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvGroupListUser;
-        
-        /// <summary>
-        /// btnFirstSub1 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnFirstSub1;
-        
-        /// <summary>
-        /// btnPreSub1 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnPreSub1;
-        
-        /// <summary>
-        /// btnNextSub1 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnNextSub1;
-        
-        /// <summary>
-        /// btnLastSub1 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnLastSub1;
-        
-        /// <summary>
-        /// txtPageNoSub1 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPageNoSub1;
-        
-        /// <summary>
-        /// btnToPageSub1 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnToPageSub1;
-        
-        /// <summary>
-        /// lblCurrentPageSub1 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCurrentPageSub1;
-        
-        /// <summary>
-        /// btnReload 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnReload;
-        
-        /// <summary>
-        /// hdnRowIndex 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnRowIndex;
-        
-        /// <summary>
-        /// hdnRowValue 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnRowValue;
-        
-        /// <summary>
-        /// hdnRowGroupName 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnRowGroupName;
     }
 }

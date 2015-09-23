@@ -109,7 +109,7 @@
             <ProgressTemplate>            
                 <div id="progressBackgroundFilter" style="display:none"></div>
                 <div id="processMessage"> Loading...<br /><br />
-                        <img alt="Loading" src="../../../images/process/loading.gif" />
+                        <img alt="Loading" src="../../../images/loading.gif" />
                 </div>      
             </ProgressTemplate> 
         </asp:UpdateProgress>  
@@ -143,9 +143,10 @@
                         </td>
                            
                         <td align="right" style="width:15%;">
-                            
+                              <asp:Button ID="btnAdd" runat="server" Text="新增" CssClass="ButtonCreate" OnClick="btnCreate_Click"
+                                    />
                             <asp:Button ID="btnDelete" runat="server" Text="删除" CssClass="ButtonDel" OnClick="btnDelete_Click"
-                                OnClientClick="return DelConfirm('btnDelete')" Enabled="False" />
+                                OnClientClick="return DelConfirm('btnDelete')"  />
                             
                             <asp:Button ID="btnExit" runat="server" Text="退出" OnClientClick="return Exit();" CssClass="ButtonExit" />
                         </td>
@@ -205,7 +206,7 @@
                             用户帐号
                         </td>
                         <td>
-                            &nbsp;<asp:TextBox ID="txtUserName" runat="server" CssClass="TextBox" Width="140px"></asp:TextBox>
+                            &nbsp;<asp:TextBox ID="txtUserName" runat="server" CssClass="TextBox" Width="156px"></asp:TextBox>
                             <asp:TextBox ID="txtUserID" runat="server" CssClass="HiddenControl" Width="0" Height="0" ></asp:TextBox>
                         </td>
                     </tr>
@@ -223,7 +224,7 @@
                             备注
                         </td>
                         <td>
-                            &nbsp;<asp:TextBox ID="txtMemo" runat="server" Height="88px"  TextMode="MultiLine"></asp:TextBox>
+                            &nbsp;<asp:TextBox ID="txtMemo" runat="server" Height="88px" Width="156px"  TextMode="MultiLine"></asp:TextBox>
                         </td>
                     </tr>
                 </table>

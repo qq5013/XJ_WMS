@@ -35,6 +35,8 @@
                             strCellCode += "'" + $(this).val() + "',";
                         }
                     });
+                    if ($('#hdnNewCellCode').val() != '')
+                        strCellCode += $('#hdnNewCellCode').val();
                     strCellCode += "'-1'";
 
                     var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and IsLock=0 and ProductCode='' and CellCode not in (" + strCellCode + ") ";
@@ -58,6 +60,8 @@
                         strCellCode += "'" + $(this)[0].innerText + "',";
                     }
                 });
+                if ($('#hdnOldCellCode').val() != '')
+                    strCellCode += $('#hdnOldCellCode').val();
                 strCellCode += "'-1'";
                 var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and IsLock=0 and ProductCode !='' and CellCode not in (" + strCellCode + ") ";
 
@@ -200,8 +204,6 @@
                                 <ItemStyle HorizontalAlign="Center" />
                                 <HeaderStyle Width="4%"  />
                             </asp:TemplateField>
-
-                           
                             <asp:TemplateField HeaderText="新货位">
                                <ItemTemplate>
                                     <asp:TextBox ID="NewCellCode" runat="server"  Width="80%" CssClass="TextBox"></asp:TextBox><asp:Button
@@ -281,6 +283,8 @@
 		    </table>
 
             <input type="hidden" runat="server" id="hdnMulSelect" /> 
+            <input type="hidden" runat="server" id="hdnOldCellCode" /> 
+            <input type="hidden" runat="server" id="hdnNewCellCode" /> 
               
             </ContentTemplate>
         </asp:UpdatePanel>

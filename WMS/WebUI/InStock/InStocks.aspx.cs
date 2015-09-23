@@ -63,8 +63,8 @@ namespace WMS.WebUI.InStock
             {
                 ViewState["filter"] = " BillID like 'IS%' " + " and " + string.Format("{0} like '%{1}%'", this.ddlField.SelectedValue, this.txtSearch.Text.Trim().Replace("'", ""));
                 ViewState["CurrentPage"] = 1;
-                SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
-
+                DataTable dt = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+                SetBindDataSub(dt);
             }
             catch (Exception exp)
             {
@@ -112,6 +112,7 @@ namespace WMS.WebUI.InStock
         protected void btnFirst_Click(object sender, EventArgs e)
         {
             ViewState["CurrentPage"] = 1;
+            this.hdnRowIndex.Value = "0";
            DataTable dt= SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
            SetBindDataSub(dt);
         }
@@ -120,6 +121,7 @@ namespace WMS.WebUI.InStock
         protected void btnPre_Click(object sender, EventArgs e)
         {
             ViewState["CurrentPage"] = int.Parse(ViewState["CurrentPage"].ToString()) - 1;
+            this.hdnRowIndex.Value = "0";
            DataTable dt= SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
            SetBindDataSub(dt);
         }
@@ -127,6 +129,7 @@ namespace WMS.WebUI.InStock
         protected void btnNext_Click(object sender, EventArgs e)
         {
             ViewState["CurrentPage"] = int.Parse(ViewState["CurrentPage"].ToString()) + 1;
+            this.hdnRowIndex.Value = "0";
            DataTable dt= SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
            SetBindDataSub(dt);
         }
@@ -134,6 +137,7 @@ namespace WMS.WebUI.InStock
         protected void btnLast_Click(object sender, EventArgs e)
         {
             ViewState["CurrentPage"] = 0;
+            this.hdnRowIndex.Value = "0";
             DataTable dt= SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
             SetBindDataSub(dt);
         }
@@ -146,6 +150,7 @@ namespace WMS.WebUI.InStock
                 PageIndex = 1;
 
             ViewState["CurrentPage"] = PageIndex;
+            this.hdnRowIndex.Value = "0";
             DataTable dt = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
             SetBindDataSub(dt);
         }

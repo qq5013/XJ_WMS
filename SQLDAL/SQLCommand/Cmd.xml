@@ -123,7 +123,7 @@
       select cmd.*, house.WarehouseName,area.AreaName from CMD_ProductType cmd
       inner join CMD_Area area on cmd.AreaCode=area.AreaCode
       inner join CMD_Warehouse house on area.WarehouseCode=house.WarehouseCode
-      where  ProductTypeCode!='0001' and {0} order by ProductTypeCode
+      where {0} order by ProductTypeCode
     </CommandString>
   </Command>
 
@@ -148,13 +148,54 @@
   <!--堆垛机信息-->
   <Command ID="SelectCrane">
     <CommandString>
-      Select * from CMD_Crane where {0} order by CraneNo
+      Select CMD_Crane.*,StateDesc from CMD_Crane inner join Sys_TableState on CMD_Crane.State=Sys_TableState.State and Sys_TableState.FieldName='State' and Sys_TableState.TableName='CMD_Crane'  where {0} order by CraneNo
     </CommandString>
   </Command>
+  <Command ID="UpdateCrane">
+    <CommandString>
+      Update CMD_Crane set CraneName=@CraneName,State=@State,Memo=@Memo where CraneNo=@CraneNo
+    </CommandString>
+  </Command>
+
+  <Command ID="InsertCrane">
+    <CommandString>
+      Insert into CMD_Crane(CraneNo,CraneName,Memo,State)
+      values(@CraneNo,@CraneName,@Memo,@State)
+    </CommandString>
+  </Command>
+
+  <Command ID="DeleteCrane">
+    <CommandString>
+      Delete from CMD_Crane where {0}
+    </CommandString>
+  </Command>
+  
+  
   <!--小车信息-->
   <Command ID="SelectCar">
     <CommandString>
-      Select * from CMD_Car where {0} order by CarNo
+      select CMD_Car.*,StateDesc from CMD_Car 
+      inner join Sys_TableState on CMD_Car.State=Sys_TableState.State and Sys_TableState.FieldName='State' and Sys_TableState.TableName='CMD_Car' 
+      where {0} order by CarNo
+    </CommandString>
+  </Command>
+
+  <Command ID="UpdateCar">
+    <CommandString>
+       Update CMD_Car set CarName=@CarName,State=@State,Memo=@Memo where CarNo=@CarNo
+    </CommandString>
+  </Command>
+
+  <Command ID="InsertCar">
+    <CommandString>
+       Insert into CMD_Car(CarNo,CarName,Memo,State)
+       values(@CarNo,@CarName,@Memo,@State)
+    </CommandString>
+  </Command>
+
+  <Command ID="DeleteCar">
+    <CommandString>
+       Delete from CMD_Car where {0} 
     </CommandString>
   </Command>
 

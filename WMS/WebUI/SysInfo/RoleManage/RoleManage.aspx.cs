@@ -9,10 +9,11 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using IDAL;
+using System.Drawing;
 
 namespace WMS.WebUI.SysInfo.RoleManage
 {
-    public partial class RoleManage : System.Web.UI.Page
+    public partial class RoleManage : App_Code.BasePage
     {
         private string strTableView = "v_sys_GroupList";
         private string strPrimaryKey = "GroupID";
@@ -26,45 +27,27 @@ namespace WMS.WebUI.SysInfo.RoleManage
         {
             try
             {
+               
                 if (!IsPostBack)
                 {
-                    if (Request.QueryString["SubModuelCode"] != null)
-                    {
-                        Session["SubModuleCode"] = Request.QueryString["SubModuelCode"];
-                    }
-                    else
-                    {
-                        Session["SubModuleCode"] = "";
-                    }
-                    PostBack = false;
+                    ViewState["filter"] = "1=1";
+                    ViewState["CurrentPage"] = 1;
+                    DataTable dt = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), 5, gvGroupList, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+                    SetBindDataSub(dt);
+
                 }
-                else
-                {
-                    PostBack = true;
-                }
-                GridDataBind();
+
+
+
             }
             catch (Exception exp)
             {
 
             }
+            lblCurrentPage.Visible = false;
+            lblCurrentPageSub1.Visible = false;
+            ScriptManager.RegisterStartupScript(this.UpdatePanel1, this.UpdatePanel1.GetType(), "Resize", "resize();", true);
         }
-
-        private void GridDataBind()
-        {
-            int TotalCount=0;
-            int PageCount = 0;
-            DataTable dtGroup = bll.GetDataPage("Security.SelectGroup", 1, 10000, out TotalCount,out PageCount, new DataParameter[] { new DataParameter("{0}", "1=1"), new DataParameter("{1}", "GroupName") });
-            this.gvGroupList.DataSource = dtGroup;
-            this.gvGroupList.DataBind();
-            if (!PostBack)
-            {
-                string script = string.Format("document.getElementById('iframeGroupUserList').src='GroupUserList.aspx?GroupID={0}&GroupName={1}' ;", dtGroup.Rows[0]["GroupID"].ToString(), dtGroup.Rows[0]["GroupName"].ToString());
-                script += string.Format("document.getElementById('iframeRoleSet').src='RoleSet.aspx?GroupID={0}&GroupName={1}' ;", dtGroup.Rows[0]["GroupID"].ToString(), dtGroup.Rows[0]["GroupName"].ToString());
-               WMS.App_Code.JScript.Instance.RegisterScript(this, script);
-            }
-        }
-
         #endregion
 
         /// <summary>
@@ -76,33 +59,202 @@ namespace WMS.WebUI.SysInfo.RoleManage
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
+                if (e.Row.RowIndex == Convert.ToInt32(this.hdnRowIndex.Value))
+                {
+                    e.Row.BackColor = ColorTranslator.FromHtml("#60c0ff");
+                }
+                e.Row.Attributes.Add("onclick", string.Format(" $('#hdnRowGroupName').val('{2}');$('#hdnRowValue').val('{1}');selectRow({0});", e.Row.RowIndex, e.Row.Cells[0].Text, e.Row.Cells[1].Text));
+                e.Row.Attributes.Add("style", "cursor:pointer;");
+
                 e.Row.Cells[0].Visible = false;
-                Label lbAdd = new Label();
-                lbAdd.Text = "  添加用户";
-                lbAdd.Attributes.Add("onmouseover", "currentcolor=this.style.color;this.style.fontWeight=''; this.style.cursor='hand';this.style.color='Black'");
-                lbAdd.Attributes.Add("onmouseout", "this.style.color='Black',this.style.fontWeight='';");
 
-                lbAdd.Attributes.Add("onclick", string.Format("UserSet('{0}','{1}');", e.Row.Cells[0].Text, e.Row.Cells[1].Text));
-                e.Row.Cells[2].Controls.Add(lbAdd);
+                Button btn = (Button)e.Row.Cells[2].FindControl("btnAddUser");
+                btn.Attributes.Add("onclick", string.Format("UserSet('{0}','{1}');", e.Row.Cells[0].Text, e.Row.Cells[1].Text));
 
-                e.Row.Attributes.Add("onclick", string.Format("ShowGroupUserList('{0}','{1}')", e.Row.Cells[0].Text, e.Row.Cells[1].Text));
-
-                //当鼠标放上去的时候 先保存当前行的颜色 并给附一规格
-                e.Row.Attributes.Add("onmouseover", "currentcolor=this.style.backgroundColor;this.style.fontWeight=''; this.style.cursor='hand';this.style.backgroundColor='Blue'");
-                //当鼠标离开的时候 将规格还原的以前的颜色
-
-
-                e.Row.Attributes.Add("onmouseout", "this.style.backgroundColor=currentcolor,this.style.fontWeight='';");
             }
             else if (e.Row.RowType == DataControlRowType.Header)
             {
                 e.Row.Cells[0].Visible = false;
             }
         }
-        protected void gvGroupList_PageIndexChanging(object sender, GridViewPageEventArgs e)
+
+        /// <summary>
+        /// GridView行绑定事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void gvGroupListUser_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            this.gvGroupList.PageIndex = e.NewPageIndex;
-            GridDataBind();
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                e.Row.Cells[0].Visible = false;
+            }
+            else if (e.Row.RowType == DataControlRowType.Header)
+            {
+                e.Row.Cells[0].Visible = false;
+            }
         }
+
+
+
+        #region 主档事件
+        protected void btnFirst_Click(object sender, EventArgs e)
+        {
+            ViewState["CurrentPage"] = 1;
+            this.hdnRowIndex.Value = "0";
+            DataTable dt = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), 5, gvGroupList, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+            lblCurrentPage.Visible = false;
+            SetBindDataSub(dt);
+        }
+
+
+        protected void btnPre_Click(object sender, EventArgs e)
+        {
+            ViewState["CurrentPage"] = int.Parse(ViewState["CurrentPage"].ToString()) - 1;
+            this.hdnRowIndex.Value = "0";
+            DataTable dt = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), 5, gvGroupList, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+            lblCurrentPage.Visible = false;
+            SetBindDataSub(dt);
+        }
+
+        protected void btnNext_Click(object sender, EventArgs e)
+        {
+            ViewState["CurrentPage"] = int.Parse(ViewState["CurrentPage"].ToString()) + 1;
+            this.hdnRowIndex.Value = "0";
+            DataTable dt = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), 5, gvGroupList, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+            lblCurrentPage.Visible = false;
+            SetBindDataSub(dt);
+        }
+
+        protected void btnLast_Click(object sender, EventArgs e)
+        {
+            ViewState["CurrentPage"] = 0;
+            this.hdnRowIndex.Value = "0";
+            DataTable dt = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), 5, gvGroupList, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+            lblCurrentPage.Visible = false;
+            SetBindDataSub(dt);
+        }
+
+        protected void btnToPage_Click(object sender, EventArgs e)
+        {
+            int PageIndex = 0;
+            int.TryParse(this.txtPageNo.Text, out PageIndex);
+            if (PageIndex == 0)
+                PageIndex = 1;
+
+            ViewState["CurrentPage"] = PageIndex;
+            this.hdnRowIndex.Value = "0";
+            DataTable dt = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), 5, gvGroupList, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+            lblCurrentPage.Visible = false;
+            SetBindDataSub(dt);
+        }
+
+        private void SetBindDataSub(DataTable dt)
+        {
+            string BillID = "";
+            if (dt.Rows.Count > 0)
+            {
+                BillID = dt.Rows[0]["GroupID"].ToString();
+                this.hdnRowValue.Value=dt.Rows[0]["GroupID"].ToString();
+                hdnRowGroupName.Value = dt.Rows[0]["GroupName"].ToString();
+                
+            }
+            BindDataSub(BillID);
+        }
+        private void BindDataSub(string BillID)
+        {
+            string script = string.Format("document.getElementById('iframeRoleSet').src='RoleSet.aspx?GroupID={0}&GroupName={1}' ;", this.hdnRowValue.Value, hdnRowGroupName.Value);
+            ScriptManager.RegisterStartupScript(this.UpdatePanel1, this.UpdatePanel1.GetType(), "", script, true);
+
+            BLL.BLLBase bll = new BLL.BLLBase();
+            DataTable dtSub = bll.FillDataTable("Security.SelectGroupUser", new DataParameter[] { new DataParameter("@GroupID", BillID) });
+            Session[FormID + "_S_gvGroupListUser"] = dtSub;
+            this.gvGroupListUser.DataSource = dtSub;
+            this.gvGroupListUser.DataBind();
+            MovePage("S", this.gvGroupListUser, 0, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
+            lblCurrentPageSub1.Visible = false;
+        }
+
+        #endregion
+
+        #region 子表绑定
+
+        protected void btnFirstSub1_Click(object sender, EventArgs e)
+        {
+            MovePage("S", this.gvGroupListUser, 0, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
+            lblCurrentPageSub1.Visible = false;
+        }
+
+        protected void btnPreSub1_Click(object sender, EventArgs e)
+        {
+            MovePage("S", this.gvGroupListUser, this.gvGroupListUser.PageIndex - 1, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
+            lblCurrentPageSub1.Visible = false;
+        }
+
+        protected void btnNextSub1_Click(object sender, EventArgs e)
+        {
+            MovePage("S", this.gvGroupListUser, this.gvGroupListUser.PageIndex + 1, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
+            lblCurrentPageSub1.Visible = false;
+        }
+
+        protected void btnLastSub1_Click(object sender, EventArgs e)
+        {
+            MovePage("S", this.gvGroupListUser, this.gvGroupListUser.PageCount - 1, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
+            lblCurrentPageSub1.Visible = false;
+        }
+
+        protected void btnToPageSub1_Click(object sender, EventArgs e)
+        {
+            MovePage("S", this.gvGroupListUser, int.Parse(this.txtPageNoSub1.Text) - 1, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
+            lblCurrentPageSub1.Visible = false;
+        }
+
+
+
+        #endregion
+
+        protected void btnReload_Click(object sender, EventArgs e)
+        {
+            int i = Convert.ToInt32(this.hdnRowIndex.Value);
+            BindDataSub(this.hdnRowValue.Value);
+            for (int j = 0; j < this.gvGroupList.Rows.Count; j++)
+            {
+                if (j % 2 == 0)
+                    this.gvGroupList.Rows[j].BackColor = ColorTranslator.FromHtml("#ffffff");
+                else
+                    this.gvGroupList.Rows[j].BackColor = ColorTranslator.FromHtml("#E9F2FF");
+                if (j == i)
+                    this.gvGroupList.Rows[j].BackColor = ColorTranslator.FromHtml("#60c0ff");
+            }
+
+        }
+
+
+        protected void btnDeleteUser_Click(object sender, EventArgs e)
+        {
+
+            bll.ExecNonQuery("Security.UpdateUserGroup", new DataParameter[] { new DataParameter("@GroupID", 0), new DataParameter("{0}", ((Button)sender).CommandArgument) });
+
+
+            BindDataSub(this.hdnRowValue.Value);
+        }
+
+        protected void btnAddUser_Click(object sender, EventArgs e)
+        {
+            BindDataSub(this.hdnRowValue.Value);
+            int i = Convert.ToInt32(this.hdnRowIndex.Value);
+           
+            for (int j = 0; j < this.gvGroupList.Rows.Count; j++)
+            {
+                if (j % 2 == 0)
+                    this.gvGroupList.Rows[j].BackColor = ColorTranslator.FromHtml("#ffffff");
+                else
+                    this.gvGroupList.Rows[j].BackColor = ColorTranslator.FromHtml("#E9F2FF");
+                if (j == i)
+                    this.gvGroupList.Rows[j].BackColor = ColorTranslator.FromHtml("#60c0ff");
+            }
+        }
+
+        
     }
 }

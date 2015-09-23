@@ -7,19 +7,10 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace WMS.WebUI.SysInfo.RoleManage {
+namespace WMS.WebUI.CMD {
     
     
-    public partial class RoleSet {
-        
-        /// <summary>
-        /// Head1 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlHead Head1;
+    public partial class CarEdit {
         
         /// <summary>
         /// form1 控件。
@@ -31,57 +22,75 @@ namespace WMS.WebUI.SysInfo.RoleManage {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// lbTitle 控件。
+        /// btnCancel 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbTitle;
+        protected global::System.Web.UI.WebControls.Button btnCancel;
         
         /// <summary>
-        /// lnkBtnExpand 控件。
+        /// btnSave 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkBtnExpand;
+        protected global::System.Web.UI.WebControls.Button btnSave;
         
         /// <summary>
-        /// lnkBtnCollapse 控件。
+        /// btnExit 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkBtnCollapse;
+        protected global::System.Web.UI.WebControls.Button btnExit;
         
         /// <summary>
-        /// lnkBtnSave 控件。
+        /// Table1 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button lnkBtnSave;
+        protected global::System.Web.UI.HtmlControls.HtmlTable Table1;
         
         /// <summary>
-        /// lnkBtnCancle 控件。
+        /// txtID 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button lnkBtnCancle;
+        protected global::System.Web.UI.WebControls.TextBox txtID;
         
         /// <summary>
-        /// sTreeModule 控件。
+        /// txtTypeName 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::YYControls.SmartTreeView sTreeModule;
+        protected global::System.Web.UI.WebControls.TextBox txtTypeName;
+        
+        /// <summary>
+        /// ddlActive 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlActive;
+        
+        /// <summary>
+        /// txtMemo 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMemo;
     }
 }

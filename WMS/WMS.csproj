@@ -242,6 +242,48 @@
       <DependentUpon>BaseService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="WebUI\CMD\CarEdit.aspx.cs">
+      <DependentUpon>CarEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\CMD\CarEdit.aspx.designer.cs">
+      <DependentUpon>CarEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\CMD\Cars.aspx.cs">
+      <DependentUpon>Cars.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\CMD\Cars.aspx.designer.cs">
+      <DependentUpon>Cars.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\CMD\CarView.aspx.cs">
+      <DependentUpon>CarView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\CMD\CarView.aspx.designer.cs">
+      <DependentUpon>CarView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\CMD\CraneEdit.aspx.cs">
+      <DependentUpon>CraneEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\CMD\CraneEdit.aspx.designer.cs">
+      <DependentUpon>CraneEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\CMD\Cranes.aspx.cs">
+      <DependentUpon>Cranes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\CMD\Cranes.aspx.designer.cs">
+      <DependentUpon>Cranes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\CMD\CraneView.aspx.cs">
+      <DependentUpon>CraneView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\CMD\CraneView.aspx.designer.cs">
+      <DependentUpon>CraneView.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebUI\CMD\FactoryEdit.aspx.cs">
       <DependentUpon>FactoryEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5483,6 +5525,12 @@
     <Content Include="JQuery\jquery.ztree.core-3.5.js" />
     <Content Include="JScript\JsDDL.js" />
     <Content Include="UserControl\Calendar.ascx" />
+    <Content Include="WebUI\CMD\CarEdit.aspx" />
+    <Content Include="WebUI\CMD\Cars.aspx" />
+    <Content Include="WebUI\CMD\CarView.aspx" />
+    <Content Include="WebUI\CMD\CraneEdit.aspx" />
+    <Content Include="WebUI\CMD\Cranes.aspx" />
+    <Content Include="WebUI\CMD\CraneView.aspx" />
     <Content Include="WebUI\CMD\ProductTypeEdit.aspx" />
     <Content Include="WebUI\CMD\ProductTypes.aspx" />
     <Content Include="WebUI\CMD\ProductTypeView.aspx" />

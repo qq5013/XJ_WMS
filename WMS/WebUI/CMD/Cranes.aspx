@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="OutStockTypes.aspx.cs" Inherits="WMS.WebUI.OutStock.OutStockTypes" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Cranes.aspx.cs" Inherits="WMS.WebUI.CMD.Cranes" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -35,13 +35,14 @@
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">                
             <ContentTemplate>
                 <div>
-                    <table  style="width: 100%; height: 20px;">
+                    <table  style="width: 100%; height: 20px;" >
                     <tr>
 						    <td class="smalltitle" align="center" width="7%" >
                                 <asp:Literal ID="Literal1" Text="查询栏位" runat="server"  ></asp:Literal>
                              </td>
 						    <td  width="15%" height="20">&nbsp;<asp:dropdownlist id="ddlField" runat="server" Width="85%" >
-                                    <asp:ListItem Selected="True" Value="BillTypeName">类型名称</asp:ListItem>
+                                    <asp:ListItem Selected="True" Value="CraneNo">堆垛机编码</asp:ListItem>
+                                    <asp:ListItem  Value="CraneName">堆垛机名称</asp:ListItem>
                                     <asp:ListItem Value="Memo">备注</asp:ListItem>
                                  </asp:dropdownlist>
                             </td>
@@ -65,9 +66,9 @@
                           <td align="right"  style="width:30%" valign="middle">
                              <%-- <asp:Button ID="btnPrint" runat="server" Text="导出" CssClass="ButtonPrint" OnClientClick="return print();"/>--%>
                            
-                            <asp:Button ID="btnAdd" runat="server" Text="新增" OnClientClick="return Add();" CssClass="ButtonCreate"/>&nbsp;
-                            <asp:Button ID="btnDelete" runat="server" Text="刪除" CssClass="ButtonDel" onclick="btnDeletet_Click" OnClientClick="return Delete('GridView1')" Width="51px"/>&nbsp;
-                             <asp:Button ID="btnPrint" runat="server" CssClass="ButtonPrint"   Text="打印" />&nbsp;
+                              &nbsp; &nbsp;
+                           
+                            <asp:Button ID="btnPrint" runat="server" Text="打印" CssClass="ButtonPrint"/>&nbsp;
                             <asp:Button ID="btnExit" runat="server" Text="离开" CssClass="ButtonExit" OnClientClick="return Exit()" Width="51px" />&nbsp;&nbsp;
                             
                           </td>
@@ -77,7 +78,7 @@
                 </div>
                 <div id="table-container" style="overflow: auto; WIDTH: 100%; HEIGHT: 470px">
                 
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" SkinID="GridViewSkin" Width="1100px" OnRowDataBound="GridView1_RowDataBound">
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" SkinID="GridViewSkin" Width="100%" OnRowDataBound="GridView1_RowDataBound">
                 <Columns>
                     <asp:TemplateField >
                         <HeaderTemplate>
@@ -89,47 +90,28 @@
                       <HeaderStyle Width="60px"></HeaderStyle>
                      <ItemStyle Width="60px" HorizontalAlign="Center"></ItemStyle>
                    </asp:TemplateField>
-                  <asp:TemplateField HeaderText="类型编号" SortExpression="BillTypeCode">
+                  <asp:TemplateField HeaderText="堆垛机编码" SortExpression="CraneNo">
                         <ItemTemplate>
-                            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# FormID+"View.aspx?SubModuleCode=" + SubModuleCode+"&FormID=" + FormID +"&SqlCmd="+SqlCmd+ "&ID="+DataBinder.Eval(Container.DataItem, "BillTypeCode") %>'
-                                Text='<%# DataBinder.Eval(Container.DataItem, "BillTypeCode")%>'></asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# FormID+"View.aspx?SubModuleCode=" + SubModuleCode+"&FormID=" + FormID +"&SqlCmd="+SqlCmd+ "&ID="+DataBinder.Eval(Container.DataItem, "CraneNo") %>'
+                                Text='<%# DataBinder.Eval(Container.DataItem, "CraneNo")%>'></asp:HyperLink>
                         </ItemTemplate>
                         <ItemStyle Width="12%" Wrap="False" />
                         <HeaderStyle Width="12%" Wrap="False" />
                     </asp:TemplateField>
-                    <asp:BoundField DataField="BillTypeName" HeaderText="类型名称" SortExpression="BillTypeName">
-                        <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                    <asp:BoundField DataField="CraneName" HeaderText="堆垛机名称" SortExpression="CraneName">
+                        <ItemStyle HorizontalAlign="Left" Width="20%" Wrap="False" />
+                        <HeaderStyle Wrap="False" />
+                    </asp:BoundField>
+                     <asp:BoundField DataField="StateDesc" HeaderText="状态" SortExpression="StateDesc">
+                        <ItemStyle HorizontalAlign="Left" Width="20%" Wrap="False" />
                         <HeaderStyle Wrap="False" />
                     </asp:BoundField>
                     <asp:BoundField DataField="Memo" HeaderText="备注" 
                         SortExpression="Memo" >
-                        <ItemStyle HorizontalAlign="Left" Width="15%" Wrap="False" />
+                        <ItemStyle HorizontalAlign="Left" Width="40%" Wrap="False" />
                         <HeaderStyle Wrap="False" />
                     </asp:BoundField>
-                     <asp:BoundField DataField="Creator" HeaderText="建单人员" 
-                        SortExpression="Creator"  >
-                        <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
-                        <HeaderStyle Wrap="False" />
-                    </asp:BoundField>
-                    <asp:TemplateField HeaderText="建单日期" SortExpression="CreateDate">
-                        <ItemTemplate>
-                            <%# ToYMD(DataBinder.Eval(Container.DataItem, "CreateDate"))%>
-                        </ItemTemplate>
-                        <HeaderStyle Wrap="False" />
-                        <ItemStyle HorizontalAlign="Left" VerticalAlign="Middle" Wrap="False" />
-                    </asp:TemplateField>
-                    <asp:BoundField DataField="Updater" HeaderText="修改人员" 
-                        SortExpression="Updater"  >
-                        <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
-                        <HeaderStyle Wrap="False" />
-                    </asp:BoundField>
-                    <asp:TemplateField HeaderText="修改日期" SortExpression="UpdateDate">
-                        <ItemTemplate>
-                            <%# ToYMD(DataBinder.Eval(Container.DataItem, "UpdateDate"))%>
-                        </ItemTemplate>
-                        <HeaderStyle Wrap="False" />
-                        <ItemStyle HorizontalAlign="Left" VerticalAlign="Middle" Wrap="False" />
-                    </asp:TemplateField>
+                     
                
                 </Columns>
             <PagerSettings Visible="False" />

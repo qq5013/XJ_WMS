@@ -38,6 +38,8 @@ namespace WMS.WebUI.SysInfo.RoleManage
                 //JScript.Instance.RegisterScript(this, "document.getElementById('divOp').style.display='block';");
                 this.lnkBtnSave.Visible = true;
             }
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Resize", "resize();", true);
         }
 
         #region SmartTreeView
@@ -132,7 +134,7 @@ namespace WMS.WebUI.SysInfo.RoleManage
 
         public void GroupOperationBind()
         {
-            DataTable dtOP = bll.FillDataTable("Security.SelectGroupOperation", new DataParameter[] { new DataParameter("@GroupID", Convert.ToInt32(ViewState["GroupID"])) });  
+            DataTable dtOP = bll.FillDataTable("Security.SelectGroupOperation", new DataParameter[] { new DataParameter("@GroupID",ViewState["GroupID"].ToString()) });  
             if (dtOP.Rows.Count > 0)
             {
                 foreach (DataRow dr in dtOP.Rows)

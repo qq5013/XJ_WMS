@@ -49,13 +49,13 @@ namespace WMS.WebUI.SysInfo.UserGroupManage {
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
         
         /// <summary>
-        /// pnlList 控件。
+        /// dvList 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlList;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvList;
         
         /// <summary>
         /// ddl_Field 控件。
@@ -94,6 +94,15 @@ namespace WMS.WebUI.SysInfo.UserGroupManage {
         protected global::System.Web.UI.WebControls.Button btnRefresh;
         
         /// <summary>
+        /// btnAdd 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAdd;
+        
+        /// <summary>
         /// btnDelete 控件。
         /// </summary>
         /// <remarks>
@@ -112,15 +121,6 @@ namespace WMS.WebUI.SysInfo.UserGroupManage {
         protected global::System.Web.UI.WebControls.Button btnExit;
         
         /// <summary>
-        /// pnlMain 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlMain;
-        
-        /// <summary>
         /// gvMain 控件。
         /// </summary>
         /// <remarks>
@@ -130,31 +130,85 @@ namespace WMS.WebUI.SysInfo.UserGroupManage {
         protected global::System.Web.UI.WebControls.GridView gvMain;
         
         /// <summary>
-        /// pnlNavigator 控件。
+        /// btnFirst 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlNavigator;
+        protected global::System.Web.UI.WebControls.LinkButton btnFirst;
         
         /// <summary>
-        /// pager 控件。
+        /// btnPre 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::AspNetPager.AspNetPager pager;
+        protected global::System.Web.UI.WebControls.LinkButton btnPre;
         
         /// <summary>
-        /// pnlEdit 控件。
+        /// btnNext 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlEdit;
+        protected global::System.Web.UI.WebControls.LinkButton btnNext;
+        
+        /// <summary>
+        /// btnLast 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnLast;
+        
+        /// <summary>
+        /// txtPageNo 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPageNo;
+        
+        /// <summary>
+        /// btnToPage 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnToPage;
+        
+        /// <summary>
+        /// ddlPageSize 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPageSize;
+        
+        /// <summary>
+        /// lblCurrentPage 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCurrentPage;
+        
+        /// <summary>
+        /// dvEdit 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvEdit;
         
         /// <summary>
         /// btnSave 控件。

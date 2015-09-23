@@ -13,50 +13,75 @@ using System.Drawing;
 
 namespace WMS.WebUI.SysInfo.RoleManage
 {
-    public partial class GroupUserManage : System.Web.UI.Page
+    public partial class GroupUserManage: App_Code.BasePage
     {
         string GroupID = "";
         string GroupName = "";
         
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            SqlCmd = "Security.SelectAllUser";
             if (Request.QueryString["GroupID"] != null)
             {
+
                 GroupID = Request.QueryString["GroupID"].ToString();
                 GroupName = Request.QueryString["GroupName"].ToString();
-                this.Label1.Text = "用户组" + GroupName + "成员设置";
-                BLL.BLLBase bll = new BLL.BLLBase();
-
-                this.dgUser.DataSource = bll.FillDataTable("Security.SelectAllUser", null);
-                this.dgUser.DataBind();
-                this.Title = "用户组" + GroupName + "成员设置";
-            }
-        }
-        protected void dgUser_ItemDataBound(object sender, DataGridItemEventArgs e)
-        {
-            DataGridItem row = (DataGridItem)e.Item;
-            if (row.ItemIndex % 2 == 0)
-            {
-                row.BackColor = Color.White;
-            }
-            else
-            {
-                row.BackColor = ColorTranslator.FromHtml("#E9F2FF");
-            }
-           
-            if (e.Item.ItemType == ListItemType.AlternatingItem || e.Item.ItemType == ListItemType.Item)
-            {
-                CheckBox chk = new CheckBox();
-                chk.Text = "加入" + GroupName;
-                e.Item.Cells[2].Controls.Add(chk);
-                if (e.Item.Cells[1].Text.Replace("&bsp;", "").Trim() == GroupName.Trim())
+                if (!IsPostBack)
                 {
-                    chk.Checked = true;
+                    ViewState["hdnRowValue"] = "";
+                    ViewState["filter"] = "1=1";
+                    ViewState["CurrentPage"] = 1;
+
+                    try
+                    {
+                        SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, this.gvGroupList, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+                    }
+                    catch (Exception exp)
+                    {
+                        WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, exp.Message);
+                    }
+
+
+                    this.Label1.Text = "用户组" + GroupName + "成员设置";
+                    
+                    this.Title = "用户组" + GroupName + "成员设置";
                 }
             }
-            e.Item.Cells[3].Visible = false;
-        }
 
+            ScriptManager.RegisterStartupScript(this.UpdatePanel1, this.UpdatePanel1.GetType(), "Resize", "resize();", true);
+        }
+        protected void gvGroupList_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                DataRowView drv = e.Row.DataItem as DataRowView;
+                
+
+                CheckBox btn = (CheckBox)e.Row.Cells[2].FindControl("cbSelect");
+                btn.Text = "加入" + GroupName;
+
+                if (drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("GroupName")].ToString() == GroupName.Trim())
+                {
+                    btn.Checked = true;
+                }
+
+                if (ViewState["hdnRowValue"].ToString().Length > 0)
+                {
+                    string[] Users = ViewState["hdnRowValue"].ToString().Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+                    if (((IList)Users).Contains("'" + e.Row.Cells[3].Text + "'"))
+                    {
+                        btn.Checked = true;
+                    }
+                }
+                e.Row.Cells[3].Visible = false;
+               
+            }
+            else if (e.Row.RowType == DataControlRowType.Header)
+            {
+                e.Row.Cells[3].Visible = false;
+            }
+        }
         /// <summary>
         /// 保存当前组用户
 
@@ -67,18 +92,14 @@ namespace WMS.WebUI.SysInfo.RoleManage
         {
             try
             {
+                UpdateTempUser();
                 string users = "-1,";
-                foreach (DataGridItem item in dgUser.Items)
-                {
-                    if (item.ItemType == ListItemType.AlternatingItem || item.ItemType == ListItemType.Item)
-                    {
-                        CheckBox chk = (CheckBox)item.Cells[2].Controls[1];
-                        if (chk.Checked)
-                        {
-                            users += item.Cells[3].Text + ",";
-                        }
-                    }
-                }
+                 
+                if (ViewState["hdnRowValue"].ToString().Length > 0)
+                    users += ViewState["hdnRowValue"].ToString().Replace("'", "");
+
+
+              
                 users += "-1";
 
                 BLL.BLLBase bll = new BLL.BLLBase();
@@ -101,9 +122,75 @@ namespace WMS.WebUI.SysInfo.RoleManage
 
         }
 
-        protected void dgUser_ItemCreated(object sender, DataGridItemEventArgs e)
+
+        private void UpdateTempUser()
         {
-           
+            string strID = "";
+            for (int i = 0; i < this.gvGroupList.Rows.Count; i++)
+            {
+                CheckBox cb = (CheckBox)(this.gvGroupList.Rows[i].FindControl("cbSelect"));
+                if (cb != null && cb.Checked)
+                {
+                    strID += "'" + this.gvGroupList.Rows[i].Cells[3].Text + "',";
+                }
+                else
+                {
+                    ViewState["hdnRowValue"] = ViewState["hdnRowValue"].ToString().Replace("'" + this.gvGroupList.Rows[i].Cells[3].Text + "',", "");
+                }
+            }
+            ViewState["hdnRowValue"] = ViewState["hdnRowValue"].ToString() + strID;
+             
         }
+
+        #region  换页
+        protected void btnFirst_Click(object sender, EventArgs e)
+        {
+            UpdateTempUser();
+            ViewState["CurrentPage"] = 1;
+            SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, gvGroupList, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+
+        }
+
+        protected void btnPre_Click(object sender, EventArgs e)
+        {
+            UpdateTempUser();
+            ViewState["CurrentPage"] = int.Parse(ViewState["CurrentPage"].ToString()) - 1;
+            SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, gvGroupList, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+        }
+
+        protected void btnNext_Click(object sender, EventArgs e)
+        {
+            UpdateTempUser();
+            ViewState["CurrentPage"] = int.Parse(ViewState["CurrentPage"].ToString()) + 1;
+            SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, gvGroupList, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+        }
+
+        protected void btnLast_Click(object sender, EventArgs e)
+        {
+            UpdateTempUser();
+            ViewState["CurrentPage"] = 0;
+            SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, gvGroupList, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+        }
+
+        protected void btnToPage_Click(object sender, EventArgs e)
+        {
+            UpdateTempUser();
+            int PageIndex = 0;
+            int.TryParse(this.txtPageNo.Text, out PageIndex);
+            if (PageIndex == 0)
+                PageIndex = 1;
+
+            ViewState["CurrentPage"] = PageIndex;
+            SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, gvGroupList, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
+        }
+
+        protected void ddlPageSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+
+
     }
 }
