@@ -38,16 +38,16 @@
 <body style=" margin:0px 0 0 0;" >
     <form id="form1" runat="server">
     
-     <table class="maintable" style="width:100%; height:35px" >
+     <table class="maintable" style="width:100%; height:25px" >
         <tr style="font-size:10pt; font-weight:bold; color:Black;">
-            <td style=" width:50%">  <asp:Label ID="lbTitle" runat="server" Font-Bold="True" Font-Size="10pt" Height="24px"
-                    Width="98%">用户组权限设置</asp:Label>&nbsp; 
+            <td style=" width:50%" valign="middle">  
+                <asp:Label ID="lbTitle" runat="server" Font-Bold="True" Width="98%">用户组权限设置</asp:Label>&nbsp; 
             </td>
-            <td  style="width:25%; height: 30px;">
+            <td  valign="middle" style="width:25%; height: 25px;">
                 <asp:LinkButton ID="lnkBtnExpand" runat="server" OnClick="lnkBtnExpand_Click" BorderStyle="None" Width="45px">展开</asp:LinkButton> &nbsp;&nbsp;&nbsp;
                 <asp:LinkButton ID="lnkBtnCollapse" runat="server" OnClick="lnkBtnCollapse_Click"  Width="45px">折叠</asp:LinkButton>
             </td>
-            <td align="right" style="width:25%; height: 30px;">
+            <td align="right" valign="middle" style="width:25%; height: 25px;">
                 <asp:Button ID="lnkBtnSave" runat="server" CssClass="ButtonSave" OnClick="lnkBtnSave_Click"  Text="保存" />  &nbsp;&nbsp;
                 <asp:Button ID="lnkBtnCancle" runat="server" CssClass="ButtonExit" Text="离开" 
                     OnClientClick="return Exit();"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

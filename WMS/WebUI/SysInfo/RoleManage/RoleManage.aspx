@@ -67,9 +67,9 @@
                 <tr>
                   <td style=" vertical-align:top; width: 300px;"><!--GroupList-->
                         
-                        <table class="maintable" style="width:298px; height:30px;">
+                        <table class="maintable" style="width:298px; height:25px;">
                             <tr>
-                                <td align="right" style="height:30px;">
+                                <td align="right" style="height:25px;">
                                    <asp:Button ID="btnAddUser" CssClass="ButtonCreate"  runat="server"  Text="添加用户"  OnClientClick="return UserSet();" OnClick="btnAddUser_Click"/> &nbsp;&nbsp;
                                 </td>
                             </tr>
@@ -127,7 +127,8 @@
                                       
                                        <asp:TemplateField HeaderText="操作" >
                                         <ItemTemplate>
-                                          <asp:Button ID="btnDeleteUser" CommandName="btnDeleteUser" CommandArgument= '<%# DataBinder.Eval(Container.DataItem, "UserID")%> ' CssClass="ButtonDel"  runat="server"  Text="删除用户" OnClick="btnDeleteUser_Click"/>   
+                                          <asp:Button ID="btnDeleteUser" CommandName="btnDeleteUser" CommandArgument= '<%# DataBinder.Eval(Container.DataItem, "UserID")%> ' CssClass="ButtonDel" 
+                                           runat="server"  Text="删除用户" OnClientClick="return confirm('确定要删除此用户？', '删除提示');" OnClick="btnDeleteUser_Click"/>   
                                         </ItemTemplate>
                                         <ItemStyle Width="85px" Wrap="False" />
                                         <HeaderStyle Width="85px" Wrap="False" />
