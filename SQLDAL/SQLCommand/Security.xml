@@ -83,12 +83,14 @@
   <Command ID="SelectAllUser">
     <CommandString>
       select UserName ,GroupName ,UserID from sys_UserList u left join sys_GroupList g on u.GroupID=g.GroupID 
+      order by UserName
     </CommandString>
   </Command>
   <!---->
   <Command ID="SelectGroupUser">
     <CommandString>
-      select UserID, UserName ,GroupName  from sys_UserList u left join sys_GroupList g on u.GroupID=g.GroupID where userName != 'admin' and u.GroupID=@GroupID;
+      select UserID, UserName ,GroupName  from sys_UserList u left join sys_GroupList g on u.GroupID=g.GroupID where userName != 'admin' and u.GroupID=@GroupID
+      order by username
     </CommandString>
   </Command>
   

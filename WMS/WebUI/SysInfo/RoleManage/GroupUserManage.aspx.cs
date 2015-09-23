@@ -64,6 +64,7 @@ namespace WMS.WebUI.SysInfo.RoleManage
                 if (drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("GroupName")].ToString() == GroupName.Trim())
                 {
                     btn.Checked = true;
+                    btn.Enabled = false;
                 }
 
                 if (ViewState["hdnRowValue"].ToString().Length > 0)

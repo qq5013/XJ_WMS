@@ -154,7 +154,7 @@ namespace WMS.WebUI.SysInfo.RoleManage
         }
         private void BindDataSub(string BillID)
         {
-            string script = string.Format("document.getElementById('iframeRoleSet').src='RoleSet.aspx?GroupID={0}&GroupName={1}' ;", this.hdnRowValue.Value, hdnRowGroupName.Value);
+            string script = string.Format("document.getElementById('iframeRoleSet').src='RoleSet.aspx?GroupID={0}&GroupName={1}' ;", this.hdnRowValue.Value, Server.UrlEncode(hdnRowGroupName.Value));
             ScriptManager.RegisterStartupScript(this.UpdatePanel1, this.UpdatePanel1.GetType(), "", script, true);
 
             BLL.BLLBase bll = new BLL.BLLBase();
