@@ -48,8 +48,7 @@
         </asp:UpdateProgress>  
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">                
             <ContentTemplate>
-                <table  class="maintable" cellspacing="0" cellpadding="0" bordercolor="#ffffff" width="100%" height="35px"
-                    border="1" runat="server">
+                <table  class="maintable" cellspacing="0" cellpadding="0" bordercolor="#ffffff" width="100%" height="35px" runat="server">
                     <tr>
                         <td style="width:50%; height:30px">
                            &nbsp;&nbsp;<asp:Label ID="Label1" runat="server" Font-Bold="True" Height="24px" Text="Label"
