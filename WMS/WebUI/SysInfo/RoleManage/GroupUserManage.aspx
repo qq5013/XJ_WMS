@@ -17,7 +17,7 @@
             });
         });
         function resize() {
-            var h = document.documentElement.clientHeight - 65;
+            var h = document.documentElement.clientHeight - 55;
             $("#Sub-container").css("height", h);
         }
 
@@ -48,16 +48,15 @@
         </asp:UpdateProgress>  
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">                
             <ContentTemplate>
-                <table  class="maintable" cellspacing="0" cellpadding="0" bordercolor="#ffffff" width="100%" height="35px" runat="server">
+                <table  class="maintable" cellspacing="0" cellpadding="0" bordercolor="#ffffff" width="100%" height="25px" runat="server">
                     <tr>
-                        <td style="width:50%; height:30px">
-                           &nbsp;&nbsp;<asp:Label ID="Label1" runat="server" Font-Bold="True" Height="24px" Text="Label"
-                                Width="161px" Font-Size="10pt"></asp:Label>
+                        <td style="width:50%; height:25px">
+                           &nbsp;&nbsp;<asp:Label ID="Label1" runat="server" Font-Bold="True" Text="Label" Font-Size="10pt"></asp:Label>
                    
                         </td>
                        <td style="width:50%" align="right" >
-                         <asp:Button ID="btnSave" runat="server" CssClass="ButtonSave" OnClick="btnSave_Click" Text="保存" />&nbsp;&nbsp;
-                         <asp:Button ID="btnClose" runat="server" Text="关闭" Width="60px" CssClass="ButtonExit" OnClientClick="return Close('0');" />&nbsp;&nbsp;&nbsp;&nbsp;
+                         <asp:Button ID="btnSave" runat="server" CssClass="ButtonSave" OnClick="btnSave_Click" Text="保存" />&nbsp;
+                         <asp:Button ID="btnClose" runat="server" Text="关闭" Width="60px" CssClass="ButtonExit" OnClientClick="return Close('0');" />&nbsp;
                         </td>
                     </tr>
                 </table>

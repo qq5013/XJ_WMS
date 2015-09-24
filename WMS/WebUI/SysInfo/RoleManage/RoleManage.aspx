@@ -1,6 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RoleManage.aspx.cs" Inherits="WMS.WebUI.SysInfo.RoleManage.RoleManage" %>
+<%@ Register Assembly="YYControls" Namespace="YYControls" TagPrefix="yyc" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" >
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head id="Head1" runat="server">
     <title>无标题页</title>
@@ -16,12 +18,13 @@
                 resize();
             });
         });
+   
         function resize() {
             var h = document.documentElement.clientHeight - 5;
             $("#table-container").css("height", h);
-            $("#dvGroupUser").css("height", h - 315);
-            $('#fieldset').css("height", h);
-            $('#iframeRoleSet').css("height", h);
+            $("#dvGroupUser").css("height", h - 277);
+           
+            $('#plTree').css("height", h - 30);
         }
 
 
@@ -47,7 +50,99 @@
 //            var t = d.getMinutes() + d.getMilliseconds();
 //            document.getElementById("iframeGroupUserList").src = "GroupUserList.aspx?GroupName=" + encodeURI(GroupName) + "&GroupID=" + GroupID + "&t=" + t;
 //            RoleSet(GroupID, GroupName);
+        }
+
+
+
+
+        function HandleCheckbox() {
+            var element = event.srcElement;
+            if (element.tagName == "INPUT" && element.type == "checkbox") {
+                var checkedState = element.checked;
+                while (element.tagName != "TABLE") // Get wrapping table               
+                {
+                    element = element.parentElement;
+                }
+                var parentElement = element;
+
+                if (checkedState) {
+                    CheckParents(element);
+                }
+
+                element = element.nextSibling; //element.tagName = DIV
+
+                if (element != null && typeof (element) != "undefined" && typeof (element.tagName) != "undefined") // If no childrens then exit 
+                {
+                    var childTables = element.getElementsByTagName("TABLE");
+
+                    for (var tableIndex = 0; tableIndex < childTables.length; tableIndex++) {
+                        CheckTable(childTables[tableIndex], checkedState);
+                    }
+                }
+                if (checkedState == false) {
+                    UnCheckParents(parentElement);
+                }
+
+            }
+        }                                                                             
+                                                                               
+// Uncheck the parents of the given table, Can remove the recurse (redundant)
+        function CheckParents(table) {
+            if (table == null || table.rows[0].cells.length == 2) // This is the root 
+            {
+                return;
+            }
+            var parentTable = table.parentElement.previousSibling;
+            CheckTable(parentTable, true);
+            CheckParents(parentTable);
         } 
+
+// Check the parents of the given table, Can remove the recurse (redundant)
+        function UnCheckParents(table) {
+
+            if (table == null || table.rows[0].cells.length == 2) // This is the root  
+            {
+                return;
+            }
+            var parentTable = table.parentElement.previousSibling;
+
+            var checkedCount = GetCheckedCount(table.parentElement);
+            if (checkedCount == 0) {
+                CheckTable(parentTable, false);
+            }
+            UnCheckParents(parentTable);
+        }                                                                              
+                                                                               
+    // Handle the set of checkbox checked state
+        function CheckTable(table, checked) {
+            var checkboxIndex = table.rows[0].cells.length - 1;
+            var cell = table.rows[0].cells[checkboxIndex];
+            var checkboxes = cell.getElementsByTagName("INPUT");
+            if (checkboxes.length == 1) {
+                checkboxes[0].checked = checked;
+            }
+
+        }
+    //Get checked children count
+        function GetCheckedCount(table) {
+            var checkedCount = 0;
+            var element = table.nextSibling;
+            var childTable = table.getElementsByTagName("TABLE");
+
+            for (var tableIndex = 0; tableIndex < childTable.length; tableIndex++) {
+                var childTables = childTable[tableIndex];
+                var checkboxIndex = childTables.rows[0].cells.length - 1;
+                var cell = childTables.rows[0].cells[checkboxIndex];
+                var checkboxes = cell.getElementsByTagName("INPUT");
+                if (checkboxes.length == 1 && checkboxes[0].checked == true) {
+                    checkedCount++;
+                }
+            }
+            return checkedCount;
+        }                                                                          
+ 
+
+                  
   </script>  
 </head>
 <body>
@@ -66,16 +161,6 @@
               <table id="table-container" cellpadding="0" cellspacing="0" >
                 <tr>
                   <td style=" vertical-align:top; width: 300px;"><!--GroupList-->
-                        
-                        <table class="maintable" style="width:298px; height:30px;">
-                            <tr>
-                                <td align="right" style="height:30px;">
-                                   <asp:Button ID="btnAddUser" CssClass="ButtonCreate"  runat="server"  Text="添加用户"  OnClientClick="return UserSet();" OnClick="btnAddUser_Click"/> &nbsp;&nbsp;
-                                </td>
-                            </tr>
-                        </table> 
-                             
-                        
                         <div style="overflow: auto; WIDTH: 100%; height:200px">
                             <asp:GridView ID="gvGroupList" runat="server" SkinID="GridViewSkin" AllowPaging="false" Width="100%"
                              AutoGenerateColumns="False" OnRowDataBound="gvGroupList_RowDataBound"  >
@@ -127,7 +212,8 @@
                                       
                                        <asp:TemplateField HeaderText="操作" >
                                         <ItemTemplate>
-                                          <asp:Button ID="btnDeleteUser" CommandName="btnDeleteUser" CommandArgument= '<%# DataBinder.Eval(Container.DataItem, "UserID")%> ' CssClass="ButtonDel"  runat="server"  Text="删除用户" OnClick="btnDeleteUser_Click"/>   
+                                          <asp:Button ID="btnDeleteUser" CommandName="btnDeleteUser" CommandArgument= '<%# DataBinder.Eval(Container.DataItem, "UserID")%> ' CssClass="ButtonDel" 
+                                           runat="server"  Text="删除用户" OnClientClick="return confirm('确定要删除此用户？', '删除提示');" OnClick="btnDeleteUser_Click"/>   
                                         </ItemTemplate>
                                         <ItemStyle Width="85px" Wrap="False" />
                                         <HeaderStyle Width="85px" Wrap="False" />
@@ -154,16 +240,30 @@
                         </div>
                   </td>
           
-                  <td style=" vertical-align:top; width: 100%;"><!--RoleSet-->
-                    <table cellpadding="0" cellspacing="0" width="100%">
-                       <tr>
-                         <td style="vertical-align:top; ">
-                           <fieldset id="fieldset" style=" width:98%; padding:0 0 0 0;">
-                             <iframe id="iframeRoleSet"  style="width:100%;" frameborder="0" scrolling="no"></iframe>
-                           </fieldset>
-                         </td>
-                       </tr>
-                    </table>
+                  <td style=" vertical-align:top; width: 100%; border-left:2px solid #5384bb;"><!--RoleSet-->
+                       <table class="maintable" style="width:100%; height:25px" >
+                        <tr style="font-size:10pt; font-weight:bold; color:Black;">
+                            <td style=" width:60%" valign="middle">  
+                                <asp:Label ID="lbTitle" runat="server" Font-Bold="True" >用户组权限设置</asp:Label> &nbsp;&nbsp;
+                                <asp:LinkButton ID="lnkBtnExpand" runat="server" OnClick="lnkBtnExpand_Click" BorderStyle="None">展开</asp:LinkButton> &nbsp;&nbsp;&nbsp;
+                                <asp:LinkButton ID="lnkBtnCollapse" runat="server" OnClick="lnkBtnCollapse_Click">折叠</asp:LinkButton>
+                            </td>
+                             
+                        
+                            <td align="right" valign="middle" style="width:40%; height: 25px;">
+                                <asp:Button ID="lnkBtnSave" runat="server" CssClass="ButtonSave" OnClick="lnkBtnSave_Click"  Text="保存" />&nbsp;
+                                <asp:Button ID="btnAddUser" CssClass="ButtonCreate"  runat="server"  Text="添加用户"  OnClientClick="return UserSet();" OnClick="btnAddUser_Click"/> &nbsp;
+                                <asp:Button ID="lnkBtnCancle" runat="server" CssClass="ButtonExit" Text="离开" OnClientClick="return Exit();"/>&nbsp;
+                            </td>
+         
+                        </tr>
+                      </table>
+                      <div id="plTree"  style="height:443px; width:100%; overflow: auto; " >
+                       <yyc:smarttreeview id="sTreeModule" runat="server" allowcascadecheckbox="True"  onclick="HandleCheckbox();"
+                            showlines="True" Font-Size="9pt" ExpandDepth="1">
+                           <LeafNodeStyle ForeColor="MidnightBlue" />
+                       </yyc:smarttreeview>
+                    </div>
                   </td>
                 </tr>
               </table>  
