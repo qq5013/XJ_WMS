@@ -30,6 +30,8 @@ namespace WMS.WebUI.SysInfo.RoleManage
                
                 if (!IsPostBack)
                 {
+                    InitSmartTree();
+
                     ViewState["filter"] = "1=1";
                     ViewState["CurrentPage"] = 1;
                     DataTable dt = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), 5, gvGroupList, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
@@ -154,8 +156,23 @@ namespace WMS.WebUI.SysInfo.RoleManage
         }
         private void BindDataSub(string BillID)
         {
-            string script = string.Format("document.getElementById('iframeRoleSet').src='RoleSet.aspx?GroupID={0}&GroupName={1}' ;", this.hdnRowValue.Value, Server.UrlEncode(hdnRowGroupName.Value));
-            ScriptManager.RegisterStartupScript(this.UpdatePanel1, this.UpdatePanel1.GetType(), "", script, true);
+            //string script = string.Format("document.getElementById('iframeRoleSet').src='RoleSet.aspx?GroupID={0}&GroupName={1}' ;", this.hdnRowValue.Value, Server.UrlEncode(hdnRowGroupName.Value));
+            //ScriptManager.RegisterStartupScript(this.UpdatePanel1, this.UpdatePanel1.GetType(), "", script, true);
+            string GroupName = hdnRowGroupName.Value;
+            this.lbTitle.Text = "用户组 <font color='Gray'>" + GroupName + "</font> 权限设置";
+            //InitSmartTree();
+            //this.sTreeModule.ExpandDepth = 1;
+            GroupOperationBind();
+            if (GroupName == "admin")
+            {
+                this.lnkBtnSave.Enabled = false;
+            }
+            else
+            {
+                this.lnkBtnSave.Enabled = true;
+            }
+
+
 
             BLL.BLLBase bll = new BLL.BLLBase();
             DataTable dtSub = bll.FillDataTable("Security.SelectGroupUser", new DataParameter[] { new DataParameter("@GroupID", BillID) });
@@ -164,6 +181,7 @@ namespace WMS.WebUI.SysInfo.RoleManage
             this.gvGroupListUser.DataBind();
             MovePage("S", this.gvGroupListUser, 0, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
             lblCurrentPageSub1.Visible = false;
+            
         }
 
         #endregion
@@ -246,6 +264,151 @@ namespace WMS.WebUI.SysInfo.RoleManage
             }
         }
 
-        
+
+        protected void lnkBtnSave_Click(object sender, EventArgs e)
+        {
+            string GroupID = this.hdnRowValue.Value;
+           
+
+
+
+            bll.ExecNonQuery("Security.DeleteGroupOperation", new DataParameter[] { new DataParameter("@GroupID", GroupID), new DataParameter("@SystemName", "WMS") });
+
+            foreach (TreeNode tnRoot in this.sTreeModule.Nodes)
+            {
+                foreach (TreeNode tnSub in tnRoot.ChildNodes)
+                {
+                    foreach (TreeNode tnOp in tnSub.ChildNodes)
+                    {
+                        if (tnOp.Checked)
+                        {
+
+                            string ModuleID = tnOp.Value;
+                            bll.ExecNonQuery("Security.InsertGroupOperation", new DataParameter[] { new DataParameter("@GroupID", GroupID), new DataParameter("@ModuleID", ModuleID) });
+
+                        }
+                    }
+                }
+            }
+
+            App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, "保存成功！");
+            BindDataSub(this.hdnRowValue.Value);
+
+
+        }
+
+        public void InitSmartTree()
+        {
+            this.sTreeModule.Nodes.Clear();
+            DataTable dtModules = bll.FillDataTable("Security.SelectSystemModules", new DataParameter[] { new DataParameter("@SystemName", "WMS") });
+            DataTable dtSubModules = bll.FillDataTable("Security.SelectSystemSubModules", new DataParameter[] { new DataParameter("@SystemName", "WMS") });
+            DataTable dtOperations = bll.FillDataTable("Security.SelectSystemOperations", new DataParameter[] { new DataParameter("@SystemName", "WMS") });
+            foreach (DataRow dr in dtModules.Rows)
+            {
+                TreeNode tnRoot = new TreeNode(dr["MenuTitle"].ToString(), dr["ModuleCode"].ToString().Trim());
+                tnRoot.SelectAction = TreeNodeSelectAction.Expand;
+                tnRoot.ShowCheckBox = true;
+                this.sTreeModule.Nodes.Add(tnRoot);
+            }
+            //为第一级菜单增加子级菜单
+
+
+            if (dtModules.Rows.Count > 0)
+            {
+                foreach (DataRow drSub in dtSubModules.Rows)
+                {
+                    for (int i = 0; i < sTreeModule.Nodes.Count; i++)
+                    {
+                        if (sTreeModule.Nodes[i].Value == drSub["ModuleCode"].ToString().Trim())
+                        {
+                            TreeNode tnChild = new TreeNode(drSub["MenuTitle"].ToString(), drSub["SubModuleCode"].ToString().Trim());
+                            tnChild.ShowCheckBox = true;
+                            tnChild.SelectAction = TreeNodeSelectAction.Expand;
+                            this.sTreeModule.Nodes[i].ChildNodes.Add(tnChild);
+                            break;
+                        }
+
+                    }
+                }
+            }
+
+            foreach (DataRow drOp in dtOperations.Rows)
+            {
+                for (int i = 0; i < sTreeModule.Nodes.Count; i++)
+                {
+                    for (int j = 0; j < sTreeModule.Nodes[i].ChildNodes.Count; j++)
+                    {
+                        if (sTreeModule.Nodes[i].ChildNodes[j].Value == drOp["SubModuleCode"].ToString().Trim())
+                        {
+                            TreeNode tnOp = new TreeNode(drOp["OperatorDescription"].ToString(), drOp["ModuleID"].ToString());
+                            tnOp.ShowCheckBox = true;
+                            tnOp.SelectAction = TreeNodeSelectAction.None;
+                            sTreeModule.Nodes[i].ChildNodes[j].ChildNodes.Add(tnOp);
+                        }
+                    }
+                }
+            }
+
+        }
+
+        public void GroupOperationBind()
+        {
+            DataTable dtOP = bll.FillDataTable("Security.SelectGroupOperation", new DataParameter[] { new DataParameter("@GroupID", this.hdnRowValue.Value) });
+
+
+            foreach (TreeNode tnRoot in this.sTreeModule.Nodes)
+            {
+                bool IsAllSelected = false;
+                foreach (TreeNode tnSub in tnRoot.ChildNodes)
+                {
+                    bool IsSubAllSelected = false;
+                    foreach (TreeNode tnOp in tnSub.ChildNodes)
+                    {
+                        tnOp.Checked = false;
+                        DataRow[] drs = dtOP.Select(string.Format("ModuleID={0}", tnOp.Value));
+                        if (drs.Length > 0)
+                        {
+                            tnOp.Checked = true;
+                        }
+                        if (tnOp.Checked)
+                        {
+                            IsSubAllSelected = true;
+                        }
+                    }
+                    if (IsSubAllSelected)
+                    {
+                        tnSub.Checked = true;
+                        IsAllSelected = true;
+                    }
+                    else
+                    {
+                        tnSub.Checked = false;
+                    }
+                }
+                if (IsAllSelected)
+                {
+                    tnRoot.Checked = true;
+                }
+                else
+                {
+                    tnRoot.Checked = false;
+                }
+            }
+
+
+
+        }
+
+        protected void lnkBtnCollapse_Click(object sender, EventArgs e)
+        {
+            //this.tvModuleList.CollapseAll();
+            this.sTreeModule.CollapseAll();
+        }
+        protected void lnkBtnExpand_Click(object sender, EventArgs e)
+        {
+            //this.tvModuleList.ExpandAll();
+            this.sTreeModule.ExpandAll();
+        }
+ 
     }
 }

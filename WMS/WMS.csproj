@@ -655,13 +655,6 @@
     <Compile Include="WebUI\SysInfo\PwdModify\PwdModify.aspx.designer.cs">
       <DependentUpon>PwdModify.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WebUI\SysInfo\RoleManage\GroupUserList.aspx.cs">
-      <DependentUpon>GroupUserList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\SysInfo\RoleManage\GroupUserList.aspx.designer.cs">
-      <DependentUpon>GroupUserList.aspx</DependentUpon>
-    </Compile>
     <Compile Include="WebUI\SysInfo\RoleManage\GroupUserManage.aspx.cs">
       <DependentUpon>GroupUserManage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -675,13 +668,6 @@
     </Compile>
     <Compile Include="WebUI\SysInfo\RoleManage\RoleManage.aspx.designer.cs">
       <DependentUpon>RoleManage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebUI\SysInfo\RoleManage\RoleSet.aspx.cs">
-      <DependentUpon>RoleSet.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\SysInfo\RoleManage\RoleSet.aspx.designer.cs">
-      <DependentUpon>RoleSet.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebUI\SysInfo\SystemLog\ExceptionLog.aspx.cs">
       <DependentUpon>ExceptionLog.aspx</DependentUpon>
@@ -5697,10 +5683,8 @@
     <Content Include="WebUI\SysInfo\AboutProduct\AboutProduct.aspx" />
     <Content Include="WebUI\SysInfo\ConfigPlan\ConfigPlan.aspx" />
     <Content Include="WebUI\SysInfo\PwdModify\PwdModify.aspx" />
-    <Content Include="WebUI\SysInfo\RoleManage\GroupUserList.aspx" />
     <Content Include="WebUI\SysInfo\RoleManage\GroupUserManage.aspx" />
     <Content Include="WebUI\SysInfo\RoleManage\RoleManage.aspx" />
-    <Content Include="WebUI\SysInfo\RoleManage\RoleSet.aspx" />
     <Content Include="WebUI\SysInfo\SystemLog\ExceptionLog.aspx" />
     <Content Include="WebUI\SysInfo\SystemLog\OperationLog.aspx" />
     <Content Include="WebUI\SysInfo\UserGroupManage\UserGroup.aspx" />

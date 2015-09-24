@@ -22,6 +22,7 @@ namespace WMS.WebUI.SysInfo.RoleManage
         {
 
             SqlCmd = "Security.SelectAllUser";
+            pageSize = 13;
             if (Request.QueryString["GroupID"] != null)
             {
 

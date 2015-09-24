@@ -41,7 +41,7 @@ namespace WMS.WebUI.SysInfo.PwdModify
 
                 userBll.UpdateUserPWD(this.txtUserName.Text.Trim(), this.txtAckPwd.Text.Trim());
                 //WMS.App_Code.JScript.Instance.ShowMessage(this, "密码修改成功!");
-                ClientScript.RegisterStartupScript(ClientScript.GetType(), "myscript", "<script type='text/javascript'>alert('密码修改成功!'); Exit();</script>");
+                ClientScript.RegisterClientScriptBlock(ClientScript.GetType(), "myscript", "<script type='text/javascript'>alert('密码修改成功!'); Exit();</script>");
             }
             else
             {
