@@ -77,8 +77,6 @@ namespace WMS.WebUI.SysInfo.ConfigPlan
         {
             BLL.BLLBase bll = new BLL.BLLBase();
             DataTable dtOP = bll.FillDataTable("Security.SelectUserQuickDesktop", new DataParameter[] { new DataParameter("@UserID", Convert.ToInt32(Session["UserID"].ToString())) });
-
-
             foreach (TreeNode tnRoot in this.sTreeModule.Nodes)
             {
                 bool IsAllSelected = false;
