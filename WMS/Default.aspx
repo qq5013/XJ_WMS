@@ -8,7 +8,7 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="Css/icon.css" />  
     <link rel="stylesheet" type="text/css" href="Css/default.css" />  
-    
+   
     <script type="text/javascript" src="JQuery/jquery-1.8.3.min.js"></script>  
     <script type="text/javascript" src= "JScript/Common.js"></script>
     <script type="text/javascript" src="Ext/ext-all.js"></script>  
@@ -52,6 +52,14 @@
         	 padding:8px 10px;
         	 color:Red;
         }
+        .x-tree-icon
+        {
+            height:20px;
+            width:16px;
+            vertical-align:bottom;
+        }
+       
+       
     </style>
 
     <script language="javascript" type="text/javascript">

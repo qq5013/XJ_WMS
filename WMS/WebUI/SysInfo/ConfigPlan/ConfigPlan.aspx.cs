@@ -77,35 +77,28 @@ namespace WMS.WebUI.SysInfo.ConfigPlan
         {
             BLL.BLLBase bll = new BLL.BLLBase();
             DataTable dtOP = bll.FillDataTable("Security.SelectUserQuickDesktop", new DataParameter[] { new DataParameter("@UserID", Convert.ToInt32(Session["UserID"].ToString())) });
-            if (dtOP.Rows.Count > 0)
+            foreach (TreeNode tnRoot in this.sTreeModule.Nodes)
             {
-                foreach (DataRow dr in dtOP.Rows)
+                bool IsAllSelected = false;
+                foreach (TreeNode tnSub in tnRoot.ChildNodes)
                 {
-                    foreach (TreeNode tnRoot in this.sTreeModule.Nodes)
+                    tnSub.Checked = false;
+                    DataRow[] drs = dtOP.Select(string.Format("ModuleID={0}", tnSub.Value));
+                    if (drs.Length > 0)
                     {
-                        bool IsAllSelected = true;
-                        foreach (TreeNode tnSub in tnRoot.ChildNodes)
-                        {
-                            bool IsSubAllSelected = true;
-
-                            if (tnSub.Value == dr["ModuleID"].ToString())
-                            {
-                                tnSub.Checked = true;
-                                break;
-                            }
-                            if (!tnSub.Checked)
-                            {
-                                IsSubAllSelected = false;
-                            }
-                        }
-                        if (IsAllSelected)
-                        {
-                            tnRoot.Checked = true;
-                        }
+                        tnSub.Checked = true;
+                    }
+                    if (tnSub.Checked)
+                    {
+                        IsAllSelected = true;
                     }
                 }
-
+                if (IsAllSelected)
+                {
+                    tnRoot.Checked = true;
+                }
             }
+
         }
 
 

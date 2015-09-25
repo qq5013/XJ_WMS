@@ -23,9 +23,9 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <table   style="width:100%; height:35px;" >
+    <table   style="width:100%; height:30px;" >
       <tr>
-        <td class="maintable" height="30px" >
+        <td class="maintable" height="25px" >
             &nbsp;
             <asp:Button ID="btnSave" runat="server" CssClass="ButtonSave" Text="保存" OnClick="btnSave_Click" />
             <asp:Button ID="btnExit" runat="server" CssClass="ButtonExit" Text="退出" OnClientClick="return Exit();" />
