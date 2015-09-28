@@ -4,10 +4,10 @@
     <title>仓库资料设置</title>
     <script type="text/javascript" src="../../JScript/Check.js?t=00"></script>
     <script type="text/javascript" src="../../JScript/Common.js"></script>
-    <link href="../../css/css.css?t=98" rel="Stylesheet" type="text/css" />
+    
     <link href="../../css/op.css" rel="Stylesheet" type="text/css" /> 
     <link href="~/Css/Main.css" type="text/css" rel="stylesheet" /> 
-    <link href="~/Css/Detail.css" type="text/css" rel="stylesheet" />
+   
     <link href="../../css/zTreeStyle/zTreeStyle.css" type="text/css" rel="stylesheet"/>
 
     <script type="text/javascript" src='<%=ResolveClientUrl("~/JQuery/jquery-1.8.3.min.js") %>'></script>

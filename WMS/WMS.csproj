@@ -5211,7 +5211,9 @@
     <Content Include="Images\banner.jpg" />
     <Content Include="Images\banner_1.jpg" />
     <Content Include="Images\bottom.jpg" />
+    <Content Include="Images\desktop\Car.png" />
     <Content Include="Images\desktop\Cigarette.png" />
+    <Content Include="Images\desktop\Crane.png" />
     <Content Include="Images\desktop\ErrorLog.png" />
     <Content Include="Images\desktop\Factory.png" />
     <Content Include="Images\desktop\BillType.png" />
