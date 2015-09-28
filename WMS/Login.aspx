@@ -100,7 +100,7 @@ input{
 				        <label>»¶Ó­µÇÂ¼</label>
                         <asp:TextBox ID="txtUserName" class="uid" value="" placeholder="ÇëÊäÈëÕÊºÅ" runat="server" />
                         <asp:TextBox ID="txtPassWord" class="pwd" TextMode="Password" value="" placeholder="ÇëÊäÈëÃÜÂë" runat="server" />
-                        <div style="padding-left: 20px;height:20px;">
+                        <div style="padding-left: 20px;height:20px; width:280;">
                         <font size="4" color="red"><asp:Literal ID="ltlMessage" Text="" runat="server"></asp:Literal></font>		
                         </div>        
 				        <asp:Button ID="btnLogin" CssClass="buttonLogin" runat="server" Text="Á¢¼´µÇÂ¼" OnClick="btnLogin_Click" />				        
