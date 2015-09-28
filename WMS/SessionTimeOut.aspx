@@ -9,7 +9,7 @@
     alert('对不起,操作时限已过,请重新登入！');
    
     window.opener = null;
-    window.parent.location = "Login.aspx?Logout=true";
+    window.top.location = "Login.aspx?Logout=true";
 //    window.parent.opener=null;
 //    window.parent.close();
 //    window.open('LoginPage.aspx','_Parent','height=700, width=1100, top=0, left=0, toolbar=yes, menubar=yes, scrollbars=no, resizable=yes,location=yes, status=yes');
