@@ -70,11 +70,11 @@ namespace WMS
 
                             //Session["grid_OddRowColor"] = "White";
                             //Session["grid_EvenRowColor"] = "AliceBlue";
-                           
-                         
 
 
-                            //Session.Timeout = int.Parse(dtUserList.Rows[0]["SessionTimeOut"].ToString());
+
+
+                            Session.Timeout = 30;
                             #region 添加登录日志
 
                             BLL.BLLBase bll = new BLL.BLLBase();

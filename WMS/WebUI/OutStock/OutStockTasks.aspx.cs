@@ -119,7 +119,8 @@ namespace WMS.WebUI.OutStock
             string BillID = "";
             if (dt.Rows.Count > 0)
             {
-                BillID = dt.Rows[0]["BillID"].ToString(); 
+                BillID = dt.Rows[0]["BillID"].ToString();
+                hdnRowValue.Value = dt.Rows[0]["BillID"].ToString();
             }
             BindDataSub(BillID);
         }

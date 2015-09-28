@@ -25,7 +25,8 @@ namespace WMS.App_Code
             {
                 if (Session["G_user"] == null)
                 {
-                    Response.Write("<script language='javascript'>alert('对不起，操作已经超时，请重新登录！');var udswin = window.open('../../WebUI/Start/Start.aspx','_top');</script>");
+                    Response.Write("<script language=javascript>parent.location.href='../../SessionTimeOut.aspx';</script>");
+                    Response.End();
                     return;
 
                   
