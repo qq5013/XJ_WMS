@@ -83,6 +83,15 @@
       select * from CMD_Cell WHERE {0} ORDER BY AreaCode,ShelfCode,CellCode
     </CommandString>
   </Command>
+  <!--货位信息-->
+  <Command ID="SelectCellByCar">
+    <CommandString>
+      select CMD_Cell.* from CMD_Cell
+      Left Join CMD_Shelf On CMD_Cell.ShelfCode=CMD_Shelf.ShelfCode
+      WHERE {0}
+      ORDER BY CMD_Cell.AreaCode,CMD_Cell.ShelfCode,CMD_Cell.CellCode
+    </CommandString>
+  </Command>
   <Command ID="DeleteCell">
     <CommandString>
       delete from CMD_Cell WHERE CellCode='{0}'
