@@ -6,11 +6,18 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Web.SessionState;
 using IDAL;
+using System.Web.Security;
 
-public class WareHouseTree : IHttpHandler, IRequiresSessionState
+
+public class WareHouseTree : IHttpHandler, IRequiresSessionState 
 {
     
     public void ProcessRequest (HttpContext context) {
+        if (context.Session["G_user"] == null)
+        {
+            context.Response.Write("-1");
+            return;
+        }
         context.Response.ContentType = "text/plain"; 
         BLL.BLLBase bll = new BLL.BLLBase();
         DataTable dtWareHouse = bll.FillDataTable("Cmd.SelectWarehouse");

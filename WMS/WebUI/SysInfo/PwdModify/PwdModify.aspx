@@ -47,27 +47,27 @@
               </td>
             </tr>
             <tr >
-                <td  class="musttitle" align="center" style=" width:20%;" >
+                <td   align="center" style=" width:20%;" >
                     用 户 名:</td>
                 <td  >
                 <asp:TextBox ID="txtUserName" runat="server" ReadOnly="True" CssClass="TextBox" 
                         Width="80%" ></asp:TextBox></td>
             </tr>
             <tr>
-                <td class="musttitle" align="center" style=" width:20%;"> 旧 密 码:</td>
+                <td   align="center" style=" width:20%;"> 旧 密 码:</td>
                 <td>
                    <asp:TextBox ID="txtOldPwd" runat="server"  TextMode="Password" 
                         CssClass="TextBox" Width="80%"></asp:TextBox></td>
             </tr>
             <tr>
-                 <td class="musttitle" align="center" style=" width:20%;">
+                 <td  align="center" style=" width:20%;">
                      新 密 码:</td>
                  <td>
                     <asp:TextBox ID="txtNewPwd" runat="server" TextMode="Password"  
                          CssClass="TextBox" Width="80%"></asp:TextBox></td>
             </tr>
              <tr  >
-                <td class="musttitle" align="center" style=" width:20%;"> 确认密码:</td>
+                <td   align="center" style=" width:20%;"> 确认密码:</td>
                 <td>
                    <asp:TextBox ID="txtAckPwd" runat="server" TextMode="Password" 
                         CssClass="TextBox" Width="80%"></asp:TextBox></td>

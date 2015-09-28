@@ -113,13 +113,20 @@
                 async: false,
                 method: 'get',
                 success: function (response) {
+                    if (response.responseText == "-1") {
+                        alert('对不起,操作时限已过,请重新登入！');
+                        window.opener = null;
+                        window.top.location = "../../Login.aspx?Logout=true";
 
-                    var json = Ext.JSON.decode(response.responseText)
-                    Ext.each(json, function (el) {
-                        //debugger
-                        tree = buildTree(el);
-                        leftPanel.add(tree);
-                    });
+                    }
+                    else {
+                        var json = Ext.JSON.decode(response.responseText)
+                        Ext.each(json, function (el) {
+                            //debugger
+                            tree = buildTree(el);
+                            leftPanel.add(tree);
+                        });
+                    }
 
                 },
                 failure: function (request) {
@@ -143,10 +150,11 @@
               centerPanel
               ]
             });
-
-            var root = tree.getRootNode().firstChild;
-            centerPanel.setTitle("当前选中的节点：" + root.data.text);
-            $("#frmMain_warehouse").attr("src", "WarehouseEditPage.aspx?WAREHOUSE_CODE=" + root.id);
+            if (typeof (tree) != "undefined") {
+                var root = tree.getRootNode().firstChild;
+                centerPanel.setTitle("当前选中的节点：" + root.data.text);
+                $("#frmMain_warehouse").attr("src", "WarehouseEditPage.aspx?WAREHOUSE_CODE=" + root.id);
+            }
 
         });
     </script>

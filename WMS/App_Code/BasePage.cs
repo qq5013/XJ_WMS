@@ -25,11 +25,9 @@ namespace WMS.App_Code
             {
                 if (Session["G_user"] == null)
                 {
-                    Response.Write("<script language=javascript>parent.location.href='../../SessionTimeOut.aspx';</script>");
-                    Response.End();
-                    return;
-
+                    Response.Redirect("../../SessionTimeOut.aspx");
                   
+                    return;
                     //Response.Write("<script language='javascript'>alert(parent.parent.location.href);parent.parent.location.href='../../WebUI/Start/SessionTimeOut.aspx';</script>");
                     //return;
 

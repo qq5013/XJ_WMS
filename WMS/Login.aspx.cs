@@ -74,7 +74,7 @@ namespace WMS
 
 
 
-                            Session.Timeout = 30;
+                            Session.Timeout = int.Parse(ConfigurationManager.AppSettings["SessionTimeOut"]);
                             #region 添加登录日志
 
                             BLL.BLLBase bll = new BLL.BLLBase();
