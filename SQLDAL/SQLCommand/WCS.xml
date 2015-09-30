@@ -36,9 +36,14 @@
       sp_GetEmptyCell
     </CommandString>
   </Command>
-<Command ID="Sp_CreatePalletOutTask">
+  <Command ID="Sp_CreatePalletOutTask">
     <CommandString>
       Sp_CreatePalletOutTask
+    </CommandString>
+  </Command>
+  <Command ID="Sp_CreatePalletOutTask2">
+    <CommandString>
+      Sp_CreatePalletOutTask2
     </CommandString>
   </Command>
   <Command ID="Sp_CreatePalletInTask">
