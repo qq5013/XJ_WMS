@@ -529,6 +529,13 @@
     <Compile Include="WebUI\Query\Cell.aspx.designer.cs">
       <DependentUpon>Cell.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WebUI\Query\CellInfo.aspx.cs">
+      <DependentUpon>CellInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\Query\CellInfo.aspx.designer.cs">
+      <DependentUpon>CellInfo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebUI\Query\CellQuery.aspx.cs">
       <DependentUpon>CellQuery.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5328,6 +5335,7 @@
     <Content Include="WebUI\OutStock\OutStockTypeView.aspx" />
     <Content Include="WebUI\OutStock\OutStockView.aspx" />
     <Content Include="WebUI\Query\Cell.aspx" />
+    <Content Include="WebUI\Query\CellInfo.aspx" />
     <Content Include="WebUI\Query\CellQuery.aspx" />
     <Content Include="WebUI\Query\OtherProductQuery.aspx" />
     <Content Include="WebUI\Query\OutStockDeliverQuery.aspx" />
@@ -5458,6 +5466,7 @@
     <None Include="Web References\PurchaseOrder\WmsService.wsdl" />
     <Content Include="Web\Ashx\MainHandler.ashx" />
     <Content Include="WebUI\CMD\WareHouseTree.ashx" />
+    <Content Include="WebUI\Query\WareHouseTree.ashx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Common\MistakesPage.aspx" />

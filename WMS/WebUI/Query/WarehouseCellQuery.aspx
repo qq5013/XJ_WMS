@@ -1,163 +1,174 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WarehouseCellQuery.aspx.cs" Inherits="WMS.WebUI.Query.WarehouseCellQuery" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" >
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>仓库资料设置</title>
-    <script type="text/javascript" src="../../JScript/Check.js?t=00"></script>
-    <script type="text/javascript" src="../../JScript/Common.js"></script>
-    <link href="../../css/css.css?t=98" rel="Stylesheet" type="text/css" />
-    <link href="../../css/op.css" rel="Stylesheet" type="text/css" /> 
-    <link href="~/Css/Main.css" type="text/css" rel="stylesheet" /> 
-    <link href="~/Css/Detail.css" type="text/css" rel="stylesheet" />
-    <link href="../../css/zTreeStyle/zTreeStyle.css" type="text/css" rel="stylesheet"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../../Css/op.css" />  
 
-  <script type="text/javascript" src='<%=ResolveClientUrl("~/JQuery/jquery-1.8.3.min.js") %>'></script>
-    <script type="text/javascript" src='<%=ResolveClientUrl("~/JQuery/jquery.ztree.core-3.5.js") %>'></script>
-     
-    
-    <script type="text/javascript">
-        function treeview_resize() {
-
-            var h = 300;
-            if ($(window).height() <= 0) {
-                h = document.body.clientHeight - $("#toptable")[0].offsetHeight - 40;
-            }
-            else {
-                h = document.body.clientHeight - $("#toptable")[0].offsetHeight - 40;
-            }
-
-            $("#div_tree").css("height", h);
-            $("#ShowPic").css("height", h);
-            $("#frame").css("height", h -5);
+    <link rel="stylesheet" type="text/css" href="../../Css/main.css" />  
+    <link rel="stylesheet" type="text/css" href="../../ext/packages/ext-theme-crisp/build/resources/ext-theme-crisp-all.css" /> 
+    <script type="text/javascript" src="../../JQuery/jquery-2.1.3.min.js"></script>  
+    <script type="text/javascript" src= "../../JScript/Common.js"></script>
+    <script type="text/javascript" src="../../Ext/ext-all.js"></script>  
+    <script type="text/javascript" src="../../Ext/packages/ext-theme-crisp/build/ext-theme-crisp.js"></script>
+    <style type="text/css">
+        .x-panel-header-title-default
+        {
+            font-family:微软雅黑;
+            font-size:14px;
+            font-weight:300;
+            line-height:16px;
              
         }
+        .x-grid-item
+        {
+             font-family:微软雅黑;
+        }
+    </style>
+    <script language="javascript" type="text/javascript">
+        var ShowCellTag = "<td style=\"width:30px; height:20px; background-color:Red\"></td><td>异常货位</td>"+
+                          "<td style=\"width:30px; height:20px; background-color:Blue\"></td><td>有货且未锁定</td>" +
+                          "<td style=\"width:30px; height:20px; background-color:Green\"></td><td>有货且锁定</td>" +
+                          "<td style=\"width:30px; height:20px; background-color:Gray\"></td><td>禁用货位</td>" +
+                          "<td style=\"width:30px; height:20px; background-color:Yellow\"></td><td>锁定的空货位</td>" +
+                          "<td style=\"width:30px; height:20px; background-color:Orange\"></td><td>未锁定的托盘</td>" +
+                          "<td style=\"width:30px; height:20px; background-color:Gold\"></td><td>锁定的托盘</td>" +
+                          "</tr></table>";
+        Ext.onReady(function () {
+            var blnReload = false;
+            var tree;
 
-        var setting = {
-            view: {
-                showIcon: showIconForTree
-            },
-            data: {
-                simpleData: {
-                    enable: true,
-                    IdKey: "id",
-                    pIdKey: "pid"
-                }
-            },
-            callback: {
-                onClick: onClick
-            }
-        };
-        function onClick(event, treeId, treeNode, clickFlag) {
-            var tNodeID = treeNode.id;
-            var tNodeIDLen = tNodeID.length;
-            var sShelfCode = "";
-            var sAreaCode = "";
-            if (tNodeIDLen == 3) {
-                //库区
-                sAreaCode = tNodeID;
-            }
-            if (tNodeIDLen == 6) {
-                //货架
-                sShelfCode = tNodeID;
-            }
-            document.getElementById("lblCurrentNode").innerHTML = treeNode.name;
-             
-            $("#frame").attr("src", " WarehouseCell.aspx?ShelfCode=" + sShelfCode + "&AreaCode=" + sAreaCode);
- 
-        };
-        function showIconForTree(treeId, treeNode) {
-            return !treeNode.isParent;
-        };
-        $(document).ready(function () {
-            zNodes = eval($('#hidetree').val()); //.replace('[','').replace(']','')
-            $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-            var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-            var tNodeID = zTree.getNodes(0)[0];
-            tNodeID.iconSkin = "../../images/leftmenu/in_warehouse.gif";
-            zTree.updateNode(tNodeID);
-            zTree.expandNode(tNodeID, true, null, null, false);
-            document.getElementById("lblCurrentNode").innerHTML = zTree.getNodes(0)[0].children[0].name;
-            $("#frame").attr("src", "WarehouseCell.aspx?ShelfCode=&AreaCode=" + zTree.getNodes(0)[0].children[0].id);
-            $('#btnUpdateSelected').bind('click', function () {
-                return false;
+            var topPanel = {
+                region: "north",
+                height: 29,
+                //bodyStyle: 'border:true;border-width:1px 0 1px 0;background:gray',
+                collapsible: false,
+
+                html: '<table style="width: 100%; height: 28px;" cellpadding="0" cellspacing="0"><tr class="maintable"><td style="height:28px" colspan="2" align="right"><input type="button" id="btnNewWarehouse" value="增加仓库" class="HiddenControl" onclick="OpenEditWarehouse()"  /><input type="button" id="btnNewArea" value="增加库区" class="HiddenControl" onclick="OpenEditArea()" /><input type="button" id="btnNewShelf" value="增加货架" class="HiddenControl" onclick="OpenEditShelf()" /><input type="button" id="btnNewCell" value="增加货位" class="HiddenControl" onclick="OpenEditCell()" /><input type="button" id="btnExit" value="退出" class="ButtonExit" onclick="Exit()" /></td></tr></table>'
+            };
+            var leftPanel = Ext.create('Ext.panel.Panel', {
+                region: 'west',
+                //title: '仓库资料',
+                bodyStyle: 'border:true;border-width:1px 1 1px 1;background:white',
+                width: 180,
+                minWidth: 90,
+                layout: 'fit',
+                //split: true,                
+                split: {
+                    size: 3
+                },
+
+                collapsible: false
+
             });
+            var centerPanel = Ext.create('Ext.panel.Panel', {
+                region: 'center',
+                title: '仓库资料',
+                //bodyStyle: 'border:true;border-width:1px 1 1px 1;background:blue',
+                layout: "fit",
+                plit: true,
+                border: true,
+                html: '<iframe id="frmMain_warehouse" scrolling="auto" frameborder="0" width="100%" height="100%" src=""> </iframe>',
+                collapsible: false
+            });
+            var buildTree = function (json) {
+                return Ext.create('Ext.tree.Panel', {
+                    rootVisible: false,
+
+                    title: '仓库资料',
+                    border: true,
+                    bodyStyle: 'background:white;',
+                    store: Ext.create('Ext.data.TreeStore', {
+                        root: {
+                            expanded: true,
+                            children: json.children
+                        }
+                    }),
+                    listeners: {
+                        'itemclick': function (view, record, item, index, e) {
+                            var tNodeID = record.get('id');
+                            var text = record.get('text');
+                            var tNodeIDLen = tNodeID.length;
+                            var sShelfCode = "";
+                            var sAreaCode = "";
+                            var sWareHouse = "";
+
+                            centerPanel.setTitle("<table style=\"width:100%;\" valign=\"middle\"><tr><td style=\"width:20%;\">当前选中的节点：" + text + " </td>" + ShowCellTag);
+                            $("#hdnNodeID").val(tNodeID);
+                            if (tNodeIDLen == 2) {
+                                sWareHouse = tNodeID;
+                            }
+                            if (tNodeIDLen == 3) {
+                                sAreaCode = tNodeID;
+                            }
+                            if (tNodeIDLen == 6) {
+                                sShelfCode = tNodeID;
+                            }
+                            $("#frmMain_warehouse").attr("src", "WarehouseCell.aspx?WareHouse=" + sWareHouse + "&AreaCode=" + sAreaCode + "&ShelfCode=" + sShelfCode);
+
+                        },
+                        scope: this
+                    }
+                });
+            };
+            Ext.Ajax.request({
+                url: 'WareHouseTree.ashx',
+                async: false,
+                method: 'get',
+                success: function (response) {
+                    if (response.responseText == "-1") {
+                        alert('对不起,操作时限已过,请重新登入！');
+                        window.opener = null;
+                        window.top.location = "../../Login.aspx?Logout=true";
+
+                    }
+                    else {
+                        var json = Ext.JSON.decode(response.responseText)
+                        Ext.each(json, function (el) {
+                            //debugger
+                            tree = buildTree(el);
+                            leftPanel.add(tree);
+                        });
+                    }
+
+                },
+                failure: function (request) {
+                    Ext.MessageBox.show({
+                        title: '操作提示',
+                        msg: "连接服务器失败",
+                        buttons: Ext.MessageBox.OK,
+                        icon: Ext.MessageBox.ERROR
+                    });
+                }
+
+            });
+
+
+            //布局
+            var viewport = new Ext.create('Ext.container.Viewport', {
+                enableTabScroll: true,
+                layout: "border",
+                items: [topPanel,
+                leftPanel,
+              centerPanel
+              ]
+            });
+            if (typeof (tree) != "undefined") {
+                var root = tree.getRootNode().firstChild;
+                centerPanel.setTitle("<table style=\"width:100%;\" valign=\"middle\"><tr><td style=\"width:20%;\">当前选中的节点：" + root.data.text + " </td>" + ShowCellTag);
+                $("#frmMain_warehouse").attr("src", " WarehouseCell.aspx?WareHouse=" + root.id + "&AreaCode=&ShelfCode=");
+            }
 
         });
     </script>
-    <style type="text/css">
-        .SideBar
-        {
-           background-image: url(../../images/bar_bg.gif);
-           background-position:right;
-           background-repeat:no-repeat;
-        
-           padding-top:5px;
-           vertical-align:top; 
-           width:214px; 
-           padding-right:4px;
-        }
-        .topic
-        {
-           padding-top:10px;
-        }
-        .topic2
-        {
-           text-align:center; 
-           padding-top:3px;
-           height:25px; 
-           width:72px; 
-           background-image:url(../../images/topic.gif);
-           background-repeat:no-repeat;
-        }
-    </style>
 </head>
-<body >
+<body>
     <form id="form1" runat="server">
-         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-           <ContentTemplate>
-               </ContentTemplate>
-               <Triggers>
-                  
-               </Triggers>
-        </asp:UpdatePanel>  
-        <table style="width:100%; background-color:WHITE;" cellpadding="0" cellspacing="0">
-           <tr>
-             <td class="maintable" colspan="2" align="right">
-                     <asp:Button ID="btnCancel" Text="退出" runat="server" CssClass="ButtonExit" OnClientClick="Exit();"  />            
-             </td>
-           </tr>
-           <tr>
-              <td class="SideBar">
-                <div id="div_tree" style="overflow-x:hidden; overflow-y:auto; width:280px; height:500px;">
-		            <ul id="treeDemo" class="ztree"></ul>
-	            </div>
-
-              </td>
-          
-           <td style="vertical-align:top; padding-left:10px;"> <!--编辑区-->
-            <div  id="toptable" style="height:24px;vertical-align:middle; width:100% ">
-               <img src="../../images/ico_home.gif" border="0"  />当前选中的节点：
-               <asp:Label ID="lblCurrentNode" runat="server" ForeColor="#404040"></asp:Label>
-            </div>
-            <div id="ShowPic" style="width:100%; height:500px;">
-               <iframe id="frame" runat="server" src="" style="width:100%; height:480px;" bordercolor="white" frameborder="no"></iframe>
-            </div>
-          </td>
-       </tr>
-        </table>
-    
-
      <div>
-        <asp:HiddenField ID="hidetree" runat="server" />
-         <asp:Button ID="btnUpdateSelected" runat="server" CssClass="HiddenControl" Text=""/>  
-     </div>  
-  
-  <%--
-     </ContentTemplate>
-        </asp:UpdatePanel>  --%>
-
-
-    </form>  
+     
+     </div>
+    </form>
 </body>
 </html>

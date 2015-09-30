@@ -58,7 +58,10 @@
             width:16px;
             vertical-align:bottom;
         }
-       
+       .x-accordion-hd .x-tool-img
+       {
+           background-color:#EAF2F4;
+       }
        
     </style>
 
