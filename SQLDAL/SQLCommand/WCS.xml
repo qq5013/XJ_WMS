@@ -67,6 +67,16 @@
       update WCS_TASK set State=@State where TaskNo=@TaskNo
     </CommandString>
   </Command>
+  <Command ID="UpdateTaskTimeByTaskNo">
+    <CommandString>
+      update WCS_TASK set State=@State,StartDate=getdate() where TaskNo=@TaskNo
+    </CommandString>
+  </Command>
+  <Command ID="UpdateBillStateByBillID">
+    <CommandString>
+      update WMS_BillMaster set State=@State where BillID=@BillID
+    </CommandString>
+  </Command>
   
   <Command ID="UpdateTaskState">
     <CommandString>
