@@ -36,14 +36,24 @@
       sp_GetEmptyCell
     </CommandString>
   </Command>
-<Command ID="Sp_CreatePalletOutTask">
+  <Command ID="Sp_CreatePalletOutTask">
     <CommandString>
       Sp_CreatePalletOutTask
+    </CommandString>
+  </Command>
+  <Command ID="Sp_CreatePalletOutTask2">
+    <CommandString>
+      Sp_CreatePalletOutTask2
     </CommandString>
   </Command>
   <Command ID="Sp_CreatePalletInTask">
     <CommandString>
       Sp_CreatePalletInTask
+    </CommandString>
+  </Command>
+  <Command ID="Sp_RequestPalletInTask">
+    <CommandString>
+      Sp_RequestPalletInTask
     </CommandString>
   </Command>
   <Command ID="UpdateCell">
@@ -55,6 +65,16 @@
   <Command ID="UpdateTaskStateByTaskNo">
     <CommandString>
       update WCS_TASK set State=@State where TaskNo=@TaskNo
+    </CommandString>
+  </Command>
+  <Command ID="UpdateTaskTimeByTaskNo">
+    <CommandString>
+      update WCS_TASK set State=@State,StartDate=getdate() where TaskNo=@TaskNo
+    </CommandString>
+  </Command>
+  <Command ID="UpdateBillStateByBillID">
+    <CommandString>
+      update WMS_BillMaster set State=@State where BillID=@BillID
     </CommandString>
   </Command>
   
@@ -93,12 +113,12 @@
       CMD_Cell.CellColumn, CMD_Cell.IsActive, CMD_Cell.Priority, CMD_Cell.PalletCode, CMD_Cell.PalletBarcode, CMD_Cell.ProductCode, CMD_Product.ProductName,
       CMD_Cell.BillNo, WMS_BillMaster.BillTypeCode, CMD_BillType.BillTypeName, CMD_Cell.Quantity, CMD_Cell.IsLock, CMD_Cell.ErrorFlag, CMD_Cell.InDate,
       CMD_Cell.Memo
-      FROM         CMD_Cell LEFT OUTER JOIN
-      CMD_Area ON CMD_Cell.AreaCode = CMD_Area.AreaCode LEFT OUTER JOIN
-      CMD_Shelf ON CMD_Cell.ShelfCode = CMD_Shelf.ShelfCode LEFT OUTER JOIN
-      WMS_BillMaster ON CMD_Cell.BillNo = WMS_BillMaster.BillID LEFT OUTER JOIN
-      CMD_BillType ON WMS_BillMaster.BillTypeCode = CMD_BillType.BillTypeCode LEFT OUTER JOIN
-      CMD_Product ON CMD_Cell.ProductCode = CMD_Product.ProductCode
+      FROM CMD_Cell 
+      LEFT OUTER JOIN CMD_Area ON CMD_Cell.AreaCode = CMD_Area.AreaCode 
+      LEFT OUTER JOIN CMD_Shelf ON CMD_Cell.ShelfCode = CMD_Shelf.ShelfCode 
+      LEFT OUTER JOIN WMS_BillMaster ON CMD_Cell.BillNo = WMS_BillMaster.BillID 
+      LEFT OUTER JOIN CMD_BillType ON WMS_BillMaster.BillTypeCode = CMD_BillType.BillTypeCode 
+      LEFT OUTER JOIN CMD_Product ON CMD_Cell.ProductCode = CMD_Product.ProductCode
       order by CMD_Cell.CellCode
     </CommandString>
   </Command>
