@@ -262,9 +262,6 @@ namespace WMS.WebUI.Stock
                         return;
                     }
                 }
-
-
-               
                 paras.Insert(0, new DataParameter[] { new DataParameter("@Lock", 1), new DataParameter("{0}", string.Format("BillID='{0}'", this.txtID.Text.Trim())) });
                 paras.Insert(1, new DataParameter[] { new DataParameter("@Lock", 1), new DataParameter("{0}", string.Format("BillID='{0}'", this.txtID.Text.Trim())) });
 
@@ -273,13 +270,17 @@ namespace WMS.WebUI.Stock
             }
             else
             {
-              
+                int State = int.Parse(bll.GetFieldValue("WMS_BillMaster", "State", string.Format("BillID='{0}'", this.txtID.Text)));
+                if (State > 1)
+                {
+                    WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel, this.txtID.Text + " 单号已经作业，不能进行反审。");
+                    return;
+                }
                 paras.Insert(0, new DataParameter[] { new DataParameter("@Lock", 0), new DataParameter("{0}", string.Format("BillID='{0}'", this.txtID.Text.Trim())) });
                 paras.Insert(1, new DataParameter[] { new DataParameter("@Lock", 0), new DataParameter("{0}", string.Format("BillID='{0}'", this.txtID.Text.Trim())) });
                 paras.Insert(2, new DataParameter[]{ new DataParameter("@Checker", ""), new DataParameter("{0}", "null"),
                  new DataParameter("@State", 0), new DataParameter("@BillID", this.txtID.Text)});
             }
-
 
             bll.ExecTran(Comd.ToArray(), paras);
            

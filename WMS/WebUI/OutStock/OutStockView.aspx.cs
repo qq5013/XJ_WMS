@@ -268,6 +268,12 @@ namespace WMS.WebUI.OutStock
             }
             else
             {
+                int State = int.Parse(bll.GetFieldValue("WMS_BillMaster", "State", string.Format("BillID='{0}'", this.txtID.Text)));
+                if (State > 1)
+                {
+                    WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel, this.txtID.Text + " 单号已经作业，不能进行反审。");
+                    return;
+                }
                 paras[0] = new DataParameter("@Checker", "");
                 paras[1] = new DataParameter("{0}", "null");
                 paras[2] = new DataParameter("@State", 0);

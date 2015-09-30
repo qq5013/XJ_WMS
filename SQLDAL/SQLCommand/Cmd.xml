@@ -501,23 +501,33 @@
   
   
   
-  <Command ID="SelectWareHouseCellQueryByArea">
-    <CommandString>
-      SELECT * FROM V_CMD_WH_CELL_ALL WHERE AREA_CODE = @AreaCode ORDER BY SHELF_CODE,CELL_CODE
-    </CommandString>
-  </Command>
-  <Command ID="SelectWareHouseCellQueryByAreaShelfWhere">
-    <CommandString>
-      SELECT * FROM V_CMD_WH_CELL_ALL WHERE AREA_CODE = @AreaCode and {0} ORDER BY SHELF_CODE,CELL_CODE
-    </CommandString>
-  </Command>
+  
+   
 
-  <Command ID="SelectWareHouseCellQueryByShelf">
+  <Command ID="SelectWareHouseCellQueryByWareHouse">
     <CommandString>
-      SELECT * FROM V_CMD_WH_CELL_ALL WHERE SHELF_CODE = @ShelfCode ORDER BY SHELF_CODE,CELL_CODE
+      SELECT * FROM View_CMD_CELL_ALL WHERE WarehouseCode = @WareHouse ORDER BY SHELFCODE,CELLCODE
     </CommandString>
   </Command>
   
+  <Command ID="SelectWareHouseCellQueryByArea">
+    <CommandString>
+      SELECT * FROM View_CMD_CELL_ALL WHERE AREACODE = @AreaCode ORDER BY SHELFCODE,CELLCODE
+    </CommandString>
+  </Command>
+  <Command ID="SelectWareHouseCellQueryByShelf">
+    <CommandString>
+      SELECT * FROM View_CMD_CELL_ALL WHERE SHELFCODE = @ShelfCode ORDER BY SHELFCODE,CELLCODE
+    </CommandString>
+  </Command>
+
+  <Command ID="SelectWareHouseCellInfoByCell">
+    <CommandString>
+      SELECT * FROM View_CMD_CELL_ALL WHERE CellCode = @CellCode
+    </CommandString>
+  </Command>
+
+
   <!--产品区间查询-->
   <Command ID="SelectProductBetweenQuery">
     <CommandString>

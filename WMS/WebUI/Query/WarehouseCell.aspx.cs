@@ -5,22 +5,38 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using IDAL;
 
 namespace WMS.WebUI.Query
 {
 
-    public partial class WarehouseCell : System.Web.UI.Page
+    public partial class WarehouseCell :App_Code.BasePage
     {
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            string WareHouse = Request.QueryString["WareHouse"].ToString();
             string ShelfCode = Request.QueryString["ShelfCode"].ToString();
             string AreaCode = Request.QueryString["AreaCode"].ToString();
-            BLL.BLLQuery bll = new BLL.BLLQuery();
+            BLL.BLLBase bll = new BLL.BLLBase();
 
-            DataTable tableCell = bll.GetWareHouseQuery(ShelfCode, AreaCode);
+            DataTable tableCell;
+            if (WareHouse != "")
+            {
+                tableCell = bll.FillDataTable("CMD.SelectWareHouseCellQueryByWareHouse", new DataParameter[] { new DataParameter("@WareHouse", WareHouse) });
+            }
+            else if (ShelfCode != "")
+            {
+                tableCell = bll.FillDataTable("CMD.SelectWareHouseCellQueryByShelf", new DataParameter[] { new DataParameter("@ShelfCode", ShelfCode) });
+            }
+            else
+            {
+                tableCell = bll.FillDataTable("CMD.SelectWareHouseCellQueryByArea", new DataParameter[] { new DataParameter("@AreaCode", AreaCode) });
+            }
+
+
             ShowCellChart(tableCell);
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "Resize", "content_resize();", true);
+            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "Resize", "resize();", true);
         }
 
         #region 显示货位图表
@@ -30,90 +46,167 @@ namespace WMS.WebUI.Query
             if (tableCell.Rows.Count == 0)
                 return;
            
-            Table tableShelf = new Table();
-            tableShelf.Attributes.Add("style", "width:1400px;");
-            TableRow trShelf = new TableRow();
-            string oldAreaCode = tableCell.Rows[0]["SHELF_CODE"].ToString();
-            string newAreaCode = tableCell.Rows[0]["SHELF_CODE"].ToString();
-            for (int i = 0; i < tableCell.Rows.Count; i++)
-            {
-                TableCell tc = new TableCell();
-                DataRow dr = tableCell.Rows[i];
-                int ColumnCount=int.Parse(dr["COLUMN_COUNT"].ToString());
-                #region 插入货架信息
-                if (i == 0)
-                {
-                    TableCell tcNew = new TableCell();
-                    tcNew.Text = dr["SHELF_NAME"].ToString()  +"   存放产品:"+ dr["PRODUCT_PartsName"].ToString() + " (" + dr["PRODUCT_MODEL"].ToString() + ") " + dr["COLOR_NAME"].ToString();
-                    tcNew.Attributes.Add("style", "font-size: 12px");
-                    tcNew.ColumnSpan = ColumnCount;
-                    tcNew.Height = 6;
-                    tcNew.Font.Bold = true;
-                    oldAreaCode = newAreaCode;
-                    trShelf.Controls.Add(tcNew);
-                    tableShelf.Controls.Add(trShelf);
-                    trShelf = new TableRow();
-                }
-                #endregion
-                #region 层数换行
-                if (i % ColumnCount == 0 && i > 0)
-                {
-                    tableShelf.Controls.Add(trShelf);
-                    trShelf = new TableRow();
-                }
-                #endregion
-                #region 货架判断
-                newAreaCode = dr["SHELF_CODE"].ToString();
-                if (oldAreaCode != newAreaCode)
-                {
-                    TableCell tcNew = new TableCell();
-                    tcNew.Text = dr["SHELF_NAME"].ToString() +"  存放产品:"+ dr["PRODUCT_PartsName"].ToString() + " (" + dr["PRODUCT_MODEL"].ToString() + ") " + dr["COLOR_NAME"].ToString();
-                    tcNew.Attributes.Add("style", "font-size: 12px");
-                    tcNew.ColumnSpan = ColumnCount;
-                    tcNew.Height = 6;
-                    tcNew.Font.Bold = true;
-                    oldAreaCode = newAreaCode;
-                    trShelf.Controls.Add(tcNew);
-                    tableShelf.Controls.Add(trShelf);
-                    trShelf = new TableRow();
-                }
-                #endregion
-              
+          
 
-                #region 插入货位信息
-                if (dr["IS_ACTIVE"].ToString() == "0")
+            DataTable dtShelf = tableCell.DefaultView.ToTable(true, "ShelfCode");
+            for (int i = 0; i < dtShelf.Rows.Count; i++)
+            {
+
+                Table shelfchar = CreateShelfChart(dtShelf.Rows[i]["ShelfCode"].ToString());
+                this.pnlCell.Controls.Add(shelfchar);
+
+
+            }
+        }
+
+        //货架显示图；
+        protected Table CreateShelfChart(string shelfCode)
+        {
+            BLL.BLLBase bll = new BLL.BLLBase();
+            DataTable ShelfCell = bll.FillDataTable("CMD.SelectWareHouseCellQueryByShelf", new DataParameter[] { new DataParameter("@ShelfCode", shelfCode) });
+
+            int Rows = int.Parse(ShelfCell.Rows[0]["Rows"].ToString());
+            int Columns = int.Parse(ShelfCell.Rows[0]["Columns"].ToString());
+            string Width = "15%";
+            if (Columns > 6)
+                Width = "8%";
+               
+
+
+            Table tb = new Table();
+            //tb.Attributes.Add("display", "table-cell");
+            for (int i = Rows; i >= 1; i--)
+            {
+                TableRow row = new TableRow();
+                for (int j = Columns; j >= 1; j--)
                 {
-                    tc.Text = string.Format("{0}<br/>未启用", dr["CELL_Name"].ToString());
-                    tc.Attributes.Add("style", "background-color: #C0C0C0;cursor:default;font-size: 12px ;text-align:center");
-                }
-                else
-                {
-                    if (dr["IS_LOCK"].ToString() == "1")
+                    int k = j;
+                    if (shelfCode == "001002" || shelfCode == "001004")  //特殊处理
                     {
-                        tc.Text = string.Format("{0}<br/>" + (dr["IN_DATE"].ToString().Length > 0 ? "已入锁定" : "未入锁定"), dr["CELL_Name"].ToString());
-                        tc.Attributes.Add("style", "background-color: #FF0000;cursor:hand;font-size: 12px ;text-align:center");
-                        tc.ToolTip = string.Format("产品数量：{0}\r\n箱 条 码 ：{1}", dr["QUANTITY"].ToString(), dr["PALLET_CODE"].ToString());
+                        k= j + 1;
+                    }
+                    if (shelfCode == "001005" )
+                    {
+                        k = 12 - j;
+                    }
+                    if (shelfCode == "001006")
+                    {
+                        k = 13 - j;
+                    }
+
+                    TableCell cell = new TableCell();
+                    DataRow[] drs = ShelfCell.Select(string.Format("CellRow={0} and CellColumn={1}", i, k), "");
+                    cell.ID = drs[0]["CellCode"].ToString();
+                 
+                    string style = "height:25px;width:" + Width + ";border:2px solid #008B8B;";
+                    string backColor = ReturnColorFlag(drs[0]["ProductCode"].ToString(), drs[0]["IsActive"].ToString(), drs[0]["IsLock"].ToString(), drs[0]["ErrorFlag"].ToString(), ToYMD(drs[0]["InDate"]));
+                    if (drs[0]["ProductCode"].ToString() != "")
+                    {
+                        style += "background-color:" + backColor + ";";
+                    }
+
+                    cell.Attributes.Add("style", style);
+                    cell.Attributes.Add("onclick", "ShowCellInfo('" + cell.ID + "');");
+                    row.Cells.Add(cell);
+                    if (j == 1)
+                    {
+                        if (shelfCode == "001002" || shelfCode == "001005" || shelfCode == "001004")
+                        {
+                            TableCell cellAdd = new TableCell();
+                            cellAdd.Attributes.Add("style", "height:25px;width:" + Width + ";border:0px solid #008B8B");
+                            row.Cells.Add(cellAdd);
+                        }
+                        TableCell cellTag = new TableCell();
+                        cellTag.Attributes.Add("style", "height:25px;width:120px;border:0px solid #008B8B");
+                        cellTag.Attributes.Add("align", "right");
+                        cellTag.Text = "<font color=\"#008B8B\"> 第" + int.Parse(shelfCode.Substring(3, 3)).ToString() + "排第" + i.ToString() + "层</font>";
+                        row.Cells.Add(cellTag);
+                    }
+
+                }
+                tb.Rows.Add(row);
+
+                if (i == 1)
+                {
+                    TableRow rowNum = new TableRow();
+                    for (int j = Columns; j >= 1; j--)
+                    {
+                       
+                        int k = j;
+                        if (shelfCode == "001002" || shelfCode == "001004")  //特殊处理
+                        {
+                            k = j + 1;
+                        }
+                        if (shelfCode == "001005")
+                        {
+                            k = 12 - j;
+                        }
+                        if (shelfCode == "001006")
+                        {
+                            k = 13 - j;
+                        }
+                        TableCell cellNum = new TableCell();
+                        cellNum.Attributes.Add("style", "height:40px;width:" + Width.ToString() + "px;border:0px solid #008B8B");
+                        cellNum.Attributes.Add("align", "center");
+                        cellNum.Attributes.Add("Valign", "top");
+                        cellNum.Text = "<font color=\"#008B8B\">"+k.ToString()+"</font>";
+
+                        rowNum.Cells.Add(cellNum);
+                        
+                    }
+                    tb.Rows.Add(rowNum);
+
+                }
+
+            }
+            return tb;
+
+        }
+        private string  ReturnColorFlag(string ProductCode, string IsActive, string IsLock, string ErrFlag,string Indate)
+        {
+            string Flag = "White";
+            if (ProductCode == "" || Indate == "") //空货位锁定
+            {
+                if (IsLock == "1")
+                {
+                    Flag = "Yellow";
+                }
+
+            }
+            else
+            {
+
+                if (IsLock == "1")
+                {
+                    if (ProductCode == "0001" || ProductCode == "0002")
+                    {
+                        Flag = "Gold";
                     }
                     else
                     {
-                        if (dr["IN_DATE"].ToString().Length > 0)
-                        {
-                            tc.Text = string.Format("{0}<br/>已装货", dr["CELL_Name"].ToString());
-                            tc.Attributes.Add("style", "background-color: #0066FF;cursor:hand;font-size: 12px ;text-align:center");
-                            tc.ToolTip = string.Format("产品数量：{0}\r\n箱 条 码 ：{1}", dr["QUANTITY"].ToString(), dr["PALLET_CODE"].ToString());
-                        }
-                        else
-                        {
-                            tc.Text = string.Format("{0}<br/>空货位", dr["CELL_Name"].ToString());
-                            tc.Attributes.Add("style", "background-color: #00ffc0;cursor:hand;font-size: 12px ;text-align:center");
-                        }
+                        Flag = "Green";
                     }
                 }
-                #endregion
-                trShelf.Controls.Add(tc);
+                else
+                {
+                    if (ProductCode == "0001" || ProductCode == "0002")
+                    {
+                        Flag = "Orange";
+                    }
+                    else
+                    {
+                        Flag = "Blue";
+                    }
+                }
+
+
+
             }
-            tableShelf.Controls.Add(trShelf);
-            this.pnlCell.Controls.Add(tableShelf);
+            if (IsActive == "0")
+                Flag = "Gray";
+            if (ErrFlag == "1")
+                Flag = "Red";
+            return Flag;
         }
         #endregion
     }
