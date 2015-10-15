@@ -13,11 +13,12 @@ namespace WMS.WebUI.CMD
 
     public partial class Products : App_Code.BasePage
     {
+        private string filter = "AreaCode='001' ";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                ViewState["filter"] = " ProductCode not in ('0001','0002') ";
+                ViewState["filter"] = filter;
                 ViewState["CurrentPage"] = 1;
 
                 try
@@ -38,6 +39,16 @@ namespace WMS.WebUI.CMD
         }
         protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
         {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                if (((System.Data.DataRowView)e.Row.DataItem).Row.ItemArray[((System.Data.DataRowView)e.Row.DataItem).Row.Table.Columns.IndexOf("IsFixed")].ToString()=="1")
+                {
+                    HyperLink hk = (HyperLink)e.Row.Cells[1].FindControl("HyperLink1");
+                    CheckBox chk = (CheckBox)e.Row.Cells[0].FindControl("cbSelect");
+                    chk.Enabled = false;
+                    hk.Enabled = false;
+                }
+            }
 
         }
 
@@ -46,7 +57,7 @@ namespace WMS.WebUI.CMD
 
             try
             {
-                ViewState["filter"] =" ProductCode not in ('0001','0002') and "+ string.Format("{0} like '%{1}%'", this.ddlField.SelectedValue, this.txtSearch.Text.Trim().Replace("'", ""));
+                ViewState["filter"] = filter + " and " + string.Format("{0} like '%{1}%'", this.ddlField.SelectedValue, this.txtSearch.Text.Trim().Replace("'", ""));
                 ViewState["CurrentPage"] = 1;
                 SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
 

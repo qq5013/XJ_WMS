@@ -42,9 +42,9 @@
                              </td>
 						    <td  width="15%" height="20">&nbsp;
                                 <asp:dropdownlist id="ddlField" runat="server" Width="85%" >
-                                    <asp:ListItem Selected="True" Value="TypeName">车型名称</asp:ListItem>
-                                    <asp:ListItem  Value="AxieNo">车轴编号</asp:ListItem>
-                                    <asp:ListItem  Value="ProductName">产品名称</asp:ListItem>
+                                    <asp:ListItem Selected="True" Value="ProductTypeName">产品类别</asp:ListItem>
+                                    <asp:ListItem  Value="AxieNo">单位</asp:ListItem>
+                                    <asp:ListItem  Value="ProductName">品名</asp:ListItem>
                                     <asp:ListItem Value="Memo">备注</asp:ListItem>
                                  </asp:dropdownlist>
                             </td>
@@ -92,7 +92,7 @@
                       <HeaderStyle Width="60px"></HeaderStyle>
                      <ItemStyle Width="60px" HorizontalAlign="Center"></ItemStyle>
                    </asp:TemplateField>
-                  <asp:TemplateField HeaderText="产品编码" SortExpression="ProductCode">
+                  <asp:TemplateField HeaderText="产品编号" SortExpression="ProductCode">
                         <ItemTemplate>
                             <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# FormID+"View.aspx?SubModuleCode=" + SubModuleCode+"&FormID=" + FormID +"&SqlCmd="+SqlCmd+ "&ID="+DataBinder.Eval(Container.DataItem, "ProductCode") %>'
                                 Text='<%# DataBinder.Eval(Container.DataItem, "ProductCode")%>'></asp:HyperLink>
@@ -100,7 +100,7 @@
                         <ItemStyle Width="12%" Wrap="False" />
                         <HeaderStyle Width="12%" Wrap="False" />
                     </asp:TemplateField>
-                    <asp:BoundField DataField="ProductName" HeaderText="产品名称" SortExpression="ProductName">
+                    <asp:BoundField DataField="ProductName" HeaderText="品名" SortExpression="ProductName">
                         <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                         <HeaderStyle Wrap="False" />
                     </asp:BoundField>
@@ -108,11 +108,13 @@
                         <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                         <HeaderStyle Wrap="False" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="TrainTypeName" HeaderText="车型" SortExpression="TrainTypeName">
-                        <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
+                     
+                     <asp:CheckBoxField DataField="ChkIsTmp" HeaderText="临时产品"  SortExpression="ChkIsTmp">
+                        <ItemStyle HorizontalAlign="Center" Width="10%" Wrap="False" />
                         <HeaderStyle Wrap="False" />
-                    </asp:BoundField>
-                    <asp:BoundField DataField="AxieNo" HeaderText="车轴编号" SortExpression="AxieNo">
+                    </asp:CheckBoxField>
+                    
+                    <asp:BoundField DataField="AxieNo" HeaderText="单位" SortExpression="AxieNo">
                         <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                         <HeaderStyle Wrap="False" />
                     </asp:BoundField>

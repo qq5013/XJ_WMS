@@ -16,6 +16,7 @@ namespace WMS.WebUI.Stock
         private string TableName = "WMS_BillMaster";
         private string PrimaryKey = "BillID";
         BLL.BLLBase bll = new BLL.BLLBase();
+        private string Filter = "BillID like 'MS%'";
         protected void Page_Load(object sender, EventArgs e)
         {
             strID = Request.QueryString["ID"] + "";
@@ -188,19 +189,19 @@ namespace WMS.WebUI.Stock
         #region 上下笔事件
         protected void btnFirst_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("F", TableName, "BillID like 'MS%'", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("F", TableName, Filter, PrimaryKey, this.txtID.Text));
         }
         protected void btnPre_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("P", TableName, "BillID like 'MS%'", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("P", TableName, Filter, PrimaryKey, this.txtID.Text));
         }
         protected void btnNext_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("N", TableName, "BillID like 'MS%'", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("N", TableName, Filter, PrimaryKey, this.txtID.Text));
         }
         protected void btnLast_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("L", TableName, "BillID like 'MS%'", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("L", TableName, Filter, PrimaryKey, this.txtID.Text));
         }
         #endregion
 
@@ -255,7 +256,7 @@ namespace WMS.WebUI.Stock
                         WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel, "货位 " + dtSub.Rows[i]["CellCode"].ToString() + "已经被其它单据锁定，不能移库！");
                         return;
                     }
-                    count = bll.GetRowCount("Cmd_Cell", string.Format("CellCode='{0}' and IsLock=1", dtSub.Rows[i]["NewCellCode"]));
+                    count = bll.GetRowCount("Cmd_Cell", string.Format("CellCode='{0}' and (IsLock=1 or IsActive=0)", dtSub.Rows[i]["NewCellCode"]));
                     if (count > 0)
                     {
                         WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel, "货位 " + dtSub.Rows[i]["NewCellCode"].ToString() + "已经被其它单据锁定，不能移库！");

@@ -68,14 +68,14 @@
 				         runat="server">			
 				    <tr>
                         <td align="center" class="musttitle" style="width:8%;"  >
-                                入库日期
+                                移库日期
                         </td>
                         <td  width="25%">
                                 &nbsp;<asp:TextBox ID="txtBillDate" runat="server"  CssClass="TextRead" 
                                     Width="90%" MaxLength="20" ReadOnly="True" ></asp:TextBox>
                         </td>
                         <td align="center" class="musttitle" style="width:8%;"  >
-                                入库单号
+                                移库单号
                         </td>
                         <td width="25%">
                                 &nbsp;<asp:TextBox ID="txtID" 
@@ -114,11 +114,11 @@
                                 <ItemStyle HorizontalAlign="Left" Width="7%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="ProductCode" HeaderText="产品编码" SortExpression="ProductCode">
+                            <asp:BoundField DataField="ProductCode" HeaderText="产品编号" SortExpression="ProductCode">
                                 <ItemStyle HorizontalAlign="Left" Width="20%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="ProductName" HeaderText="产品名称" SortExpression="ProductName">
+                            <asp:BoundField DataField="ProductName" HeaderText="品名" SortExpression="ProductName">
                                 <ItemStyle HorizontalAlign="Left" Width="25%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
@@ -130,7 +130,7 @@
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="NewCellCode" HeaderText="数量" SortExpression="NewCellCode">
+                            <asp:BoundField DataField="NewCellCode" HeaderText="新货位" SortExpression="NewCellCode">
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>

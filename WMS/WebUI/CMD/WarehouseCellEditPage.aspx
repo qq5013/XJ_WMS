@@ -97,14 +97,14 @@
             <tr>
                 <td align="center" class="musttitle" style="width:15%;">
                     是否锁定</td> 
-                <td style="width:35%;"><asp:DropDownList ID="ddlLock" runat="server" Height="16px" Width="79%">
+                <td style="width:35%;"><asp:DropDownList ID="ddlLock" runat="server" Height="16px" Width="80%">
                         <asp:ListItem Selected="True" Value="1">锁定</asp:ListItem>
                         <asp:ListItem Value="0">解锁</asp:ListItem>
                     </asp:DropDownList></td>
                 <td align="center" class="musttitle" style="width:15%;">
                     是否启用</td> 
                 <td style="width:35%;">
-                    <asp:DropDownList ID="ddlActive" runat="server" Height="16px" Width="79%">
+                    <asp:DropDownList ID="ddlActive" runat="server" Height="16px" Width="80%">
                         <asp:ListItem Selected="True" Value="1">启用</asp:ListItem>
                         <asp:ListItem Value="0">未启用</asp:ListItem>
                     </asp:DropDownList>

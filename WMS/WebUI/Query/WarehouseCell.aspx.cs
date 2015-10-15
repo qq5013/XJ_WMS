@@ -21,23 +21,49 @@ namespace WMS.WebUI.Query
             BLL.BLLBase bll = new BLL.BLLBase();
 
             DataTable tableCell;
-            if (WareHouse != "")
+            if (WareHouse != "" &&  AreaCode=="")
             {
                 tableCell = bll.FillDataTable("CMD.SelectWareHouseCellQueryByWareHouse", new DataParameter[] { new DataParameter("@WareHouse", WareHouse) });
+                ShowWareHouseChart(tableCell);
             }
-            else if (ShelfCode != "")
+            else  if(AreaCode!="" && ShelfCode=="")
             {
-                tableCell = bll.FillDataTable("CMD.SelectWareHouseCellQueryByShelf", new DataParameter[] { new DataParameter("@ShelfCode", ShelfCode) });
+                tableCell = bll.FillDataTable("CMD.SelectWareHouseCellQueryByArea", new DataParameter[] { new DataParameter("@AreaCode", AreaCode) });
+                ShowCellChart(tableCell);
             }
             else
             {
-                tableCell = bll.FillDataTable("CMD.SelectWareHouseCellQueryByArea", new DataParameter[] { new DataParameter("@AreaCode", AreaCode) });
+                tableCell = bll.FillDataTable("CMD.SelectWareHouseCellQueryByShelf", new DataParameter[] { new DataParameter("{0}", string.Format("ShelfCode='{0}' and AreaCode='{1}'", ShelfCode, AreaCode)) });
+                ShowCellChart(tableCell);
             }
-
-
-            ShowCellChart(tableCell);
             ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "Resize", "resize();", true);
         }
+
+
+        #region 显示仓库图标
+        private void ShowWareHouseChart(DataTable tableCell)
+        {
+            this.pnlCell.Controls.Clear();
+            if (tableCell.Rows.Count == 0)
+                return;
+
+            DataTable dtShelf = tableCell.DefaultView.ToTable(true, "ShelfCode");
+            for (int i = 0; i < dtShelf.Rows.Count; i++)
+            {
+
+                Table shelfchar = CreateShelfChart("", dtShelf.Rows[i]["ShelfCode"].ToString());
+                this.pnlCell.Controls.Add(shelfchar);
+            }
+        }
+        #endregion
+
+
+        #region 显示库区图标
+        #endregion
+
+
+        #region 显示货架图标
+        #endregion
 
         #region 显示货位图表
         protected void ShowCellChart(DataTable tableCell)
@@ -45,14 +71,11 @@ namespace WMS.WebUI.Query
             this.pnlCell.Controls.Clear();
             if (tableCell.Rows.Count == 0)
                 return;
-           
-          
-
-            DataTable dtShelf = tableCell.DefaultView.ToTable(true, "ShelfCode");
+            DataTable dtShelf = tableCell.DefaultView.ToTable(true, "AreaCode", "ShelfCode");
             for (int i = 0; i < dtShelf.Rows.Count; i++)
             {
 
-                Table shelfchar = CreateShelfChart(dtShelf.Rows[i]["ShelfCode"].ToString());
+                Table shelfchar = CreateShelfChart(dtShelf.Rows[i]["AreaCode"].ToString(), dtShelf.Rows[i]["ShelfCode"].ToString());
                 this.pnlCell.Controls.Add(shelfchar);
 
 
@@ -60,10 +83,17 @@ namespace WMS.WebUI.Query
         }
 
         //货架显示图；
-        protected Table CreateShelfChart(string shelfCode)
+        protected Table CreateShelfChart(string AreaCode, string shelfCode)
         {
             BLL.BLLBase bll = new BLL.BLLBase();
-            DataTable ShelfCell = bll.FillDataTable("CMD.SelectWareHouseCellQueryByShelf", new DataParameter[] { new DataParameter("@ShelfCode", shelfCode) });
+           
+            string strWhere = "";
+            if (AreaCode == "")
+                strWhere = string.Format("ShelfCode='{0}'", shelfCode);
+            else
+                strWhere = string.Format("ShelfCode='{0}' and AreaCode='{1}'", shelfCode, AreaCode);
+
+            DataTable ShelfCell = bll.FillDataTable("CMD.SelectWareHouseCellQueryByShelf", new DataParameter[] { new DataParameter("{0}", strWhere) });
 
             int Rows = int.Parse(ShelfCell.Rows[0]["Rows"].ToString());
             int Columns = int.Parse(ShelfCell.Rows[0]["Columns"].ToString());
@@ -83,9 +113,9 @@ namespace WMS.WebUI.Query
                     int k = j;
                     if (shelfCode == "001002" || shelfCode == "001004")  //特殊处理
                     {
-                        k= j + 1;
+                        k = j + 1;
                     }
-                    if (shelfCode == "001005" )
+                    if (shelfCode == "001005")
                     {
                         k = 12 - j;
                     }
@@ -94,20 +124,38 @@ namespace WMS.WebUI.Query
                         k = 13 - j;
                     }
 
-                    TableCell cell = new TableCell();
-                    DataRow[] drs = ShelfCell.Select(string.Format("CellRow={0} and CellColumn={1}", i, k), "");
-                    cell.ID = drs[0]["CellCode"].ToString();
-                 
-                    string style = "height:25px;width:" + Width + ";border:2px solid #008B8B;";
-                    string backColor = ReturnColorFlag(drs[0]["ProductCode"].ToString(), drs[0]["IsActive"].ToString(), drs[0]["IsLock"].ToString(), drs[0]["ErrorFlag"].ToString(), ToYMD(drs[0]["InDate"]));
-                    if (drs[0]["ProductCode"].ToString() != "")
-                    {
-                        style += "background-color:" + backColor + ";";
-                    }
+                    if (AreaCode == "")
+                        strWhere = string.Format("CellRow={0} and CellColumn={1}", i, k);
+                    else
+                        strWhere = string.Format("CellRow={0} and CellColumn={1} and AreaCode='{2}'", i, k, AreaCode);
 
-                    cell.Attributes.Add("style", style);
-                    cell.Attributes.Add("onclick", "ShowCellInfo('" + cell.ID + "');");
-                    row.Cells.Add(cell);
+
+                    DataRow[] drs = ShelfCell.Select(strWhere, "");
+                    if (drs.Length > 0)
+                    {
+                        TableCell cell = new TableCell();
+                        cell.ID = drs[0]["CellCode"].ToString();
+
+                        string style = "height:25px;width:" + Width + ";border:2px solid #008B8B;";
+                        string backColor = ReturnColorFlag(drs[0]["ProductCode"].ToString(), drs[0]["IsActive"].ToString(), drs[0]["IsLock"].ToString(), drs[0]["ErrorFlag"].ToString(), ToYMD(drs[0]["InDate"]));
+                        if (drs[0]["ProductCode"].ToString() != "")
+                        {
+                            style += "background-color:" + backColor + ";";
+                        }
+
+                        cell.Attributes.Add("style", style);
+                        cell.Attributes.Add("onclick", "ShowCellInfo('" + cell.ID + "');");
+                        row.Cells.Add(cell);
+                    }
+                    else
+                    {
+                        TableCell cell = new TableCell();
+                        string style = "height:25px;width:" + Width + ";border:0px solid #008B8B";
+                     
+                        cell.Attributes.Add("style", style);
+                      
+                        row.Cells.Add(cell);
+                    }
                     if (j == 1)
                     {
                         if (shelfCode == "001002" || shelfCode == "001005" || shelfCode == "001004")
@@ -122,6 +170,7 @@ namespace WMS.WebUI.Query
                         cellTag.Text = "<font color=\"#008B8B\"> 第" + int.Parse(shelfCode.Substring(3, 3)).ToString() + "排第" + i.ToString() + "层</font>";
                         row.Cells.Add(cellTag);
                     }
+
 
                 }
                 tb.Rows.Add(row);

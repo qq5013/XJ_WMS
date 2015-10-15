@@ -26,14 +26,14 @@ namespace WMS.WebUI.CMD
             {
                 if (Request.QueryString["CMD_WH_SHELF_ID"] != null)
                 {
-                    dtShelf = bll.FillDataTable("Cmd.SelectShelf", new DataParameter[] { new DataParameter("{0}", " ShelfCode='" + Request.QueryString["CMD_WH_SHELF_ID"] + "'") });
+                    dtShelf = bll.FillDataTable("Cmd.SelectCellShelf", new DataParameter[] { new DataParameter("{0}", " ShelfCode='" + Request.QueryString["CMD_WH_SHELF_ID"] + "'") });
 
                     this.txtShelfID.Text = dtShelf.Rows[0]["ShelfCode"].ToString();
 
                     this.txtWHID.Text = dtShelf.Rows[0]["WarehouseCode"].ToString();
                     this.txtWhName.Text = bll.GetFieldValue("CMD_Warehouse", "WarehouseName", "WarehouseCode='" + this.txtWHID.Text + "'");
                     this.txtAreaID.Text = dtShelf.Rows[0]["AreaCode"].ToString();
-                    this.txtAreaName.Text = bll.GetFieldValue("CMD_Area", "AreaName", "AreaCode='" + this.txtAreaID.Text + "'");
+                    
                     this.txtShelfCode.Text = dtShelf.Rows[0]["ShelfCode"].ToString();
                     this.txtShelfName.Text = dtShelf.Rows[0]["ShelfName"].ToString();
                     this.txtCellRows.Text = dtShelf.Rows[0]["Rows"].ToString();
@@ -49,7 +49,7 @@ namespace WMS.WebUI.CMD
                     this.txtAreaID.Text = Request.QueryString["AREACODE"];
                     this.txtWHID.Text = bll.GetFieldValue("CMD_Area", "WarehouseCode", "AreaCode='" + this.txtAreaID.Text + "'");
                     this.txtWhName.Text = bll.GetFieldValue("CMD_Warehouse", "WarehouseName", "WarehouseCode='" + this.txtWHID.Text + "'");
-                    this.txtAreaName.Text = bll.GetFieldValue("CMD_Area", "AreaName", "AreaCode='" + this.txtAreaID.Text + "'");
+                     
                     this.txtShelfID.Text = "";
                     
                     int RowCount = bll.GetRowCount("CMD_WH_SHELF",string.Format( "AREA_CODE='{0}'",Request.QueryString["AREACODE"])) + 1;
@@ -57,7 +57,7 @@ namespace WMS.WebUI.CMD
 
                    
                 }
-                SetTextReadOnly(txtShelfCode, this.txtWhName, this.txtAreaName, this.txtCellCols, this.txtCellRows);
+                SetTextReadOnly(txtShelfCode, this.txtWhName,  this.txtCellCols, this.txtCellRows);
             }
         }
         protected void btnSave_Click(object sender, EventArgs e)

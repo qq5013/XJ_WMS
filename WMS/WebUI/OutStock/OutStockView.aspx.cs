@@ -13,7 +13,7 @@ namespace WMS.WebUI.OutStock
     public partial class OutStockView :App_Code.BasePage
     {
         private string strID;
-        private string TableName = "WMS_BillMaster";
+        private string TableName = "View_WMS_BillMaster";
         private string PrimaryKey = "BillID";
         BLL.BLLBase bll = new BLL.BLLBase();
         protected void Page_Load(object sender, EventArgs e)
@@ -41,10 +41,10 @@ namespace WMS.WebUI.OutStock
             this.ddlAreaCode.DataSource = dtArea;
             this.ddlAreaCode.DataBind();
 
-            DataTable TrainType = bll.FillDataTable("Cmd.SelectTrainType");
-            this.ddlTrainTypeCode.DataValueField = "TypeCode";
-            this.ddlTrainTypeCode.DataTextField = "TypeName";
-            this.ddlTrainTypeCode.DataSource = TrainType;
+            DataTable ProductType = bll.FillDataTable("Cmd.SelectProductType", new DataParameter[] { new DataParameter("{0}", " ProductTypeCode<>'0001'") });
+            this.ddlTrainTypeCode.DataValueField = "ProductTypeCode";
+            this.ddlTrainTypeCode.DataTextField = "ProductTypeName";
+            this.ddlTrainTypeCode.DataSource = ProductType;
             this.ddlTrainTypeCode.DataBind();
 
             DataTable dtBillType = bll.FillDataTable("Cmd.SelectBillType", new DataParameter[] { new DataParameter("{0}", "Flag=2") });

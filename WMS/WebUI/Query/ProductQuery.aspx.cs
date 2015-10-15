@@ -9,6 +9,7 @@ using FastReport.Data;
 using FastReport.Utils;
 using System.Data;
 using System.IO;
+using IDAL;
 
 namespace WMS.WebUI.Query
 {
@@ -20,8 +21,6 @@ namespace WMS.WebUI.Query
             if (!Page.IsPostBack)
             {
                 rptview.Visible = false;
-                this.txtEndDate.DateValue = DateTime.Now;
-                this.txtStartDate.DateValue = DateTime.Now.AddMonths(-1);
                 BindOther();
 
             }
@@ -31,38 +30,49 @@ namespace WMS.WebUI.Query
                 int W = int.Parse(hdnwh.Split('#')[0]);
                 int H = int.Parse(hdnwh.Split('#')[1]);
                 WebReport1.Width = W - 60;
-                WebReport1.Height = H - 100;
+                WebReport1.Height = H - 55;
                 if (this.HdnProduct.Value.Length > 0)
                     this.btnProduct.Text = "取消指定";
                 else
                     this.btnProduct.Text = "指定";
 
-                if (this.HdnFProduct.Value.Length > 0)
-                    this.btnFProduct.Text = "取消指定";
-                else
-                    this.btnFProduct.Text = "指定";
-                if (this.hdnColor.Value.Length > 0)
-                    this.btnColor.Text = "取消指定";
-                else
-                    this.btnColor.Text = "指定";
+                
 
                 ScriptManager.RegisterStartupScript(this.UpdatePanel1, this.GetType(), "", "BindEvent();", true);
             }
-            SetTextReadOnly(this.txtProductFModule, this.txtProductModule, this.txtColor);
+            SetTextReadOnly(this.txtProductName);
 
         }
         private void BindOther()
         {
             BLL.BLLBase bll = new BLL.BLLBase();
-            DataTable dtClass = bll.FillDataTable("Cmd.SelectProductClass", null);
-            DataRow dr = dtClass.NewRow();
-            dr[0] = "请选择";
-            dtClass.Rows.InsertAt(dr, 0);
-            dtClass.AcceptChanges();
-            this.ddlProductClass.DataValueField = "PRODUCT_Class";
-            this.ddlProductClass.DataTextField = "PRODUCT_Class";
-            this.ddlProductClass.DataSource = dtClass;
-            this.ddlProductClass.DataBind();
+            DataTable ProductType = bll.FillDataTable("Cmd.SelectProductType", new DataParameter[] { new DataParameter("{0}", "cmd.AreaCode='001' and ProductTypeCode<>'0001'") });
+            DataRow dr = ProductType.NewRow();
+            dr["ProductTypeCode"] = "";
+            dr["ProductTypeName"] = "请选择";
+            ProductType.Rows.InsertAt(dr, 0);
+            ProductType.AcceptChanges();
+            
+            this.ddlProductType.DataValueField = "ProductTypeCode";
+            this.ddlProductType.DataTextField = "ProductTypeName";
+            this.ddlProductType.DataSource = ProductType;
+            this.ddlProductType.DataBind();
+
+
+
+          
+            DataTable dtStateNo = bll.FillDataTable("Cmd.SelectProductState");
+            dr = dtStateNo.NewRow();
+            dr["StateNo"] = "";
+            dr["StateName"] = "请选择";
+            dtStateNo.Rows.InsertAt(dr, 0);
+            dtStateNo.AcceptChanges();
+
+            this.ddlStateNo.DataValueField = "StateNo";
+            this.ddlStateNo.DataTextField = "StateName";
+            this.ddlStateNo.DataSource = dtStateNo;
+            this.ddlStateNo.DataBind();  
+
         }
         protected void WebReport1_StartReport(object sender, EventArgs e)
         {
@@ -77,38 +87,20 @@ namespace WMS.WebUI.Query
         private void GetStrWhere()
         {
             strWhere="1=1";
-            if (this.ddlProductClass.SelectedValue != "请选择")
+            if (this.ddlProductType.SelectedValue != "")
             {
-                strWhere += string.Format(" and product.PRODUCT_Class='{0}'", this.ddlProductClass.SelectedValue);
+                strWhere += string.Format(" and productTypeCode='{0}'", this.ddlProductType.SelectedValue);
             }
+
 
             if (this.HdnProduct.Value.Length == 0)
             {
-                if (this.txtProductID.Text.Length > 0)
-                    strWhere += string.Format(" and product.Product_Code='{0}'", this.txtProductID.Text);
+                if (this.txtProductCode.Text.Trim().Length > 0)
+                    strWhere += string.Format(" and ProductCode='{0}'", this.txtProductCode.Text);
             }
             else
             {
-                strWhere += "and product.Product_Code in (" + this.HdnProduct.Value + ") ";
-            }
-            if (this.HdnFProduct.Value.Length == 0)
-            {
-                if (this.txtFProductID.Text.Length > 0)
-                    strWhere += string.Format(" and product.Product_Code='{0}'", this.txtFProductID.Text);
-            }
-            else
-            {
-                strWhere += "and product.Product_Code in (" + this.HdnFProduct.Value + ") ";
-            }
-
-            if (this.hdnColor.Value.Length == 0)
-            {
-                if (this.txtColorID.Text.Length > 0)
-                    strWhere += string.Format(" and Color.COLOR_CODE='{0}'", this.txtColorID.Text);
-            }
-            else
-            {
-                strWhere += " and Color.COLOR_CODE in (" + this.hdnColor.Value + ") ";
+                strWhere += "and ProductCode in (" + this.HdnProduct.Value + ") ";
             }
 
         }
@@ -117,11 +109,24 @@ namespace WMS.WebUI.Query
             try
             {
                 GetStrWhere();
-                WebReport1.Report = new Report();
-                WebReport1.Report.Load(System.AppDomain.CurrentDomain.BaseDirectory + @"RptFiles\"+"ProductQuery.frx");
+                string frx = "ProductDetailQuery.frx";
+                string Comds = "WMS.SelectProductDetailQuery";
 
-                BLL.BLLQuery bll = new BLL.BLLQuery();
-                DataTable dt = bll.GetProductQuery(this.txtStartDate.tDate.Text, this.txtEndDate.tDate.Text, strWhere, Session["EmployeeCode"].ToString());
+                if (rpt2.Checked)
+                {
+                    frx = "ProductTotalQuery.frx";
+                    Comds = "WMS.SelectProductTotalQuery";
+
+                }
+                WebReport1.Report = new Report();
+                WebReport1.Report.Load(System.AppDomain.CurrentDomain.BaseDirectory + @"RptFiles\" + frx);
+
+                BLL.BLLBase bll = new BLL.BLLBase();
+
+                DataTable dt = bll.FillDataTable(Comds, new DataParameter[] { new DataParameter("{0}", strWhere) });
+
+
+
                 if (dt.Rows.Count == 0)
                 {
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "alert('您所选择的条件没有资料!');", true);
@@ -129,7 +134,7 @@ namespace WMS.WebUI.Query
 
                 WebReport1.Report.RegisterData(dt, "ProductQuery");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
             }
             return true;

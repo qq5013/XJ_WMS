@@ -18,7 +18,11 @@ namespace WMS
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Page.Request.Url.Query != "")
+            {
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "Resize", "alert(\"对不起,操作时限已过,请重新登入！\");window.top.location =\"Login.aspx\";", true);
+            }
+             
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
@@ -74,7 +78,7 @@ namespace WMS
 
 
 
-                            Session.Timeout = int.Parse(ConfigurationManager.AppSettings["SessionTimeOut"]);
+                            //Session.Timeout = int.Parse(ConfigurationManager.AppSettings["SessionTimeOut"]);
                             #region 添加登录日志
 
                             BLL.BLLBase bll = new BLL.BLLBase();
@@ -108,7 +112,7 @@ namespace WMS
                     Session["FunctionName"] = frame.GetMethod().Name;
                     Session["ExceptionalType"] = exp.GetType().FullName;
                     Session["ExceptionalDescription"] = exp.Message;
-                    Response.Redirect("../../Common/MistakesPage.aspx", false);
+                    Response.Redirect("Common/MistakesPage.aspx", false);
                 }
             }
             else

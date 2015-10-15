@@ -71,6 +71,13 @@
     </CommandString>
   </Command>
 
+
+  <Command ID="SelectCellShelf">
+    <CommandString>
+      SELECT * FROM VCell_CMD_Shelf where {0} ORDER BY ShelfCode,AreaCode
+    </CommandString>
+  </Command>
+
   <!--货架列信息-->
   <Command ID="SelectColumn">
     <CommandString>
@@ -267,15 +274,7 @@
   <!--产品信息-->
   <Command ID="SelectProduct">
     <CommandString>
-      select product.*,CCLXFactory.FactoryName as CCLXFactoryName,FCCLXFactory.FactoryName as FCCLXFactoryName,CXFactory.FactoryName as CXFactoryName,
-      ProductType.ProductTypeName ,TrainType.TypeName as TrainTypeName,null as InStockDate,Area.AreaName
-      from CMD_Product product
-      left join CMD_ProductType ProductType on product.ProductTypeCode=ProductType.ProductTypeCode
-      left join CMD_TrainType TrainType on product.TrainTypeCode=TrainType.TypeCode
-      left join CMD_Factory CCLXFactory on product.CCLX_FactoryID=CCLXFactory.FactoryID
-      left join CMD_Factory FCCLXFactory on product.FCCLX_FactoryID=FCCLXFactory.FactoryID
-      left join CMD_Factory CXFactory on product.CX_FactoryID=CXFactory.FactoryID
-      left join CMD_Area Area on product.AreaCode=Area.AreaCode
+      select * from VCMD_Product
       where {0}
     </CommandString>
   </Command>
@@ -288,10 +287,10 @@
     <CommandString>
       INSERT INTO CMD_PRODUCT(ProductCode, ProductName, ProductTypeCode, TrainTypeCode, AxieNo, WheelDiameter, CCZ_Diameter, FCCZ_Diameter, CCD_Diameter,
       FCCD_Diameter, CCXPBZW_Size, FCCXPBZW_Size, GearNo, CCLX_Flag, FCCLX_Flag, CCLX_Year, FCCLX_Year, CCLX_FactoryID, FCCLX_FactoryID, CX_FactoryID, CCLG_Flag,
-      FCCLG_Flag, Memo, WarehouseCode, AreaCode, Creator, CreateDate, Updater, UpdateDate, LDXC, CX_DateTime)
+      FCCLG_Flag, Memo, WarehouseCode, AreaCode, Creator, CreateDate, Updater, UpdateDate, LDXC, CX_DateTime,IsTemp)
       values(@ProductCode,@ProductName,@ProductTypeCode,@TrainTypeCode,@AxieNo,@WheelDiameter,@CCZ_Diameter,@FCCZ_Diameter,@CCD_Diameter,@FCCD_Diameter,
       @CCXPBZW_Size,@FCCXPBZW_Size,@GearNo,@CCLX_Flag,@FCCLX_Flag,@CCLX_Year,@FCCLX_Year,@CCLX_Factory,@FCCLX_Factory,@CX_Factory,@CCLG_Flag,
-      @FCCLG_Flag,@Memo,@WarehouseCode,@AreaCode,@Creator,getDate(),@Updater, getDate(),@LDXC, @CX_DateTime)
+      @FCCLG_Flag,@Memo,@WarehouseCode,@AreaCode,@Creator,getDate(),@Updater, getDate(),@LDXC, @CX_DateTime,@IsTemp)
     </CommandString>
   </Command>
   <Command ID="UpdateProduct">
@@ -299,7 +298,7 @@
       Update CMD_PRODUCT Set ProductName=@ProductName,ProductTypeCode=@ProductTypeCode,TrainTypeCode=@TrainTypeCode,AxieNo=@AxieNo,WheelDiameter=@WheelDiameter,
       CCZ_Diameter=@CCZ_Diameter,FCCZ_Diameter=@FCCZ_Diameter,CCD_Diameter=@CCD_Diameter,FCCD_Diameter=@FCCD_Diameter,CCXPBZW_Size=@CCXPBZW_Size,FCCXPBZW_Size=@FCCXPBZW_Size,
       GearNo=@GearNo,CCLX_Flag=@CCLX_Flag,FCCLX_Flag=@FCCLX_Flag,CCLX_Year=@CCLX_Year,FCCLX_Year=@FCCLX_Year,CCLX_FactoryID=@CCLX_Factory,FCCLX_FactoryID=@FCCLX_Factory,CX_FactoryID=@CX_Factory,
-      CCLG_Flag=@CCLG_Flag,FCCLG_Flag=@FCCLG_Flag,Memo=@Memo,WarehouseCode=@WarehouseCode,AreaCode=@AreaCode,Updater=@Updater,UpdateDate=getdate(),LDXC=@LDXC,CX_DateTime=@CX_DateTime
+      CCLG_Flag=@CCLG_Flag,FCCLG_Flag=@FCCLG_Flag,Memo=@Memo,WarehouseCode=@WarehouseCode,AreaCode=@AreaCode,Updater=@Updater,UpdateDate=getdate(),LDXC=@LDXC,CX_DateTime=@CX_DateTime,IsTemp=@IsTemp
       where ProductCode=@ProductCode
     </CommandString>
   </Command>
@@ -357,127 +356,31 @@
   </Command>
 
 
-
-  <!--客户信息-->
-  <Command ID="SelectCustomer">
+  <!-- 产品状态-->
+  <Command ID="SelectProductState">
     <CommandString>
-      Select * from View_CMD_Customer where {0}  order by AreaSation,CUSTOMER_CODE
+     select * from CMD_ProductState
+      where {0}
+      order by StateNo
     </CommandString>
   </Command>
-  <Command ID="DeleteCustomer">
+  <Command ID="DeleteProductState">
     <CommandString>
-      delete from CMD_CUSTOMER WHERE {0}
+      delete from CMD_ProductState WHERE StateNo in({0})
     </CommandString>
   </Command>
-  <Command ID="InsertCustomer">
+  <Command ID="InsertProductState">
     <CommandString>
-      INSERT INTO CMD_CUSTOMER(CUSTOMER_CODE,CUSTOMER_NAME,CUSTOMER_PERSON,CUSTOMER_PHONE,CUSTOMER_Fax,MEMO,PLAYCUSTOMER_CODE,CustomerType,AreaSation,Creator, CreateDate, Updater, UpdateDate)
-      values(@CUSTOMER_CODE,@CUSTOMER_NAME,@CUSTOMER_PERSON,@CUSTOMER_PHONE,@CUSTOMER_Fax,@MEMO,@PLAYCUSTOMER_CODE,@CustomerType,@AreaSation, @Creator, getdate(), @Updater, getdate())
+      INSERT INTO CMD_ProductState(StateNo,StateName,MEMO,Creator, CreateDate, Updater, UpdateDate)
+      values(@StateNo,@StateName,@MEMO, @Creator, getdate(), @Updater, getdate())
     </CommandString>
   </Command>
-  <Command ID="UpdateCustomer">
+  <Command ID="UpdateProductState">
     <CommandString>
-      Update CMD_CUSTOMER Set CUSTOMER_NAME=@CUSTOMER_NAME,CUSTOMER_PERSON=@CUSTOMER_PERSON, CUSTOMER_PHONE=@CUSTOMER_PHONE,CUSTOMER_Fax=@CUSTOMER_Fax, MEMO=@MEMO,PLAYCUSTOMER_CODE=@PLAYCUSTOMER_CODE,CustomerType=@CustomerType,AreaSation=@AreaSation,Updater=@Updater, UpdateDate=getdate() where CUSTOMER_CODE='{0}'
+      Update CMD_ProductState Set StateName=@StateName,MEMO=@MEMO,Updater=@Updater, UpdateDate=getdate() where StateNo='{0}'
     </CommandString>
   </Command>
-  
-  
-
-  <Command ID="SelectAreaSation">
-    <CommandString>
-      select distinct areasation from CMD_CUSTOMER
-    </CommandString>
-  </Command>
-
-  <Command ID="SelectCustomerSub">
-    <CommandString>
-      Select * from CMD_CUSTOMERSUB where {0} order by OrderNum
-    </CommandString>
-  </Command>
-  <Command ID="DeleteCustomerSub">
-    <CommandString>
-      delete from CMD_CUSTOMERSUB WHERE {0}
-    </CommandString>
-  </Command>
-  <Command ID="InsertCustomerSub">
-    <CommandString>
-      INSERT INTO CMD_CUSTOMERSUB(CUSTOMER_CODE,RowID,PERSON,PHONE,Address,OrderNum)
-      values(@CUSTOMER_CODE,@RowID,@PERSON,@PHONE,@Address,@OrderNum)
-    </CommandString>
-  </Command>
-  <!--获取收货人，收货电话，收货地址-->
-  <Command ID="SelectLinkPerson">
-    <CommandString>
-      select  PERSON from CMD_CUSTOMERSUB where CUSTOMER_CODE=@CUSTOMER_CODE  group by PERSON order by min(OrderNum),min(RowID)
-    </CommandString>
-  </Command>
-  <Command ID="SelectLinkPhone">
-    <CommandString>
-      select  PHONE from CMD_CUSTOMERSUB where CUSTOMER_CODE=@CUSTOMER_CODE  group by PHONE order by min(OrderNum),min(RowID)
-    </CommandString>
-  </Command>
-  <Command ID="SelectLinkAddress">
-    <CommandString>
-      select Address from CMD_CUSTOMERSUB where CUSTOMER_CODE=@CUSTOMER_CODE  group by Address order by min(OrderNum),min(RowID)
-    </CommandString>
-  </Command>
-
-  <Command ID="SelectCustomerByReport">
-    <CommandString>
-      select Main.*,sub.*,playcust.CUSTOMER_NAME as PlayCustomerName from CMD_CUSTOMER Main left join CMD_CUSTOMERSUB Sub on main.CUSTOMER_CODE=sub.CUSTOMER_CODE
-      left join CMD_CUSTOMER PlayCust on main.PLAYCUSTOMER_CODE=playcust.CUSTOMER_CODE
-    </CommandString>
-  </Command>
-  
-  
-  
-
-
-  <!--部门信息 测试使用-->
-  <Command ID="SelectDepartment">
-    <CommandString>
-      Select * from CMD_DEPARTMENT where {0}
-    </CommandString>
-  </Command>
-  <Command ID="DeleteDepartment">
-    <CommandString>
-      delete from CMD_DEPARTMENT WHERE Department_Code in({0})
-    </CommandString>
-  </Command>
-  <Command ID="InsertDepartment">
-    <CommandString>
-      INSERT INTO CMD_DEPARTMENT(Department_Code,Department_Name,MEMO)
-      values(@Department_Code,@Department_Name,@MEMO)
-    </CommandString>
-  </Command>
-  <Command ID="UpdateDepartment">
-    <CommandString>
-      Update CMD_DEPARTMENT Set Department_Name=@Department_Name,MEMO=@MEMO where Department_Code='{0}'
-    </CommandString>
-  </Command>
-  <Command ID="SelectDepartmentSub">
-    <CommandString>
-      select CMD_DEPARTMENT_SUB.*,CMD_PRODUCT.PRODUCT_NAME from CMD_DEPARTMENT_SUB left join CMD_PRODUCT on CMD_PRODUCT.PRODUCT_CODE=CMD_DEPARTMENT_SUB.PRODUCT_CODE where {0}
-    </CommandString>
-  </Command>
-  <Command ID="DeleteDepartmentSub">
-    <CommandString>
-      delete from CMD_DEPARTMENT_SUB WHERE {0}
-    </CommandString>
-  </Command>
-  <Command ID="InsertDepartmentSub">
-    <CommandString>
-      INSERT INTO CMD_DEPARTMENT_SUB(DEPARTMENT_CODE,RowID,PRODUCT_CODE)
-      values(@DEPARTMENT_CODE,@RowID,@PRODUCT_CODE)
-    </CommandString>
-  </Command>
-  <Command ID="UpdateDepartmentSub">
-    <CommandString>
-      Update CMD_DEPARTMENT_SUB Set PRODUCT_CODE=@PRODUCT_CODE where {0}
-    </CommandString>
-  </Command>
-
-  
+ 
   <!--查询使用-->
 
   <Command ID="selectWareHouseQuery">
@@ -501,18 +404,6 @@
     </CommandString>
   </Command>
 
-  <Command ID="selectAreaQuery">
-    <CommandString>
-      select AREA_CODE ,AREA_NAME from  CMD_WH_AREA
-    </CommandString>
-  </Command>
-  
-  
-  
-  
-  
-   
-
   <Command ID="SelectWareHouseCellQueryByWareHouse">
     <CommandString>
       SELECT * FROM View_CMD_CELL_ALL WHERE WarehouseCode = @WareHouse ORDER BY SHELFCODE,CELLCODE
@@ -526,7 +417,7 @@
   </Command>
   <Command ID="SelectWareHouseCellQueryByShelf">
     <CommandString>
-      SELECT * FROM View_CMD_CELL_ALL WHERE SHELFCODE = @ShelfCode ORDER BY SHELFCODE,CELLCODE
+      SELECT * FROM View_CMD_CELL_ALL WHERE {0} ORDER BY SHELFCODE,CELLCODE
     </CommandString>
   </Command>
 
@@ -536,60 +427,6 @@
     </CommandString>
   </Command>
 
-
-  <!--产品区间查询-->
-  <Command ID="SelectProductBetweenQuery">
-    <CommandString>
-      select MIN(Product_Code) as MinProduct,MAX(product_code) as MaxProduct,MIN(PRODUCT_MODEL) as MinModel,MAX(PRODUCT_MODEL) as MaxModel from V4_CMD_PRODUCT
-    </CommandString>
-  </Command>
-
-  <Command ID="SPProductQuery">
-    <CommandString>
-      sp_ProductQuery
-    </CommandString>
-  </Command>
-  <Command ID="SPOtherProductQuery">
-    <CommandString>
-      sp_OtherProductQuery
-    </CommandString>
-  </Command>
-
-
-  <Command ID="SelectCustomerBetweenQuery">
-    <CommandString>
-      select MIN(CUSTOMER_CODE) as MinCust,MAX(CUSTOMER_CODE) as MaxCust,MIN(CUSTOMER_NAME) as MinName,MAX(CUSTOMER_NAME) as MaxName from CMD_CUSTOMER
-    </CommandString>
-  </Command>
-
-
-  <Command ID="SelectFactoryBetweenQuery">
-    <CommandString>
-      select MIN(FactoryID) as MinCust,MAX(FactoryID) as MaxCust,MIN(FactoryName) as MinName,MAX(FactoryName) as MaxName from CMD_Factory
-    </CommandString>
-  </Command>
-
-
-  <Command ID="SelectProductBOM">
-    <CommandString>
-      Select * from View_CMD_ProductBom where {0} order by orderNum,ProductNo
-    </CommandString>
-  </Command>
-  <Command ID="DeleteProductBOM">
-    <CommandString>
-      delete from CMD_ProductBOM WHERE ProductNo in({0})
-    </CommandString>
-  </Command>
-  <Command ID="InsertProductBOM">
-    <CommandString>
-      INSERT INTO CMD_ProductBOM(ProductNo,Name,Unit,Product_Code,ColorID,Memo,StandPrice, Price1, Price2, Price3, Price4, Price5, OrderNum,Creator, CreateDate, Updater, UpdateDate)
-      values(@ProductNo,@Name,@Unit,@Product_Code,@ColorID,@Memo,@StandPrice,@Price1,@Price2,@Price3,@Price4,@Price5,@OrderNum, @Creator, getdate(), @Updater, getdate())
-    </CommandString>
-  </Command>
-  <Command ID="UpdateProductBOM">
-    <CommandString>
-      Update CMD_ProductBOM Set Name=@Name,Unit=@Unit,Product_Code=@Product_Code,ColorID=@ColorID,Memo=@Memo,StandPrice=@StandPrice, Price1=@Price1, Price2=@Price2, Price3=@Price3, Price4=@Price4, Price5=@Price5, OrderNum=@OrderNum,Updater=@Updater, UpdateDate=getdate() where ProductNo='{0}'
-    </CommandString>
-  </Command>
+ 
 
 </SqlCommand>

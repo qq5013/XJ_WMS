@@ -7,9 +7,10 @@
     <title>无标题页</title>
     <script type="text/javascript">
     alert('对不起,操作时限已过,请重新登入！');
-   
-    window.opener = null;
-    window.top.location = "Login.aspx?Logout=true";
+    alert(window.dialogArguments.location);
+
+   // window.opener = null;
+    window.top.location = "Login.aspx";
 //    window.parent.opener=null;
 //    window.parent.close();
 //    window.open('LoginPage.aspx','_Parent','height=700, width=1100, top=0, left=0, toolbar=yes, menubar=yes, scrollbars=no, resizable=yes,location=yes, status=yes');

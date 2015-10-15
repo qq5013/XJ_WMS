@@ -14,18 +14,20 @@
             $(document).ready(function () {
                 $(window).resize(function () {
                     resize();
-                    BindEvent();
                 });
+                BindEvent();
             });
             function resize() {
                 var h = document.documentElement.clientHeight - 230;
                 $("#Sub-container").css("height", h);
             }
+            function SelectProduct() {
+                var tableName = 'CMD_Product';
+                var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and ProductCode not in ('0001','0002') ";
+               
+                return GetMulSelectValue(tableName, 'hdnMulSelect', where);
+            }
             function BindEvent() {
-                $("[ID$='btnProduct']").bind("click", function () {
-                    var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and ProductCode not in ('0001','0002') ";
-                    return GetMulSelectValue('CMD_Product', 'hdnMulSelect', where);
-                });
                 $("[ID$='ProductCode']").bind("change", function () {
                     var txtID = this.id;
                     var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and ProductCode='" + $('#' + txtID).val() + "' and ProductCode not in ('0001','0002')";
@@ -38,8 +40,6 @@
 
                 });
             }
-
-
             function Save() {
                 if ($("#txtBillDate_txtDate").val() == "") {
                     alert("日期不能为空，请输入！");
@@ -63,7 +63,7 @@
                 }
 
 
-                if (!ChkDelMustValue("dgViewSub1", "ProductCode", "产品编码"))
+                if (!ChkDelMustValue("dgViewSub1", "ProductCode", "产品编号"))
                     return false;
                 if (!ChkDelMustNumericValue("dgViewSub1", "Quantity", "数量"))
                     return false;
@@ -156,7 +156,7 @@
                     <tr>
                         <td class="table_titlebgcolor" height="25px">
                             <asp:Button  id="btnAddDetail" CssClass=" ButtonCreate" runat="server" 
-                                Text="新增明细" onclick="btnAddDetail_Click"  Width="75px" Height="16px"  />  
+                                Text="新增明细" onclick="btnAddDetail_Click" OnClientClick="return SelectProduct();"  Width="75px" Height="16px"  />  
                                 &nbsp;&nbsp;
                                 <asp:Button  id="btnDelDetail" CssClass=" ButtonDel" 
                                 runat="server" Text="删除明细" onclick="btnDelDetail_Click" 
@@ -186,16 +186,15 @@
                                 <ItemStyle HorizontalAlign="Center" />
                                 <HeaderStyle Width="4%"  />
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="产品编码">
+                            <asp:TemplateField HeaderText="产品编号">
                                     <ItemTemplate>
                                     <asp:TextBox ID="ProductCode" runat="server"  Width="80%" CssClass="TextBox"></asp:TextBox><asp:Button
-                                        ID="btnProduct"  CssClass="ButtonOption" Width="20px" runat="server"  Text="..." OnClick="btnProduct_Click" />
+                                        ID="btnProduct"  CssClass="ButtonOption" Width="20px" runat="server"  Text="..." OnClientClick="return SelectProduct();" OnClick="btnProduct_Click" />
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Left" />
                                 <HeaderStyle Width="20%"  />
                             </asp:TemplateField>
-                                
-                                <asp:TemplateField HeaderText="产品名称">
+                            <asp:TemplateField HeaderText="品名">
                                 <ItemTemplate>
                                     <asp:TextBox ID="ProductName" runat="server" Width="98%"  CssClass="TextRead" ></asp:TextBox> 
                                 </ItemTemplate>
@@ -210,6 +209,14 @@
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Left" />
                                 <HeaderStyle Width="10%" />
+                            </asp:TemplateField>
+                             <asp:TemplateField HeaderText="产品状态">
+                                <ItemTemplate>
+                                    <asp:DropDownList ID="ddlStateNo" runat="server" Width="90%">
+                                    </asp:DropDownList>
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Left" />
+                                <HeaderStyle  Width="25%" />
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="备注">
                                 <ItemTemplate>

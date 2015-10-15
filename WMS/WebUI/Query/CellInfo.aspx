@@ -27,7 +27,7 @@
                    </tr>
                    <tr>
                       <td  class="smalltitle" style="width:20%;">
-                            &nbsp;产品名称:
+                            &nbsp;品名:
                       </td>
                       <td>
                         &nbsp;<asp:Label ID="lblProductName" runat="server"></asp:Label>

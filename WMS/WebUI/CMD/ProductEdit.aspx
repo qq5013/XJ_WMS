@@ -11,20 +11,16 @@
         <script type="text/javascript" src= "../../JScript/Common.js"></script>
          <script type="text/javascript" src= "../../JScript/DataProcess.js"></script>
         <script type="text/javascript">
-            $(document).ready(function () {
-                $("#ddlProductTypeCode").bind("change", function () {
-                    getWhereBaseData('CMD_ProductType', 'ddlAreaCode', 'AreaCode', "ProductTypeCode='" + $("#ddlProductTypeCode").val() + "'");
-                });
-            });
+           
 
             function Save() {
                 if (trim($("#txtID").val()) == "") {
-                    alert("产品编码不能为空!");
+                    alert("产品编号不能为空!");
                     $("#txtID").focus();
                     return false;
                 }
                 if (trim($("#txtProductName").val()) == "") {
-                    alert("产品名称不能为空!");
+                    alert("品名不能为空!");
                     $("#txtProductName").focus();
                     return false;
                 }
@@ -33,17 +29,24 @@
                     $("#ddlProductTypeCode").focus();
                     return false;
                 }
-                if (trim($("#ddlTrainTypeCode").val()) == "") {
-                    alert("车型不能为空!");
-                    $("#ddlTrainTypeCode").focus();
-                    return false;
+                if (!$("#chkTemp")[0].checked) {
+                    if (trim($("#txtAxieNo").val()) == "") {
+                        alert("单位不能为空!");
+                        $("#txtAxieNo").focus();
+                        return false;
+                    }
+                    if (trim($("#txtWheelDiameter").val()) == "") {
+                        alert("轮径不能为空!");
+                        $("#txtWheelDiameter").focus();
+                        return false;
+                    }
+                    if (trim($("#ddlCX_Factory").val()) == "") {
+                        alert("承修厂家不能为空!");
+                        $("#ddlCX_Factory").focus();
+                        return false;
+                    } 
                 }
-                if (trim($("#txtAxieNo").val()) == "") {
-                    alert("车轴编号不能为空!");
-                    $("#txtAxieNo").focus();
-                    return false;
-                }
-                 
+                
                 return true;
             }
            
@@ -67,8 +70,15 @@
         <table id="Table1" class="maintable"  width="100%" align="center" cellspacing="0" cellpadding="0" bordercolor="#ffffff" border="1"
 				 runat="server">			
 				<tr>
+                    <td align="center" class="musttitle" style="width:12%;">
+                        产品类别</td>
+                    <td width="21%">
+                        &nbsp;<asp:DropDownList 
+                            ID="ddlProductTypeCode" runat="server" Width="91%">
+                        </asp:DropDownList>
+                    </td>
                     <td align="center" class="musttitle" style="width:12%;"  >
-                            产品编码
+                            产品编号
                     </td>
                     <td  width="21%">
                             &nbsp;<asp:TextBox 
@@ -76,7 +86,7 @@
                                 MaxLength="20"  ></asp:TextBox>
                     </td>
                     <td align="center" class="musttitle" style="width:12%;"  >
-                           产品名称
+                           品名
                     </td>
                     <td width="21%">
                             &nbsp;<asp:TextBox 
@@ -85,39 +95,57 @@
                           
 
                     </td>
-                    <td align="center" class="musttitle" style="width:12%;">
-                        产品类别</td>
-                    <td width="21%">
-                        &nbsp;<asp:DropDownList 
-                            ID="ddlProductTypeCode" runat="server" Width="91%">
-                        </asp:DropDownList>
-                    </td>
+                    
                 </tr>
                 <tr>
+                     
                     <td align="center" class="musttitle" style="width:12%;"  >
-                            车型
-                    </td>
-                    <td  width="21%">
-                         &nbsp;<asp:DropDownList ID="ddlTrainTypeCode" runat="server" Width="91%">
-                        </asp:DropDownList>
-                    </td>
-                    <td align="center" class="musttitle" style="width:12%;"  >
-                           车轴编号 
+                           单位 
                     </td>
                     <td width="21%">
                             &nbsp;<asp:TextBox ID="txtAxieNo" runat="server"   Width="90%" 
                                 MaxLength="20" CssClass="TextBox" ></asp:TextBox> 
 
                     </td>
-                    <td align="center" class="smalltitle" style="width:12%;">
+                    <td align="center" class="musttitle" style="width:12%;">
                         轮径</td>
                     <td width="21%">
                         &nbsp;<asp:TextBox ID="txtWheelDiameter" runat="server" 
-                                  Width="90%" CssClass="TextBox" MaxLength="25" ></asp:TextBox> 
+                                  Width="90%" CssClass="TextBox" MaxLength="25" ></asp:TextBox>
 
                     </td>
+                    <td align= "center" colspan="2">
+                        <asp:CheckBox ID="chkTemp" runat="server" Text="临时产品" />
+                    </td>
+                     
+                </tr>
+                 <tr>
+                    <td align="center" class="musttitle" style="width:12%;">
+                        承修厂家</td>
+                    <td width="21%">
+                        &nbsp;<asp:DropDownList ID="ddlCX_Factory" runat="server" Width="91%">
+                        </asp:DropDownList>
+
+                    </td>
+                    <td align="center" class="smalltitle" style="width:12%;"  >
+                            &nbsp;轮对修程</td>
+                    <td  width="21%">
+                        &nbsp;<asp:TextBox ID="txtLDXC" runat="server" 
+                                  Width="90%" CssClass="TextBox"
+                                MaxLength="50" ></asp:TextBox> 
+
+                    </td>
+                     
+                    <td align="center" class="smalltitle" style="width:12%;"  >
+                           承修时间 
+                    </td>
+                    <td width="21%">
+                            &nbsp;<uc1:Calendar ID="txtCX_DateTime" runat="server" />
+                    </td>
+                   
                 </tr>
                 <tr>
+                   
                     <td align="center" class="smalltitle" style="width:12%;"  >
                             齿侧轴径
                     </td>
@@ -143,9 +171,11 @@
                                   Width="90%" CssClass="TextBox"
                                 MaxLength="25" ></asp:TextBox> 
 
-                    </td>
+                    </td> 
+                   
                 </tr>
                  <tr>
+                    
                     <td align="center" class="smalltitle" style="width:12%;"  >
                             非齿侧端轴直径
                     </td>
@@ -171,8 +201,10 @@
                                 MaxLength="25" ></asp:TextBox> 
 
                     </td>
+                    
                 </tr>
                  <tr>
+                   
                     <td align="center" class="smalltitle" style="width:12%;"  >
                             齿轮编号</td>
                     <td  width="21%">
@@ -190,7 +222,7 @@
                                 MaxLength="25" ></asp:TextBox> 
 
                     </td>
-                    <td align="center" class="smalltitle" style="width:12%;">
+                   <td align="center" class="smalltitle" style="width:12%;">
                         非齿侧轮芯标记</td>
                     <td width="21%">
                         &nbsp;<asp:TextBox ID="txtFCCLX_Flag" runat="server" 
@@ -198,8 +230,10 @@
                                 MaxLength="25" ></asp:TextBox> 
 
                     </td>
+                   
                 </tr>
                  <tr>
+                     
                     <td align="center" class="smalltitle" style="width:12%;"  >
                             齿侧轮芯制造年代
                     </td>
@@ -226,8 +260,10 @@
                         </asp:DropDownList>
 
                     </td>
+                    
                 </tr>
                  <tr>
+                    
                     <td align="center" class="smalltitle" style="width:12%;"  >
                             非齿侧轮芯生产厂家
                     </td>
@@ -253,47 +289,24 @@
                                   Width="90%" CssClass="TextBox"
                                 MaxLength="25" ></asp:TextBox> 
 
-                    </td>
-                </tr>
-                 <tr>
-                    <td align="center" class="smalltitle" style="width:12%;"  >
-                            &nbsp;轮对修程</td>
-                    <td  width="21%">
-                        &nbsp;<asp:TextBox ID="txtLDXC" runat="server" 
-                                  Width="90%" CssClass="TextBox"
-                                MaxLength="50" ></asp:TextBox> 
+                    </td> 
 
-                    </td>
-                    <td align="center" class="smalltitle" style="width:12%;"  >
-                           承修时间 
-                    </td>
-                    <td width="21%">
-                            &nbsp;<uc1:Calendar ID="txtCX_DateTime" runat="server" />
-                    </td>
-                    <td align="center" class="smalltitle" style="width:12%;">
-                        承修厂家</td>
-                    <td width="21%">
-                        &nbsp;<asp:DropDownList ID="ddlCX_Factory" runat="server" Width="91%">
-                        </asp:DropDownList>
-
-                    </td>
+                   
                 </tr>
+                
                  <tr>
                   
-                   <td align="center"  class="smalltitle" style="width:12%;">
-                       存放库区</td>
-                  <td width="21%">
-                      &nbsp;<asp:DropDownList 
-                            ID="ddlAreaCode" runat="server" Width="91%">
-                        </asp:DropDownList>
-
-                  </td>
+                     
                  
                    <td align="center"  class="smalltitle" style="width:12%;">
                        入库时间</td>
                   <td width="21%">
                       &nbsp;<asp:TextBox ID="txtInstockDate" runat="server"  
                           CssClass="TextRead" Width="90%"  ></asp:TextBox> 
+                  </td>
+                  <td>
+                  </td>
+                  <td>
                   </td>
                   <td align="center"  class="smalltitle" style="width:12%;">
                         建单人员

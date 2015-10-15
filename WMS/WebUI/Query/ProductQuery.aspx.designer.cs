@@ -67,49 +67,40 @@ namespace WMS.WebUI.Query {
         protected global::System.Web.UI.HtmlControls.HtmlTableRow rptform;
         
         /// <summary>
-        /// txtStartDate 控件。
+        /// ddlProductType 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::WMS.UserControl.Calendar txtStartDate;
+        protected global::System.Web.UI.WebControls.DropDownList ddlProductType;
         
         /// <summary>
-        /// txtEndDate 控件。
+        /// ddlStateNo 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::WMS.UserControl.Calendar txtEndDate;
+        protected global::System.Web.UI.WebControls.DropDownList ddlStateNo;
         
         /// <summary>
-        /// ddlProductClass 控件。
+        /// txtProductCode 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlProductClass;
+        protected global::System.Web.UI.WebControls.TextBox txtProductCode;
         
         /// <summary>
-        /// txtProductID 控件。
+        /// txtProductName 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtProductID;
-        
-        /// <summary>
-        /// txtProductModule 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtProductModule;
+        protected global::System.Web.UI.WebControls.TextBox txtProductName;
         
         /// <summary>
         /// btnProduct 控件。
@@ -121,58 +112,22 @@ namespace WMS.WebUI.Query {
         protected global::System.Web.UI.WebControls.Button btnProduct;
         
         /// <summary>
-        /// txtFProductID 控件。
+        /// rpt1 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFProductID;
+        protected global::System.Web.UI.WebControls.RadioButton rpt1;
         
         /// <summary>
-        /// txtProductFModule 控件。
+        /// rpt2 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtProductFModule;
-        
-        /// <summary>
-        /// btnFProduct 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnFProduct;
-        
-        /// <summary>
-        /// txtColorID 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtColorID;
-        
-        /// <summary>
-        /// txtColor 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtColor;
-        
-        /// <summary>
-        /// btnColor 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnColor;
+        protected global::System.Web.UI.WebControls.RadioButton rpt2;
         
         /// <summary>
         /// btnSearch 控件。
@@ -211,15 +166,6 @@ namespace WMS.WebUI.Query {
         protected global::FastReport.Web.WebReport WebReport1;
         
         /// <summary>
-        /// HdnFProduct 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden HdnFProduct;
-        
-        /// <summary>
         /// HdnProduct 控件。
         /// </summary>
         /// <remarks>
@@ -227,15 +173,6 @@ namespace WMS.WebUI.Query {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden HdnProduct;
-        
-        /// <summary>
-        /// hdnColor 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden hdnColor;
         
         /// <summary>
         /// HdnWH 控件。

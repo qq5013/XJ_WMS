@@ -13,12 +13,14 @@ namespace WMS.WebUI.OutStock
 
     public partial class OutStockTasks : App_Code.BasePage
     {
+        private string Filter = "BillID like 'OS%' and State in (1,2,3)";
         protected void Page_Load(object sender, EventArgs e)
         {
+
             this.GridView2.PageSize = pageSubSize;
             if (!IsPostBack)
             {
-                ViewState["filter"] = "Main.BillID like 'OS%' and Main.State in (1,2,3) ";
+                ViewState["filter"] = Filter;
                 ViewState["CurrentPage"] = 1;
 
                 try
@@ -55,7 +57,7 @@ namespace WMS.WebUI.OutStock
 
             try
             {
-                ViewState["filter"] = " main.BillID like 'OS%' and Main.State in (1,2,3)  " + " and " + string.Format("{0} like '%{1}%'", this.ddlField.SelectedValue, this.txtSearch.Text.Trim().Replace("'", ""));
+                ViewState["filter"] = Filter + " and " + string.Format("{0} like '%{1}%'", this.ddlField.SelectedValue, this.txtSearch.Text.Trim().Replace("'", ""));
                 ViewState["CurrentPage"] = 1;
                 DataTable dt = SetBtnEnabled(int.Parse(ViewState["CurrentPage"].ToString()), SqlCmd, ViewState["filter"].ToString(), pageSize, GridView1, btnFirst, btnPre, btnNext, btnLast, btnToPage, lblCurrentPage, this.UpdatePanel1);
                 SetBindDataSub(dt);
@@ -232,6 +234,7 @@ namespace WMS.WebUI.OutStock
             }
             catch (Exception ex)
             {
+                BindDataSub(this.hdnRowValue.Value);
                 WMS.App_Code.JScript.Instance.ShowMessage(this.UpdatePanel1, ex.Message);
             }
 

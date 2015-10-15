@@ -41,10 +41,8 @@
                                 <asp:Literal ID="Literal1" Text="查询栏位" runat="server"  ></asp:Literal>
                              </td>
 						    <td  width="15%" height="20">&nbsp;<asp:dropdownlist id="ddlField" runat="server" Width="85%" >
-                                    <asp:ListItem Selected="True" Value="BillTypeName">入库类型</asp:ListItem>
-                                    <asp:ListItem Value="AreaName">库区</asp:ListItem>
-                                    <asp:ListItem Value="FactoryName">工厂</asp:ListItem>
-                                    <asp:ListItem Value="BillID">入库单号</asp:ListItem>
+                                    <asp:ListItem Selected="True" Value="AreaName">库区</asp:ListItem>
+                                    <asp:ListItem Value="BillID">移库单号</asp:ListItem>
                                     <asp:ListItem Value="Memo">备注</asp:ListItem>
                                  </asp:dropdownlist>
                             </td>
@@ -199,11 +197,11 @@
                                 <ItemStyle HorizontalAlign="Left" Width="7%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="ProductCode" HeaderText="产品编码" SortExpression="ProductCode">
+                            <asp:BoundField DataField="ProductCode" HeaderText="产品编号" SortExpression="ProductCode">
                                 <ItemStyle HorizontalAlign="Left" Width="20%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="ProductName" HeaderText="产品名称" SortExpression="ProductName">
+                            <asp:BoundField DataField="ProductName" HeaderText="品名" SortExpression="ProductName">
                                 <ItemStyle HorizontalAlign="Left" Width="25%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>

@@ -81,7 +81,7 @@ function selectAll(ctlName, bool) {
     var checkbox = ctl.getElementsByTagName('input');
 
     for (var i = 0; i < checkbox.length; i++) {
-        if (checkbox[i].type == 'checkbox') {
+        if (checkbox[i].type == 'checkbox' && !checkbox[i].disabled) {
             checkbox[i].checked = bool;
         }
     }
@@ -106,7 +106,7 @@ function regInput(obj, reg, inputStr) {
 function trim(theData) {
     var checkStr = theData;
     if (checkStr == null)
-        return;
+        return "";
     if (checkStr == "")
         return "";
     var theStrLength = 0;

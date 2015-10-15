@@ -16,7 +16,7 @@ using System.Collections.Generic;
 
 namespace WMS.Common
 {
-    public partial class Select : WMS.App_Code.BasePage
+    public partial class Select :Page
     {
         int pageIndex = 1;
         int pageSize = 10;
@@ -35,7 +35,16 @@ namespace WMS.Common
         bool blnMultiSelect;
         Dictionary<int, string> d;
         BLL.BLLBase bll = new BLL.BLLBase();
+        protected void Page_PreInit(object sender, EventArgs e)
+        {
 
+            if (Session["G_user"] == null)
+            {
+                Response.Write("<script language='javascript'>alert('对不起,操作时限已过,请重新登入！'); var parentwindow=window.dialogArguments;parentwindow.top.location = '../Login.aspx';window.close();</script>");
+                return;
+            }
+
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -46,6 +55,7 @@ namespace WMS.Common
                 
                 if (!IsPostBack)
                 {
+
                    
                     if (Request.QueryString["Where"] != "" && Request.QueryString["Where"] != null)
                     {
@@ -385,6 +395,18 @@ namespace WMS.Common
         }
 
         #endregion
+
+        protected int GetPageCount(int TotalCount, int PageSize)
+        {
+            int pageCount = 1;
+
+            pageCount = TotalCount / PageSize;
+            int p = TotalCount % PageSize;
+            if (p > 0)
+                pageCount += 1;
+
+            return pageCount;
+        }
 
         protected void btnRefresh_Click(object sender, EventArgs e)
         {

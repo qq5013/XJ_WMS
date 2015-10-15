@@ -113,12 +113,29 @@ public abstract class JsonHelper
             Dictionary<string, object> drow = new Dictionary<string, object>();
             foreach (DataColumn col in dtb.Columns)
             {
-                drow.Add(col.ColumnName, row[col.ColumnName]);
+                if (row[col.ColumnName].GetType() == typeof(DateTime))
+                {
+                    drow.Add(col.ColumnName, ToYMDHM(row[col.ColumnName]));
+
+                }
+                else
+                    drow.Add(col.ColumnName, row[col.ColumnName]);
             }
             dic.Add(drow);
         }
         return jss.Serialize(dic);
     }
+
+    public static string ToYMDHM(object dateobj)
+    {
+        return DateFormat(dateobj, "yyyy/MM/dd HH:mm:ss");
+    }
+    private static string DateFormat(object dateobj, string strFormat)
+    {
+        if (dateobj == null || dateobj.ToString().Trim().Length == 0) return "";
+        return ((DateTime)dateobj).ToString(strFormat).Replace("-", "/");   //"yyyy/MM/dd HH:mm"     
+    }
+
     public static DataTable Json2Dtb(string json)
     {
         JavaScriptSerializer jss = new JavaScriptSerializer();

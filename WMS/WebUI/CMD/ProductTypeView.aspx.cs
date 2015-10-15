@@ -16,6 +16,7 @@ namespace WMS.WebUI.CMD
         private string TableName = "CMD_ProductType";
         private string PrimaryKey = "ProductTypeCode";
         BLL.BLLBase bll = new BLL.BLLBase();
+        private string filter = "IsFixed='0'";
         protected void Page_Load(object sender, EventArgs e)
         {
             strID = Request.QueryString["ID"] + "";
@@ -94,19 +95,19 @@ namespace WMS.WebUI.CMD
         #region 上下笔事件
         protected void btnFirst_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("F", TableName, "1=1", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("F", TableName, filter, PrimaryKey, this.txtID.Text));
         }
         protected void btnPre_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("P", TableName, "1=1", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("P", TableName, filter, PrimaryKey, this.txtID.Text));
         }
         protected void btnNext_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("N", TableName, "1=1", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("N", TableName, filter, PrimaryKey, this.txtID.Text));
         }
         protected void btnLast_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("L", TableName, "1=1", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("L", TableName, filter, PrimaryKey, this.txtID.Text));
         }
         #endregion
         
