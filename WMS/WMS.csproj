@@ -5384,7 +5384,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="WebUI\TableXML\CMD_ProductInStock.xml" />
-    <Content Include="WebUI\TableXML\CMD_ProductAll.xml" />
     <Content Include="Web\Base\InBillType.aspx" />
     <Content Include="Web\Base\Cigarette.aspx" />
     <Content Include="Web\Base\CigaretteEdit.aspx" />
