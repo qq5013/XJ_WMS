@@ -110,6 +110,15 @@ namespace WMS.WebUI.InStock
                 ((Label)e.Row.FindControl("RowID")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("RowID")].ToString();
                 ((TextBox)e.Row.FindControl("ProductCode")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("ProductCode")].ToString();
                 ((TextBox)e.Row.FindControl("ProductName")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("ProductName")].ToString();
+
+                DropDownList ddl = (DropDownList)e.Row.FindControl("ddlStateNo");
+                DataTable dtStateNo = bll.FillDataTable("Cmd.SelectProductState");
+                ddl.DataValueField = "StateNo";
+                ddl.DataTextField = "StateName";
+                ddl.DataSource = dtStateNo;
+                ddl.DataBind();
+                ddl.SelectedValue = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("StateNo")].ToString();
+
                 ((TextBox)e.Row.FindControl("Quantity")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("Quantity")].ToString();
                 ((TextBox)e.Row.FindControl("SubMemo")).Text = drv.Row.ItemArray[drv.DataView.Table.Columns.IndexOf("Memo")].ToString();
             }
@@ -118,26 +127,55 @@ namespace WMS.WebUI.InStock
         protected void btnAddDetail_Click(object sender, EventArgs e)
         {
             UpdateTempSub(this.dgViewSub1);
-            int pagecount = this.dgViewSub1.PageCount;
-
             DataTable dt = (DataTable)Session[FormID + "_Edit_dgViewSub1"];
-            if (dt.Rows.Count > 0)
-            {
-                if (dt.Rows[dt.Rows.Count - 1]["ProductCode"].ToString() == "")
-                {
-                    return;
-                }
-            }
-            DataRow dr;
-            dr = dt.NewRow();
-            dr["RowID"] = dt.Rows.Count + 1;
-            dr["Quantity"] = 1;
+            DataTable dt1 = Util.JsonHelper.Json2Dtb(hdnMulSelect.Value);
+            
+            DataView dv = dt.DefaultView;
+            dv.Sort = "RowID";
+            dt = dv.ToTable();
 
-            dt.Rows.Add(dr);
+            DataRow dr;
+            int cur = dt.Rows.Count;
+            for (int i = 0; i < dt1.Rows.Count; i++)
+            {
+
+                dr = dt.NewRow();
+                dt.Rows.InsertAt(dr, cur + i);
+
+
+                dr["RowID"] = cur + i + 1;
+
+                dr["BillID"] = this.txtID.Text.Trim();
+                dr["ProductCode"] = dt1.Rows[i]["ProductCode"];
+                dr["ProductName"] = dt1.Rows[i]["ProductName"];
+                dr["Quantity"] = 1;
+
+            }
+
             this.dgViewSub1.DataSource = dt;
             this.dgViewSub1.DataBind();
             Session[FormID + "_Edit_dgViewSub1"] = dt;
-            MovePage("Edit", this.dgViewSub1, this.dgViewSub1.PageCount, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
+            MovePage("Edit", this.dgViewSub1, this.dgViewSub1.PageIndex, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
+            //int pagecount = this.dgViewSub1.PageCount;
+
+            //DataTable dt = (DataTable)Session[FormID + "_Edit_dgViewSub1"];
+            //if (dt.Rows.Count > 0)
+            //{
+            //    if (dt.Rows[dt.Rows.Count - 1]["ProductCode"].ToString() == "")
+            //    {
+            //        return;
+            //    }
+            //}
+            //DataRow dr;
+            //dr = dt.NewRow();
+            //dr["RowID"] = dt.Rows.Count + 1;
+            //dr["Quantity"] = 1;
+
+            //dt.Rows.Add(dr);
+            //this.dgViewSub1.DataSource = dt;
+            //this.dgViewSub1.DataBind();
+            //Session[FormID + "_Edit_dgViewSub1"] = dt;
+            //MovePage("Edit", this.dgViewSub1, this.dgViewSub1.PageCount, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
         }
         protected void btnDelDetail_Click(object sender, EventArgs e)
         {
@@ -237,6 +275,7 @@ namespace WMS.WebUI.InStock
                 dr["ProductCode"] = ((TextBox)dgv.Rows[i].FindControl("ProductCode")).Text;
                 dr["ProductName"] = ((TextBox)dgv.Rows[i].FindControl("ProductName")).Text;
                 dr["Quantity"] = ((TextBox)dgv.Rows[i].FindControl("Quantity")).Text;
+                dr["StateNo"] = ((DropDownList)dgv.Rows[i].FindControl("ddlStateNo")).SelectedValue;
                 dr["Memo"] = ((TextBox)dgv.Rows[i].FindControl("SubMemo")).Text;
                 dr.EndEdit();
             }

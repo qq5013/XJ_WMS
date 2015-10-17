@@ -101,9 +101,11 @@
                                 sWareHouse = tNodeID;
                             }
                             if (tNodeIDLen == 3) {
+                                sWareHouse = record.parentNode.id;
                                 sAreaCode = tNodeID;
                             }
                             if (tNodeIDLen == 6) {
+                                sAreaCode = record.parentNode.id;
                                 sShelfCode = tNodeID;
                             }
                             $("#frmMain_warehouse").attr("src", "WarehouseCell.aspx?WareHouse=" + sWareHouse + "&AreaCode=" + sAreaCode + "&ShelfCode=" + sShelfCode);

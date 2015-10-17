@@ -11,26 +11,42 @@
     <DataType>string</DataType>
   </FIELD>
   <FIELD ShowInFieldQuery="1" ShowQueryIndex="3">
-    <FieldName>ProductCode</FieldName>
-    <FieldTitle>产品编码</FieldTitle>
-    <DataType>string</DataType>
-  </FIELD>
-  <FIELD ShowInFieldQuery="1" ShowQueryIndex="4">
-    <FieldName>ProductName</FieldName>
-    <FieldTitle>产品名称</FieldTitle>
-    <DataType>string</DataType>
-  </FIELD>
-  <FIELD ShowInFieldQuery="1" ShowQueryIndex="5">
     <FieldName>ProductTypeName</FieldName>
     <FieldTitle>产品类别</FieldTitle>
     <DataType>string</DataType>
   </FIELD>
-  <FIELD ShowInFieldQuery="1" ShowQueryIndex="6">
-    <FieldName>TrainTypeName</FieldName>
-    <FieldTitle>车型</FieldTitle>
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="4">
+    <FieldName>ProductCode</FieldName>
+    <FieldTitle>产品编号</FieldTitle>
     <DataType>string</DataType>
   </FIELD>
-  <FIELD ShowInFieldQuery="0" ShowQueryIndex="7">
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="5">
+    <FieldName>ProductName</FieldName>
+    <FieldTitle>品名</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="1" ShowQueryIndex="6">
+    <FieldName>AxieNo</FieldName>
+    <FieldTitle>单位</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="0" ShowQueryIndex="4">
+    <FieldName>StateName</FieldName>
+    <FieldTitle>产品状态</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="0" ShowQueryIndex="4">
+    <FieldName>BillNo</FieldName>
+    <FieldTitle>单号</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  <FIELD ShowInFieldQuery="0" ShowQueryIndex="4">
+    <FieldName>InDate</FieldName>
+    <FieldTitle>入库时间</FieldTitle>
+    <DataType>string</DataType>
+  </FIELD>
+  
+  <FIELD ShowInFieldQuery="0" ShowQueryIndex="6">
     <FieldName>Quantity</FieldName>
     <FieldTitle>数量</FieldTitle>
     <DataType>string</DataType>

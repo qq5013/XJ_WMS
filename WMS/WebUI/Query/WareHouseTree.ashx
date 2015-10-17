@@ -136,7 +136,7 @@ public class WareHouseTree : IHttpHandler, IRequiresSessionState
     {
         string json = "";
         BLL.BLLBase bll = new BLL.BLLBase();
-        DataTable dtShelf = bll.FillDataTable("Cmd.SelectShelf", new DataParameter[] { new DataParameter("{0}", string.Format("AreaCode='{0}'", AreaCode)) });
+        DataTable dtShelf = bll.FillDataTable("Cmd.SelectCellShelf", new DataParameter[] { new DataParameter("{0}", string.Format("AreaCode='{0}'", AreaCode)) });
         for (int j = 0; j < dtShelf.Rows.Count; j++)
         {
             DataRow dr = dtShelf.Rows[j];

@@ -25,7 +25,13 @@ namespace WMS.App_Code
             {
                 if (Session["G_user"] == null)
                 {
-                    Response.Redirect("../../SessionTimeOut.aspx");
+                    string strPath = "../../";
+                    if (Page.Request.Url.AbsolutePath.Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries).Length == 3)
+                        strPath = "../";
+                    else if (Page.Request.Url.AbsolutePath.Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries).Length == 5)
+                        strPath = "../../../";
+
+                    Response.Redirect(strPath + "SessionTimeOut.aspx");
                   
                     return;
                     //Response.Write("<script language='javascript'>alert(parent.parent.location.href);parent.parent.location.href='../../WebUI/Start/SessionTimeOut.aspx';</script>");
@@ -638,6 +644,21 @@ namespace WMS.App_Code
             }
             else
             {
+                SetGridViewEmptyRow(dgv, strState);
+            }
+           
+        }
+
+        /// <summary>
+        /// 设置无产品资料时
+        /// </summary>
+        /// <param name="dgv"></param>
+        /// <param name="strState"></param>
+        public void SetGridViewEmptyRow(GridView dgv, string strState)
+        {
+            DataTable dt1 = (DataTable)Session[FormID + "_" + strState + "_" + dgv.ID];
+            if (dt1.Rows.Count == 0)
+            {
                 DataTable dtNew = dt1.Clone();
                 dtNew.Rows.Add(dtNew.NewRow());
                 dgv.DataSource = dtNew;
@@ -648,15 +669,7 @@ namespace WMS.App_Code
                 dgv.Rows[0].Cells[0].ColumnSpan = columnCount;
                 dgv.Rows[0].Cells[0].Text = "没有明细资料";
                 dgv.Rows[0].Visible = true;
-
-                btnFirst.Enabled = false;
-                btnPre.Enabled = false;
-                btnNext.Enabled = false;
-                btnLast.Enabled = false;
-                btnToPage.Enabled = false;
-                lblPage.Visible = false;
             }
-           
         }
 
 

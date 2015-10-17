@@ -58,10 +58,10 @@ namespace WMS.WebUI.OutStock
             this.ddlAreaCode.DataSource = dtArea;
             this.ddlAreaCode.DataBind();
 
-            DataTable TrainType = bll.FillDataTable("Cmd.SelectTrainType");
-            this.ddlTrainTypeCode.DataValueField = "TypeCode";
-            this.ddlTrainTypeCode.DataTextField = "TypeName";
-            this.ddlTrainTypeCode.DataSource = TrainType;
+            DataTable ProductType = bll.FillDataTable("Cmd.SelectProductType", new DataParameter[] { new DataParameter("{0}", "cmd.AreaCode='001' and ProductTypeCode<>'0001'") });
+            this.ddlTrainTypeCode.DataValueField = "ProductTypeCode";
+            this.ddlTrainTypeCode.DataTextField = "ProductTypeName";
+            this.ddlTrainTypeCode.DataSource = ProductType;
             this.ddlTrainTypeCode.DataBind();
 
             DataTable dtBillType = bll.FillDataTable("Cmd.SelectBillType",new DataParameter[]{new DataParameter("{0}","Flag=2")});
@@ -125,26 +125,59 @@ namespace WMS.WebUI.OutStock
         protected void btnAddDetail_Click(object sender, EventArgs e)
         {
             UpdateTempSub(this.dgViewSub1);
-            int pagecount = this.dgViewSub1.PageCount;
-
             DataTable dt = (DataTable)Session[FormID + "_Edit_dgViewSub1"];
-            if (dt.Rows.Count > 0)
-            {
-                if (dt.Rows[dt.Rows.Count - 1]["ProductCode"].ToString() == "")
-                {
-                    return;
-                }
-            }
-            DataRow dr;
-            dr = dt.NewRow();
-            dr["RowID"] = dt.Rows.Count + 1;
-            dr["Quantity"] = 1;
+            DataTable dt1 = Util.JsonHelper.Json2Dtb(hdnMulSelect.Value);
 
-            dt.Rows.Add(dr);
+            DataView dv = dt.DefaultView;
+            dv.Sort = "RowID";
+            dt = dv.ToTable();
+
+            DataRow dr;
+            int cur = dt.Rows.Count;
+            for (int i = 0; i < dt1.Rows.Count; i++)
+            {
+
+                dr = dt.NewRow();
+                dt.Rows.InsertAt(dr, cur + i);
+
+
+                dr["RowID"] = cur + i + 1;
+
+                dr["BillID"] = this.txtID.Text.Trim();
+                dr["ProductCode"] = dt1.Rows[i]["ProductCode"];
+                dr["ProductName"] = dt1.Rows[i]["ProductName"];
+                dr["Quantity"] = 1;
+
+            }
+
             this.dgViewSub1.DataSource = dt;
             this.dgViewSub1.DataBind();
             Session[FormID + "_Edit_dgViewSub1"] = dt;
-            MovePage("Edit", this.dgViewSub1, this.dgViewSub1.PageCount, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
+            MovePage("Edit", this.dgViewSub1, this.dgViewSub1.PageIndex, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
+
+
+
+
+            //int pagecount = this.dgViewSub1.PageCount;
+
+            //DataTable dt = (DataTable)Session[FormID + "_Edit_dgViewSub1"];
+            //if (dt.Rows.Count > 0)
+            //{
+            //    if (dt.Rows[dt.Rows.Count - 1]["ProductCode"].ToString() == "")
+            //    {
+            //        return;
+            //    }
+            //}
+            //DataRow dr;
+            //dr = dt.NewRow();
+            //dr["RowID"] = dt.Rows.Count + 1;
+            //dr["Quantity"] = 1;
+
+            //dt.Rows.Add(dr);
+            //this.dgViewSub1.DataSource = dt;
+            //this.dgViewSub1.DataBind();
+            //Session[FormID + "_Edit_dgViewSub1"] = dt;
+            //MovePage("Edit", this.dgViewSub1, this.dgViewSub1.PageCount, btnFirstSub1, btnPreSub1, btnNextSub1, btnLastSub1, btnToPageSub1, lblCurrentPageSub1);
         }
         protected void btnDelDetail_Click(object sender, EventArgs e)
         {
@@ -395,6 +428,17 @@ namespace WMS.WebUI.OutStock
       
        
         #endregion
+
+        protected void ddlAreaCode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string AreaCode = ddlAreaCode.SelectedValue;
+            DataTable ProductType = bll.FillDataTable("Cmd.SelectProductType", new DataParameter[] { new DataParameter("{0}", "cmd.AreaCode='" + AreaCode + "' and ProductTypeCode<>'0001'") });
+            this.ddlTrainTypeCode.DataValueField = "ProductTypeCode";
+            this.ddlTrainTypeCode.DataTextField = "ProductTypeName";
+            this.ddlTrainTypeCode.DataSource = ProductType;
+            this.ddlTrainTypeCode.DataBind();
+            SetGridViewEmptyRow(this.dgViewSub1, "Edit");
+        }
 
     }
 }

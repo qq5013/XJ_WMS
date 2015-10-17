@@ -44,7 +44,6 @@
   <ItemGroup>
     <Compile Include="BLLBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Query\BLLQuery.cs" />
     <Compile Include="Security\UserBll.cs" />
   </ItemGroup>
   <ItemGroup>

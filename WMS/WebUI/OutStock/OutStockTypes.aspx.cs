@@ -38,7 +38,16 @@ namespace WMS.WebUI.OutStock
         }
         protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                if (((System.Data.DataRowView)e.Row.DataItem).Row.ItemArray[((System.Data.DataRowView)e.Row.DataItem).Row.Table.Columns.IndexOf("IsFixed")].ToString() == "1")
+                {
+                    HyperLink hk = (HyperLink)e.Row.Cells[1].FindControl("HyperLink1");
+                    CheckBox chk = (CheckBox)e.Row.Cells[0].FindControl("cbSelect");
+                    chk.Enabled = false;
+                    hk.Enabled = false;
+                }
+            }
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)

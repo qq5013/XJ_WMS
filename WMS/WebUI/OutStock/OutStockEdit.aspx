@@ -14,21 +14,23 @@
             $(document).ready(function () {
                 $(window).resize(function () {
                     resize();
-                    BindEvent();
                 });
+                BindEvent();
             });
             function resize() {
                 var h = document.documentElement.clientHeight - 290;
                 $("#Sub-container").css("height", h);
             }
+            function SelectProduct() {
+                var tableName = 'CMD_ProductInStock';
+                var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and ProductCode not in ('0001','0002') and ProductTypeCode='" + $('#ddlTrainTypeCode').val() + "'";
+               
+                return GetMulSelectValue(tableName, 'hdnMulSelect', where);
+            }
             function BindEvent() {
-                $("[ID$='btnProduct']").bind("click", function () {
-                    var where = "AreaCode='" + $('#ddlAreaCode').val() + "'  and ProductCode not in ('0001','0002') ";
-                    return GetMulSelectValue('CMD_Product', 'hdnMulSelect', where);
-                });
                 $("[ID$='ProductCode']").bind("change", function () {
                     var txtID = this.id;
-                    var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and ProductCode='" + $('#' + txtID).val() + "'  and ProductCode not in ('0001','0002') ";
+                    var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and ProductCode='" + $('#' + txtID).val() + "'  and ProductCode not in ('0001','0002') and ProductTypeCode='" + $('#ddlTrainTypeCode').val() + "'";
 
                     getWhereBaseData('CMD_Product', txtID + "," + txtID.replace("ProductCode", "ProductName"), 'ProductCode,ProductName', where);
                 });
@@ -62,7 +64,7 @@
                     $("#ddlAreaCode").focus();
                     return false;
                 }
-                if (!ChkDelMustValue("dgViewSub1", "ProductCode", "产品编码"))
+                if (!ChkDelMustValue("dgViewSub1", "ProductCode", "产品编号"))
                     return false;
                 if (!ChkDelMustNumericValue("dgViewSub1", "Quantity", "数量"))
                     return false;
@@ -125,11 +127,12 @@
                         <td align="center" class="musttitle" style="width:8%;"  >
                                 库区</td>
                         <td  width="25%">
-                                &nbsp;<asp:DropDownList ID="ddlAreaCode" runat="server" Width="90%">
+                                &nbsp;<asp:DropDownList ID="ddlAreaCode" runat="server" Width="90%" 
+                                    onselectedindexchanged="ddlAreaCode_SelectedIndexChanged" AutoPostBack="true">
                             </asp:DropDownList>
                         </td>
                         <td align="center" class="musttitle" style="width:8%;"  >
-                                车型
+                                产品类型
                         </td>
                         <td width="25%">
                                 &nbsp;<asp:DropDownList ID="ddlTrainTypeCode" runat="server" Width="90%">
@@ -196,7 +199,7 @@
                     <tr>
                         <td class="table_titlebgcolor" height="25px">
                             <asp:Button  id="btnAddDetail" CssClass=" ButtonCreate" runat="server" 
-                                Text="新增明细" onclick="btnAddDetail_Click"  Width="75px" Height="16px"  />  
+                                Text="新增明细" onclick="btnAddDetail_Click" OnClientClick="return SelectProduct();"  Width="75px" Height="16px"  />  
                                 &nbsp;&nbsp;
                                 <asp:Button  id="btnDelDetail" CssClass=" ButtonDel" 
                                 runat="server" Text="删除明细" onclick="btnDelDetail_Click" 
@@ -226,16 +229,16 @@
                                 <ItemStyle HorizontalAlign="Center" />
                                 <HeaderStyle Width="4%"  />
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="产品编码">
+                            <asp:TemplateField HeaderText="产品编号">
                                     <ItemTemplate>
                                     <asp:TextBox ID="ProductCode" runat="server"  Width="80%" CssClass="TextBox"></asp:TextBox><asp:Button
-                                        ID="btnProduct"  CssClass="ButtonOption" Width="20px" runat="server"  Text="..." OnClick="btnProduct_Click" />
+                                        ID="btnProduct"  CssClass="ButtonOption" Width="20px" runat="server"  Text="..." OnClientClick="return SelectProduct();" OnClick="btnProduct_Click" />
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Left" />
                                 <HeaderStyle Width="20%"  />
                             </asp:TemplateField>
                                 
-                                <asp:TemplateField HeaderText="产品名称">
+                                <asp:TemplateField HeaderText="品名">
                                 <ItemTemplate>
                                     <asp:TextBox ID="ProductName" runat="server" Width="98%"  CssClass="TextRead" ></asp:TextBox> 
                                 </ItemTemplate>

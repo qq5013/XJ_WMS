@@ -107,6 +107,35 @@ namespace WMS.WebServices
             return rr;
         }
 
+        [WebMethod]
+        [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Xml)]
+        public ReturnData GetCellInfo(string xmlpara)
+        {
+
+            ReturnData rr = new ReturnData();
+            try
+            {
+                DataTable dt = Util.JsonHelper.Json2Dtb(xmlpara);
+                string CellCode = dt.Rows[0]["CellCode"].ToString();
+
+                BLL.BLLBase bll = new BLL.BLLBase();
+                DataTable dtCell = bll.FillDataTable("CMD.SelectWareHouseCellInfoByCell", new DataParameter[] { new DataParameter("@CellCode", CellCode) });
+                string str = JsonHelper.Dtb2Json(dtCell);
+                rr.data = str;
+                rr.type = "" + dtCell.GetType();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return rr;
+        }
+
+
+
+
+
         [WebMethod(EnableSession = true)]
         [System.Web.Script.Services.ScriptMethod(ResponseFormat = System.Web.Script.Services.ResponseFormat.Xml)]
         public ReturnData doJsDAOMode(string xmlpara)

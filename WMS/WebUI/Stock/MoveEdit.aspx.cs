@@ -168,6 +168,8 @@ namespace WMS.WebUI.Stock
             DataTable dt1 = (DataTable)Session[FormID + "_Edit_" + dgv.ID];
             if (dt1.Rows.Count == 0)
             {
+                hdnOldCellCode.Value = "";
+                hdnNewCellCode.Value = "";
                 this.ddlAreaCode.Enabled = true;
                 return;
             }

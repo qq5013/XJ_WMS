@@ -3,15 +3,9 @@
   <!--入库单据 -->
   <Command ID="SelectBillMaster">
     <CommandString>
-      select main.*,area.AreaName,billtype.BillTypeName,TrainType.TypeName,Facotry.FactoryName,State.StateDesc
-      from WMS_BillMaster main
-      left join CMD_BillType BillType on main.BillTypeCode=BillType.BillTypeCode
-      left join CMD_TrainType TrainType on main.TrainTypeCode=TrainType.TypeCode
-      left join CMD_Area area on main.AreaCode=area.AreaCode
-      left join CMD_Factory Facotry on main.FactoryID=Facotry.FactoryID
-      left join Sys_TableState State on State.State=main.State and State.TableName='WMS_BillMaster' and State.FieldName='State'
+      select  * from View_WMS_BillMaster
       where {0}
-      ORDER BY BillDate DESC, Main.BillID DESC
+      ORDER BY BillDate DESC, BillID DESC
     </CommandString>
   </Command>
   <Command ID="DeleteBillMaster">
@@ -22,17 +16,19 @@
   
   <Command ID="SelectBillDetail">
     <CommandString>
-      select detail.*,product.ProductName from WMS_BillDetail detail
-      inner join CMD_Product product on detail.ProductCode=product.ProductCode
+      select detail.*,product.ProductName,product.ProductTypeName,product.AxieNo, ProductState.StateName from WMS_BillDetail detail
+      inner join VCMD_Product product on detail.ProductCode=product.ProductCode
+      left join CMD_ProductState ProductState on detail.StateNo=ProductState.StateNo
       where {0}
       ORDER BY RowID
     </CommandString>
   </Command>
   <Command ID="SelectBillTask">
     <CommandString>
-      select task.*,Product.ProductName,state.StateDesc from WCS_TASK Task
+      select task.*,Product.ProductName,state.StateDesc,ProductState.StateName from WCS_TASK Task
       inner join CMD_Product Product on task.ProductCode=Product.ProductCode
       inner join Sys_TableState state on task.State=state.State and state.TableName='WCS_task' and state.FieldName='State'
+      left join CMD_ProductState ProductState on Task.StateNo=ProductState.StateNo
       where {0}
       order by taskNo
     </CommandString>
@@ -64,8 +60,8 @@
   </Command>
   <Command ID="InsertInStockDetail">
     <CommandString>
-      insert into WMS_BillDetail(BillID,RowID,ProductCode,Quantity,Memo)
-      values(@BillID,@RowID,@ProductCode,@Quantity,@Memo)
+      insert into WMS_BillDetail(BillID,RowID,ProductCode,Quantity,Memo,StateNo)
+      values(@BillID,@RowID,@ProductCode,@Quantity,@Memo,@StateNo)
     </CommandString>
   </Command>
   <Command ID="SpInstockTask">
@@ -159,9 +155,70 @@
       where {0}
     </CommandString>
   </Command>
+
+
+<!--盘库单-->
+  <Command ID="InsertInventoryStockBill">
+    <CommandString>
+      insert into WMS_BillMaster(BillID,BillDate,AreaCode,BillTypeCode,Memo,Creator,CreateDate,Updater,UpdateDate)
+      values(@BillID,@BillDate,@AreaCode,@BillTypeCode,@Memo,@Creator,getdate(),@Updater,getdate())
+    </CommandString>
+  </Command>
+  <Command ID="UpdateInventoryStock">
+    <CommandString>
+      update WMS_BillMaster set BillDate=@BillDate, AreaCode=@AreaCode,BillTypeCode=@BillTypeCode,Memo=@Memo,Updater=@Updater,UpdateDate=getdate() where {0}
+    </CommandString>
+  </Command>
+  <Command ID="InsertInventoryStockDetail">
+    <CommandString>
+      insert into WMS_BillDetail(BillID,RowID,ProductCode,Quantity,CellCode,Memo)
+      values(@BillID,@RowID,@ProductCode,@Quantity,@CellCode,@Memo)
+    </CommandString>
+  </Command>
+  <Command ID="SpInventoryStockTask">
+    <CommandString>
+      Sp_InventorystockTask
+    </CommandString>
+  </Command>
+  <Command ID="SpCancelInventoryStockTask">
+    <CommandString>
+      Sp_InventorystockCancelTask
+    </CommandString>
+  </Command>
   
+  <!--现有库存明细查询-->
+  <Command ID="SelectProductDetailQuery">
+    <CommandString>
+      select AreaCode,AreaName,ShelfCode,ShelfName,CellCode,CellName,CellRow,CellColumn,IsLock,
+      PalletCode,PalletBarcode,ProductCode,ProductName,ProductTypeCode,ProductTypeName,AxieNo,
+      BillNo,Quantity,InDate,StateNo,StateName
+      from View_CMD_CELL_ALL
+      where InDate is not null and {0}
+    </CommandString>
+  </Command>
 
+  <Command ID="SelectProductTotalQuery">
+    <CommandString>
+      select AreaName, ProductCode,ProductName,ProductTypeCode,ProductTypeName,AxieNo,StateNo,StateName,COUNT(1) as Qty
+      from View_CMD_CELL_ALL Cell
+      where  InDate is not null  and {0}
+      group by AreaName,ProductCode,ProductName,ProductTypeCode,ProductTypeName,AxieNo,StateNo,StateName
+    </CommandString>
+  </Command>
 
-
-
+  <Command ID="SelectTaskQuery">
+    <CommandString>
+      SELECT Task.*,BillType.BillTypeName,StateName,Product.ProductName,Product.ProductTypeName,Product.AxieNo,TableState.StateDesc,car.CarName,crane.CraneName,
+      (case when Task.TaskType='11' then Car.StationNo when Task.TaskType in('12','13','14') then Task.CellCode end) FromStation,
+      (case when Task.TaskType in ('11','14') then Task.CellCode when Task.TaskType='12' then Car.StationNo when Task.TaskType='13' then Task.ToCellCode end) ToStation
+      FROM WCS_TASK  Task
+      LEFT JOIN CMD_Car Car ON Task.CarNo = Car.CarNo
+      left join CMD_Crane Crane on Task.CraneNo=crane.CraneNo
+      left join VCMD_Product Product on task.ProductCode=Product.ProductCode
+      left join CMD_ProductState ProductState on task.StateNo=ProductState.StateNo
+      left join CMD_BillType BillType on task.BillTypeCode=billtype.BillTypeCode
+      LEFT JOIN  Sys_TableState TableState on TableState.TableName='WCS_TASK' and TableState.FieldName='State' and Task.State=TableState.State
+      where  Task.ProductCode not in ('0001','0002') and {0}
+    </CommandString>
+  </Command>
 </SqlCommand>

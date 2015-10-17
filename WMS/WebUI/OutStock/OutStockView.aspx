@@ -101,7 +101,7 @@
                             </asp:DropDownList>
                         </td>
                         <td align="center" class="musttitle" style="width:8%;"  >
-                                车型
+                                产品类型
                         </td>
                         <td width="25%">
                                 &nbsp;<asp:DropDownList ID="ddlTrainTypeCode" runat="server" Width="90%" 
@@ -181,11 +181,11 @@
                                 <ItemStyle HorizontalAlign="Left" Width="7%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="ProductCode" HeaderText="产品编码" SortExpression="ProductCode">
+                            <asp:BoundField DataField="ProductCode" HeaderText="产品编号" SortExpression="ProductCode">
                                 <ItemStyle HorizontalAlign="Left" Width="20%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="ProductName" HeaderText="产品名称" SortExpression="ProductName">
+                            <asp:BoundField DataField="ProductName" HeaderText="品名" SortExpression="ProductName">
                                 <ItemStyle HorizontalAlign="Left" Width="25%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>

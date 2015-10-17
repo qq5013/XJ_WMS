@@ -70,7 +70,9 @@
             <tr>                        
                 <td align="center" class="musttitle" style="width:15%;">库区名称</td>
                 <td style="width:35%;">
-                    <asp:TextBox ID="txtAreaName" runat="server" CssClass="TextRead"  Width="80%"></asp:TextBox>
+                    <asp:DropDownList ID="ddlAreaCode" runat="server" Width="80%">
+                        </asp:DropDownList>
+                        
                 </td> 
                 <td align="center" class="musttitle" style="width:15%;">货架名称</td>
                 <td   style="width:35%;"><asp:TextBox ID="txtShelfName" runat="server" CssClass="TextRead" Width="80%" ></asp:TextBox>
@@ -82,7 +84,7 @@
                 </td>
                 <td  align="center" class="musttitle" style="width:15%;">货位名称</td> 
                 <td style="width:35%;">
-                    <asp:TextBox ID="txtCellName" runat="server"  CssClass="TextBox"  Width="80%"></asp:TextBox>
+                    <asp:TextBox ID="txtCellName" runat="server"  CssClass="TextRead"  Width="80%"></asp:TextBox>
                 </td>
             </tr>
                       
@@ -97,19 +99,29 @@
             <tr>
                 <td align="center" class="musttitle" style="width:15%;">
                     是否锁定</td> 
-                <td style="width:35%;"><asp:DropDownList ID="ddlLock" runat="server" Height="16px" Width="79%">
+                <td style="width:35%;"><asp:DropDownList ID="ddlLock" runat="server" Height="16px" 
+                        Width="80%" Enabled="False">
                         <asp:ListItem Selected="True" Value="1">锁定</asp:ListItem>
                         <asp:ListItem Value="0">解锁</asp:ListItem>
                     </asp:DropDownList></td>
                 <td align="center" class="musttitle" style="width:15%;">
                     是否启用</td> 
                 <td style="width:35%;">
-                    <asp:DropDownList ID="ddlActive" runat="server" Height="16px" Width="79%">
+                    <asp:DropDownList ID="ddlActive" runat="server" Height="16px" Width="80%">
                         <asp:ListItem Selected="True" Value="1">启用</asp:ListItem>
                         <asp:ListItem Value="0">未启用</asp:ListItem>
                     </asp:DropDownList>
                  </td>
             </tr> 
+            <tr>
+               <td align="center" class="musttitle" style="width:15%;">
+                   设定单元</td>
+               <td colspan="3">
+                    <asp:RadioButton ID="rpt1" runat="server" Checked="True" GroupName="Rpt" Text="单个货位" />&nbsp;
+                    <asp:RadioButton ID="rpt2" runat="server" GroupName="Rpt" Text="货位所在货架层的所有货位" />&nbsp;  
+                    <asp:RadioButton ID="rpt3" runat="server" GroupName="Rpt" Text="货位所在货架列的所有货位" />&nbsp;  
+               </td> 
+            </tr>
             <tr>
                 <td align="center" class=" smalltitle" style="width:15%;">备注</td> 
                 <td colspan="3">

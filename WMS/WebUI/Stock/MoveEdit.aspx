@@ -14,15 +14,32 @@
             $(document).ready(function () {
                 $(window).resize(function () {
                     resize();
-                    BindEvent();
                 });
+                BindEvent();
             });
             function resize() {
                 var h = document.documentElement.clientHeight - 200;
                 $("#Sub-container").css("height", h);
             }
 
-           
+
+//            function NewCellClick() {
+//                var txtID = this.id;
+//                var strCellCode = "'-1',";
+
+//                var ctls = $("[id$='dgViewSub1']").find("[id$='NewCellCode']");
+//                ctls.each(function () {
+//                    if ($(this).val() != "") {
+//                        strCellCode += "'" + $(this).val() + "',";
+//                    }
+//                });
+//                if ($('#hdnNewCellCode').val() != '')
+//                    strCellCode += $('#hdnNewCellCode').val();
+//                strCellCode += "'-1'";
+
+//                var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and IsLock=0 and ProductCode='' and CellCode not in (" + strCellCode + ") ";
+//                GetOtherValue('CMD_Cell', txtID.replace("btnCellCode", "NewCellCode"), 'CellCode', where);
+//            }
             
             function BindEvent() {
                 $("[ID$='btnCellCode']").bind("click", function () {
@@ -39,7 +56,7 @@
                         strCellCode += $('#hdnNewCellCode').val();
                     strCellCode += "'-1'";
 
-                    var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and IsLock=0 and ProductCode='' and CellCode not in (" + strCellCode + ") ";
+                    var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and IsLock=0 and ProductCode='' and IsActive=1 and CellCode not in (" + strCellCode + ") ";
                     GetOtherValue('CMD_Cell', txtID.replace("btnCellCode", "NewCellCode"), 'CellCode', where);
 
 
@@ -184,11 +201,11 @@
                                 <ItemStyle HorizontalAlign="Center" />
                                 <HeaderStyle Width="4%"  />
                             </asp:TemplateField>
-                             <asp:BoundField DataField="ProductCode" HeaderText="产品编码" SortExpression="ProductCode">
+                             <asp:BoundField DataField="ProductCode" HeaderText="产品编号" SortExpression="ProductCode">
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="ProductName" HeaderText="产品名称" SortExpression="ProductName">
+                            <asp:BoundField DataField="ProductName" HeaderText="品名" SortExpression="ProductName">
                                 <ItemStyle HorizontalAlign="Left" Width="10%" Wrap="False" />
                                 <HeaderStyle Wrap="False" />
                             </asp:BoundField>

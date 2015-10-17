@@ -5,8 +5,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.ComponentModel;
-using System.Web.UI.WebControls;
-
 namespace WMS.UserControl
 {
     public partial class Calendar : System.Web.UI.UserControl
@@ -148,10 +146,10 @@ namespace WMS.UserControl
             if (_ym)
             {
                 string sp = JsDateFormat.Replace("y", "").Replace("m", "").Replace("d", "").Replace("g", "").Substring(1);
-                this.txtDate.ToolTip = "輸入年月格式為:[YYYY" + sp + "MM] 例如:" + (_dateFormat.IndexOf('g') >= 0 ? DateTime.Now.Year - 1911 : DateTime.Now.Year) + sp + (DateTime.Now.Month > 9 ? "" + DateTime.Now.Month : "0" + DateTime.Now.Month);
+                this.txtDate.ToolTip = "输入年月格式为:[YYYY" + sp + "MM] 例如:" + (_dateFormat.IndexOf('g') >= 0 ? DateTime.Now.Year - 1911 : DateTime.Now.Year) + sp + (DateTime.Now.Month > 9 ? "" + DateTime.Now.Month : "0" + DateTime.Now.Month);
             }
             else
-                this.txtDate.ToolTip = "輸入日期格式為:[" + _dateFormat + "] 例如:" + GetDateTimeString(DateTime.Now, _dateFormat);
+                this.txtDate.ToolTip = "输入日期格式为:[" + _dateFormat + "] 例如:" + GetDateTimeString(DateTime.Now, _dateFormat);
 
             //virtualPath = Js.Com.ConfigHelper.GetConfigString("VirtualPath");
             //if (!Page.ClientScript.IsClientScriptIncludeRegistered("headjquery"))

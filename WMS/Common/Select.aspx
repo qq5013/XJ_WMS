@@ -121,7 +121,7 @@
 		        </table>
             <div id="SelectDiv" style="overflow: auto; WIDTH: 100%; HEIGHT: 470px" >
                  
-                <asp:GridView ID="GridView1" runat="server" SkinID="GridViewSkin" Width="1100px" AllowPaging="True"  PageSize="12"  
+                <asp:GridView ID="GridView1" runat="server" SkinID="GridViewSkin" Width="100%" AllowPaging="True"  PageSize="12"  
                  OnRowDataBound="GridView1_RowDataBound"  >
                     <RowStyle Wrap="False"></RowStyle>
                     <Columns>

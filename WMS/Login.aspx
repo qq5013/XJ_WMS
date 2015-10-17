@@ -5,14 +5,10 @@
     <title>login</title>
     <script type="text/javascript" src='<%=ResolveUrl("~/JQuery/jquery-1.8.3.min.js") %>'></script>
     <script language="javascript" type="text/javascript">
-        $(document).ready(function () {
-//            window.moveTo(0, 0);
-//            window.resizeTo(screen.availWidth, screen.availHeight);
-//            var top = screen.availHeight / 2 - 153;
-//            var left = screen.availWidth / 2 - 275;
-//            divLogin.style.top = top;
-//            divLogin.style.left = left;
-        });
+        if (self.location != top.location) {
+            top.location.href = self.location.href;
+        }
+
         function document.onkeydown() {
             if (event.keyCode == 13 && event.srcElement.type != 'button' && event.srcElement.type != 'submit' && event.srcElement.type != 'reset' && event.srcElement.type != 'textarea' && event.srcElement.type != '') {
                 event.keyCode = 9;
@@ -75,6 +71,7 @@ input{
 </head>
 <body>
     <form id="form1" runat="server">
+     <asp:ScriptManager ID="ScriptManager1" runat="server"  />  
     <div>
     <table width="100%" height="100%" border="0">
         <tr>

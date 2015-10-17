@@ -58,13 +58,13 @@ namespace WMS.WebUI.CMD {
         protected global::System.Web.UI.WebControls.TextBox txtShelfID;
         
         /// <summary>
-        /// txtAreaName 控件。
+        /// ddlAreaCode 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAreaName;
+        protected global::System.Web.UI.WebControls.DropDownList ddlAreaCode;
         
         /// <summary>
         /// txtShelfName 控件。
@@ -128,6 +128,33 @@ namespace WMS.WebUI.CMD {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlActive;
+        
+        /// <summary>
+        /// rpt1 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rpt1;
+        
+        /// <summary>
+        /// rpt2 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rpt2;
+        
+        /// <summary>
+        /// rpt3 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rpt3;
         
         /// <summary>
         /// txtMemo 控件。

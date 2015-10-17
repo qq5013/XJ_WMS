@@ -150,13 +150,6 @@
     <Compile Include="Index\Navigation.aspx.designer.cs">
       <DependentUpon>Navigation.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Index\ShowMsg.aspx.cs">
-      <DependentUpon>ShowMsg.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Index\ShowMsg.aspx.designer.cs">
-      <DependentUpon>ShowMsg.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Index\Spliter.aspx.cs">
       <DependentUpon>Spliter.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -305,6 +298,27 @@
     <Compile Include="WebUI\CMD\FactoryView.aspx.designer.cs">
       <DependentUpon>FactoryView.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WebUI\CMD\MachineEdit.aspx.cs">
+      <DependentUpon>MachineEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\CMD\MachineEdit.aspx.designer.cs">
+      <DependentUpon>MachineEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\CMD\Machines.aspx.cs">
+      <DependentUpon>Machines.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\CMD\Machines.aspx.designer.cs">
+      <DependentUpon>Machines.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\CMD\MachineView.aspx.cs">
+      <DependentUpon>MachineView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\CMD\MachineView.aspx.designer.cs">
+      <DependentUpon>MachineView.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebUI\CMD\ProductEdit.aspx.cs">
       <DependentUpon>ProductEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -318,6 +332,27 @@
     </Compile>
     <Compile Include="WebUI\CMD\Products.aspx.designer.cs">
       <DependentUpon>Products.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\CMD\ProductStateEdit.aspx.cs">
+      <DependentUpon>ProductStateEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\CMD\ProductStateEdit.aspx.designer.cs">
+      <DependentUpon>ProductStateEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\CMD\ProductStates.aspx.cs">
+      <DependentUpon>ProductStates.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\CMD\ProductStates.aspx.designer.cs">
+      <DependentUpon>ProductStates.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\CMD\ProductStateView.aspx.cs">
+      <DependentUpon>ProductStateView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\CMD\ProductStateView.aspx.designer.cs">
+      <DependentUpon>ProductStateView.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebUI\CMD\ProductTypeEdit.aspx.cs">
       <DependentUpon>ProductTypeEdit.aspx</DependentUpon>
@@ -515,20 +550,6 @@
     <Compile Include="WebUI\OutStock\OutStockView.aspx.designer.cs">
       <DependentUpon>OutStockView.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WebUI\Query\BarCodeQuery.aspx.cs">
-      <DependentUpon>BarCodeQuery.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\Query\BarCodeQuery.aspx.designer.cs">
-      <DependentUpon>BarCodeQuery.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebUI\Query\Cell.aspx.cs">
-      <DependentUpon>Cell.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\Query\Cell.aspx.designer.cs">
-      <DependentUpon>Cell.aspx</DependentUpon>
-    </Compile>
     <Compile Include="WebUI\Query\CellInfo.aspx.cs">
       <DependentUpon>CellInfo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -536,54 +557,12 @@
     <Compile Include="WebUI\Query\CellInfo.aspx.designer.cs">
       <DependentUpon>CellInfo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WebUI\Query\CellQuery.aspx.cs">
-      <DependentUpon>CellQuery.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\Query\CellQuery.aspx.designer.cs">
-      <DependentUpon>CellQuery.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebUI\Query\InScheduleQuery.aspx.cs">
-      <DependentUpon>InScheduleQuery.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\Query\InScheduleQuery.aspx.designer.cs">
-      <DependentUpon>InScheduleQuery.aspx</DependentUpon>
-    </Compile>
     <Compile Include="WebUI\Query\InStockQuery.aspx.cs">
       <DependentUpon>InStockQuery.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="WebUI\Query\InStockQuery.aspx.designer.cs">
       <DependentUpon>InStockQuery.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebUI\Query\MsgInfo.aspx.cs">
-      <DependentUpon>MsgInfo.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\Query\MsgInfo.aspx.designer.cs">
-      <DependentUpon>MsgInfo.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebUI\Query\OtherProductQuery.aspx.cs">
-      <DependentUpon>OtherProductQuery.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\Query\OtherProductQuery.aspx.designer.cs">
-      <DependentUpon>OtherProductQuery.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebUI\Query\OutScheduleQuery.aspx.cs">
-      <DependentUpon>OutScheduleQuery.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\Query\OutScheduleQuery.aspx.designer.cs">
-      <DependentUpon>OutScheduleQuery.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebUI\Query\OutStockDeliverQuery.aspx.cs">
-      <DependentUpon>OutStockDeliverQuery.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUI\Query\OutStockDeliverQuery.aspx.designer.cs">
-      <DependentUpon>OutStockDeliverQuery.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebUI\Query\OutStockQuery.aspx.cs">
       <DependentUpon>OutStockQuery.aspx</DependentUpon>
@@ -599,6 +578,13 @@
     <Compile Include="WebUI\Query\ProductQuery.aspx.designer.cs">
       <DependentUpon>ProductQuery.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WebUI\Query\TaskQuery.aspx.cs">
+      <DependentUpon>TaskQuery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\Query\TaskQuery.aspx.designer.cs">
+      <DependentUpon>TaskQuery.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebUI\Query\WarehouseCell.aspx.cs">
       <DependentUpon>WarehouseCell.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -612,6 +598,55 @@
     </Compile>
     <Compile Include="WebUI\Query\WarehouseCellQuery.aspx.designer.cs">
       <DependentUpon>WarehouseCellQuery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\Stock\InventoryEdit.aspx.cs">
+      <DependentUpon>InventoryEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\Stock\InventoryEdit.aspx.designer.cs">
+      <DependentUpon>InventoryEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\Stock\Inventorys.aspx.cs">
+      <DependentUpon>Inventorys.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\Stock\Inventorys.aspx.designer.cs">
+      <DependentUpon>Inventorys.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\Stock\InventoryTasks.aspx.cs">
+      <DependentUpon>InventoryTasks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\Stock\InventoryTasks.aspx.designer.cs">
+      <DependentUpon>InventoryTasks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\Stock\InventoryTypeEdit.aspx.cs">
+      <DependentUpon>InventoryTypeEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\Stock\InventoryTypeEdit.aspx.designer.cs">
+      <DependentUpon>InventoryTypeEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\Stock\InventoryTypes.aspx.cs">
+      <DependentUpon>InventoryTypes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\Stock\InventoryTypes.aspx.designer.cs">
+      <DependentUpon>InventoryTypes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\Stock\InventoryTypeView.aspx.cs">
+      <DependentUpon>InventoryTypeView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\Stock\InventoryTypeView.aspx.designer.cs">
+      <DependentUpon>InventoryTypeView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\Stock\InventoryView.aspx.cs">
+      <DependentUpon>InventoryView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\Stock\InventoryView.aspx.designer.cs">
+      <DependentUpon>InventoryView.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebUI\Stock\MoveEdit.aspx.cs">
       <DependentUpon>MoveEdit.aspx</DependentUpon>
@@ -5245,6 +5280,7 @@
     <Content Include="Images\desktop\Product.png" />
     <Content Include="Images\desktop\WarehouseCellQuery.png" />
     <Content Include="Images\desktop\Software.png" />
+    <Content Include="Images\flag.png" />
     <Content Include="Images\icon\BreakLog.png" />
     <Content Include="Images\icon\Car.png" />
     <Content Include="Images\icon\Crane.png" />
@@ -5288,7 +5324,6 @@
     <Content Include="Index\Left.aspx" />
     <Content Include="Index\Main.aspx" />
     <Content Include="Index\Navigation.aspx" />
-    <Content Include="Index\ShowMsg.aspx" />
     <Content Include="Index\Spliter.aspx" />
     <Content Include="Index\Top.aspx" />
     <Content Include="Index\topButton.aspx" />
@@ -5312,6 +5347,12 @@
     <Content Include="WebUI\CMD\CraneEdit.aspx" />
     <Content Include="WebUI\CMD\Cranes.aspx" />
     <Content Include="WebUI\CMD\CraneView.aspx" />
+    <Content Include="WebUI\CMD\MachineEdit.aspx" />
+    <Content Include="WebUI\CMD\Machines.aspx" />
+    <Content Include="WebUI\CMD\MachineView.aspx" />
+    <Content Include="WebUI\CMD\ProductStateEdit.aspx" />
+    <Content Include="WebUI\CMD\ProductStates.aspx" />
+    <Content Include="WebUI\CMD\ProductStateView.aspx" />
     <Content Include="WebUI\CMD\ProductTypeEdit.aspx" />
     <Content Include="WebUI\CMD\ProductTypes.aspx" />
     <Content Include="WebUI\CMD\ProductTypeView.aspx" />
@@ -5334,16 +5375,23 @@
     <Content Include="WebUI\OutStock\OutStockTypes.aspx" />
     <Content Include="WebUI\OutStock\OutStockTypeView.aspx" />
     <Content Include="WebUI\OutStock\OutStockView.aspx" />
-    <Content Include="WebUI\Query\Cell.aspx" />
     <Content Include="WebUI\Query\CellInfo.aspx" />
-    <Content Include="WebUI\Query\CellQuery.aspx" />
-    <Content Include="WebUI\Query\OtherProductQuery.aspx" />
-    <Content Include="WebUI\Query\OutStockDeliverQuery.aspx" />
+    <Content Include="WebUI\Query\TaskQuery.aspx" />
+    <Content Include="WebUI\Stock\InventoryEdit.aspx" />
+    <Content Include="WebUI\Stock\Inventorys.aspx" />
+    <Content Include="WebUI\Stock\InventoryTasks.aspx" />
+    <Content Include="WebUI\Stock\InventoryTypeEdit.aspx" />
+    <Content Include="WebUI\Stock\InventoryTypes.aspx" />
+    <Content Include="WebUI\Stock\InventoryTypeView.aspx" />
+    <Content Include="WebUI\Stock\InventoryView.aspx" />
     <Content Include="WebUI\Stock\MoveEdit.aspx" />
     <Content Include="WebUI\Stock\Moves.aspx" />
     <Content Include="WebUI\Stock\MoveTasks.aspx" />
     <Content Include="WebUI\Stock\MoveView.aspx" />
-    <Content Include="WebUI\TableXML\CMD_Cell.xml" />
+    <Content Include="WebUI\TableXML\CMD_Cell.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="WebUI\TableXML\CMD_ProductInStock.xml" />
     <Content Include="Web\Base\InBillType.aspx" />
     <Content Include="Web\Base\Cigarette.aspx" />
     <Content Include="Web\Base\CigaretteEdit.aspx" />
@@ -5437,7 +5485,6 @@
     <Content Include="WebUI\CMD\ProductEdit.aspx" />
     <Content Include="WebUI\CMD\Products.aspx" />
     <Content Include="WebUI\CMD\ProductView.aspx" />
-    <Content Include="WebUI\Query\BarCodeQuery.aspx" />
     <Content Include="WebUI\Query\images\background.jpg" />
     <Content Include="WebUI\Query\images\buttons1\Export.gif" />
     <Content Include="WebUI\Query\images\buttons1\First.gif" />
@@ -5452,16 +5499,14 @@
     <Content Include="WebUI\Query\images\buttons1\Refresh.gif" />
     <Content Include="WebUI\Query\images\buttons1\Zoom.gif" />
     <Content Include="WebUI\Query\images\demo_logo.png" />
-    <Content Include="WebUI\Query\InScheduleQuery.aspx" />
     <Content Include="WebUI\Query\InStockQuery.aspx" />
-    <Content Include="WebUI\Query\MsgInfo.aspx" />
-    <Content Include="WebUI\Query\OutScheduleQuery.aspx" />
     <Content Include="WebUI\Query\OutStockQuery.aspx" />
     <Content Include="WebUI\Query\ProductQuery.aspx" />
     <Content Include="WebUI\Query\WarehouseCell.aspx" />
     <Content Include="WebUI\Query\WarehouseCellQuery.aspx" />
     <Content Include="WebUI\TableXML\CMD_Product.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <None Include="Web References\PurchaseOrder\WmsService.wsdl" />
     <Content Include="Web\Ashx\MainHandler.ashx" />

@@ -15,6 +15,7 @@ namespace WMS.WebUI.OutStock
         private string strID;
         private string TableName = "CMD_BillType";
         private string PrimaryKey = "BillTypeCode";
+        private string Filter = "Flag=2 and IsFixed='0'";
         BLL.BLLBase bll = new BLL.BLLBase();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -90,19 +91,19 @@ namespace WMS.WebUI.OutStock
         #region 上下笔事件
         protected void btnFirst_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("F", TableName, "Flag=2", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("F", TableName, Filter, PrimaryKey, this.txtID.Text));
         }
         protected void btnPre_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("P", TableName, "Flag=2", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("P", TableName, Filter, PrimaryKey, this.txtID.Text));
         }
         protected void btnNext_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("N", TableName, "Flag=2", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("N", TableName, Filter, PrimaryKey, this.txtID.Text));
         }
         protected void btnLast_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("L", TableName, "Flag=2", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("L", TableName, Filter, PrimaryKey, this.txtID.Text));
         }
         #endregion
         

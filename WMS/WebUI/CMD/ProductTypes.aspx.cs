@@ -38,7 +38,16 @@ namespace WMS.WebUI.CMD
         }
         protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                if (((System.Data.DataRowView)e.Row.DataItem).Row.ItemArray[((System.Data.DataRowView)e.Row.DataItem).Row.Table.Columns.IndexOf("IsFixed")].ToString() == "1")
+                {
+                    HyperLink hk = (HyperLink)e.Row.Cells[1].FindControl("HyperLink1");
+                    CheckBox chk = (CheckBox)e.Row.Cells[0].FindControl("cbSelect");
+                    chk.Enabled = false;
+                    hk.Enabled = false;
+                }
+            }
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -64,7 +73,7 @@ namespace WMS.WebUI.CMD
             for (int i = 0; i < this.GridView1.Rows.Count; i++)
             {
                 CheckBox cb = (CheckBox)(this.GridView1.Rows[i].FindControl("cbSelect"));
-                if (cb != null && cb.Checked)
+                if (cb != null && cb.Checked && cb.Enabled)
                 {
                     HyperLink hk = (HyperLink)(this.GridView1.Rows[i].FindControl("HyperLink1"));
                     //判断能否删除

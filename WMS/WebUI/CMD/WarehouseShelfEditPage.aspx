@@ -72,39 +72,34 @@
                          
                 <td style="width:35%;">
                     <asp:TextBox ID="txtWhName" runat="server" CssClass="TextRead" Width="80%"></asp:TextBox></td>
-                <td align="center" class="musttitle" style="width:15%;">库区名称</td>
-                <td style="width:35%;"><asp:TextBox ID="txtAreaName" runat="server" 
-                        CssClass="TextRead" Width="80%"></asp:TextBox></td>
+                <td align="center" class="musttitle" style="width:15%;">货架编码</td>
+                <td style="width:35%;"><asp:TextBox ID="txtShelfCode" runat="server"  CssClass="TextRead" Width="80%" 
+                        MaxLength="10"></asp:TextBox>
+                </td>
                          
             </tr>
             <tr>
-                <td align="center" class="musttitle" style="width:15%;">货架编码</td> 
-                <td><asp:TextBox ID="txtShelfCode" runat="server"  CssClass="TextRead" Width="80%" 
-                        MaxLength="10"></asp:TextBox>
-                </td>
                 <td align="center" class="musttitle" style="width:15%;">货架名称</td> 
                 <td><asp:TextBox ID="txtShelfName" runat="server"  CssClass="TextBox" Width="80%" MaxLength="10"></asp:TextBox>
                 </td>
+                <td align="center" class=" smalltitle" style="width:15%;">货架层数</td> 
+                <td><asp:TextBox ID="txtCellRows" runat="server"  CssClass="TextBox" Width="80%">1</asp:TextBox>
+                </td>
             </tr>
             <tr>
-                <td align="center" class="smalltitle" style="width:15%;">货架层数</td> 
-                <td><asp:TextBox ID="txtCellRows" runat="server"  CssClass="TextBox" Width="80%" >1</asp:TextBox>
+                <td align="center" class="smalltitle" style="width:15%;">是否启用</td> 
+                <td>
+                    <asp:DropDownList ID="ddlActive" runat="server" Width="80%">
+                        <asp:ListItem Selected="True" Value="1">启用</asp:ListItem>
+                        <asp:ListItem Value="0">未启用</asp:ListItem>
+                    </asp:DropDownList>
                 </td>
                 <td align="center" class="smalltitle" style="width:15%;">货架列数</td> 
                 <td><asp:TextBox ID="txtCellCols" runat="server"  CssClass="TextBox" Width="80%" >1</asp:TextBox>
                 </td>
             </tr>  
                       
-            <tr>
-                <td align="center" class="smalltitle" style="width:15%;">是否启用</td> 
-                <td><asp:DropDownList ID="ddlActive" runat="server">
-                        <asp:ListItem Selected="True" Value="1">启用</asp:ListItem>
-                        <asp:ListItem Value="0">未启用</asp:ListItem>
-                    </asp:DropDownList>
-                </td>
-                <td align="center" class="musttitle" style="width:15%;">&nbsp;</td> 
-                <td>&nbsp;</td>
-            </tr>     
+            
             <tr>
                 <td align="center" class="smalltitle" style="width:15%;">备注</td> 
                 <td colspan="3" style="text-align: left; height:75px">

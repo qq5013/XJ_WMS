@@ -140,11 +140,11 @@ public class WareHouseTree : IHttpHandler, IRequiresSessionState
     {
         string json = "";
         BLL.BLLBase bll = new BLL.BLLBase();
-        DataTable dtShelf = bll.FillDataTable("Cmd.SelectShelf", new DataParameter[] { new DataParameter("{0}", string.Format("AreaCode='{0}'", AreaCode)) });
+        DataTable dtShelf = bll.FillDataTable("Cmd.SelectCellShelf", new DataParameter[] { new DataParameter("{0}", string.Format("AreaCode='{0}'", AreaCode)) });
         for (int j = 0; j < dtShelf.Rows.Count; j++)
         {
             DataRow dr = dtShelf.Rows[j];
-            string shelfTree = GetShelfTree(dr["ShelfCode"].ToString());
+            string shelfTree = GetShelfTree(AreaCode, dr["ShelfCode"].ToString());
             if (j == 0)
             {
                 json += ",children:[{";
@@ -196,11 +196,11 @@ public class WareHouseTree : IHttpHandler, IRequiresSessionState
     }
 
 
-    private string GetShelfTree(string ShelfCode)
+    private string GetShelfTree(string AreaCode, string ShelfCode)
     {
         string json = "";
         BLL.BLLBase bll = new BLL.BLLBase();
-        DataTable dtShelf = bll.FillDataTable("Cmd.SelectCell", new DataParameter[] { new DataParameter("{0}", string.Format("ShelfCode='{0}'", ShelfCode)) });
+        DataTable dtShelf = bll.FillDataTable("Cmd.SelectCell", new DataParameter[] { new DataParameter("{0}", string.Format("ShelfCode='{0}' and AreaCode='{1}'", ShelfCode,AreaCode)) });
         for (int j = 0; j < dtShelf.Rows.Count; j++)
         {
             DataRow dr = dtShelf.Rows[j];

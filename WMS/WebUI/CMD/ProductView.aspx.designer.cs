@@ -139,6 +139,15 @@ namespace WMS.WebUI.CMD {
         protected global::System.Web.UI.HtmlControls.HtmlTable Table1;
         
         /// <summary>
+        /// ddlProductTypeCode 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlProductTypeCode;
+        
+        /// <summary>
         /// txtID 控件。
         /// </summary>
         /// <remarks>
@@ -157,24 +166,6 @@ namespace WMS.WebUI.CMD {
         protected global::System.Web.UI.WebControls.TextBox txtProductName;
         
         /// <summary>
-        /// ddlProductTypeCode 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlProductTypeCode;
-        
-        /// <summary>
-        /// ddlTrainTypeCode 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTrainTypeCode;
-        
-        /// <summary>
         /// txtAxieNo 控件。
         /// </summary>
         /// <remarks>
@@ -191,6 +182,42 @@ namespace WMS.WebUI.CMD {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtWheelDiameter;
+        
+        /// <summary>
+        /// chkTemp 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkTemp;
+        
+        /// <summary>
+        /// ddlCX_Factory 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCX_Factory;
+        
+        /// <summary>
+        /// txtLDXC 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLDXC;
+        
+        /// <summary>
+        /// txtCX_DateTime 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCX_DateTime;
         
         /// <summary>
         /// txtCCZ_Diameter 控件。
@@ -326,42 +353,6 @@ namespace WMS.WebUI.CMD {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFCCLG_Flag;
-        
-        /// <summary>
-        /// txtLDXC 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLDXC;
-        
-        /// <summary>
-        /// txtCX_DateTime 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCX_DateTime;
-        
-        /// <summary>
-        /// ddlCX_Factory 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCX_Factory;
-        
-        /// <summary>
-        /// ddlAreaCode 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlAreaCode;
         
         /// <summary>
         /// txtInstockDate 控件。

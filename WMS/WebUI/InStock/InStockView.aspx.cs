@@ -13,7 +13,7 @@ namespace WMS.WebUI.InStock
     public partial class InStockView :App_Code.BasePage
     {
         private string strID;
-        private string TableName = "WMS_BillMaster";
+        private string TableName = "View_WMS_BillMaster";
         private string PrimaryKey = "BillID";
         BLL.BLLBase bll = new BLL.BLLBase();
         protected void Page_Load(object sender, EventArgs e)

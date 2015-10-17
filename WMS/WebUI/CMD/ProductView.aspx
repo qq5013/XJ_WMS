@@ -54,47 +54,66 @@
                  <table id="Table1" class="maintable"  width="100%" align="center" cellspacing="0" cellpadding="0" bordercolor="#ffffff" border="1"
 				     runat="server">			
 				<tr>
-                    <td align="center" class="musttitle" style="width:12%;"  >
-                            产品编码
-                    </td>
-                    <td  width="21%">
-                            &nbsp;<asp:TextBox ID="txtID" runat="server"  CssClass="TextRead" Width="90%" MaxLength="20" ReadOnly="True"></asp:TextBox>
-                    </td>
-                    <td align="center" class="musttitle" style="width:12%;"  >
-                           产品名称
-                    </td>
-                    <td width="21%">
-                            &nbsp;<asp:TextBox ID="txtProductName" CssClass="TextRead" runat="server"   Width="90%" MaxLength="50" ReadOnly="True"></asp:TextBox> 
-                          
-
-                    </td>
                     <td align="center" class="musttitle" style="width:12%;">
                         产品类别
                     </td>
                     <td width="21%">
                         &nbsp;<asp:DropDownList ID="ddlProductTypeCode" Enabled="false" runat="server" Width="91%"></asp:DropDownList>
                     </td>
-                </tr>
-                <tr>
                     <td align="center" class="musttitle" style="width:12%;"  >
-                            车型
+                            产品编号
                     </td>
                     <td  width="21%">
-                         &nbsp;<asp:DropDownList ID="ddlTrainTypeCode" Enabled="false" runat="server" Width="91%"></asp:DropDownList>
+                            &nbsp;<asp:TextBox ID="txtID" runat="server"  CssClass="TextRead" Width="90%" MaxLength="20" ReadOnly="True"></asp:TextBox>
                     </td>
                     <td align="center" class="musttitle" style="width:12%;"  >
-                           车轴编号 
+                           品名
+                    </td>
+                    <td width="21%">
+                            &nbsp;<asp:TextBox ID="txtProductName" CssClass="TextRead" runat="server"   Width="90%" MaxLength="50" ReadOnly="True"></asp:TextBox> 
+                          
+
+                    </td>
+                    
+                </tr>
+                <tr>
+                    
+                    <td align="center" class="musttitle" style="width:12%;"  >
+                           单位 
                     </td>
                     <td width="21%">
                             &nbsp;<asp:TextBox ID="txtAxieNo" runat="server"    Width="90%" CssClass="TextRead" MaxLength="20" ReadOnly="True"></asp:TextBox> 
 
                     </td>
-                    <td align="center" class="smalltitle" style="width:12%;">
+                    <td align="center" class="musttitle" style="width:12%;">
                         轮径</td>
                     <td width="21%">
-                        &nbsp;<asp:TextBox ID="txtWheelDiameter" runat="server" CssClass="TextRead"   Width="90%" MaxLength="25" ReadOnly="True"></asp:TextBox> 
+                        &nbsp;<asp:TextBox ID="txtWheelDiameter" runat="server" CssClass="TextRead"   Width="90%" MaxLength="25" ReadOnly="True"></asp:TextBox>
+                    </td>
+                    <td colspan="2" align="center">
+                        <asp:CheckBox ID="chkTemp" runat="server" Text="临时产品" />
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" class="musttitle" style="width:12%;">
+                        承修厂家</td>
+                    <td width="21%">
+                        &nbsp;<asp:DropDownList ID="ddlCX_Factory" runat="server" Enabled="false" Width="91%"></asp:DropDownList>
 
                     </td>
+                    <td align="center" class="smalltitle" style="width:12%;"  >
+                            &nbsp;轮对修程</td>
+                    <td  width="21%">
+                        &nbsp;<asp:TextBox ID="txtLDXC" runat="server"   Width="90%" CssClass="TextRead" MaxLength="50" ReadOnly="True"></asp:TextBox> 
+
+                    </td>
+                    <td align="center" class="smalltitle" style="width:12%;"  >
+                           承修时间 
+                    </td>
+                    <td width="21%">
+                           &nbsp;<asp:TextBox ID="txtCX_DateTime" runat="server"  CssClass="TextRead" Width="90%"  ReadOnly="True"></asp:TextBox>
+                    </td>
+                    
                 </tr>
                 <tr>
                     <td align="center" class="smalltitle" style="width:12%;"  >
@@ -203,39 +222,19 @@
 
                     </td>
                 </tr>
-                 <tr>
-                    <td align="center" class="smalltitle" style="width:12%;"  >
-                            &nbsp;轮对修程</td>
-                    <td  width="21%">
-                        &nbsp;<asp:TextBox ID="txtLDXC" runat="server"   Width="90%" CssClass="TextRead" MaxLength="50" ReadOnly="True"></asp:TextBox> 
-
-                    </td>
-                    <td align="center" class="smalltitle" style="width:12%;"  >
-                           承修时间 
-                    </td>
-                    <td width="21%">
-                           &nbsp;<asp:TextBox ID="txtCX_DateTime" runat="server"  CssClass="TextRead" Width="90%"  ReadOnly="True"></asp:TextBox>
-                    </td>
-                    <td align="center" class="smalltitle" style="width:12%;">
-                        承修厂家</td>
-                    <td width="21%">
-                        &nbsp;<asp:DropDownList ID="ddlCX_Factory" runat="server" Enabled="false" Width="91%"></asp:DropDownList>
-
-                    </td>
-                </tr>
+                 
                  <tr>
                   
-                   <td align="center"  class="smalltitle" style="width:12%;">
-                       存放库区</td>
-                  <td width="21%">
-                      &nbsp;<asp:DropDownList ID="ddlAreaCode" runat="server" Enabled="false" Width="91%"></asp:DropDownList>
-
-                  </td>
+                   
                  
                    <td align="center"  class="smalltitle" style="width:12%;">
                        入库时间</td>
                   <td width="21%">
                       &nbsp;<asp:TextBox ID="txtInstockDate" runat="server"  CssClass="TextRead" Width="90%" ReadOnly="True" ></asp:TextBox> 
+                  </td>
+                  <td>
+                  </td>
+                  <td>
                   </td>
                   <td align="center"  class="smalltitle" style="width:12%;">
                         建单人员

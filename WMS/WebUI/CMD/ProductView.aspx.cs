@@ -13,9 +13,10 @@ namespace WMS.WebUI.CMD
     public partial class ProductView :App_Code.BasePage
     {
         private string strID;
-        private string TableName = "CMD_Product";
+        private string TableName = "VCMD_Product";
         private string PrimaryKey = "ProductCode";
         BLL.BLLBase bll = new BLL.BLLBase();
+        private string filter = "IsFixed='0' and AreaCode='001'";
         protected void Page_Load(object sender, EventArgs e)
         {
             strID = Request.QueryString["ID"] + "";
@@ -31,26 +32,21 @@ namespace WMS.WebUI.CMD
         #region 绑定方法
         private void BindDropDownList()
         {
-            DataTable dtArea = bll.FillDataTable("Cmd.SelectArea");
-            this.ddlAreaCode.DataValueField = "AreaCode";
-            this.ddlAreaCode.DataTextField = "AreaName";
-            this.ddlAreaCode.DataSource = dtArea;
-            this.ddlAreaCode.DataBind();
 
 
 
-            DataTable ProductType = bll.FillDataTable("Cmd.SelectProductType");
+            DataTable ProductType = bll.FillDataTable("Cmd.SelectProductType", new DataParameter[] { new DataParameter("{0}", "cmd.AreaCode='001' and ProductTypeCode<>'0001'") });
             this.ddlProductTypeCode.DataValueField = "ProductTypeCode";
             this.ddlProductTypeCode.DataTextField = "ProductTypeName";
             this.ddlProductTypeCode.DataSource = ProductType;
             this.ddlProductTypeCode.DataBind();
 
             //ddlTrainTypeCode
-            DataTable TrainType = bll.FillDataTable("Cmd.SelectTrainType");
-            this.ddlTrainTypeCode.DataValueField = "TypeCode";
-            this.ddlTrainTypeCode.DataTextField = "TypeName";
-            this.ddlTrainTypeCode.DataSource = TrainType;
-            this.ddlTrainTypeCode.DataBind();
+            //DataTable TrainType = bll.FillDataTable("Cmd.SelectTrainType");
+            //this.ddlTrainTypeCode.DataValueField = "TypeCode";
+            //this.ddlTrainTypeCode.DataTextField = "TypeName";
+            //this.ddlTrainTypeCode.DataSource = TrainType;
+            //this.ddlTrainTypeCode.DataBind();
 
             //ddlCCLX_Factory
             DataTable CCLX_Factory = bll.FillDataTable("Cmd.SelectFactory", new DataParameter[] { new DataParameter("{0}", "Flag=1") });
@@ -84,7 +80,7 @@ namespace WMS.WebUI.CMD
                 this.txtID.Text = dt.Rows[0]["ProductCode"].ToString();
                 this.txtProductName.Text = dt.Rows[0]["ProductName"].ToString();
                 this.ddlProductTypeCode.SelectedValue = dt.Rows[0]["ProductTypeCode"].ToString();
-                this.ddlTrainTypeCode.SelectedValue = dt.Rows[0]["TrainTypeCode"].ToString();
+                //this.ddlTrainTypeCode.SelectedValue = dt.Rows[0]["TrainTypeCode"].ToString();
                 this.txtAxieNo.Text = dt.Rows[0]["AxieNo"].ToString();
                 this.txtWheelDiameter.Text = dt.Rows[0]["WheelDiameter"].ToString();
 
@@ -104,7 +100,7 @@ namespace WMS.WebUI.CMD
                 this.ddlCX_Factory.SelectedValue = dt.Rows[0]["CX_FactoryID"].ToString();
                 this.txtCCLG_Flag.Text = dt.Rows[0]["CCLG_Flag"].ToString();
                 this.txtFCCLG_Flag.Text = dt.Rows[0]["FCCLG_Flag"].ToString();
-                this.ddlAreaCode.SelectedValue = dt.Rows[0]["AreaCode"].ToString();
+                this.chkTemp.Checked = dt.Rows[0]["IsTemp"].ToString() == "1" ? true : false;
                 this.txtLDXC.Text = dt.Rows[0]["LDXC"].ToString();
                 this.txtCX_DateTime.Text = ToYMD(dt.Rows[0]["CX_DateTime"]);
                 this.txtInstockDate.Text = ToYMD(dt.Rows[0]["InstockDate"]);
@@ -159,7 +155,7 @@ namespace WMS.WebUI.CMD
             int Count = bll.GetRowCount("VUsed_CMD_Product", string.Format("ProductCode='{0}'", this.txtID.Text.Trim()));
             if (Count > 0)
             {
-                WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel, "该产品编码已被其它单据使用，请调整后再删除！");
+                WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel, "该产品编号已被其它单据使用，请调整后再删除！");
                 return;
             }
             bll.ExecNonQuery("Cmd.DeleteProduct", new DataParameter[] { new DataParameter("{0}", "'" + strID + "'") });
@@ -180,19 +176,19 @@ namespace WMS.WebUI.CMD
         #region 上下笔事件
         protected void btnFirst_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("F", TableName, " ProductCode not in ('0001','0002') ", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("F", TableName,  filter, PrimaryKey, this.txtID.Text));
         }
         protected void btnPre_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("P", TableName, " ProductCode not in ('0001','0002') ", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("P", TableName, filter, PrimaryKey, this.txtID.Text));
         }
         protected void btnNext_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("N", TableName, " ProductCode not in ('0001','0002') ", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("N", TableName, filter, PrimaryKey, this.txtID.Text));
         }
         protected void btnLast_Click(object sender, EventArgs e)
         {
-            BindData(bll.GetRecord("L", TableName, " ProductCode not in ('0001','0002') ", PrimaryKey, this.txtID.Text));
+            BindData(bll.GetRecord("L", TableName, filter, PrimaryKey, this.txtID.Text));
         }
         #endregion
         
