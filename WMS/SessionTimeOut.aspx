@@ -7,8 +7,6 @@
     <title>无标题页</title>
     <script type="text/javascript">
     alert('对不起,操作时限已过,请重新登入！');
-    alert(window.dialogArguments.location);
-
    // window.opener = null;
     window.top.location = "Login.aspx";
 //    window.parent.opener=null;

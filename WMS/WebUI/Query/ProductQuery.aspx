@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ProductQuery.aspx.cs" Inherits="WMS.WebUI.Query.ProductQuery" %>
 <%@ Register Assembly="FastReport.Web" Namespace="FastReport.Web" TagPrefix="cc1" %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
@@ -24,45 +24,36 @@
                $("#rptview").css("height", h);
            }
            function ProductClick() {
-               var where = "1=1";
-               if ($("#ddlProductType").val() != "") {
-                   where += escape(" and ProductTypeCode='" + $('#ddlProductType').val() + "'");
-               }
-               if ($("#ddlStateNo").val() != "") {
-                   where += escape(" and StateNo='" + $('#ddlStateNo').val() + "'");
-               }
+               var where = getWhere();
                getMultiItems("CMD_ProductInStock", "ProductCode", $('#btnProduct'), '#HdnProduct', where);
                return false;
            }
            function BindEvent() {
                $("#txtProductCode").bind("dblclick", function () {
-                   var where = "1=1";
-                   if ($("#ddlProductType").val() != "") {
-                       where += escape(" and ProductTypeCode='" + $('#ddlProductType').val() + "'");
-                   }
-                   if ($("#ddlStateNo").val() != "") {
-                       where += escape(" and StateNo='" + $('#ddlStateNo').val() + "'");
-                   }
-
+                   var where = getWhere();
                    GetOtherValue("CMD_ProductInStock", "txtProductName,txtProductCode", "ProductName,ProductCode", where);
                    return false;
                });
                $("#txtProductCode").bind("change", function () {
-                   var where = "1=1";
-                   if ($("#ddlProductType").val() != "") {
-                       where += escape("ProductTypeCode='" + $('#ddlProductType').val() + "'");
-                   }
-                   if ($("#ddlStateNo").val() != "") {
-                       where += escape(" and StateNo='" + $('#ddlStateNo').val() + "'");
-                   }
+                   var where = getWhere();
                    where += " and ProductCode='" + $('#txtProductCode').val() + "'";
                    getWhereBaseData('CMD_ProductInStock', "txtProductName,txtProductCode", "ProductName,ProductCode", where);
                });
            }
+           function getWhere() {
+               var where = "ProductCode not in ('0001','0002')";
+               if ($("#ddlProductType").val() != "") {
+                   where += escape("ProductTypeCode='" + $('#ddlProductType').val() + "'");
+               }
+               if ($("#ddlStateNo").val() != "") {
+                   where += escape(" and StateNo='" + $('#ddlStateNo').val() + "'");
+               }
+               return where;
+           }
 
 
         function PrintClick() {
-            $('#HdnWH').val(document.body.clientWidth + "#" + document.body.clientHeight);
+            $('#HdnWH').val(document.documentElement.clientWidth + "#" + document.documentElement.clientHeight);
             return true;
         }
         </script>
@@ -91,7 +82,7 @@
                          <td   align="center" class="musttitle" style="width:6%;">
                             产品类型 
                         </td>
-                        <td align="left"   style="width:15%;" >
+                        <td align="left"   style="width:12%;" >
                             <asp:DropDownList ID="ddlProductType" runat="server" Width="90%">
                             </asp:DropDownList>
                         </td>
@@ -105,9 +96,9 @@
                         <td   align="center" class="musttitle" style="width:5%;">
                             产品
                         </td>
-                        <td align="left"   style="width:15%;" >
+                        <td align="left"   style="width:18%;" >
                          <asp:textbox id="txtProductCode"   runat="server"  Width="30%" CssClass="TextBox" ></asp:textbox>
-                         <asp:textbox id="txtProductName" tabIndex="1" runat="server" Width="65%" CssClass="TextRead"></asp:textbox>
+                         <asp:textbox id="txtProductName" tabIndex="1" runat="server" Width="60%" CssClass="TextRead"></asp:textbox>
                         </td>
                         <td  align="left" style="width:5%;">
                                <asp:Button ID="btnProduct" runat="server" OnClientClick="return ProductClick();" CssClass="ButtonOption" Text="指定" Width="70px" Height="23px" />

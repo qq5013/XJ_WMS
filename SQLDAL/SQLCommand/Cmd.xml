@@ -112,9 +112,7 @@
   </Command>
   <Command ID="UpdateCell">
     <CommandString>
-      update CMD_Cell set  CellName=@CellName,AreaCode=@AreaCode,ShelfCode=@ShelfCode,CellRow=@CellRow,
-      CellColumn=@CellColumn,IsActive=@IsActive,IsLock=@IsLock,Memo=@Memo
-      where CellCode={0}
+      update CMD_Cell set AreaCode=@AreaCode,IsActive=@IsActive,Memo=@Memo where {0}
     </CommandString>
   </Command>
 
@@ -158,6 +156,12 @@
   <Command ID="DeleteProductType">
     <CommandString>
       delete from CMD_ProductType where ProductTypeCode in({0})
+    </CommandString>
+  </Command>
+
+  <Command ID="UpdateProductAreaCode">
+    <CommandString>
+      update CMD_Product set AreaCode=@AreaCode where ProductTypeCode=@ProductTypeCode
     </CommandString>
   </Command>
 

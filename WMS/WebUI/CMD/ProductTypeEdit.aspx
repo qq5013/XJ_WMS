@@ -69,7 +69,9 @@
                             存放库区 
                     </td>
                     <td>
-                        &nbsp;<asp:DropDownList ID="ddlAreaCode" runat="server" Width="43%"  >
+                        &nbsp;<asp:DropDownList 
+                            ID="ddlAreaCode" runat="server" Width="43%" AutoPostBack="True" 
+                            onselectedindexchanged="ddlAreaCode_SelectedIndexChanged"  >
                         </asp:DropDownList>
                         
                     </td>

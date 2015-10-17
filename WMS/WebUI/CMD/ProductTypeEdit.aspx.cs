@@ -25,7 +25,9 @@ namespace WMS.WebUI.CMD
                 {
                     DataTable dt = bll.FillDataTable("Cmd.SelectProductType", new DataParameter[] { new DataParameter("{0}", string.Format("ProductTypeCode='{0}'", strID)) });
                     BindData(dt);
-                    
+                    int count = bll.GetRowCount("View_CMD_CELL_ALL", "ProductTypeCode='" + this.txtID.Text + "'");
+                    if (count > 0)
+                        this.ddlAreaCode.Enabled = false;
                     SetTextReadOnly(this.txtID);
                 }
                 else
@@ -94,16 +96,44 @@ namespace WMS.WebUI.CMD
             }
             else //修改
             {
-                bll.ExecNonQuery("Cmd.UpdateProductType", new DataParameter[] {  new DataParameter("@ProductTypeName", this.txtProductTypeName.Text.Trim()),
-                                                                                 new DataParameter("@WarehouseCode", ""),
-                                                                                 new DataParameter("@AreaCode", this.ddlAreaCode.SelectedValue),
-                                                                                 new DataParameter("@Memo", this.txtMemo.Text.Trim()) ,
-                                                                                 new DataParameter("@Updater", Session["EmployeeCode"].ToString()),
-                                                                                 new DataParameter("@ProductTypeCode", this.txtID.Text.Trim())
-                                                                               });
+
+
+                List<string> Comd = new List<string>();
+                Comd.Insert(0, "Cmd.UpdateProductType");
+                Comd.Insert(1, "Cmd.UpdateProductAreaCode");
+
+                List<DataParameter[]> paras = new List<DataParameter[]>();
+                paras.Insert(0, new DataParameter[] {  new DataParameter("@ProductTypeName", this.txtProductTypeName.Text.Trim()),
+                                                       new DataParameter("@WarehouseCode", ""),
+                                                       new DataParameter("@AreaCode", this.ddlAreaCode.SelectedValue),
+                                                       new DataParameter("@Memo", this.txtMemo.Text.Trim()) ,
+                                                       new DataParameter("@Updater", Session["EmployeeCode"].ToString()),
+                                                       new DataParameter("@ProductTypeCode", this.txtID.Text.Trim())
+                                                     });
+
+                paras.Insert(1, new DataParameter[] { new DataParameter("@AreaCode", this.ddlAreaCode.SelectedValue), 
+                                                      new DataParameter("@ProductTypeCode", this.txtID.Text.Trim()) 
+                                                    });
+                bll.ExecTran(Comd.ToArray(), paras);
+
+
             }
 
             Response.Redirect(FormID + "View.aspx?SubModuleCode=" + SubModuleCode + "&FormID=" + Server.UrlEncode(FormID) + "&SqlCmd=" + SqlCmd + "&ID=" + Server.UrlEncode(this.txtID.Text));
+        }
+
+        protected void ddlAreaCode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.strID.Length > 0)
+            {
+                int count = bll.GetRowCount("View_CMD_CELL_ALL", "ProductTypeCode='" + this.txtID.Text + "'");
+                if (count > 0)
+                {
+                    this.ddlAreaCode.SelectedValue = bll.GetFieldValue("CMD_ProductType", "AreaCode", "ProductTypeCode='" + this.txtID.Text + "'");
+                    WMS.App_Code.JScript.Instance.ShowMessage(this.Page, "该类别已经有产品存放在库区货位上，不能修改库区！");
+                    return;
+                }
+            }
         }
     }
 }

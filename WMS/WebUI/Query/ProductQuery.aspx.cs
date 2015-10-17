@@ -100,7 +100,11 @@ namespace WMS.WebUI.Query
             }
             else
             {
-                strWhere += "and ProductCode in (" + this.HdnProduct.Value + ") ";
+                strWhere += " and ProductCode in (" + this.HdnProduct.Value + ") ";
+            }
+            if (this.ddlStateNo.SelectedValue != "")
+            {
+                strWhere += " and StateNo='" + this.ddlStateNo.SelectedValue + "'";
             }
 
         }

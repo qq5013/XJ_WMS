@@ -578,6 +578,13 @@
     <Compile Include="WebUI\Query\ProductQuery.aspx.designer.cs">
       <DependentUpon>ProductQuery.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WebUI\Query\TaskQuery.aspx.cs">
+      <DependentUpon>TaskQuery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\Query\TaskQuery.aspx.designer.cs">
+      <DependentUpon>TaskQuery.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebUI\Query\WarehouseCell.aspx.cs">
       <DependentUpon>WarehouseCell.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5369,6 +5376,7 @@
     <Content Include="WebUI\OutStock\OutStockTypeView.aspx" />
     <Content Include="WebUI\OutStock\OutStockView.aspx" />
     <Content Include="WebUI\Query\CellInfo.aspx" />
+    <Content Include="WebUI\Query\TaskQuery.aspx" />
     <Content Include="WebUI\Stock\InventoryEdit.aspx" />
     <Content Include="WebUI\Stock\Inventorys.aspx" />
     <Content Include="WebUI\Stock\InventoryTasks.aspx" />

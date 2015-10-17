@@ -250,7 +250,7 @@ namespace WMS.WebUI.Stock
                 for (int i = 0; i < dtSub.Rows.Count; i++)
                 {
                     int count = 0;
-                    count = bll.GetRowCount("Cmd_Cell", string.Format("CellCode='{0}' and IsLock=1", dtSub.Rows[i]["CellCode"]));
+                    count = bll.GetRowCount("Cmd_Cell", string.Format("CellCode='{0}' and (IsLock=1 or ProductCode!='{1}')", dtSub.Rows[i]["CellCode"], dtSub.Rows[i]["ProductCode"]));
                     if (count > 0)
                     {
                         WMS.App_Code.JScript.Instance.ShowMessage(this.updatePanel, "货位 " + dtSub.Rows[i]["CellCode"].ToString() + "已经被其它单据锁定，不能移库！");
