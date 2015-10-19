@@ -104,6 +104,8 @@ namespace WMS.WebUI.Query
 
 
             Table tb = new Table();
+            string tbstyle = "width:100%";
+            tb.Attributes.Add("style", tbstyle);
             //tb.Attributes.Add("display", "table-cell");
             for (int i = Rows; i >= 1; i--)
             {
@@ -165,7 +167,7 @@ namespace WMS.WebUI.Query
                             row.Cells.Add(cellAdd);
                         }
                         TableCell cellTag = new TableCell();
-                        cellTag.Attributes.Add("style", "height:25px;width:120px;border:0px solid #008B8B");
+                        cellTag.Attributes.Add("style", "height:25px;border:0px solid #008B8B");
                         cellTag.Attributes.Add("align", "right");
                         cellTag.Text = "<font color=\"#008B8B\"> 第" + int.Parse(shelfCode.Substring(3, 3)).ToString() + "排第" + i.ToString() + "层</font>";
                         row.Cells.Add(cellTag);

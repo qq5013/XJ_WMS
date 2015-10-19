@@ -22,15 +22,5 @@ namespace WMS.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://192.168.0.29:8888/WebService/WmsService.asmx")]
-        public string WMS_PurchaseOrder_WmsService {
-            get {
-                return ((string)(this["WMS_PurchaseOrder_WmsService"]));
-            }
-        }
     }
 }

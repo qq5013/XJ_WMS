@@ -9,7 +9,7 @@
         <link href="~/Css/Main.css" type="text/css" rel="stylesheet" /> 
         <link href="~/Css/op.css" type="text/css" rel="stylesheet" /> 
    
-        <script type="text/javascript" src='<%=ResolveClientUrl("~/JQuery/jquery-2.1.3.min.js") %>'></script>
+        <script type="text/javascript" src='<%=ResolveClientUrl("~/JQuery/jquery-1.8.3.min.js") %>'></script>
         <script type="text/javascript" src='<%=ResolveClientUrl("~/JScript/Common.js") %>'></script>
        <script type="text/javascript" src='<%=ResolveClientUrl("~/JScript/DataProcess.js") %>'></script>
        <script type="text/javascript">
@@ -62,19 +62,7 @@
     </head>
 <body  style="overflow:hidden;">
   <form id="form1" runat="server"> 
-    <asp:ScriptManager ID="ScriptManager1" runat="server" />  
-    <asp:UpdateProgress ID="updateprogress" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
-    <ProgressTemplate>            
-             <div id="progressBackgroundFilter" style="display:none"></div>
-        <div id="processMessage"> Loading...<br /><br />
-             <img alt="Loading" src="../../images/loading.gif" />
-        </div>            
- 
-        </ProgressTemplate>
- 
-    </asp:UpdateProgress>  
-        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">                
-            <ContentTemplate>
+     
     <table  style="width:100%;height:100%;" >
         <tr runat ="server" id = "rptform" valign="top">
             <td align="left" style="width:100%; height:30px;" >
@@ -180,8 +168,7 @@
         <input id="HdnProduct" type="hidden" runat="server" />
       
        <input id="HdnWH" type="hidden" runat="server" value="0#0" />
-        </ContentTemplate>
-    </asp:UpdatePanel> 
+       
    </form>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title>用户信息</title>
-    <script type="text/javascript" src="../../../JQuery/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="../../../JQuery/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="../../../JScript/Check.js?t=00"></script>
     <script type="text/javascript" src="../../../JScript/Common.js"></script>
     <link href="../../../css/main.css" rel="Stylesheet" type="text/css" />
@@ -150,7 +150,7 @@
                 
                 <!--数据-->
                <div id="table-container" style="overflow: auto; WIDTH: 100%; HEIGHT: 470px">
-                    <asp:GridView ID="gvMain" runat="server"  Width="900px" OnRowEditing="gvMain_RowEditing" OnRowDataBound="gvMain_RowDataBound"
+                    <asp:GridView ID="gvMain" runat="server"  Width="100%" OnRowEditing="gvMain_RowEditing" OnRowDataBound="gvMain_RowDataBound"
                           SkinID="GridViewSkin"  AutoGenerateColumns="False">
                         <RowStyle BackColor="WhiteSmoke" Height="28px" />
                         <HeaderStyle CssClass="GridHeader" />

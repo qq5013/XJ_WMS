@@ -5,7 +5,7 @@
     <title>货位信息显示</title>
      <link href="~/Css/Main.css" type="text/css" rel="stylesheet" /> 
         <link href="~/Css/op.css" type="text/css" rel="stylesheet" /> 
-        <script type="text/javascript" src="../../JQuery/jquery-2.1.3.min.js"></script>
+        <script type="text/javascript" src="../../JQuery/jquery-1.8.3.min.js"></script>
          <script type="text/javascript" src="../../JScript/DataProcess.js"></script>
         <script type="text/javascript" language="javascript">
             var oldcell;
@@ -41,12 +41,12 @@
             var json = eval(Ajax("GetCellInfo", row));
 
             if (json) {
-                document.getElementById("ProductName").innerText = json[0].ProductName;
+                document.getElementById("ProductName").innerText = json[0].ProductName == null ? "" : json[0].ProductName;
                 document.getElementById("Barcode").innerText = json[0].PalletBarcode;
                 document.getElementById("PalletCode").innerText = json[0].PalletCode;
                 document.getElementById("BillNo").innerText = json[0].BillNo;
 
-                document.getElementById("Indate").innerText = json[0].InDate;
+                document.getElementById("Indate").innerText = json[0].InDate == null ? "" : json[0].InDate;
                 document.getElementById("AreaName").innerText = json[0].AreaName;
                 document.getElementById("ShelfName").innerText = json[0].ShelfName;
                 document.getElementById("CellColumn").innerText = json[0].CellColumn;

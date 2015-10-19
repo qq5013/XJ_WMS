@@ -7,7 +7,7 @@
     <title></title>
     <link href="~/Css/Main.css" type="text/css" rel="stylesheet" /> 
     <link href="~/Css/op.css" type="text/css" rel="stylesheet" /> 
-    <script type="text/javascript" src="../../JQuery/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="../../JQuery/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src= "../../JScript/Common.js"></script>
     <script type="text/javascript" language="javascript">
     $(document).ready(function () {     

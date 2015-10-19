@@ -26,6 +26,9 @@
 DB.xml
 obj/
 [Rr]elease*/
+obj/
+[Dd]ebug*/
+
 _ReSharper*/
 [Tt]est[Rr]esult*
 

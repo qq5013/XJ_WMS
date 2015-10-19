@@ -82,7 +82,7 @@
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="YYControls, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Reference\YYControls.dll</HintPath>
+      <HintPath>..\Library\YYControls.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -228,11 +228,6 @@
     </Compile>
     <Compile Include="UserControl\LeftMenu.ascx.designer.cs">
       <DependentUpon>LeftMenu.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Web References\PurchaseOrder\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="WebServices\BaseService.asmx.cs">
       <DependentUpon>BaseService.asmx</DependentUpon>
@@ -5476,11 +5471,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Web References\PurchaseOrder\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\PurchaseOrder\WmsService.disco" />
     <Content Include="WebServices\BaseService.asmx" />
     <Content Include="WebUI\CMD\FactoryEdit.aspx" />
     <Content Include="WebUI\CMD\Factorys.aspx" />
@@ -5511,7 +5501,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <None Include="Web References\PurchaseOrder\WmsService.wsdl" />
     <Content Include="Web\Ashx\MainHandler.ashx" />
     <Content Include="WebUI\CMD\WareHouseTree.ashx" />
     <Content Include="WebUI\Query\WareHouseTree.ashx" />
@@ -5677,19 +5666,6 @@
   </ItemGroup>
   <ItemGroup>
     <WebReferences Include="Web References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferenceUrl Include="http://110.80.15.139:18888/WebService/WmsService.asmx%3fop=WriteReplyToPurchaseOrder">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\PurchaseOrder\</RelPath>
-      <UpdateFromURL>http://110.80.15.139:18888/WebService/WmsService.asmx%3fop=WriteReplyToPurchaseOrder</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>WMS_PurchaseOrder_WmsService</CachedSettingsPropName>
-    </WebReferenceUrl>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
