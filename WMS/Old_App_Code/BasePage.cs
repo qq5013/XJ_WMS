@@ -17,7 +17,7 @@ namespace WMS.App_Code
         protected string SubModuleTitle;
         protected string FormID;
         protected string SqlCmd;
-        protected int pageSize = 15;
+        protected int pageSize = 20;
         protected int pageSubSize = 10;
         protected void Page_PreInit(object sender, EventArgs e)
         {
@@ -25,17 +25,24 @@ namespace WMS.App_Code
             {
                 if (Session["G_user"] == null)
                 {
+                   
                     string strPath = "../../";
                     if (Page.Request.Url.AbsolutePath.Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries).Length == 3)
-                        strPath = "../";
+                       strPath = "../";                  
                     else if (Page.Request.Url.AbsolutePath.Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries).Length == 5)
-                        strPath = "../../../";
+                      strPath = "../../../";
 
-                    Response.Redirect(strPath + "SessionTimeOut.aspx");
-                  
+                    Response.Redirect( ResolveUrl("~/SessionTimeOut.aspx"));
                     return;
-                    //Response.Write("<script language='javascript'>alert(parent.parent.location.href);parent.parent.location.href='../../WebUI/Start/SessionTimeOut.aspx';</script>");
-                    //return;
+                   // Response.Redirect(strPath + "SessionTimeOut.aspx");
+
+                    //Response.Write("<script language='javascript'>alert('对不起,操作时限已过,请重新登入！');window.top.location.href = " + strPath + "/Login.aspx';</script>");
+                    //Response.End();
+                   
+
+                    Response.Write("<script language='javascript'>alert(parent.location.href);parent.location.href=" + strPath + "SessionTimeOut.aspx';</script>");
+                    Response.End();
+                    return;
 
                 }
 
@@ -555,15 +562,7 @@ namespace WMS.App_Code
 
             if (dtView.Rows.Count == 0)
             {
-                dtView.Rows.Add(dtView.NewRow());
-                dgview.DataSource = dtView;
-                dgview.DataBind();
-                int columnCount = dgview.Rows[0].Cells.Count;
-                dgview.Rows[0].Cells.Clear();
-                dgview.Rows[0].Cells.Add(new TableCell());
-                dgview.Rows[0].Cells[0].ColumnSpan = columnCount;
-                dgview.Rows[0].Cells[0].Text = "没有符合以上条件的数据,请重新查询 ";
-                dgview.Rows[0].Visible = true;
+                SetGridViewEmptyRow(dgview, dtView);
 
                 btnFirst.Enabled = false;
                 btnPre.Enabled = false;
@@ -596,6 +595,7 @@ namespace WMS.App_Code
                 lblCurrentPage.Text = "共 [" + totalCount.ToString() + "] 笔记录  第 [" + ViewState["CurrentPage"] + "] 页  共 [" + pageCount.ToString() + "] 页";
 
             }
+            ViewState[FormID + "_MainFormData"] = dtView;
             return dtView;
              
         }
@@ -649,6 +649,24 @@ namespace WMS.App_Code
            
         }
 
+        public void SetGridViewEmptyRow(GridView dgv, DataTable dt)
+        {
+            if (dt.Rows.Count == 0)
+            {
+                DataTable dtnew = dt.Clone();
+                dtnew.Rows.Add(dtnew.NewRow());
+
+                dgv.DataSource = dtnew;
+                dgv.DataBind();
+                int columnCount = dgv.Rows[0].Cells.Count;
+                dgv.Rows[0].Cells.Clear();
+                dgv.Rows[0].Cells.Add(new TableCell());
+                dgv.Rows[0].Cells[0].ColumnSpan = columnCount;
+                dgv.Rows[0].Cells[0].Text = "没有符合以上条件的数据,请重新查询 ";
+                dgv.Rows[0].Visible = true;
+            }
+        }
+
         /// <summary>
         /// 设置无产品资料时
         /// </summary>
@@ -671,9 +689,34 @@ namespace WMS.App_Code
                 dgv.Rows[0].Visible = true;
             }
         }
+        public void BtnReloadSub(int i, string value, GridView dgv)
+        {
+
+            BindDataSub(value);
+            DataTable dt = (DataTable)ViewState[FormID + "_MainFormData"];
+            if (dt.Rows.Count == 0)
+            {
+                SetGridViewEmptyRow(dgv, dt);
+                return;
+            }
+            for (int j = 0; j < dgv.Rows.Count; j++)
+            {
+                if (j % 2 == 0)
+                    dgv.Rows[j].BackColor = System.Drawing.ColorTranslator.FromHtml("#ffffff");
+                else
+                    dgv.Rows[j].BackColor = System.Drawing.ColorTranslator.FromHtml("#E9F2FF");
+                if (j == i)
+                    dgv.Rows[j].BackColor = System.Drawing.ColorTranslator.FromHtml("#60c0ff");
+            }
+        }
 
 
         public virtual void UpdateTempSub(GridView dgv)
+        {
+
+        }
+
+        public virtual void BindDataSub(string BillID)
         {
 
         }

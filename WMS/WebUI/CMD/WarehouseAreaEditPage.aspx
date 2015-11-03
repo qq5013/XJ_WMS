@@ -18,7 +18,7 @@
 
         function UpdateParent() {
             alert('库区修改成功！');
-            window.parent.document.getElementById('btnUpdateSelected').click();
+            //window.parent.document.getElementById('btnUpdateSelected').click();
         }
 
         function ReloadParent() {

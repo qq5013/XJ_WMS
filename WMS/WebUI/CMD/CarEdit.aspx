@@ -52,7 +52,7 @@
 				 runat="server">			
 				<tr>
                     <td align="center" class="musttitle" style="width:8%;"  >
-                            车型编码
+                            小车编码
                     </td>
                     <td  width="25%">
                             &nbsp;<asp:TextBox 
@@ -60,7 +60,7 @@
                                 MaxLength="10"  ></asp:TextBox>
                     </td>
                     <td align="center" class="musttitle" style="width:8%;"  >
-                           车型名称
+                           小车名称
                     </td>
                     <td width="25%">
                             &nbsp;<asp:TextBox ID="txtTypeName" 

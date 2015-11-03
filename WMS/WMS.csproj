@@ -86,6 +86,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\TempSelect.aspx.cs">
+      <DependentUpon>TempSelect.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common\TempSelect.aspx.designer.cs">
+      <DependentUpon>TempSelect.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
@@ -766,6 +773,7 @@
       <DependentUpon>InStockBill.aspx</DependentUpon>
     </Compile>
     <Content Include="Common\Select.aspx" />
+    <Content Include="Common\TempSelect.aspx" />
     <Content Include="Css\default.css" />
     <Content Include="Css\icon.css" />
     <Content Include="Css\zTreeStyle\img\diy\1_close.png" />

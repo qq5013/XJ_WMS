@@ -17,7 +17,7 @@
 
         function UpdateParent() {
             alert('货位修改成功！');
-            window.parent.document.getElementById('btnUpdateSelected').click();
+            //window.parent.document.getElementById('btnUpdateSelected').click();
         }
 
         function ReloadParent() {

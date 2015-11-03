@@ -140,7 +140,7 @@
                                 Text="查询" Width="58px" />
                             &nbsp;&nbsp;
                             <asp:Button ID="btnRefresh" runat="server" CssClass="ButtonRefresh" 
-                                OnClientClick="return Refresh()" tabIndex="2" Text="刷新" Width="58px" />
+                                OnClientClick="return Refresh()" tabIndex="2" Text="重置" Width="58px" />
                         </td>
                         <td colspan="2">
                         </td>

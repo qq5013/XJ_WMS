@@ -16,7 +16,7 @@ namespace WMS.WebUI.CMD
         private string TableName = "VCMD_Product";
         private string PrimaryKey = "ProductCode";
         BLL.BLLBase bll = new BLL.BLLBase();
-        private string filter = "IsFixed='0' and AreaCode in ('002','003')";
+        private string filter = "IsFixed='0' and AreaCode not in ('001')";
         protected void Page_Load(object sender, EventArgs e)
         {
             strID = Request.QueryString["ID"] + "";
@@ -35,7 +35,7 @@ namespace WMS.WebUI.CMD
 
 
 
-            DataTable ProductType = bll.FillDataTable("Cmd.SelectProductType", new DataParameter[] { new DataParameter("{0}", "cmd.AreaCode in ('002','003') and ProductTypeCode<>'0001'") });
+            DataTable ProductType = bll.FillDataTable("Cmd.SelectProductType", new DataParameter[] { new DataParameter("{0}", "cmd.AreaCode not in ('001') and ProductTypeCode<>'0001'") });
             this.ddlProductTypeCode.DataValueField = "ProductTypeCode";
             this.ddlProductTypeCode.DataTextField = "ProductTypeName";
             this.ddlProductTypeCode.DataSource = ProductType;

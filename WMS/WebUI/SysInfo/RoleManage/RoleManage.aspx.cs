@@ -154,7 +154,7 @@ namespace WMS.WebUI.SysInfo.RoleManage
             }
             BindDataSub(BillID);
         }
-        private void BindDataSub(string BillID)
+        public override void BindDataSub(string BillID)
         {
             //string script = string.Format("document.getElementById('iframeRoleSet').src='RoleSet.aspx?GroupID={0}&GroupName={1}' ;", this.hdnRowValue.Value, Server.UrlEncode(hdnRowGroupName.Value));
             //ScriptManager.RegisterStartupScript(this.UpdatePanel1, this.UpdatePanel1.GetType(), "", script, true);
@@ -224,18 +224,7 @@ namespace WMS.WebUI.SysInfo.RoleManage
 
         protected void btnReload_Click(object sender, EventArgs e)
         {
-            int i = Convert.ToInt32(this.hdnRowIndex.Value);
-            BindDataSub(this.hdnRowValue.Value);
-            for (int j = 0; j < this.gvGroupList.Rows.Count; j++)
-            {
-                if (j % 2 == 0)
-                    this.gvGroupList.Rows[j].BackColor = ColorTranslator.FromHtml("#ffffff");
-                else
-                    this.gvGroupList.Rows[j].BackColor = ColorTranslator.FromHtml("#E9F2FF");
-                if (j == i)
-                    this.gvGroupList.Rows[j].BackColor = ColorTranslator.FromHtml("#60c0ff");
-            }
-
+            BtnReloadSub(Convert.ToInt32(this.hdnRowIndex.Value), this.hdnRowValue.Value, this.gvGroupList);
         }
 
 

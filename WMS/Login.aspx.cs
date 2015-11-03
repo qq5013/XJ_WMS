@@ -16,14 +16,14 @@ namespace WMS
 {
     public partial class Login : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if (Page.Request.Url.Query != "")
-            {
-                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "Resize", "alert(\"对不起,操作时限已过,请重新登入！\");window.top.location =\"Login.aspx\";", true);
-            }
+        //protected void Page_Load(object sender, EventArgs e)
+        //{
+        //    if (Page.Request.Url.Query != "")
+        //    {
+        //        //ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "Resize", "alert(\"对不起,操作时限已过,请重新登入！\");window.top.location =\"Login.aspx\";", true);
+        //    }
              
-        }
+        //}
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {

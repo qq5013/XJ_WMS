@@ -89,13 +89,13 @@
                         <td align="center" class="smalltitle" width="4%">
                             日期从
                         </td>
-                        <td width="12%">
+                        <td  style="width:120px;">
                             &nbsp;<uc1:Calendar ID="txtStartDate" runat="server" />
                         </td>
                         <td align="center" class="smalltitle" width="1%">
                             至
                         </td>
-                        <td  width="12%">
+                        <td   style="width:120px;">
                              &nbsp;<uc1:Calendar ID="txtEndDate" runat="server" />
                         </td>
                         <td  width="15%">
@@ -103,8 +103,7 @@
                             <asp:Button ID="btnRefresh" runat="server" CssClass="ButtonRefresh" OnClientClick="return Refresh()" tabIndex="2"  Text="刷新" Width="58px" />
                         </td>
                            
-                        <td align="right" style="width:15%;">
-                            
+                        <td align="right">
                             <asp:Button ID="btnDelete" runat="server" Text="删除" CssClass="ButtonDel" OnClick="btnDelete_Click"
                                 OnClientClick="return DelConfirm('btnDelete')" Enabled="False" />
                             <asp:Button ID="btnDeleteAll" runat="server" Text="清空" CssClass="ButtonClearAll"

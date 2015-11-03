@@ -40,7 +40,7 @@
                 if ($('#hdnOldCellCode').val() != '')
                     strCellCode += $('#hdnOldCellCode').val();
                 strCellCode += "'-1'";
-                var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and IsLock=0 and ProductCode !='' and CellCode not in (" + strCellCode + ") ";
+                var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and IsLock=0 and IsActive=1 and ProductCode !='' and CellCode not in (" + strCellCode + ") ";
 
                 return GetMulSelectValue('CMD_Cell', 'hdnMulSelect', where);
             }

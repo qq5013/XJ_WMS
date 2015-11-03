@@ -227,6 +227,11 @@
                             &nbsp;<asp:TextBox ID="txtMemo" runat="server" Height="88px" Width="156px"  TextMode="MultiLine"></asp:TextBox>
                         </td>
                     </tr>
+                    <tr>
+                        <td colspan="2" style="height:26px">
+                            <font color="red">初始密码为:123456</font>
+                        </td>
+                    </tr>
                 </table>
           
         </div>

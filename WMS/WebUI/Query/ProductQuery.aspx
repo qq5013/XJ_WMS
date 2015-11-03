@@ -43,10 +43,10 @@
            function getWhere() {
                var where = "ProductCode not in ('0001','0002')";
                if ($("#ddlProductType").val() != "") {
-                   where += escape("ProductTypeCode='" + $('#ddlProductType').val() + "'");
+                   where +=" and "+ escape("ProductTypeCode='" + $('#ddlProductType').val() + "'");
                }
                if ($("#ddlStateNo").val() != "") {
-                   where += escape(" and StateNo='" + $('#ddlStateNo').val() + "'");
+                   where += " and " + escape(" and StateNo='" + $('#ddlStateNo').val() + "'");
                }
                return where;
            }
@@ -103,7 +103,7 @@
                                 onclientclick="return PrintClick();" /> &nbsp;&nbsp;
                              <asp:Button ID="btnRefresh" runat="server" CssClass="ButtonRefresh" 
                                  OnClientClick="return Refresh()" tabIndex="2" 
-                                 Text="刷新" Width="58px" />
+                                 Text="重置" Width="58px" />
                         </td>  
                                                                      
                     </tr>

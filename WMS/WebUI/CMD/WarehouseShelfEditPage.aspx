@@ -17,7 +17,7 @@
         }
         function UpdateParent() {
             alert('货架修改成功！');
-            window.parent.document.getElementById('btnUpdateSelected').click();
+            //window.parent.document.getElementById('btnUpdateSelected').click();
         }
         function ReloadParent() {
             alert('货架添加成功！');

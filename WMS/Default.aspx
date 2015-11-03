@@ -97,10 +97,10 @@
         Ext.onReady(function () {
             var topPanel = {
                 region: "north",
-                height: 120,
-                title: '罗伯泰克自动化科技(苏州)有限公司',
+                height: 83,
+                title: '', //罗伯泰克自动化科技(苏州)有限公司
                 bodyStyle: 'border:true;border-width:1px 0 1px 0;background:#d8d8d8',
-                collapsible: true,
+                collapsible: false,
 
                 html: '<div class="header"><table width="100%" height="80" border="0" cellpadding="0" cellspacing="0"  background="Images/top_bg.jpg" style="top: 0px; z-index: inherit"><tr><th align="left" valign="top" scope="col" style="height:80px; background-repeat:no-repeat; width: 100%;" background="Images/banner_1.jpg"><div class="topNav"><a href="Login.aspx" id="changeUser">切换用户</a><span>|</span><a href="javascript:void(0)" onclick="return ChangePassword();" id="changePassword">修改密码</a><span>|</span><a href="javascript:window.close();"/" id="loginOut">退出</a></div></th></tr></table></div>'
             };
@@ -215,8 +215,8 @@
                 //bodyStyle: 'border:1px solid #FF0000',
                 height: 30,
                 titleAlign: null,
-                //bodyStyle: 'background:#cbe4f3',
-                html: '<div style="border:1px solid #cbe4f3;line-height:30px;text-align: center;background:url(Images/bottom.jpg) repeat-x;"><a href="http://www.unitechnik.com.cn" target="_blank">罗伯泰克自动化科技（苏州）有限公司</a></div>'
+                //bodyStyle: 'background:#cbe4f3',<a href="http://www.unitechnik.com.cn" target="_blank">罗伯泰克自动化科技（苏州）有限公司</a>
+                html: '<div style="border:1px solid #cbe4f3;line-height:30px;text-align: center;background:url(Images/bottom.jpg) repeat-x;"></div>'
 
             };
             //布局
