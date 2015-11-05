@@ -44,7 +44,7 @@ namespace WMS.WebUI.Query
 
                 
 
-                ScriptManager.RegisterStartupScript(this.UpdatePanel1, this.GetType(), "", "BindEvent();", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "", "BindEvent();", true);
             }
             SetTextReadOnly(this.txtProductName);
 

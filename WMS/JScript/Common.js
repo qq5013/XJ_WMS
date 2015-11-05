@@ -744,11 +744,6 @@ function setMaxLength(object, length) {
         return result;
     }
 }
-
- 
-
-
-
-
- 
- 
+function frxOpenPrint(url) {
+    window.open(url, '_blank', 'height=500px, width=900px,toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no');
+};

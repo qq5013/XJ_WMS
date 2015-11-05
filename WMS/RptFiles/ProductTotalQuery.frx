@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="10/14/2015 22:11:24" ReportInfo.Modified="10/16/2015 00:03:34" ReportInfo.CreatorVersion="1.9.9.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/14/2015 22:11:24" ReportInfo.Modified="10/25/2015 17:12:46" ReportInfo.CreatorVersion="1.9.9.0">
   <Dictionary>
     <TableDataSource Name="ProductQuery" ReferenceName="ProductQuery" DataType="System.Int32" Enabled="true">
       <Column Name="ProductCode" DataType="System.String"/>
@@ -45,12 +45,12 @@
         <TableColumn Name="Column20"/>
         <TableColumn Name="Column18"/>
         <TableRow Name="Row2" Height="30.25">
-          <TableCell Name="Cell22" Border.Lines="Right" Text="[ProductQuery.AreaName]" Font="宋体, 9pt"/>
+          <TableCell Name="Cell22" Border.Lines="Right" Text="[ProductQuery.AreaName]" VertAlign="Center" Font="宋体, 9pt"/>
           <TableCell Name="Cell10" Border.Lines="Right" Text="[ProductQuery.ProductTypeName]" VertAlign="Center" Font="宋体, 9pt"/>
           <TableCell Name="Cell11" Border.Lines="Right" Text="[ProductQuery.ProductCode]" VertAlign="Center" Font="宋体, 9pt"/>
           <TableCell Name="Cell12" Border.Lines="Right" Text="[ProductQuery.ProductName]" VertAlign="Center" Font="宋体, 9pt"/>
           <TableCell Name="Cell13" Border.Lines="Right" Text="[ProductQuery.AxieNo]" VertAlign="Center" Font="宋体, 9pt"/>
-          <TableCell Name="Cell20" Border.Lines="Right" Text="[ProductQuery.StateName]" Font="宋体, 9pt"/>
+          <TableCell Name="Cell20" Border.Lines="Right" Text="[ProductQuery.StateName]" VertAlign="Center" Font="宋体, 9pt"/>
           <TableCell Name="Cell18" Border.Lines="Right" Text="[ProductQuery.Qty]" HorzAlign="Right" VertAlign="Center" Font="宋体, 9pt"/>
         </TableRow>
       </TableObject>

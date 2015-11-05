@@ -13,7 +13,7 @@ namespace WMS.WebUI.CMD
 
     public partial class Machines : App_Code.BasePage
     {
-        private string filter = "AreaCode in ('002','003') ";
+        private string filter = "AreaCode not in ('001') ";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)

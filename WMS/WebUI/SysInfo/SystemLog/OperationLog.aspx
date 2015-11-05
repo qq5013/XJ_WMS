@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
    <title>操作日志</title>
-    <script type="text/javascript" src="../../../JQuery/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="../../../JQuery/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="../../../JScript/Common.js"></script>
     <link href="../../../css/main.css" rel="Stylesheet" type="text/css" />
     <link href="../../../css/op.css" rel="Stylesheet" type="text/css" />
@@ -89,13 +89,13 @@
                         <td align="center" class="smalltitle" width="4%">
                             日期从
                         </td>
-                        <td width="12%">
+                        <td  style="width:120px;">
                             &nbsp;<uc1:Calendar ID="txtStartDate" runat="server" />
                         </td>
                         <td align="center" class="smalltitle" width="1%">
                             至
                         </td>
-                        <td  width="12%">
+                        <td   style="width:120px;">
                              &nbsp;<uc1:Calendar ID="txtEndDate" runat="server" />
                         </td>
                         <td  width="15%">
@@ -103,8 +103,7 @@
                             <asp:Button ID="btnRefresh" runat="server" CssClass="ButtonRefresh" OnClientClick="return Refresh()" tabIndex="2"  Text="刷新" Width="58px" />
                         </td>
                            
-                        <td align="right" style="width:15%;">
-                            
+                        <td align="right">
                             <asp:Button ID="btnDelete" runat="server" Text="删除" CssClass="ButtonDel" OnClick="btnDelete_Click"
                                 OnClientClick="return DelConfirm('btnDelete')" Enabled="False" />
                             <asp:Button ID="btnDeleteAll" runat="server" Text="清空" CssClass="ButtonClearAll"
@@ -119,7 +118,7 @@
                    
                 <!--数据-->
                   <div id="table-container" style="overflow: auto; WIDTH: 100%; HEIGHT: 470px">
-                   <asp:GridView ID="gvMain" runat="server"  Width="900px"  OnRowDataBound="gvMain_RowDataBound"
+                   <asp:GridView ID="gvMain" runat="server"  Width="100%"  OnRowDataBound="gvMain_RowDataBound"
                           SkinID="GridViewSkin"  AutoGenerateColumns="False">
                         <RowStyle BackColor="WhiteSmoke" Height="28px" />
                         <HeaderStyle CssClass="GridHeader" />

@@ -28,5 +28,6 @@
 .icon-Car  {  background: url('../Images/icon/Car.png') no-repeat !important;  }
 .icon-Crane  {  background: url('../Images/icon/Crane.png') no-repeat !important;  }
 .icon-InventoryType  {  background: url('../Images/icon/InStockType.png') no-repeat !important;  }
-.icon-Inventory {  background: url('../Images/icon/Move.png') no-repeat !important;  }
-.icon-InventoryTask  {  background: url('../Images/icon/MoveTask.png') no-repeat !important;  }
+.icon-Inventory {  background: url('../Images/icon/Inventor.png') no-repeat !important;  }
+.icon-InventoryTask  {  background: url('../Images/icon/InventorTask.png') no-repeat !important;  }
+.icon-ProductState  {  background: url('../Images/icon/ProductState.png') no-repeat !important;  }

@@ -7,7 +7,7 @@
     <title></title>
         <link href="~/Css/Main.css" type="text/css" rel="stylesheet" /> 
         <link href="~/Css/op.css" type="text/css" rel="stylesheet" /> 
-        <script type="text/javascript" src="../../JQuery/jquery-2.1.3.min.js"></script>
+        <script type="text/javascript" src="../../JQuery/jquery-1.8.3.min.js"></script>
         <script type="text/javascript" src= "../../JScript/Common.js"></script>
          <script type="text/javascript" src= "../../JScript/DataProcess.js"></script>
         <script type="text/javascript">
@@ -30,21 +30,13 @@
                     return false;
                 }
                 if (!$("#chkTemp")[0].checked) {
-                    if (trim($("#txtAxieNo").val()) == "") {
-                        alert("单位不能为空!");
-                        $("#txtAxieNo").focus();
-                        return false;
-                    }
+                     
                     if (trim($("#txtWheelDiameter").val()) == "") {
                         alert("轮径不能为空!");
                         $("#txtWheelDiameter").focus();
                         return false;
                     }
-                    if (trim($("#ddlCX_Factory").val()) == "") {
-                        alert("承修厂家不能为空!");
-                        $("#ddlCX_Factory").focus();
-                        return false;
-                    } 
+                   
                 }
                 
                 return true;
@@ -91,7 +83,7 @@
                     <td width="21%">
                             &nbsp;<asp:TextBox 
                                 ID="txtProductName" runat="server"  CssClass="TextBox" Width="90%" 
-                                MaxLength="50" ></asp:TextBox> 
+                                MaxLength="50" >轮对</asp:TextBox> 
                           
 
                     </td>
@@ -120,7 +112,7 @@
                      
                 </tr>
                  <tr>
-                    <td align="center" class="musttitle" style="width:12%;">
+                    <td align="center" class="smalltitle" style="width:12%;">
                         承修厂家</td>
                     <td width="21%">
                         &nbsp;<asp:DropDownList ID="ddlCX_Factory" runat="server" Width="91%">

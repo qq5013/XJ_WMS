@@ -29,7 +29,7 @@
       inner join CMD_Product Product on task.ProductCode=Product.ProductCode
       inner join Sys_TableState state on task.State=state.State and state.TableName='WCS_task' and state.FieldName='State'
       left join CMD_ProductState ProductState on Task.StateNo=ProductState.StateNo
-      where {0}
+      where task.ProductCode not in ('0001','0002') and {0}
       order by taskNo
     </CommandString>
   </Command>

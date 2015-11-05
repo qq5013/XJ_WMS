@@ -5,7 +5,7 @@
     <title>货位信息显示</title>
      <link href="~/Css/Main.css" type="text/css" rel="stylesheet" /> 
         <link href="~/Css/op.css" type="text/css" rel="stylesheet" /> 
-        <script type="text/javascript" src="../../JQuery/jquery-2.1.3.min.js"></script>
+        <script type="text/javascript" src="../../JQuery/jquery-1.8.3.min.js"></script>
          <script type="text/javascript" src="../../JScript/DataProcess.js"></script>
         <script type="text/javascript" language="javascript">
             var oldcell;
@@ -39,14 +39,16 @@
             var row = new Object();
             row.CellCode = obj;
             var json = eval(Ajax("GetCellInfo", row));
-
+            
             if (json) {
-                document.getElementById("ProductName").innerText = json[0].ProductName;
-                document.getElementById("Barcode").innerText = json[0].PalletBarcode;
-                document.getElementById("PalletCode").innerText = json[0].PalletCode;
+                document.getElementById("ProductTypeName").innerText = json[0].ProductTypeName == null ? "" : json[0].ProductTypeName;
+                document.getElementById("ProductCode").innerText = json[0].ProductCode;
+                document.getElementById("ProductName").innerText = json[0].ProductName == null ? "" : json[0].ProductName;
+
+                document.getElementById("StateName").innerText = json[0].StateName == null ? "" : json[0].StateName;
                 document.getElementById("BillNo").innerText = json[0].BillNo;
 
-                document.getElementById("Indate").innerText = json[0].InDate;
+                document.getElementById("Indate").innerText = json[0].InDate == null ? "" : json[0].InDate;
                 document.getElementById("AreaName").innerText = json[0].AreaName;
                 document.getElementById("ShelfName").innerText = json[0].ShelfName;
                 document.getElementById("CellColumn").innerText = json[0].CellColumn;
@@ -119,35 +121,44 @@
                    </tr>
                    <tr>
                       <td  class="cellinfo" style="width:20%;">
+                            &nbsp;产品类型:
+                      </td>
+                      <td id="ProductTypeName">
+                        
+                      </td>
+
+                       <td   class="cellinfo" style="width:20%;">
+                             &nbsp;产品编码:
+                      </td>
+                      <td id="ProductCode">
+                        
+                      </td>
+                      
+                     
+                   </tr>
+                   
+                   <tr>
+                      <td  class="cellinfo" style="width:20%;">
                             &nbsp;品名:
                       </td>
                       <td id="ProductName">
                         
                       </td>
-                      <td   class="cellinfo" style="width:20%;">
-                             &nbsp;条码:
-                      </td>
-                      <td id="Barcode">
-                        
-                      </td>
-                   </tr>
-                   
-                   <tr>
                       <td   class="cellinfo"  style="width:20%;">
-                             &nbsp;托盘:
+                            产品状态
                       </td>
-                      <td id="PalletCode">
+                      <td id="StateName" >
                           
                       </td>
-                       <td   class="cellinfo"  style="width:20%;">
+                   </tr>
+                    
+                    <tr>
+                        <td   class="cellinfo"  style="width:20%;">
                              &nbsp;单据号:
                       </td>
                       <td id="BillNo">
                            
                       </td>
-                   </tr>
-                    
-                    <tr>
                       <td   class="cellinfo"  style="width:20%;">
                              &nbsp;入库时间:
                       </td>
@@ -155,12 +166,7 @@
                           
                       </td>
 
-                      <td   class="cellinfo"  style="width:20%;">
-                            
-                      </td>
-                      <td >
-                          
-                      </td>
+                     
                    </tr>
                     <tr>
                       <td  colspan="4" class="cellinfo">

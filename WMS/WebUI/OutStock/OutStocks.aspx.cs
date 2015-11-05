@@ -165,7 +165,7 @@ namespace WMS.WebUI.OutStock
             }
             BindDataSub(BillID);
         }
-        private void BindDataSub(string BillID)
+        public override void BindDataSub(string BillID)
         {
             BLL.BLLBase bll = new BLL.BLLBase();
             DataTable dtSub = bll.FillDataTable("WMS.SelectBillDetail", new DataParameter[] { new DataParameter("{0}", string.Format("BillID='{0}'", BillID)) });
@@ -211,17 +211,7 @@ namespace WMS.WebUI.OutStock
 
         protected void btnReload_Click(object sender, EventArgs e)
         {
-            int i = Convert.ToInt32(this.hdnRowIndex.Value);
-            BindDataSub(this.hdnRowValue.Value);
-            for (int j = 0; j < this.GridView1.Rows.Count; j++)
-            {
-                if (j % 2 == 0)
-                    this.GridView1.Rows[j].BackColor = ColorTranslator.FromHtml("#ffffff");
-                else
-                    this.GridView1.Rows[j].BackColor = ColorTranslator.FromHtml("#E9F2FF");
-                if (j == i)
-                    this.GridView1.Rows[j].BackColor = ColorTranslator.FromHtml("#60c0ff");
-            }
+            BtnReloadSub(Convert.ToInt32(this.hdnRowIndex.Value), this.hdnRowValue.Value, this.GridView1);
          
         }
 

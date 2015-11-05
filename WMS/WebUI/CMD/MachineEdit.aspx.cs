@@ -47,7 +47,7 @@ namespace WMS.WebUI.CMD
         private void BindDropDownList()
         {
 
-            DataTable ProductType = bll.FillDataTable("Cmd.SelectProductType", new DataParameter[] { new DataParameter("{0}", "cmd.AreaCode in ('002','003') and ProductTypeCode<>'0001'") });
+            DataTable ProductType = bll.FillDataTable("Cmd.SelectProductType", new DataParameter[] { new DataParameter("{0}", "cmd.AreaCode not in ('001') and ProductTypeCode<>'0001'") });
             this.ddlProductTypeCode.DataValueField = "ProductTypeCode";
             this.ddlProductTypeCode.DataTextField = "ProductTypeName";
             this.ddlProductTypeCode.DataSource = ProductType;

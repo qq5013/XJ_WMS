@@ -8,7 +8,7 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="../../Css/icon.css" />  
     <link rel="stylesheet" type="text/css" href="../../ext/packages/ext-theme-crisp/build/resources/ext-theme-crisp-all.css" />  
-    <script type="text/javascript" src="../../JQuery/jquery-2.1.3.min.js"></script> 
+    <script type="text/javascript" src="../../JQuery/jquery-1.8.3.min.js"></script> 
     <script type="text/javascript" src="../../Ext/ext-all.js"></script>  
     <script type="text/javascript" src="../../Ext/packages/ext-theme-crisp/build/ext-theme-crisp.js"></script>
 

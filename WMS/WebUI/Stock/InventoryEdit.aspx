@@ -7,7 +7,7 @@
     <title></title>
         <link href="~/Css/Main.css" type="text/css" rel="stylesheet" /> 
         <link href="~/Css/op.css" type="text/css" rel="stylesheet" /> 
-        <script type="text/javascript" src="../../JQuery/jquery-2.1.3.min.js"></script>
+        <script type="text/javascript" src="../../JQuery/jquery-1.8.3.min.js"></script>
         <script type="text/javascript" src= "../../JScript/Common.js"></script>
         <script type="text/javascript" src="../../JScript/DataProcess.js"></script>
         <script type="text/javascript">
@@ -40,7 +40,7 @@
                 if ($('#hdnOldCellCode').val() != '')
                     strCellCode += $('#hdnOldCellCode').val();
                 strCellCode += "'-1'";
-                var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and IsLock=0 and ProductCode !='' and CellCode not in (" + strCellCode + ") ";
+                var where = "AreaCode='" + $('#ddlAreaCode').val() + "' and IsLock=0 and IsActive=1 and ProductCode !='' and CellCode not in (" + strCellCode + ") ";
 
                 return GetMulSelectValue('CMD_Cell', 'hdnMulSelect', where);
             }

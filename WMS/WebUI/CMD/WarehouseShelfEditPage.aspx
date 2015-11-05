@@ -5,7 +5,7 @@
     <base target="_self" />
     <link href="../../css/main.css" rel="Stylesheet" type="text/css" />
     <link href="../../css/op.css" rel="Stylesheet" type="text/css" />
-    <script type="text/javascript" src="../../JQuery/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="../../JQuery/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src= "../../JScript/Common.js"></script>
    
    
@@ -17,7 +17,7 @@
         }
         function UpdateParent() {
             alert('货架修改成功！');
-            window.parent.document.getElementById('btnUpdateSelected').click();
+            //window.parent.document.getElementById('btnUpdateSelected').click();
         }
         function ReloadParent() {
             alert('货架添加成功！');
