@@ -66,6 +66,21 @@
       Sp_UpdateTaskCellCode
     </CommandString>
   </Command>
+  <Command ID="sp_GetEmptyCellWithPallet">
+    <CommandString>
+      sp_GetEmptyCellWithPallet
+    </CommandString>
+  </Command>
+  <Command ID="sp_GetOutStockCell">
+    <CommandString>
+      sp_GetOutStockCell
+    </CommandString>
+  </Command>
+  <Command ID="Sp_CreateProductInTask">
+    <CommandString>
+      Sp_CreateProductInTask
+    </CommandString>
+  </Command>
   <Command ID="UpdateCell">
     <CommandString>
       update CMD_Cell Set IsLock=@IsLock,ProductCode=@ProductCode,BillNo=@BillNo where CellCode=@CellCode)
@@ -87,6 +102,11 @@
   <Command ID="UpdateTaskStateByTaskNo">
     <CommandString>
       update WCS_TASK set State=@State where TaskNo=@TaskNo
+    </CommandString>
+  </Command>
+  <Command ID="UpdateTaskCarNoByTaskNo">
+    <CommandString>
+      update WCS_TASK set CarNo=@CarNo where TaskNo=@TaskNo
     </CommandString>
   </Command>
   <Command ID="UpdateTaskTimeByTaskNo">
@@ -122,22 +142,21 @@
       CMD_Shelf ON CMD_Cell.ShelfCode = CMD_Shelf.ShelfCode LEFT OUTER JOIN
       WMS_BillMaster ON CMD_Cell.BillNo = WMS_BillMaster.BillID LEFT OUTER JOIN
       CMD_BillType ON WMS_BillMaster.BillTypeCode = CMD_BillType.BillTypeCode LEFT OUTER JOIN
-      CMD_Product ON CMD_Cell.ProductCode = CMD_Product.ProductCode
+      CMD_Product ON CMD_Cell.ProductCode = CMD_Product.ProductCode      
       ORDER BY CMD_Cell.CellCode
     </CommandString>
   </Command>
   <Command ID="SelectCell">
     <CommandString>
-      SELECT  CMD_Cell.CellCode, CMD_Cell.CellName, CMD_Cell.AreaCode, CMD_Area.AreaName, CMD_Cell.ShelfCode, CMD_Shelf.ShelfName, CMD_Cell.CellRow,
-      CMD_Cell.CellColumn, CMD_Cell.IsActive, CMD_Cell.Priority, CMD_Cell.PalletCode, CMD_Cell.PalletBarcode, CMD_Cell.ProductCode, VCMD_Product.ProductName,VCMD_Product.ProductTypeName,
-      CMD_Cell.BillNo, WMS_BillMaster.BillTypeCode, CMD_BillType.BillTypeName, CMD_Cell.Quantity, CMD_Cell.IsLock, CMD_Cell.ErrorFlag, CMD_Cell.InDate,
-      CMD_Cell.Memo
+      SELECT  CMD_Cell.*, CMD_Area.AreaName, CMD_Cell.ShelfCode, CMD_Shelf.ShelfName, VCMD_Product.ProductName,VCMD_Product.ProductTypeName,
+      WMS_BillMaster.BillTypeCode, CMD_BillType.BillTypeName,CMD_ProductState.StateName
       FROM CMD_Cell
       LEFT OUTER JOIN CMD_Area ON CMD_Cell.AreaCode = CMD_Area.AreaCode
       LEFT OUTER JOIN CMD_Shelf ON CMD_Cell.ShelfCode = CMD_Shelf.ShelfCode
       LEFT OUTER JOIN WMS_BillMaster ON CMD_Cell.BillNo = WMS_BillMaster.BillID
       LEFT OUTER JOIN CMD_BillType ON WMS_BillMaster.BillTypeCode = CMD_BillType.BillTypeCode
       LEFT OUTER JOIN VCMD_Product ON CMD_Cell.ProductCode = VCMD_Product.ProductCode
+      LEFT OUTER JOIN CMD_ProductState ON CMD_Cell.StateNo = CMD_ProductState.StateNo
       order by CMD_Cell.CellCode
     </CommandString>
   </Command>

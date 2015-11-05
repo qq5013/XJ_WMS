@@ -50,6 +50,7 @@
     <Compile Include="ChineseAttribute.cs" />
     <Compile Include="ConfigHelper.cs" />
     <Compile Include="ConvertStringChar.cs" />
+    <Compile Include="DBConfig.cs" />
     <Compile Include="DBConfigUtil.cs" />
     <Compile Include="DDL.cs" />
     <Compile Include="DESEncrypt.cs" />

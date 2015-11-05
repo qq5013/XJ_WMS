@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Data;
+using System.Data.Common;
 using System.Xml;
 
 namespace Util
 {
     public class DBConfigUtil
-    { 
-       
+    {
         private static DataTable dtDBConfig;
         public static DataTable DtDBConfig
         {
@@ -54,7 +54,7 @@ namespace Util
 
                     dtDBConfig.Rows.Add(dr);
                 }
-
+                
                 return dtDBConfig;
             }
 
