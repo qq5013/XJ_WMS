@@ -91,7 +91,7 @@
                 </tr>
                 <tr>
                      
-                    <td align="center" class="musttitle" style="width:12%;"  >
+                    <td align="center" class="smalltitle" style="width:12%;"  >
                            单位 
                     </td>
                     <td width="21%">

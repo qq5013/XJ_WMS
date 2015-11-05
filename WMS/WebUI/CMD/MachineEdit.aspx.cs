@@ -30,7 +30,7 @@ namespace WMS.WebUI.CMD
                 }
                 else
                 {
-                    this.txtID.Text = bll.GetNewID("CMD_Product", "ProductCode", "1=1");
+                    //this.txtID.Text = bll.GetNewID("CMD_Product", "ProductCode", "1=1");
                     this.txtCreator.Text = Session["EmployeeCode"].ToString();
                     this.txtUpdater.Text = Session["EmployeeCode"].ToString();
                     this.txtCreatDate.Text = ToYMD(DateTime.Now);
