@@ -81,6 +81,11 @@
       Sp_CreateProductInTask
     </CommandString>
   </Command>
+  <Command ID="Sp_UpdateBillTypeCode">
+    <CommandString>
+      Sp_UpdateBillTypeCode
+    </CommandString>
+  </Command>
   <Command ID="UpdateCell">
     <CommandString>
       update CMD_Cell Set IsLock=@IsLock,ProductCode=@ProductCode,BillNo=@BillNo where CellCode=@CellCode)
@@ -175,5 +180,10 @@
       Where {0}
       order by CMD_Cell.CellCode
     </CommandString>
-  </Command>  
+  </Command>
+  <Command ID="UpdateBillType">
+    <CommandString>
+      update WMS_BillMaster set BillTypeCode=@Checker,CheckDate={0},State=@State where BillID=@BillID
+    </CommandString>
+  </Command>
 </SqlCommand>

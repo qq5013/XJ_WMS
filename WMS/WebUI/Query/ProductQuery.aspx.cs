@@ -46,7 +46,7 @@ namespace WMS.WebUI.Query
         private void BindOther()
         {
             BLL.BLLBase bll = new BLL.BLLBase();
-            DataTable ProductType = bll.FillDataTable("Cmd.SelectProductType", new DataParameter[] { new DataParameter("{0}", "cmd.AreaCode='001' and ProductTypeCode<>'0001'") });
+            DataTable ProductType = bll.FillDataTable("Cmd.SelectProductType", new DataParameter[] { new DataParameter("{0}", "ProductTypeCode<>'0001'") });
             DataRow dr = ProductType.NewRow();
             dr["ProductTypeCode"] = "";
             dr["ProductTypeName"] = "请选择";

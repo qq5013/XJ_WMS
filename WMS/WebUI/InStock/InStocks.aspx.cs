@@ -49,10 +49,6 @@ namespace WMS.WebUI.InStock
                 }
                 e.Row.Attributes.Add("onclick", string.Format("$('#hdnRowValue').val('{1}');selectRow({0});", e.Row.RowIndex, ((HyperLink)e.Row.Cells[2].FindControl("HyperLink1")).Text));
                 e.Row.Attributes.Add("style", "cursor:pointer;");
-
-
-                
-
             }
         }
 

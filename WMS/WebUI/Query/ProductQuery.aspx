@@ -43,10 +43,10 @@
            function getWhere() {
                var where = "ProductCode not in ('0001','0002')";
                if ($("#ddlProductType").val() != "") {
-                   where +=" and "+ escape("ProductTypeCode='" + $('#ddlProductType').val() + "'");
+                   where += escape(" and ProductTypeCode='" + $('#ddlProductType').val() + "'");
                }
                if ($("#ddlStateNo").val() != "") {
-                   where += " and " + escape(" and StateNo='" + $('#ddlStateNo').val() + "'");
+                   where += escape(" and StateNo='" + $('#ddlStateNo').val() + "'");
                }
                return where;
            }
